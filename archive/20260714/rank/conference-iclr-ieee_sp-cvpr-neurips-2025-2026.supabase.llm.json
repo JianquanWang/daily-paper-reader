@@ -1,0 +1,2523 @@
+{
+  "top_k": 200,
+  "generated_at": "2026-07-14T01:48:10.303803+00:00",
+  "papers": [
+    {
+      "id": "openreview-iclr-2026-ndilonnabz",
+      "source": "ICLR-2026-Accepted",
+      "title": "AnyTouch 2: General Optical Tactile Representation Learning For Dynamic Tactile Perception",
+      "abstract": "Real-world contact-rich manipulation demands robots to perceive temporal tactile feedback, capture subtle surface deformations, and reason about object properties and force dynamics.\nAlthough optical tactile sensors are uniquely capable of providing such rich information, existing tactile datasets and models remain limited. These resources primarily focus on object-level attributes (e.g., material) while largely overlooking fine-grained temporal dynamics.\nWe consider that advancing dynamic tactile perception requires a systematic hierarchy of dynamic perception capabilities to guide both data collection and model design.\nTo address the lack of tactile data with rich dynamic information, we present ToucHD, a large-scale tactile dataset spanning tactile atomic actions, real-world manipulations, and touch-force paired data.\nBeyond scale, ToucHD establishes a comprehensive dynamic data ecosystem that explicitly supports hierarchical perception capabilities from the data perspective.\nBuilding on it, we propose AnyTouch 2, a general tactile representation learning framework for diverse optical tactile sensors that unifies object-level understanding with fine-grained, force-aware dynamic perception. The framework captures both pixel-level and action-specific deformations across frames, while explicitly modeling physical force dynamics, thereby learning multi-level dynamic perception capabilities from the model perspective.\nWe evaluate our model on benchmarks that covers static object properties and dynamic physical attributes, as well as real-world manipulation tasks spanning multiple tiers of dynamic perception capabilities—from basic object-level understanding to force-aware dexterous manipulation. Experimental results demonstrate consistent and strong performance across sensors and tasks, highlighting the framework’s effectiveness as a general dynamic tactile perception model. The code, dataset and model are available at gewu-lab.github.io/AnyTouch2/.",
+      "authors": [
+        "Ruoxuan Feng",
+        "Yuxuan Zhou",
+        "Siyu Mei",
+        "Dongzhan Zhou",
+        "Pengwei Wang",
+        "Shaowei Cui",
+        "Bin Fang",
+        "Guocai Yao",
+        "Di Hu"
+      ],
+      "primary_category": "Tactile Representation Learning",
+      "categories": [
+        "Tactile Representation Learning",
+        "Tactile Dataset",
+        "Dynamic Tactile Perception"
+      ],
+      "published": "2026-01-26T13:55:43.292+00:00",
+      "link": "https://openreview.net/forum?id=ndilONnABZ",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-appnmuunhx",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Universal Visuo-Tactile Video Understanding for Embodied Interaction",
+      "abstract": "Tactile perception is essential for embodied agents to understand the physical attributes of objects that cannot be determined through visual inspection alone. While existing methods have made progress in visual and language modalities for physical understanding, they fail to effectively incorporate tactile information that provides crucial haptic feedback for real-world interaction. In this paper, we present VTV-LLM, the first multi-modal large language model that enables universal Visuo-Tactile Video (VTV) understanding, bridging the gap between tactile perception and natural language. To address the challenges of cross-sensor and cross-modal integration, we contribute VTV150K, a comprehensive dataset comprising 150,000 video frames from 100 diverse objects captured across three different tactile sensors (GelSight Mini, DIGIT, and Tac3D), annotated with four fundamental tactile attributes (hardness, protrusion, elasticity, and friction). We develop a novel three-stage training paradigm that includes VTV enhancement for robust visuo-tactile representation, VTV-text alignment for cross-modal correspondence, and text prompt finetuning for natural language generation. Our framework enables sophisticated tactile reasoning capabilities including feature assessment, comparative analysis, and scenario-based decision-making. Extensive experimental evaluations demonstrate that VTV-LLM achieves superior performance in tactile reasoning tasks, establishing a foundation for more intuitive human-machine interaction in tactile domains.",
+      "authors": [
+        "Yifan Xie",
+        "Mingyang Li",
+        "Shoujie Li",
+        "Xingting Li",
+        "Guangyu Chen",
+        "Fei Ma",
+        "Fei Yu",
+        "Wenbo Ding"
+      ],
+      "primary_category": "Embodied Interaction",
+      "categories": [
+        "Embodied Interaction",
+        "Tactile Perception",
+        "Video Understanding"
+      ],
+      "published": "2025-09-18T17:35:37.134+00:00",
+      "link": "https://openreview.net/forum?id=aPPnmuuNhx",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-zkqsyt7a7n",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "Visuo-Tactile World Models",
+      "abstract": "We introduce multi-task Visuo-Tactile World Models (VT-WM), which capture the physics of contact through touch reasoning. By complementing vision with tactile sensing, VT-WM better understands robot–object interactions in contact-rich tasks, avoiding common failure modes of vision-only models under occlusion or ambiguous contact states, such as objects disappearing, teleporting, or moving in ways that violate basic physics. Trained across a set of contact-rich manipulation tasks, VT-WM improves physical fidelity in imagination, achieving 33\\% better performance at maintaining object permanence and 29\\% better compliance with the laws of motion in autoregressive rollouts. Moreover, experiments show that grounding in contact dynamics also translates to planning. In zero-shot real-robot experiments, VT-WM achieves up to 35\\% higher success rates, with the largest gains in multi-step, contact-rich tasks. Finally, VT-WM shows data efficiency when targeting a new task, outperforming a behavioral cloning policy  by over 3.5$\\times$ in success rate with limited demonstrations.",
+      "authors": [
+        "Carolina Higuera",
+        "Sergio Arnaud",
+        "Byron Boots",
+        "Mustafa Mukadam",
+        "Francois Robert Hogan",
+        "Franziska Meier"
+      ],
+      "primary_category": "world models",
+      "categories": [
+        "world models",
+        "robotics",
+        "tactile sensing"
+      ],
+      "published": "2025-09-19T20:45:23.984+00:00",
+      "link": "https://openreview.net/forum?id=zKQSyT7a7n",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-uhb3pbjprm",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "Tactile-VLA: Unlocking Vision-Language-Action Model's Physical Knowledge for Tactile Generalization",
+      "abstract": "Vision-Language-Action (VLA) models have shown remarkable achievements, driven by the rich implicit knowledge of their vision-language components. However, achieving generalist robotic agents demands precise grounding into physical interactions, especially in contact-rich scenarios where fine-grained force control is essential. We advance VLAs' implicit knowledge beyond identifying what to do, towards guiding how to physically interact with real world. This paper introduces Tactile-VLA, a novel framework that deeply fuses vision, language, action, and tactile sensing. This framework incorporates a hybrid position-force controller to translate the model's intentions into precise physical actions and a reasoning module that allows the robot to adapt its strategy based on tactile feedback. Experiments demonstrate Tactile-VLA's effectiveness and generalizability in three key aspects: (1) enabling tactile-aware instruction following, (2) utilizing tactile-relevant commonsense, and (3) facilitating adaptive tactile-involved reasoning. A key finding is that the VLM's prior knowledge already contains semantic understanding of physical interaction; by connecting it to the robot's tactile sensors with only a few demonstrations, we can activate this prior knowledge to achieve zero-shot generalization in contact-rich tasks.",
+      "authors": [
+        "Jialei Huang",
+        "Shuo Wang",
+        "Fanqi Lin",
+        "Yihang Hu",
+        "Chuan Wen",
+        "Yang Gao"
+      ],
+      "primary_category": "tactile",
+      "categories": [
+        "tactile",
+        "VLA",
+        "robot manipulation"
+      ],
+      "published": "2025-09-10T08:01:23.3+00:00",
+      "link": "https://openreview.net/forum?id=uhB3pbJpRm",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-htwkjqzt7r",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Toward Artificial Palpation: Representation Learning of Touch on Soft Bodies",
+      "abstract": "Palpation, the use of touch in medical examination, is almost exclusively performed by humans. We investigate a proof of concept for an artificial palpation method based on self-supervised learning. Our key idea is that an encoder-decoder framework can learn a **representation** from a sequence of tactile measurements that contains all the relevant information about the palpated object. We conjecture that such a representation can be used for downstream tasks such as tactile imaging and change detection. With enough training data, it should capture intricate patterns in the tactile measurements that go beyond a simple map of forces -- the current state of the art. To validate our approach, we both develop a simulation environment and collect a real-world dataset of soft objects and corresponding ground truth images obtained by magnetic resonance imaging (MRI). We collect palpation sequences using a robot equipped with a tactile sensor, and train a model that predicts sensory readings at different positions on the object. We investigate the representation learned in this process, and demonstrate its use in imaging and change detection.",
+      "authors": [
+        "Zohar Rimon",
+        "Elisei Shafer",
+        "Tal Tepper",
+        "Efrat Shimron",
+        "Aviv Tamar"
+      ],
+      "primary_category": "Tactile sensors",
+      "categories": [
+        "Tactile sensors",
+        "Touch processing",
+        "Robotics",
+        "Self-supervised learning"
+      ],
+      "published": "2025-09-18T17:43:23.105+00:00",
+      "link": "https://openreview.net/forum?id=HtwKJQzt7R",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-2pv41ey3jk",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "Learning Open-World Visual-Tactile Grasp Stability Prediction with Synthetic Data",
+      "abstract": "Grasp stability prediction with visual-tactile data is an important problem in robotics. Most prior work learns these predictors with limited real-world data. Moreover, their evaluation has also been restricted to a simple and unitary laboratory environment. Our work studies open-world visual-tactile grasp stability prediction, i.e. the predictor should zero-shot generalize to novel objects in novel environment. Towards this problem, we propose to learn with synthetic visual-tactile data, generated with FEM-based simulation and ray-tracing rendering. In our experiment, we show that our simulation pipeline has much higher physical fidelity, compared to the rigid-body simulation. Furthermore, the predictor trained on our synthetic dataset has higher accuracy on open-world grasp stability prediction tasks than models trained on real-world dataset or on synthetic dataset from rigid-body simulation.",
+      "authors": [
+        "Beining Han",
+        "Gan Luyang",
+        "Derek Geng",
+        "Abhishek Joshi",
+        "Jia Deng"
+      ],
+      "primary_category": "Visual-Tactile Data; FEM-based Simulation; Grasping",
+      "categories": [
+        "Visual-Tactile Data; FEM-based Simulation; Grasping"
+      ],
+      "published": "2025-09-17T21:40:29.719+00:00",
+      "link": "https://openreview.net/forum?id=2Pv41Ey3jK",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-icniadbcor",
+      "source": "ICLR-2026-Public",
+      "title": "PRISM: Performer RS-IMLE for Single-pass Multisensory Imitation Learning",
+      "abstract": "Robotic imitation learning typically requires models that capture multimodal action distributions while operating in real-time control rates and accommodating multiple sensing modalities. Although recent generative approaches such as diffusion models, flow matching, and Implicit Maximum Likelihood Estimation (IMLE) have achieved promising results in this domain, they satisfy only a subset of these requirements. To satisfy these requirements, we introduce PRISM, based on a batch-global rejection-sampling variant of IMLE. PRISM is a single-pass policy that couples a temporal multisensory encoder (e.g, RGB, Depth, tactile, audio, proprioception) with a linear-attention generator using a Performer architecture. We validate on MetaWorld, CALVIN, Robomimic, and a real hardware suite using a Unitree Go2 with a 7-DoF arm, wrist and shoulder RGB, tactile, audio, and proprioception sensors. PRISM matches or outperforms diffusion, flow-matching, and prior IMLE policies in terms of task success rates, robustness, and sample efficiency. In CALVIN with 10\\% of the data, PRISM improves the success rate by $\\sim$ 10\\% over IMLE, $\\sim$ 20\\% over flow matching, and $\\sim$ 25\\% over diffusion, while reducing the jerk by about $20\\times$. On MetaWorld, PRISM is 5-12\\% on Hard/Very-Hard splits over diffusion and flow baselines. Real-world loco-manipulation shows 10--25\\% higher success and maintains faster inference diffusion policy. These results position PRISM as a fast, accurate, and multisensory imitation policy that retains multimodal action coverage without iterative sampling.",
+      "authors": [
+        "Amisha Bhaskar",
+        "Pratap Tokekar",
+        "Stefano Di Cairano",
+        "Alexander Schperberg"
+      ],
+      "primary_category": "Imitation Learning",
+      "categories": [
+        "Imitation Learning",
+        "Diffusion Policy",
+        "Flow-matching Policy",
+        "Implicit Maximum Likelihood Estimation",
+        "Manipulation",
+        "Quadruped",
+        "Locomotion"
+      ],
+      "published": "2025-09-20T02:17:27.296+00:00",
+      "link": "https://openreview.net/forum?id=icnIadBCoR",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-toy96yyopr",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Enhancing Tactile-based Reinforcement Learning for Robotic Control",
+      "abstract": "Achieving safe, reliable real-world robotic manipulation requires agents to evolve beyond vision and incorporate tactile sensing to overcome sensory deficits and reliance on idealised state information. Despite its potential, the efficacy of tactile sensing in reinforcement learning (RL) remains inconsistent. We address this by developing self-supervised learning (SSL) methodologies to more effectively harness tactile observations, focusing on a scalable setup of proprioception and sparse binary contacts. We empirically demonstrate that sparse binary tactile signals are critical for dexterity, particularly for interactions that proprioceptive control errors do not register, such as decoupled robot-object motions. Our agents achieve superhuman dexterity in complex contact tasks (ball bouncing and Baoding ball rotation). Furthermore, we find that decoupling the SSL memory from the on-policy memory can improve performance. We release the Robot Tactile Olympiad ($\\texttt{RoTO}$) benchmark to standardise and promote future research in tactile-based manipulation. Project page: https://elle-miller.github.io/tactile_rl.",
+      "authors": [
+        "Elle Miller",
+        "Trevor McInroe",
+        "David Abel",
+        "Oisin Mac Aodha",
+        "Sethu Vijayakumar"
+      ],
+      "primary_category": "Reinforcement learning",
+      "categories": [
+        "Reinforcement learning",
+        "tactile sensing",
+        "representation learning",
+        "robotic manipulation"
+      ],
+      "published": "2025-09-18T17:39:22.93+00:00",
+      "link": "https://openreview.net/forum?id=Toy96yYopR",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-tnghorsgxy",
+      "source": "ICLR-2026-Public",
+      "title": "A Predictive Model for Tactile Force Estimation using Audio-Tactile Data",
+      "abstract": "Robust in-hand manipulation of objects with movable content requires estimation\n and prediction of the contents’ motion with enough anticipation to allow time to\n compensate for resulting internal torques. The quick estimation of the objects’\n dynamics can be challenging when the objects’ motion properties (e.g., type,\n amount, dynamics) cannot be observed visually due to robot occlusions or opacity\n of the container. This can be further complicated by the computational requirements\n of onboard hardware available for real-time processing and control for robotics. In\n this work, we develop a simple learning framework that uses echo state networks\n to predict the torques experienced on the robotic hand with enough anticipation\n to allow for adaptive controls and sufficient efficiency for real-time prediction\n without GPU processing. We demonstrate the efficacy of this formulation for\n tactile force prediction on the Allegro robotic hand with a Tekscan tactile skin\n using both material-specific and material-agnostic learned models. We show that\n while both are effective, the material-specific models show an improvement in\n accuracy due to the difference in inertial properties between the different materials.\n Wealso develop a prediction model that uses audio feedback to augment the tactile\n predictions. We show that adding auditory feedback improves the prediction error,\n though it significantly increases the computation cost of the model. We validate\n this formulation for online prediction on the robotic hand moving materials in\n real-time and adapting grip for slip detection.",
+      "authors": [
+        "Jiangyu Hu"
+      ],
+      "primary_category": "Tactile Force Estimation",
+      "categories": [
+        "Tactile Force Estimation"
+      ],
+      "published": "2025-09-15T07:21:48.772+00:00",
+      "link": "https://openreview.net/forum?id=TnGhoRSgXy",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-nu1d2ismwh",
+      "source": "ICLR-2026-Public",
+      "title": "ViTacFormer: Learning Cross-Modal Representation for Visuo-Tactile Dexterous Manipulation",
+      "abstract": "Dexterous manipulation is a cornerstone capability for robotic systems aiming to interact with the physical world in a human-like manner. Although vision-based methods have advanced rapidly, tactile sensing remains crucial for fine-grained control—particularly in unstructured or visually occluded settings. We present ViTacFormer, a representation-learning approach that couples a cross-attention encoder to fuse high-resolution vision and touch with an autoregressive tactile-prediction head that anticipates future contact signals. Building on this architecture, we devise an easy-to-challenging curriculum that steadily refines the visual-tactile latent space, boosting both accuracy and robustness. The learned cross-modal representation drives imitation learning for multi-fingered hands, enabling precise and adaptive manipulation. Across a suite of challenging real-world benchmarks, our method achieves approximately 50% higher success rates than prior state-of-the-art systems. To our knowledge, it is also the first to autonomously complete long-horizon dexterous manipulation tasks that demand highly precise control with an anthropomorphic hand—successfully executing up to 11 sequential stages and sustaining continuous operation for 2.5 minutes.",
+      "authors": [
+        "Liang Heng",
+        "Haoran Geng",
+        "Kaifeng Zhang",
+        "Pieter Abbeel",
+        "Jitendra Malik"
+      ],
+      "primary_category": "dexterous manipulation",
+      "categories": [
+        "dexterous manipulation",
+        "imitation learning",
+        "visuo-tactile representation"
+      ],
+      "published": "2025-09-18T21:57:03.917+00:00",
+      "link": "https://openreview.net/forum?id=Nu1D2IsmWH",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-q60d8jf4ki",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "FastGrasp: Learning-based Whole-body Control method for Fast Dexterous Grasping with Mobile Manipulators",
+      "abstract": "Fast grasping is critical for mobile robots in logistics, manufacturing, and service applications. Existing methods face fundamental challenges in impact stabilization under high-speed motion, real-time whole-body coordination, and generalization across diverse objects and scenarios, limited by fixed bases, simple grippers, or slow tactile response capabilities. We propose **FastGrasp**, a learning-based framework that integrates grasp guidance, whole-body control, and tactile feedback for mobile fast grasping. Our two-stage reinforcement learning strategy first generates diverse grasp candidates via conditional variational autoencoder conditioned on object point clouds, then executes coordinated movements of mobile base, arm, and hand guided by optimal grasp selection. Tactile sensing enables real-time grasp adjustments to handle impact effects and object variations. Extensive experiments demonstrate superior grasping performance in both simulation and real-world scenarios, achieving robust manipulation across diverse object geometries through effective sim-to-real transfer.",
+      "authors": [
+        "Heng Tao",
+        "Yiming Zhong",
+        "Zemin Yang",
+        "Hengan Zhou",
+        "Yuexin Ma"
+      ],
+      "primary_category": "Fast Grasp; tactile-enhanced grasping; sim2real",
+      "categories": [
+        "Fast Grasp; tactile-enhanced grasping; sim2real"
+      ],
+      "published": "2025-09-17T13:33:34.753+00:00",
+      "link": "https://openreview.net/forum?id=Q60D8jF4KI",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-wabvvqktuf",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper",
+      "abstract": "Handheld grippers are increasingly used to collect human demonstrations due to their ease of deployment and versatility. However, most existing designs lack tactile sensing, despite the critical role of tactile feedback in precise manipulation. We present a portable, lightweight gripper with integrated tactile sensors that enables synchronized collection of visual and tactile data in diverse, real-world, and in-the-wild settings. Building on this hardware, we propose a cross-modal representation learning framework that integrates visual and tactile signals while preserving their distinct characteristics. The learning procedure allows the emergence of interpretable representations that consistently focus on contacting regions relevant for physical interactions. When used for downstream manipulation tasks, these representations enable more efficient and effective policy learning, supporting precise robotic manipulation based on multimodal feedback. We validate our approach on fine-grained tasks such as test tube insertion and pipette-based fluid transfer, demonstrating improved accuracy and robustness under external disturbances. Our project page is available at \\url{https://binghao-huang.github.io/touch_in_the_wild/}.",
+      "authors": [
+        "Xinyue Zhu",
+        "Binghao Huang",
+        "Yunzhu Li"
+      ],
+      "primary_category": "Visuo-Tactile Sensing",
+      "categories": [
+        "Visuo-Tactile Sensing",
+        "Fine-Grained Manipulation",
+        "Scalable Data Collection"
+      ],
+      "published": "2025-09-18T17:34:30.593+00:00",
+      "link": "https://openreview.net/forum?id=WabVVQKTUF",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-hu2gt2ucua",
+      "source": "ICLR-2026-Accepted",
+      "title": "APPLE: Toward General Active Perception via Reinforcement Learning",
+      "abstract": "Active perception is a fundamental skill that enables us humans to deal with uncertainty in our inherently partially observable environment. For senses such as touch, where the information is sparse and local, active perception becomes crucial. In recent years, active perception has emerged as an important research domain in robotics. However, current methods are often bound to specific tasks or make strong assumptions, which limit their generality. To address this gap, this work introduces APPLE (Active Perception Policy Learning) – a novel framework that leverages reinforcement learning (RL) to address a range of different active perception problems. APPLE jointly trains a transformer-based perception module and decision-making policy with a unified optimization objective, learning how to actively gather information. By design, APPLE is not limited to a specific task and can, in principle, be applied to a wide range of active perception problems. We evaluate two variants of APPLE across different tasks, including tactile exploration problems from the Tactile MNIST benchmark. Experiments demonstrate the efficacy of APPLE, achieving high accuracies on both regression and classification tasks. These findings underscore the potential of APPLE as a versatile and general framework for advancing active perception in robotics.\n\nProject page: https://timschneider42.github.io/apple",
+      "authors": [
+        "Tim Schneider",
+        "Cristiana de Farias",
+        "Roberto Calandra",
+        "Liming Chen",
+        "Jan Peters"
+      ],
+      "primary_category": "Active Perception",
+      "categories": [
+        "Active Perception",
+        "Reinforcement Learning",
+        "Tactile Sensing",
+        "Transformers"
+      ],
+      "published": "2026-01-26T13:55:57.605+00:00",
+      "link": "https://openreview.net/forum?id=hU2gT2Ucua",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-rlmcc0jtu4",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "MimicTouch:Tactile Affordance for Robot Synesthesia for Dexterous Manipulation",
+      "abstract": "In the field of dexterous robotic manipulation, integrating visual and tactile modalities to inform manipulation policies presents significant challenges, especially\nin noncontact scenarios where reliance on tactile perception can be inadequate.\nVisual affordance techniques currently offer effective manipulation-centric semantic priors focused on objects. However, most existing research is limited to\nusing camera sensors and prior object information for affordance prediction. In\nthis study, we introduce a unified framework called Tactile Affordance in Robot\nSynesthesia (TARS) for dexterous manipulation that employs robotic synesthesia\nthrough a unified point cloud representation. This framework harnesses the visuotactile affordance of objects, effectively merging comprehensive visual perception\nfrom external cameras with tactile feedback from local optical tactile sensors to\nhandle tasks involving both contact and non-contact states. We simulated tactile\nperception in a virtual environment and trained task-oriented manipulation policies.\nSubsequently, we tested our approach on four distinct manipulation tasks, conducting extensive experiments to evaluate how different modules within our method\noptimize the performance of these manipulation policies.",
+      "authors": [
+        "Jiangyu Hu"
+      ],
+      "primary_category": "visuotactile affordance",
+      "categories": [
+        "visuotactile affordance"
+      ],
+      "published": "2025-09-02T01:15:51.483+00:00",
+      "link": "https://openreview.net/forum?id=RlMCc0JTu4",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-ptgmadeonu",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Taccel: Scaling Up Vision-based Tactile Robotics via High-performance GPU Simulation",
+      "abstract": "Tactile sensing is crucial for achieving human-level robotic capabilities in manipulation tasks. As a promising solution, Vision-based Tactile Sensors (VBTSs) offer high spatial resolution and cost-effectiveness, but present unique challenges in robotics for their complex physical characteristics and visual signal processing requirements. The lack of efficient and accurate simulation tools for VBTSs has significantly limited the scale and scope of tactile robotics research. We present Taccel, a high-performance simulation platform that integrates Incremental Potential Contact (IPC) and Affine Body Dynamics (ABD) to model robots, tactile sensors, and objects with both accuracy and unprecedented speed, achieving a total of 915 FPS with 4096 parallel environments. Unlike previous simulators that operate at sub-real-time speeds with limited parallelization, Taccel provides precise physics simulation and realistic tactile signals while supporting flexible robot-sensor configurations through user-friendly APIs. Through extensive validation in object recognition, robotic grasping, and articulated object manipulation, we demonstrate precise simulation and successful sim-to-real transfer. These capabilities position Taccel as a powerful tool for scaling up tactile robotics research and development, potentially transforming how robots interact with and understand their physical environment.",
+      "authors": [
+        "Yuyang Li",
+        "Wenxin Du",
+        "Chang Yu",
+        "Puhao Li",
+        "Zihang Zhao",
+        "Tengyu Liu",
+        "Chenfanfu Jiang",
+        "Yixin Zhu",
+        "Siyuan Huang"
+      ],
+      "primary_category": "tactile sensing",
+      "categories": [
+        "tactile sensing",
+        "simulation",
+        "robotics"
+      ],
+      "published": "2025-09-18T17:29:27.516+00:00",
+      "link": "https://openreview.net/forum?id=PtGMadeONU",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-wdiyhgoswx",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "ControlTac: Force- and Position-Controlled Tactile Data Augmentation with a Single Reference Image",
+      "abstract": "Vision-based tactile sensing is widely used in perception, reconstruction, and robotic manipulation, yet collecting large-scale tactile data remains costly due to diverse sensor-object interactions and inconsistencies across sensor instances. Existing approaches to scaling tactile data—simulation and free-form tactile generation—often yield unrealistically rendered signals with poor transfer to highly dynamic real-world tasks. We propose **ControlTac**, a two-stage controllable framework that generates realistic tactile images conditioned on a single reference tactile image, contact force, and contact position. By grounding generation in these important physical priors, **ControlTac** produces realistic samples that effectively capture task-relevant variations. Across three downstream tasks and three real-world experiments, the augmented datasets using our approach consistently improve performance and demonstrate practical utility in dynamic real-world settings. Project page: https://controltac.github.io/",
+      "authors": [
+        "Dongyu Luo",
+        "Kelin Yu",
+        "Amir Hossein Shahidzadeh",
+        "Cornelia Fermuller",
+        "Yiannis Aloimonos",
+        "Ruohan Gao"
+      ],
+      "primary_category": "Tactile Sensing",
+      "categories": [
+        "Tactile Sensing",
+        "Tactile Data Augmentation",
+        "Tactile Generation",
+        "Robot Learning"
+      ],
+      "published": "2025-09-18T16:33:23.72+00:00",
+      "link": "https://openreview.net/forum?id=wdiyHGoswX",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-1pyxfks6hy",
+      "source": "ICLR-2026-Accepted",
+      "title": "TaCo:  A Benchmark for Lossless and Lossy Codecs of Heterogeneous Tactile Data",
+      "abstract": "Tactile sensing is crucial for embodied intelligence, providing fine-grained perception and control in complex environments. However, efficient tactile data compression, which is essential for real-time robotic applications under strict bandwidth constraints, remains underexplored. The inherent heterogeneity and spatiotemporal complexity of tactile data further complicate this challenge. To bridge this gap, we introduce TaCo, the first comprehensive benchmark for Tactile data Codecs. TaCo evaluates 30 compression methods, including off-the-shelf compression algorithms and neural codecs, across five diverse datasets from various sensor types. We systematically assess both lossless and lossy compression schemes on four key tasks: lossless storage, human visualization, material and object classification, and dexterous robotic grasping. Notably, we pioneer the development of data-driven codecs explicitly trained on tactile data, TaCo-LL (lossless) and TaCo-L (lossy). Results have validated the superior performance of our TaCo-LL and TaCo-L. This benchmark provides a foundational framework for understanding the critical trade-offs between compression efficiency and task performance, paving the way for future advances in tactile perception.",
+      "authors": [
+        "Zhengxue Cheng",
+        "Yan Zhao",
+        "Keyu Wang",
+        "Hengdi ZHANG",
+        "Li Song"
+      ],
+      "primary_category": "Tactile Dataset",
+      "categories": [
+        "Tactile Dataset",
+        "Lossless Compression",
+        "Lossy Compression",
+        "Heterogeneous Tactile Data"
+      ],
+      "published": "2026-01-26T13:58:05.953+00:00",
+      "link": "https://openreview.net/forum?id=1PYXFkS6Hy",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-m7md0sa8re",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "Task-Optimized Convolutional Recurrent Networks Align with Tactile Processing in the Rodent Brain",
+      "abstract": "Tactile sensing remains far less understood in neuroscience and less effective in artificial systems compared to more mature modalities such as vision and language.\nWe bridge these gaps by introducing a novel Encoder-Attender-Decoder (EAD) framework to systematically explore the space of task-optimized temporal neural networks trained on realistic tactile input sequences from a customized rodent whisker-array simulator. \nWe identify convolutional recurrent neural networks (ConvRNNs) as superior encoders to purely feedforward and state-space architectures for tactile categorization. \nCrucially, these ConvRNN-encoder-based EAD models achieve neural representations closely matching rodent somatosensory cortex, saturating the explainable neural variability and revealing a clear linear relationship between supervised categorization performance and neural alignment.\nFurthermore, contrastive self-supervised ConvRNN-encoder-based EADs, trained with tactile-specific augmentations, match supervised neural fits, serving as an ethologically-relevant, label-free proxy.\n\nFor neuroscience, our findings highlight nonlinear recurrent processing as important for general-purpose tactile representations in somatosensory cortex, providing the first quantitative characterization of the underlying inductive biases in this system. \nFor embodied AI, our results emphasize the importance of recurrent EAD architectures to handle realistic tactile inputs, along with tailored self-supervised learning methods for achieving robust tactile perception with the same type of sensors animals use to sense in unstructured environments.",
+      "authors": [
+        "Trinity Chung",
+        "Yuchen Shen",
+        "Nathan Kong",
+        "Aran Nayebi"
+      ],
+      "primary_category": "NeuroAI",
+      "categories": [
+        "NeuroAI",
+        "Temporal Neural Networks",
+        "Tactile Perception",
+        "Somatosensory Cortex"
+      ],
+      "published": "2025-09-18T17:34:08.23+00:00",
+      "link": "https://openreview.net/forum?id=m7MD0sa8Re",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-2845h8ua5d",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "ForceVLA: Enhancing VLA Models with a Force-aware MoE for Contact-rich Manipulation",
+      "abstract": "Vision-Language-Action (VLA) models have advanced general-purpose robotic manipulation by leveraging pretrained visual and linguistic representations. However, they struggle with contact-rich tasks that require fine-grained control involving force, especially under visual occlusion or dynamic uncertainty. To address these limitations, we propose \\textbf{ForceVLA}, a novel end-to-end manipulation framework that treats external force sensing as a first-class modality within VLA systems. ForceVLA introduces \\textbf{FVLMoE}, a force-aware Mixture-of-Experts fusion module that dynamically integrates pretrained visual-language embeddings with real-time 6-axis force feedback during action decoding. This enables context-aware routing across modality-specific experts, enhancing the robot's ability to adapt to subtle contact dynamics. We also introduce \\textbf{ForceVLA-Data}, a new dataset comprising synchronized vision, proprioception, and force-torque signals across five contact-rich manipulation tasks. ForceVLA improves average task success by 23.2\\% over strong $\\pi_0$-based baselines, achieving up to 80\\% success in tasks such as plug insertion. Our approach highlights the importance of multimodal integration for dexterous manipulation and sets a new benchmark for physically intelligent robotic control. Code and data will be released at https://sites.google.com/view/forcevla2025/.",
+      "authors": [
+        "Jiawen Yu",
+        "Hairuo Liu",
+        "Qiaojun Yu",
+        "Jieji Ren",
+        "Ce Hao",
+        "Haitong Ding",
+        "Guangyu Huang",
+        "Guofan Huang",
+        "Yan Song",
+        "Panpan Cai",
+        "Wenqiang Zhang",
+        "Cewu Lu"
+      ],
+      "primary_category": "VLA",
+      "categories": [
+        "VLA",
+        "Robotics",
+        "Contact-rich Manipulation",
+        "Robotics and Control"
+      ],
+      "published": "2025-09-18T17:40:13.553+00:00",
+      "link": "https://openreview.net/forum?id=2845H8Ua5D",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-ea6j8k8rnw",
+      "source": "ICLR-2026-Accepted",
+      "title": "Action-aware Dynamic Pruning for Efficient Vision-Language-Action Manipulation",
+      "abstract": "Robotic manipulation with Vision-Language-Action models requires efficient inference over long-horizon multi-modal context, where attention to dense visual tokens dominates computational cost. Existing methods optimize inference speed by reducing visual redundancy within VLA models, but they overlook the varying redundancy across robotic manipulation stages. We observe that the visual token redundancy is higher in coarse manipulation phase than in fine-grained operations, and is strongly correlated with the action dynamic. \nMotivated by this observation, we propose Action-aware Dynamic Pruning (ADP), a multi-modal pruning framework that integrates text-driven token selection with action-aware trajectory gating. ADP introduces a gating mechanism that conditions the pruning signal on recent action trajectories, using past motion windows to adaptively adjust token retention ratios in accordance with dynamics, thereby balancing computational efficiency and perceptual precision across different manipulation stages. \nExtensive experiments on the LIBERO suites and diverse real-world scenarios demonstrate that our method significantly reduces FLOPs and action inference latency (e.g. 1.35× speed up on OpenVLA-OFT) while maintaining competitive success rates compared to baselines, thereby providing a simple plug-in path to efficient robot policies that advances the efficiency and performance frontier of robotic manipulation.",
+      "authors": [
+        "Xiaohuan Pei",
+        "Yuxing Chen",
+        "Siyu Xu",
+        "Yunke Wang",
+        "Yuheng Shi",
+        "Chang Xu"
+      ],
+      "primary_category": "Vision-Language-Actions",
+      "categories": [
+        "Vision-Language-Actions",
+        "Efficient Robotic Manipulations"
+      ],
+      "published": "2026-01-26T14:02:36.292+00:00",
+      "link": "https://openreview.net/forum?id=ea6j8k8Rnw",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-dt3zcixvnx",
+      "source": "ICLR-2026-Accepted",
+      "title": "DexMove: Learning Tactile-Guided Non-Prehensile Manipulation with Dexterous Hands",
+      "abstract": "Non-prehensile manipulation offers a robust alternative to traditional pick-and-place methods for object repositioning. However, learning such skills with dexterous, multi-fingered hands remains largely unexplored, leaving their potential for stable and efficient manipulation underutilized. Progress has been limited by the lack of large-scale, contact-aware non-prehensile datasets for dexterous hands and the absence of wrist–finger control policies. To bridge these gaps, we present DexMove, a tactile-guided non-prehensile manipulation framework for dexterous hands. DexMove combines a scalable simulation pipeline that generates physically plausible wrist–finger trajectories with a wearable device, which captures multi-finger contact data from human demonstrations using vision-based tactile sensors. Using these data, we train a flow-based policy that enables real-time, synergistic wrist–finger control for robust non-prehensile manipulation of diverse tabletop objects. In real-world experiments, DexMove successfully manipulated six objects of varying shapes and materials, achieving a 77.8\\% success rate. Our method outperforms ablated baselines by 36.6\\% and improves efficiency by nearly 300\\%. Furthermore, the learned policy generalizes to language-conditioned, long-horizon tasks such as object sorting and desktop tidying.",
+      "authors": [
+        "Pei Lin",
+        "Yuzhe Huang",
+        "Wanlin Li",
+        "Chenxi Xiao",
+        "Ziyuan Jiao"
+      ],
+      "primary_category": "tactile",
+      "categories": [
+        "tactile",
+        "robotics",
+        "dexterous hand",
+        "manipulation"
+      ],
+      "published": "2026-01-26T13:53:57.895+00:00",
+      "link": "https://openreview.net/forum?id=dT3ZciXvNX",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-k2ceveoqbl",
+      "source": "ICLR-2026-Public",
+      "title": "DexCanvas: Bridging Human Demonstrations and Robot Learning for Dexterous Manipulation",
+      "abstract": "We present DexCanvas, a large-scale hybrid real-synthetic human manipulation dataset containing 7,000 hours of dexterous hand-object interactions seeded from 70 hours of real human demonstrations, organized across 21 fundamental manipulation types based on the Cutkosky taxonomy. Each entry combines synchronized multi-view RGB-D, high-precision mocap with MANO hand parameters, and per-frame contact points with physically consistent force profiles. Our real-to-sim pipeline uses reinforcement learning to train policies that control an actuated MANO hand in physics simulation, reproducing human demonstrations while discovering the underlying contact forces that generate the observed object motion. DexCanvas is the first manipulation dataset to combine large-scale real demonstrations, systematic skill coverage based on established taxonomies, and physics-validated contact annotations. The dataset can facilitate research in robotic manipulation learning, contact-rich control, and skill transfer across different hand morphologies.",
+      "authors": [
+        "Xinyue Xu",
+        "Jieqiang Sun",
+        "Jing Dai",
+        "Siyuan Chen",
+        "Lanjie Ma",
+        "Ke Sun",
+        "Bin Zhao",
+        "Jianbo Yuan",
+        "Yiwen Lu"
+      ],
+      "primary_category": "robot learning",
+      "categories": [
+        "robot learning",
+        "dexterous manipulation",
+        "reinforcement learning",
+        "physics simulation",
+        "human demonstrations",
+        "datasets"
+      ],
+      "published": "2025-09-20T09:13:27.1+00:00",
+      "link": "https://openreview.net/forum?id=K2ceVeoqbL",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-neurips-2025-t1gvxvbkb1",
+      "source": "NeurIPS-2025-Accepted",
+      "title": "RAPID Hand: Robust, Affordable, Perception-Integrated, Dexterous Manipulation Platform for Embodied Intelligence",
+      "abstract": "This paper addresses the scarcity of low-cost but high-dexterity platforms for collecting real-world multi-fingered robot manipulation data towards generalist robot autonomy. \nTo achieve it, we propose the RAPID Hand, a co-optimized hardware and software platform where the compact 20-DoF hand, robust whole-hand perception, and high-DoF teleoperation interface are jointly designed.\nSpecifically, RAPID Hand adopts a compact and practical hand ontology and a hardware-level perception framework that stably integrates wrist-mounted vision, fingertip tactile sensing, and proprioception with sub-7 ms latency and spatial alignment. \nCollecting high-quality demonstrations on high-DoF hands is challenging, as existing teleoperation methods struggle with precision and stability on complex multi-fingered systems.\nWe address this by co-optimizing hand design, perception integration, and teleoperation interface through a universal actuation scheme, custom perception electronics, and two retargeting constraints. We evaluate the platform’s hardware, perception, and teleoperation interface. Training a diffusion policy on collected data shows superior performance over prior works, validating the system’s capability for reliable, high-quality data collection.\nThe platform is constructed from low-cost and off-the-shelf components and will be made public to ensure reproducibility and ease of adoption.",
+      "authors": [
+        "Zhaoliang Wan",
+        "Zetong Bi",
+        "Zida Zhou",
+        "Hao Ren",
+        "Yiming Zeng",
+        "Yihan Li",
+        "Lu Qi",
+        "Xu Yang",
+        "Ming-Hsuan Yang",
+        "Hui Cheng"
+      ],
+      "primary_category": "Robotics; Robotic Manipulation; Embodied Intelligence; Dexterous Manipulation; Robotic Grasping",
+      "categories": [
+        "Robotics; Robotic Manipulation; Embodied Intelligence; Dexterous Manipulation; Robotic Grasping"
+      ],
+      "published": "2025-09-18T17:29:14.282+00:00",
+      "link": "https://openreview.net/forum?id=T1gVXvbkB1",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-yz2dnybjxd",
+      "source": "ICLR-2026-Public",
+      "title": "MVP: Memory-enhanced Vision-Language-Action Policy with Feedback Learning",
+      "abstract": "Recent advances in Vision-Language-Action (VLA) models have enabled robots to perform a wide range of manipulation tasks conditioned on language instructions, offering strong generalization across tasks, objects, and environments. However, most existing VLAs operate under a Markov assumption, limiting their ability to handle temporally extended tasks and learn from feedback. To address these limitations, we propose MVP, a non-Markovian VLA model that leverages episodic memory composed of historical actions and visual observations. To mitigate the computational cost of storing high-dimensional histories, we introduce a compact memory representation inspired by video understanding techniques. Additionally, to prevent the model from disregarding historical inputs during training, we design a novel feedback learning strategy based on SO(3) trajectory perturbation. This approach encourages the model to associate actions with their environmental consequences through observation-action-observation sequences. Experimental results on both simulated and real-world benchmarks demonstrate that MVP outperforms existing models, particularly on tasks that require temporal reasoning and history-dependent decision-making. Our findings highlight the importance of memory and feedback in advancing the capabilities of general-purpose robotic manipulation systems.",
+      "authors": [
+        "Chubin Zhang",
+        "Yansong Tang",
+        "Wenkai Guo",
+        "Guanxing Lu",
+        "Yi Su",
+        "Haoji Zhang",
+        "Xiuwei Xu",
+        "Linqing Zhao",
+        "Ziwei Wang",
+        "Jiwen Lu"
+      ],
+      "primary_category": "Robotic Manipulation",
+      "categories": [
+        "Robotic Manipulation",
+        "Vision-Language-Action Models",
+        "Memory"
+      ],
+      "published": "2025-09-18T14:04:21.91+00:00",
+      "link": "https://openreview.net/forum?id=Yz2DnYBJXd",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "openreview-iclr-2026-2rxgospb5s",
+      "source": "ICLR-2026-Rejected-Public",
+      "title": "dVLA: Diffusion Vision-Language-Action Model with Multimodal Chain-of-Thought",
+      "abstract": "Vision-language-action (VLA) models have emerged as the next-generation framework in robotics, integrating visual perception, language reasoning, and robotic control into unified systems. In this paper, we present \\textbf{dVLA}, a diffusion vision-language-action model with multimodal chain-of-thought. The dVLA optimizes visual reasoning, language comprehension, and robotic actions simultaneously through a unified diffusion-based objective. By harmonizing these modalities into a single cohesive framework, dVLA facilitates more effective cross-modal reasoning, enabling the model to generalize to novel instructions and objects. To ensure practical viability, we also integrate model acceleration methods that substantially decrease robot response times. Extensive evaluations in both simulation and the real world confirm that dVLA significantly outperforms current discrete and continuous VLA models, highlighting the potential of diffusion language model (DLM) based frameworks for robotics.",
+      "authors": [
+        "Junjie Wen",
+        "Minjie Zhu",
+        "Jiaming Liu",
+        "Zhiyuan Liu",
+        "Yicun Yang",
+        "Linfeng Zhang",
+        "Shanghang Zhang",
+        "Yichen Zhu",
+        "Yi Xu"
+      ],
+      "primary_category": "Vision-Language-Action Model",
+      "categories": [
+        "Vision-Language-Action Model",
+        "Chain-of-Thought"
+      ],
+      "published": "2025-09-19T17:07:46.765+00:00",
+      "link": "https://openreview.net/forum?id=2rxgospB5s",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper",
+      "source": "CVPR-2025-Accepted",
+      "title": "Touch2Shape: Touch-Conditioned 3D Diffusion for Shape Exploration and Reconstruction",
+      "abstract": "Diffusion models have made breakthroughs in 3D generation tasks. Current 3D diffusion models focus on reconstructing target shape from images or a set of partial observations. While excelling in global context understanding, they struggle to capture the local details of complex shapes and limited to the occlusion and lighting conditions. To overcome these limitations, we utilize tactile images to capture the local 3D information and propose a Touch2Shape model, which leverages a touch-conditioned diffusion model to explore and reconstruct the target shape from touch. For shape reconstruction, we have developed a touch embedding module to condition the diffusion model in creating a compact representation and a touch shape fusion module to refine the reconstructed shape. For shape exploration, we combine the diffusion model with reinforcement learning to train a policy. This involves using the generated latent vector from the diffusion model to guide the touch exploration policy training through a novel reward design. Experiments validate the reconstruction quality thorough both qualitatively and quantitative analysis, and our touch exploration policy further boosts reconstruction performance.",
+      "authors": [
+        "Wang, Yuanbo",
+        "Zhang, Zhaoxuan",
+        "Qiu, Jiajin",
+        "Sun, Dilong",
+        "Meng, Zhengyu",
+        "Wei, Xiaopeng",
+        "Yang, Xin"
+      ],
+      "primary_category": "CVPR-2025",
+      "categories": [
+        "CVPR-2025"
+      ],
+      "published": "2025-06-01T00:00:00+00:00",
+      "link": "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_Touch2Shape_Touch-Conditioned_3D_Diffusion_for_Shape_Exploration_and_Reconstruction_CVPR_2025_paper.html",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    },
+    {
+      "id": "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+      "source": "CVPR-2025-Accepted",
+      "title": "EgoPressure: A Dataset for Hand Pressure and Pose Estimation in Egocentric Vision",
+      "abstract": "Touch contact and pressure are essential for understanding how humans interact with objects and offer insights that benefit applications in mixed reality and robotics. Estimating these interactions from an egocentric camera perspective is challenging, largely due to the lack of comprehensive datasets that provide both hand poses and pressure annotations. In this paper, we present EgoPressure, an egocentric dataset that is annotated with high-resolution pressure intensities at contact points and precise hand pose meshes, obtained via our multi-view, sequence-based optimization method. We introduce baseline models for estimating applied pressure on external surfaces from RGB images, both with and without hand pose information, as well as a joint model for predicting hand pose and the pressure distribution across the hand mesh.Our experiments show that pressure and hand pose complement each other in understanding hand-object interactions.",
+      "authors": [
+        "Zhao, Yiming",
+        "Kwon, Taein",
+        "Streli, Paul",
+        "Pollefeys, Marc",
+        "Holz, Christian"
+      ],
+      "primary_category": "CVPR-2025",
+      "categories": [
+        "CVPR-2025"
+      ],
+      "published": "2025-06-01T00:00:00+00:00",
+      "link": "https://openaccess.thecvf.com/content/CVPR2025/html/Zhao_EgoPressure_A_Dataset_for_Hand_Pressure_and_Pose_Estimation_in_CVPR_2025_paper.html",
+      "pdf_url": null,
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "type": "intent_query",
+      "tag": "tactile-vla",
+      "paper_tag": "query:tactile-vla",
+      "query_text": "multi modal tactile vision language action model for robotics",
+      "sim_scores": {
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-ea6j8k8rnw": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-iclr-2026-2rxgospb5s": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-iclr-2026-yz2dnybjxd": {
+          "score": 0.012987012987012988,
+          "rank": 17
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.011627906976744186,
+          "rank": 26
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.011111111111111112,
+          "rank": 30
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.009259259259259259,
+          "rank": 48
+        }
+      },
+      "ranked": [
+        {
+          "paper_id": "openreview-iclr-2026-uhb3pbjprm",
+          "score": 1.0,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-2rxgospb5s",
+          "score": 0.9586435070306036,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-neurips-2025-appnmuunhx",
+          "score": 0.8798076923076922,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-zkqsyt7a7n",
+          "score": 0.8057498057498057,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-nu1d2ismwh",
+          "score": 0.7703788748564866,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-ea6j8k8rnw",
+          "score": 0.6703296703296702,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-yz2dnybjxd",
+          "score": 0.6388587937883712,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-rlmcc0jtu4",
+          "score": 0.5213675213675214,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-icniadbcor",
+          "score": 0.49392712550607265,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-2845h8ua5d",
+          "score": 0.49392712550607265,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-ptgmadeonu",
+          "score": 0.46719946719946726,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-toy96yyopr",
+          "score": 0.3910256410256411,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-ndilonnabz",
+          "score": 0.3910256410256411,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-m7md0sa8re",
+          "score": 0.3668882557771445,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-wdiyhgoswx",
+          "score": 0.2760180995475112,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-tnghorsgxy",
+          "score": 0.23371647509578536,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-wabvvqktuf",
+          "score": 0.1933160472486314,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-2pv41ey3jk",
+          "score": 0.1737891737891738,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-hu2gt2ucua",
+          "score": 0.15469146238377016,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-t1gvxvbkb1",
+          "score": 0.11772814998621459,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+          "score": 0.0823211875843454,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-neurips-2025-htwkjqzt7r",
+          "score": 0.06517094017094004,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-k2ceveoqbl",
+          "score": 0.06517094017094004,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-q60d8jf4ki",
+          "score": 0.0319204604918889,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-1pyxfks6hy",
+          "score": 0.015799015799015898,
+          "star_rating": 2
+        }
+      ]
+    },
+    {
+      "type": "intent_query",
+      "tag": "tactile-vla",
+      "paper_tag": "query:tactile-vla",
+      "query_text": "tactile foundation model and its applications in robot touch sensing",
+      "sim_scores": {
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.014285714285714285,
+          "rank": 10
+        },
+        "openreview-iclr-2026-1pyxfks6hy": {
+          "score": 0.014084507042253521,
+          "rank": 11
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.013888888888888888,
+          "rank": 12
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.0136986301369863,
+          "rank": 13
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.013513513513513514,
+          "rank": 14
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-neurips-2025-m7md0sa8re": {
+          "score": 0.01282051282051282,
+          "rank": 18
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.012345679012345678,
+          "rank": 21
+        },
+        "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper": {
+          "score": 0.011235955056179775,
+          "rank": 29
+        },
+        "openreview-iclr-2026-k2ceveoqbl": {
+          "score": 0.011111111111111112,
+          "rank": 30
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.010416666666666666,
+          "rank": 36
+        }
+      },
+      "ranked": [
+        {
+          "paper_id": "openreview-iclr-2026-zkqsyt7a7n",
+          "score": 1.0,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-ndilonnabz",
+          "score": 1.0,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-uhb3pbjprm",
+          "score": 0.9586435070306036,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-neurips-2025-ptgmadeonu",
+          "score": 0.9586435070306036,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-nu1d2ismwh",
+          "score": 0.9185999185999183,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-rlmcc0jtu4",
+          "score": 0.9185999185999183,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+          "score": 0.8798076923076922,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-toy96yyopr",
+          "score": 0.8798076923076922,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-2845h8ua5d",
+          "score": 0.8422090729783037,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-tnghorsgxy",
+          "score": 0.8422090729783037,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-wdiyhgoswx",
+          "score": 0.8057498057498057,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-m7md0sa8re",
+          "score": 0.7703788748564866,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-1pyxfks6hy",
+          "score": 0.7703788748564866,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper",
+          "score": 0.73604826546003,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-wabvvqktuf",
+          "score": 0.702712746191007,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-htwkjqzt7r",
+          "score": 0.6703296703296702,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-hu2gt2ucua",
+          "score": 0.6388587937883712,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-t1gvxvbkb1",
+          "score": 0.6388587937883712,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-2pv41ey3jk",
+          "score": 0.608262108262108,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-icniadbcor",
+          "score": 0.608262108262108,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-appnmuunhx",
+          "score": 0.578503688092729,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-q60d8jf4ki",
+          "score": 0.578503688092729,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-k2ceveoqbl",
+          "score": 0.5495495495495496,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-dt3zcixvnx",
+          "score": 0.5213675213675214,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-yz2dnybjxd",
+          "score": 0.0,
+          "star_rating": 1
+        }
+      ]
+    },
+    {
+      "type": "intent_query",
+      "tag": "tactile-vla",
+      "paper_tag": "query:tactile-vla",
+      "query_text": "tactile large model and world model for robot manipulation",
+      "sim_scores": {
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.031544957774465976,
+          "rank": 1
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.01639344262295082,
+          "rank": 2
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.015873015873015872,
+          "rank": 4
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015384615384615385,
+          "rank": 6
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.012987012987012988,
+          "rank": 17
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.01282051282051282,
+          "rank": 18
+        },
+        "openreview-iclr-2026-k2ceveoqbl": {
+          "score": 0.012345679012345678,
+          "rank": 21
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.011904761904761904,
+          "rank": 24
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.011627906976744186,
+          "rank": 26
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.010638297872340425,
+          "rank": 34
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.01020408163265306,
+          "rank": 38
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.009345794392523364,
+          "rank": 47
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.00909090909090909,
+          "rank": 50
+        }
+      },
+      "ranked": [
+        {
+          "paper_id": "openreview-iclr-2026-zkqsyt7a7n",
+          "score": 1.0,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-ndilonnabz",
+          "score": 1.0,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-rlmcc0jtu4",
+          "score": 0.9586435070306036,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-neurips-2025-ptgmadeonu",
+          "score": 0.9586435070306036,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-uhb3pbjprm",
+          "score": 0.9185999185999183,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-neurips-2025-2845h8ua5d",
+          "score": 0.9185999185999183,
+          "star_rating": 5
+        },
+        {
+          "paper_id": "openreview-iclr-2026-wdiyhgoswx",
+          "score": 0.8798076923076922,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-nu1d2ismwh",
+          "score": 0.8057498057498057,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-toy96yyopr",
+          "score": 0.73604826546003,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-k2ceveoqbl",
+          "score": 0.702712746191007,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-tnghorsgxy",
+          "score": 0.702712746191007,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-appnmuunhx",
+          "score": 0.6703296703296702,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-2pv41ey3jk",
+          "score": 0.6388587937883712,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-neurips-2025-t1gvxvbkb1",
+          "score": 0.578503688092729,
+          "star_rating": 4
+        },
+        {
+          "paper_id": "openreview-iclr-2026-q60d8jf4ki",
+          "score": 0.4411571334648256,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-icniadbcor",
+          "score": 0.41577409931840303,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-iclr-2026-dt3zcixvnx",
+          "score": 0.41577409931840303,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+          "score": 0.2760180995475112,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "openreview-neurips-2025-wabvvqktuf",
+          "score": 0.1933160472486314,
+          "star_rating": 3
+        },
+        {
+          "paper_id": "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper",
+          "score": 0.09983633387888699,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-ea6j8k8rnw",
+          "score": 0.0823211875843454,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-yz2dnybjxd",
+          "score": 0.0319204604918889,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-neurips-2025-m7md0sa8re",
+          "score": 0.0319204604918889,
+          "star_rating": 2
+        },
+        {
+          "paper_id": "openreview-iclr-2026-2rxgospb5s",
+          "score": 0.015799015799015898,
+          "star_rating": 2
+        }
+      ]
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "multi-modal tactile perception",
+      "sim_scores": {
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "multi-modal tactile perception in robotics",
+      "sim_scores": {
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.014285714285714285,
+          "rank": 10
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.014084507042253521,
+          "rank": 11
+        },
+        "openreview-neurips-2025-m7md0sa8re": {
+          "score": 0.0136986301369863,
+          "rank": 13
+        },
+        "openreview-iclr-2026-1pyxfks6hy": {
+          "score": 0.013513513513513514,
+          "rank": 14
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.012658227848101266,
+          "rank": 19
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.012048192771084338,
+          "rank": 23
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.011764705882352941,
+          "rank": 25
+        },
+        "openreview-iclr-2026-hu2gt2ucua": {
+          "score": 0.011363636363636364,
+          "rank": 28
+        },
+        "openreview-neurips-2025-t1gvxvbkb1": {
+          "score": 0.011235955056179775,
+          "rank": 29
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "robot learning with tactile feedback",
+      "sim_scores": {
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-neurips-2025-m7md0sa8re": {
+          "score": 0.013888888888888888,
+          "rank": 12
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-1pyxfks6hy": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.012658227848101266,
+          "rank": 19
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.012195121951219513,
+          "rank": 22
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.011235955056179775,
+          "rank": 29
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.010869565217391304,
+          "rank": 32
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.01020408163265306,
+          "rank": 38
+        },
+        "openreview-iclr-2026-yz2dnybjxd": {
+          "score": 0.009615384615384616,
+          "rank": 44
+        },
+        "openreview-iclr-2026-k2ceveoqbl": {
+          "score": 0.009345794392523364,
+          "rank": 47
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile foundation model",
+      "sim_scores": {
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile foundation model for universal touch sensing",
+      "sim_scores": {
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-1pyxfks6hy": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-neurips-2025-m7md0sa8re": {
+          "score": 0.014285714285714285,
+          "rank": 10
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.014084507042253521,
+          "rank": 11
+        },
+        "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper": {
+          "score": 0.013888888888888888,
+          "rank": 12
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.013513513513513514,
+          "rank": 14
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.012658227848101266,
+          "rank": 19
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.012195121951219513,
+          "rank": 22
+        },
+        "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper": {
+          "score": 0.012048192771084338,
+          "rank": 23
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.010752688172043012,
+          "rank": 33
+        },
+        "openreview-iclr-2026-hu2gt2ucua": {
+          "score": 0.009615384615384616,
+          "rank": 44
+        },
+        "openreview-neurips-2025-t1gvxvbkb1": {
+          "score": 0.009259259259259259,
+          "rank": 48
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile large model",
+      "sim_scores": {
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile large model for robot perception",
+      "sim_scores": {
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.014084507042253521,
+          "rank": 11
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.0136986301369863,
+          "rank": 13
+        },
+        "openreview-iclr-2026-1pyxfks6hy": {
+          "score": 0.013513513513513514,
+          "rank": 14
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.012987012987012988,
+          "rank": 17
+        },
+        "openreview-neurips-2025-m7md0sa8re": {
+          "score": 0.01282051282051282,
+          "rank": 18
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.012195121951219513,
+          "rank": 22
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.010526315789473684,
+          "rank": 35
+        },
+        "openreview-iclr-2026-ea6j8k8rnw": {
+          "score": 0.010416666666666666,
+          "rank": 36
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.009615384615384616,
+          "rank": 44
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile robot learning",
+      "sim_scores": {
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-iclr-2026-hu2gt2ucua": {
+          "score": 0.014285714285714285,
+          "rank": 10
+        },
+        "openreview-iclr-2026-icniadbcor": {
+          "score": 0.013888888888888888,
+          "rank": 12
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile vision language action",
+      "sim_scores": {
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile vision language action model for robot control",
+      "sim_scores": {
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-ea6j8k8rnw": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.015384615384615385,
+          "rank": 5
+        },
+        "openreview-iclr-2026-yz2dnybjxd": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.013888888888888888,
+          "rank": 12
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.013333333333333334,
+          "rank": 15
+        },
+        "openreview-iclr-2026-2rxgospb5s": {
+          "score": 0.011494252873563218,
+          "rank": 27
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.00980392156862745,
+          "rank": 42
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.009174311926605505,
+          "rank": 49
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile world model",
+      "sim_scores": {
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-neurips-2025-htwkjqzt7r": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.014925373134328358,
+          "rank": 7
+        },
+        "openreview-iclr-2026-icniadbcor": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        }
+      }
+    },
+    {
+      "type": "keyword",
+      "tag": "tactile-vla",
+      "paper_tag": "keyword:tactile-vla",
+      "query_text": "tactile world model for robot manipulation",
+      "sim_scores": {
+        "openreview-iclr-2026-zkqsyt7a7n": {
+          "score": 0.01639344262295082,
+          "rank": 1
+        },
+        "openreview-iclr-2026-rlmcc0jtu4": {
+          "score": 0.016129032258064516,
+          "rank": 2
+        },
+        "openreview-iclr-2026-q60d8jf4ki": {
+          "score": 0.015873015873015872,
+          "rank": 3
+        },
+        "openreview-iclr-2026-ndilonnabz": {
+          "score": 0.015625,
+          "rank": 4
+        },
+        "openreview-neurips-2025-toy96yyopr": {
+          "score": 0.015151515151515152,
+          "rank": 6
+        },
+        "openreview-iclr-2026-tnghorsgxy": {
+          "score": 0.014705882352941176,
+          "rank": 8
+        },
+        "openreview-iclr-2026-uhb3pbjprm": {
+          "score": 0.014492753623188406,
+          "rank": 9
+        },
+        "openreview-iclr-2026-nu1d2ismwh": {
+          "score": 0.014285714285714285,
+          "rank": 10
+        },
+        "openreview-neurips-2025-ptgmadeonu": {
+          "score": 0.014084507042253521,
+          "rank": 11
+        },
+        "openreview-neurips-2025-wabvvqktuf": {
+          "score": 0.013157894736842105,
+          "rank": 16
+        },
+        "openreview-iclr-2026-dt3zcixvnx": {
+          "score": 0.012345679012345678,
+          "rank": 21
+        },
+        "openreview-iclr-2026-k2ceveoqbl": {
+          "score": 0.011627906976744186,
+          "rank": 26
+        },
+        "openreview-neurips-2025-appnmuunhx": {
+          "score": 0.011363636363636364,
+          "rank": 28
+        },
+        "openreview-iclr-2026-wdiyhgoswx": {
+          "score": 0.011111111111111112,
+          "rank": 30
+        },
+        "openreview-iclr-2026-2pv41ey3jk": {
+          "score": 0.010869565217391304,
+          "rank": 32
+        },
+        "openreview-neurips-2025-2845h8ua5d": {
+          "score": 0.010416666666666666,
+          "rank": 36
+        }
+      }
+    }
+  ],
+  "global_candidate_ids": [
+    "openreview-iclr-2026-uhb3pbjprm",
+    "openreview-neurips-2025-appnmuunhx",
+    "openreview-iclr-2026-ndilonnabz",
+    "openreview-iclr-2026-zkqsyt7a7n",
+    "openreview-iclr-2026-da8rscnygk",
+    "openreview-iclr-2026-rlmcc0jtu4",
+    "openreview-neurips-2025-toy96yyopr",
+    "openreview-iclr-2026-2pv41ey3jk",
+    "cvpr-2025-li-object-centric-prompt-driven-vision-language-action-model-for-robotic-manipulation-cvpr-2025-paper",
+    "openreview-iclr-2026-nu1d2ismwh",
+    "openreview-iclr-2026-tnghorsgxy",
+    "openreview-neurips-2025-inepyclgv2",
+    "openreview-iclr-2026-q60d8jf4ki",
+    "openreview-neurips-2025-wabvvqktuf",
+    "openreview-iclr-2026-cvx3vqo8bo",
+    "openreview-neurips-2025-ptgmadeonu",
+    "openreview-iclr-2026-wdiyhgoswx",
+    "openreview-neurips-2025-htwkjqzt7r",
+    "openreview-iclr-2026-lcua4ryit9",
+    "openreview-neurips-2025-2845h8ua5d",
+    "openreview-iclr-2026-83rfo7zzgn",
+    "openreview-iclr-2026-bf4feuw0mr",
+    "openreview-iclr-2026-dt3zcixvnx",
+    "openreview-neurips-2025-2aioeg2hwz",
+    "cvpr-2025-li-maniptrans-efficient-dexterous-bimanual-manipulation-transfer-via-residual-learning-cvpr-2025-paper",
+    "openreview-iclr-2026-wysmuwhmt4",
+    "openreview-iclr-2026-pw6rfymz8f",
+    "openreview-iclr-2026-1pyxfks6hy",
+    "openreview-iclr-2026-vjqfohu4op",
+    "openreview-neurips-2025-m7md0sa8re",
+    "openreview-iclr-2026-bfik4tvyeq",
+    "openreview-iclr-2026-brqeun4i2s",
+    "openreview-iclr-2026-aonqu2n8mc",
+    "openreview-iclr-2026-stpfxymia9",
+    "openreview-iclr-2026-eq4kdm5iyj",
+    "openreview-neurips-2025-pdrf0o7baq",
+    "openreview-iclr-2026-wacpfqlmhi",
+    "openreview-iclr-2026-ezjowez1uj",
+    "openreview-neurips-2025-ou9heyvnhb",
+    "openreview-iclr-2026-yngvaamnqi",
+    "openreview-neurips-2025-cb8jwne2vv",
+    "openreview-iclr-2026-k2ceveoqbl",
+    "openreview-iclr-2026-8wm1hefpss",
+    "cvpr-2025-pan-omnimanip-towards-general-robotic-manipulation-via-object-centric-interaction-primitives-as-cvpr-2025-paper",
+    "openreview-iclr-2026-hm2ecwfm2q",
+    "openreview-iclr-2026-ea6j8k8rnw",
+    "openreview-iclr-2026-vbvcqm2t1j",
+    "cvpr-2025-zhong-dexgrasp-anything-towards-universal-robotic-dexterous-grasping-with-physics-awareness-cvpr-2025-paper",
+    "openreview-iclr-2026-0psy3evkt7",
+    "openreview-iclr-2026-ieyecyl1i2",
+    "openreview-iclr-2026-jfhxztasjr",
+    "openreview-iclr-2026-yz2dnybjxd",
+    "openreview-iclr-2026-n8ingb3xjo",
+    "openreview-iclr-2026-hu2gt2ucua",
+    "openreview-iclr-2026-4vw9hvcrw0",
+    "cvpr-2025-iwase-zerograsp-zero-shot-shape-reconstruction-enabled-robotic-grasping-cvpr-2025-paper",
+    "openreview-iclr-2026-fina00byjj",
+    "openreview-iclr-2026-sesew4evpd",
+    "openreview-iclr-2026-13jshgck9i",
+    "openreview-iclr-2026-icniadbcor",
+    "openreview-iclr-2026-pklmd8pwuy",
+    "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper",
+    "openreview-iclr-2026-tsxwloasw5",
+    "openreview-iclr-2026-2rxgospb5s",
+    "openreview-iclr-2026-y5cajb17fn",
+    "openreview-iclr-2026-k3cyx3uets",
+    "openreview-iclr-2026-diqjanbhmp",
+    "openreview-iclr-2026-dlgfqcaxng",
+    "openreview-iclr-2026-vwqmi93ocl",
+    "openreview-iclr-2026-ztbf43tstg",
+    "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+    "openreview-iclr-2026-qquca6fbfx",
+    "openreview-iclr-2026-4rsrluymhz",
+    "openreview-neurips-2025-qzyz0xm58q",
+    "openreview-neurips-2025-rkdttznsal",
+    "cvpr-2025-liang-dexhanddiff-interaction-aware-diffusion-planning-for-adaptive-dexterous-manipulation-cvpr-2025-paper",
+    "openreview-iclr-2026-k6ntufoqet",
+    "openreview-neurips-2025-qjee4tibgz",
+    "openreview-iclr-2026-3gh2fzd9pi",
+    "openreview-iclr-2026-k8ovuxeqqu",
+    "openreview-neurips-2025-im8154ljcx",
+    "openreview-neurips-2025-3fdypdr4vn",
+    "openreview-iclr-2026-okgcbsgmqc",
+    "openreview-iclr-2026-wxffmlyb6y",
+    "openreview-iclr-2026-zab2fv3tyo",
+    "openreview-iclr-2026-6mefyomrpf",
+    "openreview-neurips-2025-t1gvxvbkb1",
+    "openreview-iclr-2026-cfunu8dk4s",
+    "openreview-neurips-2025-pk07eretkf",
+    "openreview-iclr-2026-mnya9d1da2",
+    "openreview-iclr-2026-t3i7ifeatk",
+    "openreview-iclr-2026-dfmg4coc22",
+    "openreview-iclr-2026-ha9jsvdiqo",
+    "cvpr-2025-li-latenthoi-on-the-generalizable-hand-object-motion-generation-with-latent-cvpr-2025-paper",
+    "openreview-iclr-2026-vpky3qqg3w",
+    "openreview-iclr-2026-ewe8zqgvs5",
+    "openreview-iclr-2026-i5wlozmfsq",
+    "openreview-neurips-2025-8lo0vlrxpz",
+    "openreview-iclr-2026-bjapyteorf",
+    "openreview-iclr-2026-cjzn9leyl0",
+    "openreview-iclr-2026-lqrwndceum",
+    "openreview-neurips-2025-k61y6ctmrl",
+    "openreview-neurips-2025-n2bluwofz0",
+    "cvpr-2025-yao-think-small-act-big-primitive-prompt-learning-for-lifelong-robot-cvpr-2025-paper",
+    "openreview-neurips-2025-trheq0yfhv",
+    "openreview-neurips-2025-chmp2iahml",
+    "cvpr-2025-cai-phys-edit-physics-aware-semantic-image-editing-with-text-description-cvpr-2025-paper",
+    "openreview-iclr-2026-93lgsnwfmw",
+    "openreview-iclr-2026-xcratcnifs",
+    "openreview-iclr-2026-bvirmukwv1",
+    "openreview-iclr-2026-jg4o0mnfj1",
+    "cvpr-2025-zhou-physvlm-enabling-visual-language-models-to-understand-robotic-physical-reachability-cvpr-2025-paper",
+    "openreview-iclr-2026-cz6sbhggen",
+    "openreview-iclr-2026-n5gnho2opb",
+    "openreview-iclr-2026-ddaaa4uldp",
+    "openreview-iclr-2026-ggofj6tyr3",
+    "openreview-iclr-2026-grxnah3hdo",
+    "openreview-iclr-2026-vswjhiveqz",
+    "openreview-iclr-2026-xsc8fi0mm2",
+    "cvpr-2025-wu-garmentpile-point-level-visual-affordance-guided-retrieval-and-adaptation-for-cluttered-cvpr-2025-paper"
+  ],
+  "global_pool_lane_top_k": 30,
+  "global_pool_limit": 120,
+  "global_pool_guaranteed_per_lane": 2,
+  "global_pool_effective_size": 120,
+  "reranked_at": "2026-07-14T01:49:01.971771+00:00",
+  "llm_ranked": [
+    {
+      "paper_id": "openreview-iclr-2026-zkqsyt7a7n",
+      "score": 10.0,
+      "evidence_en": "visuo-tactile world models for contact-rich manipulation",
+      "evidence_cn": "视觉-触觉世界模型用于接触丰富的操作",
+      "canonical_evidence": "视觉-触觉世界模型用于接触丰富的操作",
+      "tldr_en": "Visuo-Tactile World Models (VT-WM) integrate tactile sensing with vision to improve physical fidelity in contact-rich manipulation, achieving 33% better object permanence and 29% better compliance with physics in rollouts.",
+      "tldr_cn": "纯视觉世界模型在接触任务中缺乏物理真实性，物体常消失或违反物理规律。本文引入视觉-触觉世界模型（VT-WM），通过触觉推理补全视觉不足，在想象中物体恒存性提升33%，运动合规性提升29%，并能零样本用于真实机器人规划。",
+      "title_zh": "视觉-触觉世界模型",
+      "motivation_cn": "纯视觉模型在接触丰富的操作中易出现物体消失等违反物理的错误，需要触觉推理。",
+      "method_cn": "提出多任务视觉-触觉世界模型（VT-WM），结合触觉感知和视觉进行物理建模。",
+      "result_cn": "在想象中物体恒存性提升33%，运动定律符合度提升29%，并能零样本迁移到真实机器人。",
+      "conclusion_cn": "触觉提升世界模型的物理保真度，对规划有实际帮助。",
+      "matched_requirement_id": "req-2",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-uhb3pbjprm",
+      "score": 10.0,
+      "evidence_en": "tactile vision-language-action model for physical grounding",
+      "evidence_cn": "触觉视觉语言动作模型实现物理交互",
+      "canonical_evidence": "触觉视觉语言动作模型实现物理交互",
+      "tldr_en": "Tactile-VLA deeply fuses vision, language, action, and tactile sensing, incorporating a hybrid position-force controller to enable precise physical interaction and tactile generalization for robot control.",
+      "tldr_cn": "现有的VLA模型缺乏触觉感知，在精细力控任务中表现不足。本文提出Tactile-VLA框架，深度融合视觉、语言、动作和触觉模态，并引入混合位置力控制器，在触觉泛化任务中显著提升性能，使机器人能够进行精确的物理交互。",
+      "title_zh": "Tactile-VLA: 解锁视觉语言动作模型的物理知识实现触觉泛化",
+      "motivation_cn": "VLA模型缺乏对物理交互的精确理解，尤其在接触丰富场景中需要触觉。",
+      "method_cn": "提出Tactile-VLA框架，深度融合视觉、语言、动作和触觉，并引入混合位置力控制器。",
+      "result_cn": "在触觉泛化任务上取得显著提升，实现精细力控。",
+      "conclusion_cn": "融合触觉使VLA模型能更好地理解物理交互，推动通用机器人代理。",
+      "matched_requirement_id": "req-4",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-2845h8ua5d",
+      "score": 9.0,
+      "evidence_en": "force-aware MoE for VLA models treating force as first-class modality",
+      "evidence_cn": "将力作为第一模态的VLA模型，增强接触丰富的操作",
+      "canonical_evidence": "将力作为第一模态的VLA模型，增强接触丰富的操作",
+      "tldr_en": "ForceVLA introduces force-aware MoE fusion module into VLA models, enabling real-time 6-axis force feedback for contact-rich manipulation tasks.",
+      "tldr_cn": "ForceVLA提出了一种将力感知作为第一模态的VLA框架，通过力感知混合专家模块FVLMoE动态融合视觉语言嵌入与实时6轴力反馈，显著提升了在视觉遮挡和动态不确定性下的接触丰富操作性能。实验证明该方法在多种精细操作任务中优于基线，为机器人触觉VLA模型提供了有效范式。",
+      "title_zh": "ForceVLA：利用力感知混合专家增强VLA模型的接触丰富操作",
+      "motivation_cn": "现有VLA模型缺乏力反馈，在接触丰富任务中表现不佳",
+      "method_cn": "提出ForceVLA，引入力感知MoE融合模块，将6轴力作为第一模态集成到VLA动作解码中",
+      "result_cn": "在多种接触丰富操作任务上优于基线方法，成功处理视觉遮挡场景",
+      "conclusion_cn": "力感知是VLA模型处理精细接触任务的关键，所提方法有效提升了鲁棒性",
+      "matched_requirement_id": "req-4",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-appnmuunhx",
+      "score": 9.0,
+      "evidence_en": "multi-modal large language model for universal visuo-tactile video understanding",
+      "evidence_cn": "首个通用视觉-触觉视频理解多模态大语言模型",
+      "canonical_evidence": "首个通用视觉-触觉视频理解多模态大语言模型",
+      "tldr_en": "VTV-LLM is the first multi-modal LLM enabling universal visuo-tactile video understanding, bridging tactile perception and natural language.",
+      "tldr_cn": "VTV-LLM是首个实现通用视觉-触觉视频理解的多模态大语言模型，通过构建包含10万帧的VTV150K数据集和跨传感器跨模态集成技术，弥合了触觉感知与自然语言之间的鸿沟。实验表明该模型能有效理解物体物理属性，为机器人的触觉感知和交互提供了基础模型支撑。",
+      "title_zh": "通用视觉-触觉视频理解用于具身交互",
+      "motivation_cn": "现有方法无法有效融合触觉信息进行物理属性理解",
+      "method_cn": "构建VTV150K数据集，提出VTV-LLM多模态大语言模型实现视觉-触觉视频的通用理解",
+      "result_cn": "在触觉视频理解任务上达到领先性能，能准确描述物体物理属性",
+      "conclusion_cn": "首次实现通用视觉-触觉视频理解，推动了触觉基础模型发展",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-dt3zcixvnx",
+      "score": 9.0,
+      "evidence_en": "tactile-guided non-prehensile manipulation with dexterous hands",
+      "evidence_cn": "触觉引导的灵巧手非抓取操作",
+      "canonical_evidence": "触觉引导的灵巧手非抓取操作",
+      "tldr_en": "DexMove proposes a tactile-guided non-prehensile manipulation framework for dexterous hands, combining scalable simulation and wearable tactile sensing to generate physically plausible wrist-finger trajectories.",
+      "tldr_cn": "灵巧手的非抓取操作面临数据集和策略缺失的挑战。DexMove提出触觉引导框架，结合可扩展仿真与可穿戴触觉设备，生成物理合理的操作轨迹，实现了稳定高效的非抓取操作，为灵巧操作提供了新思路。",
+      "title_zh": "DexMove: 学习灵巧手的触觉引导非抓取操作",
+      "motivation_cn": "灵巧手的非抓取操作研究不足，缺乏大规模接触感知数据集和手腕手指控制策略。",
+      "method_cn": "提出DexMove框架，结合可扩展仿真管道生成物理合理的轨迹，并使用可穿戴设备捕获多指接触数据。",
+      "result_cn": "通过仿真和真实实验验证了框架有效性，实现了稳定高效的非抓取操作。",
+      "conclusion_cn": "触觉引导使灵巧手能够执行复杂的非抓取操作任务，为灵巧操作提供了新范式。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-rlmcc0jtu4",
+      "score": 9.0,
+      "evidence_en": "visuotactile affordance for dexterous manipulation",
+      "evidence_cn": "视觉触觉联合表征用于灵巧操作",
+      "canonical_evidence": "视觉触觉联合表征用于灵巧操作",
+      "tldr_en": "Introduces TARS framework that uses unified point cloud representation for visuotactile affordance, enabling dexterous manipulation with robotic synesthesia.",
+      "tldr_cn": "该论文针对灵巧操作中视觉与触觉融合的挑战，提出了触觉共鸣机器人共感（TARS）框架，通过统一点云表示实现物体视觉触觉联合表征。该方法在非接触场景下也能利用触觉先验，显著提升了机器人对物体属性的理解与操作精度。实验验证了在多类灵巧操作任务上的有效性，为多模态触觉感知在机器人中的应用提供了新思路。",
+      "title_zh": "MimicTouch：用于灵巧操作的机器人共感触觉联合表征",
+      "motivation_cn": "现有视觉触觉融合方法在非接触场景下触觉感知不足，限制了灵巧操作的准确性。",
+      "method_cn": "提出TARS框架，利用统一点云表示融合视觉与触觉模态，学习物体的触觉联合表征。",
+      "result_cn": "在多个灵巧操作任务上实现了更高的成功率和鲁棒性。",
+      "conclusion_cn": "视觉触觉联合表征能有效提升机器人对物体交互的理解，增强操作能力。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-ndilonnabz",
+      "score": 9.0,
+      "evidence_en": "general optical tactile representation learning for dynamic perception",
+      "evidence_cn": "通用光学触觉表征学习用于动态感知",
+      "canonical_evidence": "通用光学触觉表征学习用于动态感知",
+      "tldr_en": "Presents AnyTouch 2 and ToucHD dataset for dynamic tactile perception, enabling general tactile representation learning with temporal dynamics.",
+      "tldr_cn": "该论文针对现有触觉数据集和模型忽略时空动态细节的问题，提出了AnyTouch 2框架和大型动态触觉数据集ToucHD。通过设计层次化的动态感知能力，模型能够捕捉微妙的表面变形和力动态。实验表明，该方法在动态触觉感知任务上显著优于现有方法，推动通用触觉基础模型的发展。",
+      "title_zh": "AnyTouch 2：面向动态触觉感知的通用光学触觉表征学习",
+      "motivation_cn": "现有触觉资源缺乏对细粒度时空动态的建模，限制了机器人接触丰富的操作。",
+      "method_cn": "构建ToucHD数据集并设计层次化动态感知任务，训练通用光学触觉表征模型。",
+      "result_cn": "在动态触觉感知基准上取得最先进性能，验证了表征的泛化性。",
+      "conclusion_cn": "动态触觉表征学习是迈向通用触觉感知的关键步骤，为机器人灵巧操作提供基础。",
+      "matched_requirement_id": "req-5",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-wabvvqktuf",
+      "score": 9.0,
+      "evidence_en": "visuo-tactile representation learning for manipulation",
+      "evidence_cn": "视觉-触觉多模态表示学习用于精细操作",
+      "canonical_evidence": "视觉-触觉多模态表示学习用于精细操作",
+      "tldr_en": "Touch in the Wild presents a portable visuo-tactile gripper and cross-modal representation learning that integrates visual and tactile signals for fine-grained manipulation in real-world settings.",
+      "tldr_cn": "现有便携式夹爪缺乏触觉感知，限制了在真实环境中的精细操作能力。本文提出一种集成触觉传感器的便携式轻量夹爪，并设计跨模态表示学习框架，同步采集视觉与触觉数据，学习可解释的表征，在野外环境中实现了精细操作，展示了触觉与视觉融合在机器人学习中的关键作用。",
+      "title_zh": "野外触觉：通过便携式视触夹爪学习精细操作",
+      "motivation_cn": "现有便携夹爪缺乏触觉反馈，限制了精细操作能力。",
+      "method_cn": "设计集成触觉传感器的便携夹爪，提出跨模态表示学习框架融合视觉与触觉信号。",
+      "result_cn": "在多样化真实场景中实现了精细操作，学习到的表征聚焦于接触区域，具有可解释性。",
+      "conclusion_cn": "视觉与触觉的跨模态融合显著提升了机器人野外精细操作能力。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-toy96yyopr",
+      "score": 9.0,
+      "evidence_en": "tactile-based reinforcement learning for robotic control",
+      "evidence_cn": "基于触觉的强化学习用于机器人控制",
+      "canonical_evidence": "基于触觉的强化学习用于机器人控制",
+      "tldr_en": "Enhancing Tactile-based RL develops self-supervised learning methods to effectively harness sparse binary tactile signals, enabling agents to achieve superhuman dexterity in robotic manipulation.",
+      "tldr_cn": "触觉感知在强化学习中的效果不稳定，现有方法未能充分发挥触觉信号优势。本文提出自监督学习方法，利用稀疏二进制触觉信号与本体感受相结合，实验表明触觉信号对于非刚性接触的精细操作至关重要，智能体在灵巧操作任务上超越了人类水平，验证了触觉反馈在机器人学习中的关键价值。",
+      "title_zh": "增强基于触觉的强化学习用于机器人控制",
+      "motivation_cn": "触觉感知在强化学习中的效果不稳定，需要更好的方法来利用触觉信号。",
+      "method_cn": "提出自监督学习方法，结合本体感受和稀疏二进制触觉接触。",
+      "result_cn": "智能体在灵巧操作任务上达到超人类水平，验证了触觉反馈的关键作用。",
+      "conclusion_cn": "自监督学习能有效利用稀疏触觉信号，显著提升机器人操作性能。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-nu1d2ismwh",
+      "score": 8.0,
+      "evidence_en": "cross-modal representation learning for visuo-tactile dexterous manipulation",
+      "evidence_cn": "视觉-触觉跨模态表示学习用于灵巧操作",
+      "canonical_evidence": "视觉-触觉跨模态表示学习用于灵巧操作",
+      "tldr_en": "ViTacFormer learns cross-modal visuo-tactile representations with cross-attention and autoregressive tactile prediction for dexterous manipulation.",
+      "tldr_cn": "ViTacFormer提出跨注意力编码器融合高分辨率视觉与触觉，并结合自回归触觉预测头，通过易到难课程学习优化视觉-触觉潜在空间。在灵巧操作任务中显著提升了精度和鲁棒性，尤其适用于视觉遮挡场景，为触觉反馈的机器人学习提供了有效方法。",
+      "title_zh": "ViTacFormer：学习视觉-触觉跨模态表示用于灵巧操作",
+      "motivation_cn": "灵巧操作需要触觉进行精细控制，但现有视觉方法在遮挡下性能下降",
+      "method_cn": "提出ViTacFormer，使用跨注意力编码器融合视觉触觉，并加入触觉预测头进行课程学习",
+      "result_cn": "在灵巧操作基准上达到SOTA，对遮挡和噪声具有强鲁棒性",
+      "conclusion_cn": "视觉-触觉联合表示显著提升灵巧操作性能，触觉预测作为辅助任务有效",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-ptgmadeonu",
+      "score": 8.0,
+      "evidence_en": "high-performance simulation for vision-based tactile robotics",
+      "evidence_cn": "基于视觉的触觉机器人高性能仿真",
+      "canonical_evidence": "基于视觉的触觉机器人高性能仿真",
+      "tldr_en": "Taccel provides a high-performance GPU simulation platform for vision-based tactile sensors, achieving 915 FPS with 4096 sensors, enabling large-scale tactile robotics research.",
+      "tldr_cn": "基于视觉的触觉传感器仿真工具缺乏效率和精度，限制了触觉机器人研究。Taccel平台集成增量势接触和仿射体动力学，在4096个传感器上达到915 FPS，极大提升了仿真速度，为大规模触觉研究提供基础。",
+      "title_zh": "Taccel: 通过高性能GPU仿真扩展基于视觉的触觉机器人学",
+      "motivation_cn": "缺乏高效的视觉触觉传感器仿真工具限制了触觉机器人研究规模。",
+      "method_cn": "提出Taccel仿真平台，集成增量势接触和仿射体动力学，实现高精度高速仿真。",
+      "result_cn": "达到915 FPS（4096个传感器），大幅提升仿真速度。",
+      "conclusion_cn": "Taccel可大规模加速触觉机器人研究，支持接触丰富的操作任务。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper",
+      "score": 8.0,
+      "evidence_en": "hand pressure and pose estimation dataset for touch contact",
+      "evidence_cn": "手部压力和姿态数据集用于触觉接触",
+      "canonical_evidence": "手部压力和姿态数据集用于触觉接触",
+      "tldr_en": "EgoPressure dataset provides high-resolution pressure and hand pose annotations for egocentric vision, enabling touch pressure estimation.",
+      "tldr_cn": "该论文针对机器人触觉感知中缺乏压力标注数据的问题，提出了EgoPressure数据集，包含高分辨率接触压力强度和精确手部姿态网格。基于该数据集，训练了从RGB图像估计施加压力的基准模型。该工作为多模态触觉感知研究提供了关键资源，可支持机器人通过视觉推断触觉信息。",
+      "title_zh": "EgoPressure：用于第一人称视觉中手部压力和姿态估计的数据集",
+      "motivation_cn": "现有数据集缺乏同时标注手部姿态和接触压力的资源，限制了触觉感知研究。",
+      "method_cn": "通过多视角序列优化方法获取高精度压力强度和手部姿态标注，构建数据集。",
+      "result_cn": "建立了压力估计基准，并验证了模型在未见场景下的泛化能力。",
+      "conclusion_cn": "该数据集填补了触觉感知数据空白，促进机器人从视觉理解触觉交互。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-q60d8jf4ki",
+      "score": 8.0,
+      "evidence_en": "learning-based whole-body control with tactile feedback for fast grasping",
+      "evidence_cn": "基于学习的全身控制结合触觉反馈用于快速抓取",
+      "canonical_evidence": "基于学习的全身控制结合触觉反馈用于快速抓取",
+      "tldr_en": "FastGrasp integrates tactile feedback into a two-stage RL framework for high-speed mobile manipulation and grasping.",
+      "tldr_cn": "该论文针对移动机器人在高速抓取中触觉响应慢、全身协调难的问题，提出了FastGrasp框架。采用两阶段强化学习策略，首先生成抓取候选，再通过全身控制结合触觉反馈执行快速抓取。在多种物体和场景上的实验表明，该方法显著提升了高速抓取的成功率和稳定性，展示了触觉反馈在动态操作中的关键作用。",
+      "title_zh": "FastGrasp：基于学习的移动机械臂快速灵巧抓取全身控制方法",
+      "motivation_cn": "现有方法因固定底座或简单夹爪限制，难以应对高速移动抓取的触觉响应需求。",
+      "method_cn": "两阶段强化学习：条件VAE生成抓取候选，结合触觉反馈的全身控制。",
+      "result_cn": "在模拟和真实场景中实现高速稳定抓取，优于基线方法。",
+      "conclusion_cn": "触觉反馈对于高速移动抓取的冲击稳定和适应性至关重要。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-2pv41ey3jk",
+      "score": 8.0,
+      "evidence_en": "visual-tactile grasp stability prediction for robot learning with tactile feedback",
+      "evidence_cn": "视觉-触觉抓取稳定性预测，用于机器人触觉反馈学习",
+      "canonical_evidence": "视觉-触觉抓取稳定性预测，用于机器人触觉反馈学习",
+      "tldr_en": "Open-world visual-tactile grasp stability predictor trained on synthetic data generalizes zero-shot to novel objects and environments.",
+      "tldr_cn": "现有抓取稳定性预测依赖有限真实数据，泛化性差。本文提出基于有限元仿真和光线追踪渲染的合成数据生成管线，训练视觉-触觉稳定性预测器。实验表明，该预测器在未知物体和环境上实现零样本泛化，显著优于传统方法。",
+      "title_zh": "基于合成数据的开放世界视觉-触觉抓取稳定性预测",
+      "motivation_cn": "真实世界视觉-触觉数据有限，难以支持抓取稳定性预测的开放世界泛化。",
+      "method_cn": "使用基于有限元仿真和光线追踪的高保真合成数据训练预测器。",
+      "result_cn": "预测器在未知物体和环境中零样本泛化，性能优于刚体仿真训练的方法。",
+      "conclusion_cn": "高保真合成数据有效推动视觉-触觉感知在机器人操作中的实际应用。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-icniadbcor",
+      "score": 8.0,
+      "evidence_en": "multisensory imitation learning including tactile modality",
+      "evidence_cn": "包含触觉模态的多感官模仿学习",
+      "canonical_evidence": "包含触觉模态的多感官模仿学习",
+      "tldr_en": "PRISM is a single-pass multisensory policy that effectively integrates tactile, RGB, depth, audio, and proprioception for real-time imitation learning, validated on diverse robotic manipulation benchmarks.",
+      "tldr_cn": "针对机器人模仿学习需要同时处理多模态感知、实时动作生成和多峰分布的问题，本文提出PRISM，一种基于IMLE变体的单次前馈策略。它使用时间多感官编码器（包括触觉、RGB、深度、音频和本体感知）与Performer线性注意力生成器结合，实现高效多模态融合。在MetaWorld、CALVIN等基准上验证了性能，为多模态触觉感知和触觉反馈学习提供了直接的方法支持。",
+      "title_zh": "PRISM：基于Performer RS-IMLE的单次多感官模仿学习",
+      "motivation_cn": "现有生成方法无法同时满足多模态感知、实时控制率和多峰动作分布要求。",
+      "method_cn": "提出基于批量全局拒绝采样IMLE的单次策略，使用时间多感官编码器和Performer注意力。",
+      "result_cn": "在多个基准上验证了其处理多模态（含触觉）输入的有效性。",
+      "conclusion_cn": "该工作为多模态触觉感知在机器人学习中的应用提供了高效框架。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "cvpr-2025-wang-touch2shape-touch-conditioned-3d-diffusion-for-shape-exploration-and-reconstruction-cvpr-2025-paper",
+      "score": 7.0,
+      "evidence_en": "uses tactile images for 3D shape perception and reconstruction",
+      "evidence_cn": "使用触觉图像进行三维形状感知与重建",
+      "canonical_evidence": "使用触觉图像进行三维形状感知与重建",
+      "tldr_en": "Touch2Shape uses a touch-conditioned diffusion model to reconstruct 3D shapes from tactile images, overcoming limitations of visual-only methods.",
+      "tldr_cn": "现有3D扩散模型依赖视觉图像，难以捕捉复杂形状的局部细节。本文提出Touch2Shape，利用触觉图像条件化扩散模型进行形状探索与重建。通过触觉嵌入模块和触觉形状融合模块，模型能生成紧凑表征并融合触觉与形状信息。实验表明该方法在局部细节重建上优于纯视觉方法，为多模态触觉感知提供了新思路。",
+      "title_zh": "Touch2Shape: 触觉条件化3D扩散用于形状探索与重建",
+      "motivation_cn": "现有视觉3D重建方法受遮挡和光照限制，难以捕获局部细节，本文利用触觉图像弥补这一不足。",
+      "method_cn": "提出触觉条件化扩散模型，包含触觉嵌入模块和触觉形状融合模块，从触觉图像重建三维形状。",
+      "result_cn": "模型能从触觉图像生成高质量3D形状，尤其在局部细节上优于纯视觉方法。",
+      "conclusion_cn": "触觉信息有效增强3D重建的精细度，推动了多模态感知在机器人中的应用。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-wdiyhgoswx",
+      "score": 7.0,
+      "evidence_en": "controllable tactile data augmentation enabling large-scale training for tactile models",
+      "evidence_cn": "可控触觉数据增广，支持大规模触觉模型训练",
+      "canonical_evidence": "可控触觉数据增广，支持大规模触觉模型训练",
+      "tldr_en": "ControlTac generates realistic tactile images conditioned on force and position from a single reference, enabling scalable tactile data for foundation models.",
+      "tldr_cn": "大规模触觉数据收集成本高昂。本文提出ControlTac，一个两阶段可控框架，以单张参考触觉图像、接触力和位置为条件生成逼真触觉图像。该方法基于物理先验，生成的样本可有效用于训练下游模型，为解决触觉数据稀缺问题提供了实用方案。",
+      "title_zh": "ControlTac: 基于单张参考图像的力量和位置可控触觉数据增广",
+      "motivation_cn": "触觉传感器数据收集成本高且存在不一致性，现有生成方法难以迁移到真实任务。",
+      "method_cn": "提出两阶段可控框架，以参考图像、接触力和位置为条件生成逼真触觉图像。",
+      "result_cn": "生成数据在动态任务中有效提升了下游模型性能，超越现有模拟和生成方法。",
+      "conclusion_cn": "物理先验控制的生成策略显著提高了触觉数据增强的真实性和可用性。",
+      "matched_requirement_id": "req-5",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-htwkjqzt7r",
+      "score": 7.0,
+      "evidence_en": "self-supervised representation learning from tactile sequences for universal touch sensing",
+      "evidence_cn": "从触觉序列中自监督学习表征，用于通用触觉感知",
+      "canonical_evidence": "从触觉序列中自监督学习表征，用于通用触觉感知",
+      "tldr_en": "Self-supervised encoder-decoder learns tactile representations from palpation sequences, enabling downstream tasks like tactile imaging.",
+      "tldr_cn": "人工触诊主要依赖于人类经验。本文探索基于自监督学习的触觉表征方法，通过编码器-解码器从触觉测量序列中学习包含物体完整信息的表征。该表征可用于触觉成像和变化检测等下游任务，实验在仿真和真实数据上验证了有效性。",
+      "title_zh": "迈向人工触诊：软体对象触觉表征学习",
+      "motivation_cn": "人工触诊难以自动化，需要从触觉数据中学习可泛化的表征。",
+      "method_cn": "采用自监督编码器-解码器框架，从触觉序列中学习紧凑表征。",
+      "result_cn": "学习到的表征在触觉成像和变化检测任务中表现良好，超越简单力映射方法。",
+      "conclusion_cn": "自监督触觉表征学习为机器人自主触诊提供了可行的基础模型。",
+      "matched_requirement_id": "req-5",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-t1gvxvbkb1",
+      "score": 7.0,
+      "evidence_en": "hardware platform with fingertip tactile sensing",
+      "evidence_cn": "集成指尖触觉感知的硬件平台",
+      "canonical_evidence": "集成指尖触觉感知的硬件平台",
+      "tldr_en": "RAPID Hand is a low-cost, high-dexterity robotic hand integrating wrist vision, fingertip tactile sensing, and proprioception, enabling real-world multimodal tactile data collection for robot learning.",
+      "tldr_cn": "针对多指灵巧手平台昂贵且难以收集高质量演示数据的问题，本文提出RAPID Hand，一个集低成本、高自由度（20-DoF）、全手感知于一体的硬件软件平台。它稳定集成了腕部视觉、指尖触觉传感和本体感知，延迟低于7毫秒，并支持高自由度遥操作。该平台为多模态触觉感知和触觉反馈学习提供了实用的数据采集基础，直接支持机器人触觉感知和操作研究。",
+      "title_zh": "RAPID Hand：面向具身智能的鲁棒、经济、感知集成的灵巧操作平台",
+      "motivation_cn": "缺乏低成本高自由度平台用于真实多指操作数据收集，限制通用机器人自主性。",
+      "method_cn": "协同设计紧凑的20自由度手、全手感知（腕部视觉、指尖触觉、本体感知）和高自由度遥操作界面。",
+      "result_cn": "实现了亚7毫秒延迟的感知融合，并支持高质量演示收集。",
+      "conclusion_cn": "该平台降低了触觉感知数据获取门槛，有助于触觉大模型和世界模型研究。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-hu2gt2ucua",
+      "score": 6.0,
+      "evidence_en": "active perception framework applicable to tactile sensing via RL",
+      "evidence_cn": "基于强化学习的主动感知框架，可用于触觉感知",
+      "canonical_evidence": "基于强化学习的主动感知框架，可用于触觉感知",
+      "tldr_en": "APPLE uses reinforcement learning to train a unified active perception policy, applicable to touch and other modalities.",
+      "tldr_cn": "APPLE提出基于强化学习的主动感知策略学习框架，联合训练Transformer感知模块与决策策略，可处理触觉等稀疏局部感知问题。在多种主动感知任务中验证了泛化能力，为机器人触觉感知中的主动探索提供了通用方法论。",
+      "title_zh": "APPLE：基于强化学习的通用主动感知",
+      "motivation_cn": "主动感知方法常限于特定任务，缺乏通用性",
+      "method_cn": "提出APPLE框架，使用强化学习联合训练Transformer感知模块与决策策略",
+      "result_cn": "在多个主动感知任务上取得良好效果，证明其通用性",
+      "conclusion_cn": "APPLE为主动感知提供了通用框架，可适用于触觉等模态",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-neurips-2025-m7md0sa8re",
+      "score": 6.0,
+      "evidence_en": "tactile processing in rodent brain inspires tactile representation learning",
+      "evidence_cn": "啮齿动物触觉处理启发触觉表征学习",
+      "canonical_evidence": "啮齿动物触觉处理启发触觉表征学习",
+      "tldr_en": "Uses ConvRNNs to model tactile sequences and shows alignment with rodent somatosensory cortex, offering insights for tactile AI.",
+      "tldr_cn": "该论文针对触觉感知在人工系统中效能不足的问题，提出Encoder-Attender-Decoder框架，通过卷积循环网络在仿真触觉序列上训练，发现这些模型能够匹配啮齿动物体感皮层的神经表征。该工作为构建更具生物合理性的触觉基础模型提供了方法指导，有望提升机器人触觉感知的自然性和效率。",
+      "title_zh": "任务优化的卷积循环网络与啮齿动物大脑触觉处理对齐",
+      "motivation_cn": "触觉感知在人工系统中远不如视觉语言成熟，希望借鉴神经科学原理。",
+      "method_cn": "构建EAD框架，使用ConvRNN编码器在仿真触觉序列上训练分类任务。",
+      "result_cn": "ConvRNN模型与啮齿动物体感皮层神经表征高度相似。",
+      "conclusion_cn": "生物学合理的触觉模型可以推动人工触觉系统的进步。",
+      "matched_requirement_id": "req-5",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-tnghorsgxy",
+      "score": 6.0,
+      "evidence_en": "predicts tactile forces for in-hand manipulation using audio-tactile data",
+      "evidence_cn": "利用音频-触觉数据预测操作中的触觉力",
+      "canonical_evidence": "利用音频-触觉数据预测操作中的触觉力",
+      "tldr_en": "A predictive model using echo state networks estimates tactile torques from audio-tactile data for adaptive in-hand manipulation.",
+      "tldr_cn": "机器人进行含活动内容物体的操作时，需提前估计内部力矩。本文提出基于回声状态网络的简单学习框架，利用音频-触觉数据预测手部力矩，实现自适应控制。该方法在计算资源有限的硬件上实时运行，有效提升了操作稳定性。",
+      "title_zh": "基于音频-触觉数据的触觉力预测模型",
+      "motivation_cn": "机器人操作被遮挡容器时，无法通过视觉估计内部物体运动，需要触觉预测。",
+      "method_cn": "使用回声状态网络从音频和触觉数据中学习力矩预测模型。",
+      "result_cn": "该模型能提前预测手部力矩，为自适应控制提供时间余量。",
+      "conclusion_cn": "音频-触觉结合的预测方法增强了机器人在不可视场景下的操作能力。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-k2ceveoqbl",
+      "score": 4.0,
+      "evidence_en": "contact force dataset for dexterous manipulation relevant to tactile learning",
+      "evidence_cn": "接触力数据集，与触觉学习相关",
+      "canonical_evidence": "接触力数据集，与触觉学习相关",
+      "tldr_en": "DexCanvas provides a large-scale dexterous manipulation dataset with synchronized multi-view RGB-D, mocap, and per-frame contact forces, enabling learning of contact forces via real-to-sim RL.",
+      "tldr_cn": "灵巧操作数据集缺少物理一致的接触力信息。DexCanvas构建了包含7000小时交互数据的数据集，整合多视角RGB-D、动作捕捉和接触力，并通过真实到仿真强化学习发现接触力，为触觉相关操作研究提供资源。",
+      "title_zh": "DexCanvas: 连接人类演示与机器人学习的灵巧操作数据集",
+      "motivation_cn": "现有的灵巧操作数据集缺乏物理一致的接触力信息。",
+      "method_cn": "构建大规模混合真实合成数据集，包含多视角RGB-D、动作捕捉和每帧接触力。",
+      "result_cn": "通过真实到仿真的强化学习训练策略，重现人类演示并发现接触力。",
+      "conclusion_cn": "该数据集为灵巧操作中的接触力学习提供了基础。",
+      "matched_requirement_id": "req-6",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-1pyxfks6hy",
+      "score": 4.0,
+      "evidence_en": "tactile data compression benchmark",
+      "evidence_cn": "触觉数据压缩基准",
+      "canonical_evidence": "触觉数据压缩基准",
+      "tldr_en": "TaCo introduces a comprehensive benchmark for evaluating lossless and lossy compression methods on heterogeneous tactile data, crucial for real-time robotic applications.",
+      "tldr_cn": "现有触觉数据压缩方法缺乏系统评估，TaCo首次提出全面的触觉数据编解码基准，评估30种压缩方法在5个多样化传感器数据集上的表现，涵盖了无损和有损压缩任务，为触觉数据的高效传输和存储提供了标准评测平台，对实时机器人触觉感知具有重要意义。",
+      "title_zh": "TaCo：异构触觉数据无损与有损编解码基准",
+      "motivation_cn": "触觉数据压缩对于实时机器人应用至关重要，但缺乏系统评估基准。",
+      "method_cn": "构建包含30种压缩方法和5个数据集的基准，评估无损和有损方案。",
+      "result_cn": "系统评估了多种压缩方法，提供了触觉数据压缩的标准性能参考。",
+      "conclusion_cn": "TaCo基准为触觉数据压缩研究提供了统一比较平台。",
+      "matched_requirement_id": "req-3",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-ea6j8k8rnw",
+      "score": 4.0,
+      "evidence_en": "VLA model pruning but no tactile",
+      "evidence_cn": "VLA模型剪枝，不涉及触觉",
+      "canonical_evidence": "VLA模型剪枝，不涉及触觉",
+      "tldr_en": "Action-aware Dynamic Pruning proposes a multi-modal pruning framework for efficient VLA inference, but lacks tactile modality.",
+      "tldr_cn": "视觉-语言-动作（VLA）模型推理计算开销大，现有剪枝方法未考虑操作阶段的差异。本文提出动作感知动态剪枝框架，根据动作动态自适应减少视觉冗余，显著加速VLA推理，但该方法未纳入触觉模态，与触觉VLA需求仅有方法层面的间接关联。",
+      "title_zh": "动作感知动态剪枝：高效的视觉-语言-动作操作",
+      "motivation_cn": "VLA模型推理效率低，现有剪枝忽略操作阶段动态。",
+      "method_cn": "提出动作感知动态剪枝，集成文本驱动令牌选择和动作门控。",
+      "result_cn": "实现了显著的推理加速，同时保持了任务性能。",
+      "conclusion_cn": "动态剪枝方法有效降低了VLA模型的视觉冗余，提高效率。",
+      "matched_requirement_id": "req-4",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-2rxgospb5s",
+      "score": 4.0,
+      "evidence_en": "visual VLA model, flexible for tactile extension",
+      "evidence_cn": "视觉VLA模型，方法可扩展至触觉",
+      "canonical_evidence": "视觉VLA模型，方法可扩展至触觉",
+      "tldr_en": "dVLA presents a diffusion-based VLA model with multimodal chain-of-thought, enabling unified reasoning and control without tactile.",
+      "tldr_cn": "现有VLA模型将视觉、语言和动作分离，缺乏统一的跨模态推理。本文提出扩散VLA模型（dVLA），通过扩散目标统一优化视觉推理、语言理解和动作生成，并集成多模态思维链，提升了模型对新指令和物体的泛化能力，但未包含触觉模态，仅在VLA框架层面有参考价值。",
+      "title_zh": "dVLA：基于扩散的视觉-语言-动作模型及多模态思维链",
+      "motivation_cn": "现有VLA模型缺乏统一的跨模态推理框架。",
+      "method_cn": "提出扩散VLA模型，通过统一扩散目标联合优化视觉、语言和动作。",
+      "result_cn": "模型泛化能力强，对新指令和新物体表现良好，同时集成加速方法降低了响应时间。",
+      "conclusion_cn": "统一的扩散框架能有效整合VLA中的多模态推理。",
+      "matched_requirement_id": "req-4",
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control"
+    },
+    {
+      "paper_id": "openreview-iclr-2026-yz2dnybjxd",
+      "score": 4.0,
+      "evidence_en": "VLA model with memory and feedback, relevant to composite requirement",
+      "evidence_cn": "具有记忆和反馈的VLA模型，与复合需求相关",
+      "canonical_evidence": "具有记忆和反馈的VLA模型，与复合需求相关",
+      "tldr_en": "MVP introduces a non-Markovian VLA model with episodic memory and feedback learning, improving temporal task handling without tactile.",
+      "tldr_cn": "现有VLA模型遵循马尔可夫假设，难以处理时间上延续的任务和从反馈中学习。本文提出非马尔可夫VLA模型MVP，利用情景记忆存储历史动作和视觉观察，并设计紧凑记忆表示，支持从反馈中学习，提升了长时任务性能，但未涉及触觉，仅从VLA框架上与复合主题间接关联。",
+      "title_zh": "MVP：具有反馈学习的记忆增强视觉-语言-动作策略",
+      "motivation_cn": "现有VLA模型缺乏对历史信息的利用，无法从反馈中学习。",
+      "method_cn": "提出非马尔可夫VLA模型，引入情景记忆和紧凑表示，支持反馈学习。",
+      "result_cn": "在时间扩展任务上表现优于马尔可夫基线，能从反馈中改进动作。",
+      "conclusion_cn": "记忆增强和反馈学习显著提升了VLA模型在长时任务中的表现。",
+      "matched_requirement_id": "req-composite-tactile-vla",
+      "matched_query_tag": "query:tactile-vla:composite",
+      "matched_query_text": "Papers central to 请查找触觉大模型，触觉世界模型，和机器人多模态触觉VLA相关的论文, especially work that connects or combines: tactile large model for robot perception; tactile world model for robot manipulation; multi-modal tactile perception in robotics; tactile vision language action model for robot control; tactile foundation model for universal touch sensing; robot learning with tactile feedback; tactile large model and world model for robot manipulation; multi modal tactile vision language action model for robotics; tactile foundation model and its applications in robot touch sensing."
+    }
+  ],
+  "llm_ranked_at": "2026-07-14T01:51:05.956329+00:00",
+  "display_min_score": 4.0,
+  "pruned_at": "2026-07-14T01:51:05.996561+00:00"
+}

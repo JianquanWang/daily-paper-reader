@@ -1,0 +1,105 @@
+{
+  "version": 2,
+  "extractor": "papercropper",
+  "figures": [
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-001.webp",
+      "caption": "",
+      "page": 0,
+      "index": 1,
+      "width": 1803,
+      "height": 405,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-002.webp",
+      "caption": "",
+      "page": 0,
+      "index": 2,
+      "width": 1794,
+      "height": 542,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-003.webp",
+      "caption": "",
+      "page": 0,
+      "index": 3,
+      "width": 888,
+      "height": 493,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-004.webp",
+      "caption": "",
+      "page": 0,
+      "index": 4,
+      "width": 890,
+      "height": 444,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-005.webp",
+      "caption": "",
+      "page": 0,
+      "index": 5,
+      "width": 1572,
+      "height": 588,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-006.webp",
+      "caption": "",
+      "page": 0,
+      "index": 6,
+      "width": 902,
+      "height": 730,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-007.webp",
+      "caption": "",
+      "page": 0,
+      "index": 7,
+      "width": 693,
+      "height": 839,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-008.webp",
+      "caption": "",
+      "page": 0,
+      "index": 8,
+      "width": 700,
+      "height": 580,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-009.webp",
+      "caption": "",
+      "page": 0,
+      "index": 9,
+      "width": 1707,
+      "height": 331,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-010.webp",
+      "caption": "",
+      "page": 0,
+      "index": 10,
+      "width": 870,
+      "height": 191,
+      "label": "Figure"
+    },
+    {
+      "url": "assets/figures/cvpr-2025-accepted/cvpr-2025-zhao-egopressure-a-dataset-for-hand-pressure-and-pose-estimation-in-cvpr-2025-paper/fig-011.webp",
+      "caption": "",
+      "page": 0,
+      "index": 11,
+      "width": 874,
+      "height": 819,
+      "label": "Figure"
+    }
+  ]
+}
