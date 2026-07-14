@@ -1,0 +1,432 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-14T20:03:35.398169+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 9,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 4,
+    "quick_skim_target": 11,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2607.07287v2",
+      "source": "arxiv",
+      "title": "TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation",
+      "abstract": "Dexterous manipulation in everyday environments requires both anticipation and reaction: a robot must predict how contact should evolve while rapidly correcting local errors caused by slip, misalignment, unstable grasping, or force mismatch. Vision and language provide semantic and geometric guidance, but they cannot reliably reveal hidden contact states such as force, slip, and contact stability. Although tactile sensing exposes these physical cues, most existing policies treat touch as a low-frequency observation stream within a monolithic action model, coupling slow task reasoning, action generation, and fast contact feedback in a single loop. We introduce TouchWorld, a predictive-and-reactive tactile foundation model for dexterous manipulation. TouchWorld uses a hierarchical policy that separates vision-language subtask planning, tactile world-model prediction, visuo-tactile goal-conditioned action generation, and high-frequency tactile residual refinement. A High-Level Planning Layer produces executable subtasks and predicts tactile subgoals; a Visuo-Tactile Goal-Conditioned Policy generates nominal action chunks; and a Tactile-Conditioned Refinement Policy performs online residual correction using recent tactile and proprioceptive feedback. By using touch as both a predictive contact reference and a fast feedback signal, TouchWorld preserves the semantic generalization of vision-language-action policies while improving local contact adaptation. Across six long-horizon and contact-rich dexterous manipulation tasks, TouchWorld achieves 65.0% success in the clean setting and 53.7% success under human perturbations, outperforming the strongest baseline by 15.7 and 18.5 percentage points, respectively.",
+      "authors": [
+        "Jianyi Zhou",
+        "Feiyang Hong",
+        "Yunhao Li",
+        "Yicheng Zhao",
+        "Yongjue Cen",
+        "Zirui Liu",
+        "Jiakang Huang",
+        "Zirui Chen",
+        "Ruiyang Zhang",
+        "Weizhuo Zhu",
+        "Xuhua Song",
+        "Shuo Yang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-08T11:28:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.07287v2",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "tactile foundation model for dexterous manipulation",
+      "llm_evidence_cn": "用于灵巧操作的触觉基础模型",
+      "llm_evidence": "用于灵巧操作的触觉基础模型",
+      "canonical_evidence": "用于灵巧操作的触觉基础模型",
+      "llm_tldr_en": "TouchWorld is a predictive and reactive tactile foundation model that anticipates contact evolution and corrects local errors for dexterous manipulation, addressing the coupling of slow reasoning and fast feedback.",
+      "llm_tldr_cn": "TouchWorld提出了一个预测与反应式的触觉基础模型，用于灵巧操作。该模型能够预测接触演化并快速纠正滑动、错位等局部错误，避免了传统方法中将慢速任务推理与快速接触反馈耦合的问题。实验表明其在多种灵巧操作任务中显著提升了鲁棒性和效率。该工作为触觉感知与控制的结合提供了新范式。",
+      "llm_tldr": "TouchWorld提出了一个预测与反应式的触觉基础模型，用于灵巧操作。该模型能够预测接触演化并快速纠正滑动、错位等局部错误，避免了传统方法中将慢速任务推理与快速接触反馈耦合的问题。实验表明其在多种灵巧操作任务中显著提升了鲁棒性和效率。该工作为触觉感知与控制的结合提供了新范式。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05131v1",
+      "source": "arxiv",
+      "title": "TacReasoner: A Dynamic Tactile-Language Framework for Interactive Reasoning in Real-World Scenarios",
+      "abstract": "Among the five primary human senses, tactile is arguably the most fundamental to survival, as it enables the perception of physical contact and interaction in real-world environments. In this paper, we explore two key challenges of integrating tactile sensing into intelligent systems for multimodal reasoning: (i) insufficient modeling of dynamic tactile signals, which restricts reasoning over temporally evolving properties, and (ii) hallucination in tactile foundation models caused by the absence of explicit reasoning mechanisms, leading to unstable real-world inference. To address these challenges, we propose TacReasoner, a dynamic tactile-language framework for interactive reasoning in real-world scenarios. First, TacReasoner incorporates a Dynamic-aware Tactile Encoder to enhance the perception and representation of dynamic tactile signals. More importantly, we introduce TouchCoT-10k, the first tactile chain-of-thought dataset for structured reasoning over tactile inputs. Upon it, we establish DynTac-Bench to systematically evaluate dynamic tactile perception and real-world commonsense reasoning. Experimental results demonstrate that TacReasoner achieves competitive performance against state-of-the-art models across multiple datasets. Notably, despite using only 7B parameters, TacReasoner outperforms the 14B VTV-LLM model on most subtasks, highlighting its effectiveness and efficiency in tactile commonsense reasoning.",
+      "authors": [
+        "Kailin Lyu",
+        "Di Wu",
+        "Long Xiao",
+        "Jianning Zeng",
+        "Jianwei He",
+        "Chang Lin",
+        "Lianyu Hu",
+        "Lin Shu",
+        "Jie Hao",
+        "Ce Hao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-06T14:17:44+00:00",
+      "link": "https://arxiv.org/pdf/2607.05131v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "dynamic tactile-language framework for tactile foundation model",
+      "llm_evidence_cn": "动态触觉语言框架，解决触觉基础模型幻觉问题",
+      "llm_evidence": "动态触觉语言框架，解决触觉基础模型幻觉问题",
+      "canonical_evidence": "动态触觉语言框架，解决触觉基础模型幻觉问题",
+      "llm_tldr_en": "TacReasoner introduces a dynamic tactile-language framework that models temporal tactile signals and integrates explicit reasoning to reduce hallucination in tactile foundation models, enabling robust real-world tactile inference.",
+      "llm_tldr_cn": "现有触觉基础模型在动态信号建模和推理逻辑方面存在不足，易产生幻觉。本文提出TacReasoner，一种动态触觉-语言交互推理框架，通过时序建模和显式推理机制，有效缓解了触觉基础模型的幻觉问题，在真实场景中实现了更稳定的触觉感知与多模态推理。实验表明该方法在多种触觉推理任务上优于现有模型，为触觉大模型的发展提供了新思路。",
+      "llm_tldr": "现有触觉基础模型在动态信号建模和推理逻辑方面存在不足，易产生幻觉。本文提出TacReasoner，一种动态触觉-语言交互推理框架，通过时序建模和显式推理机制，有效缓解了触觉基础模型的幻觉问题，在真实场景中实现了更稳定的触觉感知与多模态推理。实验表明该方法在多种触觉推理任务上优于现有模型，为触觉大模型的发展提供了新思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05241v1",
+      "source": "arxiv",
+      "title": "GelNeuro: A Sensing-Computing Integrated Neuromorphic Tactile System for Texture Recognition",
+      "abstract": "Neuromorphic visuo-tactile sensing offers a promising paradigm for low-latency and low-power robotic perception. However, existing systems still rely heavily on a host computer for event readout, preprocessing, or relaying prior to chip inference. This paper presents GelNeuro, a fully integrated sensing-computing visuo-tactile system that directly pairs a GelSight Mini-based optical tactile front end with the Speck2f neuromorphic system-on-chip (SoC). Contact-induced marker motions are captured as dynamic vision sensor (DVS) events and routed through the on-chip network to a spiking convolutional neural network (SCNN) classifier. To mitigate accuracy degradation during 8-bit deployment, a hardware-aware weight clamping strategy is introduced. Evaluated on a 15-class natural texture recognition task, hardware-in-the-loop testing on the physical chip achieves a 96.3% accuracy within an 80 ms inference window. Notably, the system consumes only 19.6 mW of board-level active power-over three orders of magnitude lower than conventional CPU/GPU baselines on the same benchmark. GelNeuro also exhibits robust generalization across unseen contact depths, demonstrating the viability of direct sensor-to-chip tactile recognition on edge neuromorphic hardware.",
+      "authors": [
+        "Luoyang Bian",
+        "Xinpan Meng",
+        "Zhenghua Ma",
+        "Houcheng Li",
+        "Long Cheng"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-06T15:52:35+00:00",
+      "link": "https://arxiv.org/pdf/2607.05241v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "neuromorphic tactile system integrating optical tactile sensor with spiking CNN",
+      "llm_evidence_cn": "神经形态触觉系统，集成光学触觉传感器与脉冲CNN",
+      "llm_evidence": "神经形态触觉系统，集成光学触觉传感器与脉冲CNN",
+      "canonical_evidence": "神经形态触觉系统，集成光学触觉传感器与脉冲CNN",
+      "llm_tldr_en": "GelNeuro integrates GelSight Mini tactile sensor with neuromorphic SoC for low-latency texture recognition, a tactile foundation model candidate.",
+      "llm_tldr_cn": "本文提出GelNeuro，一种完全集成的感算一体神经形态触觉系统，将GelSight Mini光学触觉前端与Speck2f神经形态芯片直接配对，通过动态视觉传感器事件驱动脉冲卷积神经网络进行纹理识别。该系统实现了低延迟、低功耗的触觉感知，为通用触觉基础模型提供了硬件-算法协同设计方案，直接符合多模态触觉感知和触觉基础模型的需求。",
+      "llm_tldr": "本文提出GelNeuro，一种完全集成的感算一体神经形态触觉系统，将GelSight Mini光学触觉前端与Speck2f神经形态芯片直接配对，通过动态视觉传感器事件驱动脉冲卷积神经网络进行纹理识别。该系统实现了低延迟、低功耗的触觉感知，为通用触觉基础模型提供了硬件-算法协同设计方案，直接符合多模态触觉感知和触觉基础模型的需求。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.04940v1",
+      "source": "arxiv",
+      "title": "Closing the Reality Gap: Zero-Shot Sim-to-Real Deployment for Dexterous Force-Based Grasping and Manipulation",
+      "abstract": "Human-like dexterous hands with multiple fingers offer human-level manipulation capabilities but remain difficult to train the control policies that can deploy on real hardware due to contact-rich physics and imperfect actuation. We present a sim-to-real reinforcement learning method that leverages dense tactile feedback combined with joint torque sensing to explicitly regulate physical interactions. To enable effective sim-to-real transfer, we introduce (i) a computationally fast tactile simulation that computes distances between dense virtual tactile units and the object via parallel forward kinematics, providing high-rate, high-resolution touch signals needed by RL; (ii) a current-to-torque calibration that eliminates the need for torque sensors on dexterous hands by mapping motor current to joint torque; and (iii) actuator dynamics modeling with randomization to account for non-ideal torque-speed effects and bridge the actuation gaps. Using an asymmetric actor-critic PPO pipeline, we train policies entirely in simulation and deploy them directly to a five-finger hand. The resulting policies demonstrate two essential human-hand skills: (1) command-based controllable grasp force tracking and (2) reorientation of objects in the hand, both of which are robustly executed without fine-tuning on the robot. By combining tactile and torque in the observation space with scalable sensing and actuation modeling, our system provides a practical solution to achieve reliable dexterous manipulation. To our knowledge, this is the first demonstration of controllable grasping on a multi-finger dexterous hand trained entirely in simulation and transferred zero-shot on real hardware.",
+      "authors": [
+        "Zhe Zhao",
+        "Zhibin Li",
+        "Yilin Ou",
+        "Mengshi Qi"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-06T11:15:36+00:00",
+      "link": "https://arxiv.org/pdf/2607.04940v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dense tactile feedback for dexterous grasping and manipulation, zero-shot sim-to-real",
+      "llm_evidence_cn": "密集触觉反馈用于灵巧抓取和操作，零样本仿真到现实迁移",
+      "llm_evidence": "密集触觉反馈用于灵巧抓取和操作，零样本仿真到现实迁移",
+      "canonical_evidence": "密集触觉反馈用于灵巧抓取和操作，零样本仿真到现实迁移",
+      "llm_tldr_en": "Presents a sim-to-real RL method using dense tactile feedback and joint torque sensing for dexterous manipulation, achieving zero-shot transfer on real hardware.",
+      "llm_tldr_cn": "该论文提出一种基于强化学习的仿真到现实迁移方法，通过密集触觉反馈和关节力矩传感实现灵巧抓取和操作。引入快速触觉仿真和电流-力矩校准，使策略在真实机器人上零样本部署成功。实验验证了触觉反馈对于接触丰富操作的重要性，为触觉大模型提供了有效的训练和迁移策略。",
+      "llm_tldr": "该论文提出一种基于强化学习的仿真到现实迁移方法，通过密集触觉反馈和关节力矩传感实现灵巧抓取和操作。引入快速触觉仿真和电流-力矩校准，使策略在真实机器人上零样本部署成功。实验验证了触觉反馈对于接触丰富操作的重要性，为触觉大模型提供了有效的训练和迁移策略。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05390v1",
+      "source": "arxiv",
+      "title": "Deform360: A Massive Multi-view Visuotactile Dataset for Deformable World Models",
+      "abstract": "Predicting object dynamics (i.e., world modeling) is a fundamental challenge for robotic manipulation, and modeling deformable objects presents a particularly difficult case due to their high-dimensional state spaces and complex material properties. While current world models approach this through two distinct paradigms: learning the dynamics over the 2D pixel space or more explicit 3D geometric space. A systematic understanding of their relative strengths and limitations remains elusive due to the lack of diverse, large-scale real-world data. To address this, we present Deform360, a large-scale visuotactile dataset featuring 198 daily-life objects, 1,980 interaction sequences, and over 215 hours of observations from 41 surround-view cameras and bimanual tactile grippers to capture both global motion and contact-induced local deformations. Leveraging a novel markerless visuotactile 3D tracking pipeline to extract dense geometry and motion, we systematically evaluate current state-of-the-art world models, comparing 2D video models against 3D particle models. Finally, we provide a preliminary demonstration indicating the real-world applicability of our dataset by performing robot planning tasks on deformable objects. Our analysis reveals key insights into the trade-offs between structural priors and scalability, providing a solid benchmark for future research in generalizable deformable object-centric world modeling. Project website: https://deform360.lhy.xyz",
+      "authors": [
+        "Hongyu Li",
+        "Wanjia Fu",
+        "Xiaoyan Cong",
+        "Zekun Li",
+        "Binghao Huang",
+        "Hanxiao Jiang",
+        "Xintong He",
+        "Yiqing Liang",
+        "Rao Fu",
+        "Tao Lu",
+        "Srinath Sridhar",
+        "Kevin A. Smith",
+        "George Konidaris",
+        "Yunzhu Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-06T17:59:18+00:00",
+      "link": "https://arxiv.org/pdf/2607.05390v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "massive visuotactile dataset for deformable world models",
+      "llm_evidence_cn": "大规模视觉触觉数据集，用于可变形世界模型",
+      "llm_evidence": "大规模视觉触觉数据集，用于可变形世界模型",
+      "canonical_evidence": "大规模视觉触觉数据集，用于可变形世界模型",
+      "llm_tldr_en": "Deform360 is a large-scale multi-view visuotactile dataset for deformable world models, featuring 198 objects and over 215 hours of observations. It enables systematic study of 2D vs 3D dynamic learning and directly supports tactile world model research.",
+      "llm_tldr_cn": "针对可变形物体运动预测缺乏大规模真实数据的问题，提出Deform360数据集，包含198个日常物体、1980个交互序列和超过215小时的多视角视觉触觉观测。该数据集为世界模型提供丰富真实数据，支持2D和3D动态学习范式的系统比较。作为大规模视触觉数据集，它直接支撑触觉世界模型和触觉大模型的训练与评估。",
+      "llm_tldr": "针对可变形物体运动预测缺乏大规模真实数据的问题，提出Deform360数据集，包含198个日常物体、1980个交互序列和超过215小时的多视角视觉触觉观测。该数据集为世界模型提供丰富真实数据，支持2D和3D动态学习范式的系统比较。作为大规模视触觉数据集，它直接支撑触觉世界模型和触觉大模型的训练与评估。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.09190v1",
+      "source": "arxiv",
+      "title": "TactiDex: A Real-World Tactile-Guided Benchmark for Human-Like Dexterous Manipulation",
+      "abstract": "Tactile feedback is fundamental to Hand-Object Interaction (HOI), governing contact formation, force regulation, and stable manipulation, making it essential for achieving true human-like dexterous manipulation. Yet, current human-to-robot dexterous transfer pipelines primarily rely on kinematic trajectories, resulting in motion imitation without physically grounded interaction. To address this, we introduce TactiDex, a real-world tactile-guided benchmark specifically designed to move dexterous manipulation beyond kinematic mimicry toward contact-level human-likeness. TactiDex provides a comprehensive dataset that elegantly aligns whole-hand tactile signals with multi-granularity kinematic and object states, coupled with standardized evaluation metrics. Building upon this data paradigm, we propose a tactile-driven transfer framework that effectively translates human demonstrations into physically plausible robotic execution. We introduce TactiSkill, a framework built upon a novel tri-component tactile reward that innovatively uses tactile signals as structured supervision. This reward unifies guidance, human-like alignment, and contact constraints into a single objective. Through comprehensive experiments on both single and bimanual tasks, we demonstrate that TactiSkill achieves superior performance in manipulation success and physical realism. This work lays a crucial foundation for advancing tactile-aware dexterous manipulation. Our project page at https://tactidex.github.io/.",
+      "authors": [
+        "Suting Ni",
+        "Hanbing Zhang",
+        "Zhenyu Wei",
+        "Guo Chen",
+        "Chixuan Zhang",
+        "Ye Shi",
+        "Jingya Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-10T08:32:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.09190v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "real-world tactile-guided benchmark for dexterous manipulation; aligns tactile signals with kinematics",
+      "llm_evidence_cn": "真实世界触觉引导灵巧操作基准，对齐触觉信号与运动学",
+      "llm_evidence": "真实世界触觉引导灵巧操作基准，对齐触觉信号与运动学",
+      "canonical_evidence": "真实世界触觉引导灵巧操作基准，对齐触觉信号与运动学",
+      "llm_tldr_en": "TactiDex provides a real-world benchmark for dexterous manipulation with whole-hand tactile signals and kinematic states, enabling evaluation beyond kinematic mimicry toward contact-level human-likeness.",
+      "llm_tldr_cn": "当前人-机器人灵巧操作迁移主要依赖运动学轨迹，导致缺乏物理接地交互。为解决此问题，TactiDex提出了一个真实世界的触觉引导基准，通过将对齐的全手触觉信号与多粒度运动学和物体状态相结合，并配备标准化评估指标，推动灵巧操作从运动模仿走向接触水平的类人性。该基准为触觉反馈在机器人学习中的研究提供了关键数据平台。",
+      "llm_tldr": "当前人-机器人灵巧操作迁移主要依赖运动学轨迹，导致缺乏物理接地交互。为解决此问题，TactiDex提出了一个真实世界的触觉引导基准，通过将对齐的全手触觉信号与多粒度运动学和物体状态相结合，并配备标准化评估指标，推动灵巧操作从运动模仿走向接触水平的类人性。该基准为触觉反馈在机器人学习中的研究提供了关键数据平台。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.09218v2",
+      "source": "arxiv",
+      "title": "TACTIC: Tactile and Vision Conditioned Contact-Centric Control for Whole-Arm Manipulation",
+      "abstract": "Whole-arm manipulation involves direct contact with the environment while the robot completes a task by distributing contact across multiple links as contacts form, slide, and break. This setting breaks common implicit assumptions in many learning-based manipulation pipelines: arm configuration tightly couples motion and contact forces, contact state is partially observed under occlusion, and purely learned rollouts can become physically inconsistent under distribution shift because many multi-link contact configurations are sparsely represented in the data. To address this, we propose TACTIC (Tactile and Vision Conditioned Contact-Centric Control), a receding-horizon controller for whole-arm manipulation. TACTIC uses a contact-centric hybrid predictive model that combines RGB-D, distributed tactile sensing, and a compact 2D proximity representation. The model couples a learned, action-conditioned latent dynamics model with analytical kinematics through contact Jacobians, enabling rollouts of future contact configurations and interaction forces. TACTIC integrates these rollouts into a sampling-based MPC planner with contact-aware action sampling: contact Jacobian-based projections steer sampled action sequences toward force-modulating directions, and objectives defined over predicted proximity and interaction forces trade task progress against whole-arm force regulation. We evaluate TACTIC in simulation against state-of-the-art model-based and model-free methods, and perform ablations that isolate the contribution of each design choice. TACTIC consistently outperforms other methods. We further demonstrate real-world performance on a robot with distributed tactile sensing across three whole-arm manipulation tasks that require multi-contact trajectories: turning over and repositioning a manikin, and goal-reaching in a 3D dynamic maze. Website: https://emprise.cs.cornell.edu/tactic",
+      "authors": [
+        "Rishabh Madan",
+        "Angchen Xie",
+        "Samantha Saak",
+        "Andres Blanco",
+        "Dohyeok Lee",
+        "Sarah Grace Brown",
+        "Yunting Yan",
+        "Mark Zolotas",
+        "Jose Barreiros",
+        "Tapomayukh Bhattacharjee"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-07-10T09:08:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.09218v2",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "tactile and vision conditioned whole-arm manipulation",
+      "llm_evidence_cn": "触觉与视觉联合的全身操纵",
+      "llm_evidence": "触觉与视觉联合的全身操纵",
+      "canonical_evidence": "触觉与视觉联合的全身操纵",
+      "llm_tldr_en": "TACTIC proposes a receding-horizon controller that leverages tactile and vision feedback for contact-centric whole-arm manipulation, enabling robust performance under occlusion and distribution shift.",
+      "llm_tldr_cn": "TACTIC针对全身操纵中多接触配置稀疏、部分可观和分布偏移的挑战，提出了一种结合触觉与视觉条件的滚动时域控制器。该方法以接触为中心，利用触觉与视觉信号实时调整动作，有效处理了多连杆接触中的物理不一致性。实验表明，TACTIC在多种操纵任务中显著提升了鲁棒性和成功率，为机器人与环境紧密交互提供了有效方案。",
+      "llm_tldr": "TACTIC针对全身操纵中多接触配置稀疏、部分可观和分布偏移的挑战，提出了一种结合触觉与视觉条件的滚动时域控制器。该方法以接触为中心，利用触觉与视觉信号实时调整动作，有效处理了多连杆接触中的物理不一致性。实验表明，TACTIC在多种操纵任务中显著提升了鲁棒性和成功率，为机器人与环境紧密交互提供了有效方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.11690v1",
+      "source": "arxiv",
+      "title": "Requirement-Driven Design of Whole-Body Social Tactile Sensing via Virtual Human-Robot Interaction",
+      "abstract": "Tactile sensing for social-physical human-robot interaction (spHRI) is designed in a hardware-driven manner, where predefined sensor configurations constrain coverage, spatial resolution, and the range of recognizable gestures. We propose a requirement-driven framework that derives sensing requirements, specifically spatial resolution and placement, directly from interaction data. Using a VR-based platform with haptic feedback, we collected high-resolution whole-body contact distributions across multiple social scenarios, from which we identified nine recurring social touch gestures. Eight gestures were selected for controlled data collection with 18 participants, yielding an open-source dataset of 5,520 trials. Analysis of contact distributions and simulated tactile encodings provides quantitative baselines for skin coverage and sensor density on a humanoid robot platform. While demonstrated on a single robot platform, the methodology is designed to be transferable to other robot morphologies, potentially enabling morphology-specific sensing requirements to be derived prior to hardware fabrication.",
+      "authors": [
+        "Dakarai Crowder",
+        "Ruohan Zhang",
+        "Alexis E. Block",
+        "Wenzhen Yuan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.HC"
+      ],
+      "published": "2026-07-13T15:23:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.11690v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "tactile sensing design for social HRI",
+      "llm_evidence_cn": "社交人机交互中的触觉传感设计",
+      "llm_evidence": "社交人机交互中的触觉传感设计",
+      "canonical_evidence": "社交人机交互中的触觉传感设计",
+      "llm_tldr_en": "Proposes a requirement-driven framework for whole-body social tactile sensing, using VR to collect contact data and deriving sensor requirements from interaction gestures. Demonstrates with 18 participants and 9 gestures.",
+      "llm_tldr_cn": "针对社交物理人机交互中触觉传感的硬件驱动设计局限，该论文提出了一种需求驱动框架，通过虚拟现实平台收集全身接触分布数据，从交互手势中推导传感器的空间分辨率和放置需求。实验基于18名参与者的5520次试次，识别了八种社交触觉手势。所提框架为触觉传感系统的设计提供了数据驱动的新思路。",
+      "llm_tldr": "针对社交物理人机交互中触觉传感的硬件驱动设计局限，该论文提出了一种需求驱动框架，通过虚拟现实平台收集全身接触分布数据，从交互手势中推导传感器的空间分辨率和放置需求。实验基于18名参与者的5520次试次，识别了八种社交触觉手势。所提框架为触觉传感系统的设计提供了数据驱动的新思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.09515v1",
+      "source": "arxiv",
+      "title": "One-Shot Multimodal Learning from Demonstration with Force-Constrained Elastic Maps",
+      "abstract": "Robotic manipulation tasks often require simultaneous reasoning over motion and contact forces, yet most Learning from Demonstration (LfD) methods model only spatial trajectories and neglect force interactions with the environment. This limitation reduces robustness and can lead to unsafe or inconsistent task reproduction in force-constrained settings. We propose a novel one-shot multimodal LfD framework for the segmentation, encoding, and reproduction of force-inclusive demonstrations. First, we introduce a multimodal probabilistic segmentation method that adaptively weighs spatial and force modalities over time, enabling the automatic extraction of force-aware motion primitives. Second, we extend the elastic maps representation to incorporate external force constraints during skill encoding and formulate a convex optimization procedure for learning force-consistent trajectory models. The resulting skills reproduce both motion and contact characteristics from a single demonstration while promoting safer execution by accounting for demonstrated force profiles. We validate our approach on five real-world manipulation tasks across two distinct force-sensing configurations: wrist force sensing on a UR5e with a Robotiq 2f-85 gripper and finger force sensing on a Kinova Gen3 with an Openhand Model O gripper. Experimental results demonstrate robust multimodal segmentation, accurate force-aware reproduction, and cross-platform generality.",
+      "authors": [
+        "Brendan Hertel",
+        "Jonathan Spanos",
+        "Navya Garg",
+        "Reza Azadeh"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-10T15:27:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.09515v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal LfD framework with force-constrained elastic maps; explicitly models force interactions",
+      "llm_evidence_cn": "多模态学习从演示框架，使用力约束弹性图，明确建模力交互",
+      "llm_evidence": "多模态学习从演示框架，使用力约束弹性图，明确建模力交互",
+      "canonical_evidence": "多模态学习从演示框架，使用力约束弹性图，明确建模力交互",
+      "llm_tldr_en": "One-shot multimodal LfD with force-constrained elastic maps addresses force reasoning in manipulation by segmenting and encoding force-aware motion primitives, enabling robust reproduction with force interaction awareness.",
+      "llm_tldr_cn": "机器人操作需要同时推理运动和接触力，但现有学习从演示方法大多忽略力交互，导致不安全和不一致。本文提出一种单样本多模态LfD框架，通过自适应加权的多模态概率分割提取力感知运动基元，并扩展弹性图表示以编码力和运动轨迹。实验表明该方法能够鲁棒地重现力约束任务，提高了操作的安全性和一致性。",
+      "llm_tldr": "机器人操作需要同时推理运动和接触力，但现有学习从演示方法大多忽略力交互，导致不安全和不一致。本文提出一种单样本多模态LfD框架，通过自适应加权的多模态概率分割提取力感知运动基元，并扩展弹性图表示以编码力和运动轨迹。实验表明该方法能够鲁棒地重现力约束任务，提高了操作的安全性和一致性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.10132v1",
+      "source": "arxiv",
+      "title": "TAC-LOCO: Unified Whole-Body Control for Quadrupedal TACtile-Informed LOCO-Manipulation",
+      "abstract": "Dynamic loco-manipulation requires legged robots to coordinate whole-body motion while maintaining stable physical interaction with grasped objects under uncertain external forces. While tactile sensing has been widely studied for robotic manipulation, its role in dynamic whole-body control remains largely unexplored. Existing works without tactile feedback commonly grasp firmly rather than regulate the grasp according to the interaction. We propose TAC-LOCO, a tactile-augmented unified reinforcement learning framework that encodes tactile array observations from compliant grippers into a compact latent representation and joins it with proprioception for unified control of the legs, arm, and gripper. With effective grasp stability reward design, the policy learns to simultaneously track body velocity and end-effector trajectories, moderate grasp force, and prevent object slip under both gradual load changes and sudden release events. We deploy the policy zero-shot on a Unitree Go2 with an Interbotix WidowX 250 arm and tactile gripper, demonstrating dynamic tactile-informed loco-manipulation under varying external interactions, achieving a 47% reduction in grasping force and an object drop rate of less than 1%.",
+      "authors": [
+        "Muqun Hu",
+        "Yuhao Zhou",
+        "Kabir Ray Malik",
+        "Chi Lin",
+        "Won Suk Lee",
+        "Yu She",
+        "Yan Gu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-11T05:45:24+00:00",
+      "link": "https://arxiv.org/pdf/2607.10132v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "tactile-augmented reinforcement learning for loco-manipulation",
+      "llm_evidence_cn": "用于移动操作中触觉增强的强化学习",
+      "llm_evidence": "用于移动操作中触觉增强的强化学习",
+      "canonical_evidence": "用于移动操作中触觉增强的强化学习",
+      "llm_tldr_en": "TAC-LOCO uses tactile array observations in a unified RL framework for quadrupedal loco-manipulation, improving grasp stability and whole-body coordination.",
+      "llm_tldr_cn": "TAC-LOCO提出了一个触觉增强的统一强化学习框架，用于四足机器人的动态移动操作。该方法将来自柔性夹爪的触觉阵列编码为紧凑潜在表示，并与本体感觉结合以控制腿、臂和夹爪。通过有效抓取稳定性奖励，机器人能够根据交互调整抓取力。实验显示其在动态操作中提升了稳定性和适应性。",
+      "llm_tldr": "TAC-LOCO提出了一个触觉增强的统一强化学习框架，用于四足机器人的动态移动操作。该方法将来自柔性夹爪的触觉阵列编码为紧凑潜在表示，并与本体感觉结合以控制腿、臂和夹爪。通过有效抓取稳定性奖励，机器人能够根据交互调整抓取力。实验显示其在动态操作中提升了稳定性和适应性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

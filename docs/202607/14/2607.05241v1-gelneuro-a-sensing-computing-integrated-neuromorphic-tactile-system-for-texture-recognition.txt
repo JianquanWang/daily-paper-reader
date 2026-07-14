@@ -1,0 +1,340 @@
+Title: GelNeuro: A Sensing-Computing Integrated Neuromorphic Tactile System for Texture Recognition
+
+URL Source: https://arxiv.org/pdf/2607.05241v1
+
+Published Time: Tue, 07 Jul 2026 03:32:04 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# GelNeuro: A Sensing-Computing Integrated Neuromorphic Tactile System for Texture Recognition 
+
+Luoyang Bian, Xinpan Meng, Zhenghua Ma, Houcheng Li and Long Cheng, Fellow, IEEE 
+
+Abstract —Neuromorphic visuo-tactile sensing offers a promis-ing paradigm for low-latency and low-power robotic perception. However, existing systems still rely heavily on a host computer for event readout, preprocessing, or relaying prior to chip infer-ence. This paper presents GelNeuro, a fully integrated sensing-computing visuo-tactile system that directly pairs a GelSight Mini-based optical tactile front end with the Speck2f neuro-morphic system-on-chip (SoC). Contact-induced marker motions are captured as dynamic vision sensor (DVS) events and routed through the on-chip network to a spiking convolutional neural network (SCNN) classifier. To mitigate accuracy degradation during 8-bit deployment, a hardware-aware weight clamping strategy is introduced. Evaluated on a 15-class natural texture recognition task, hardware-in-the-loop testing on the physical chip achieves a 96.3% accuracy within an 80 ms inference window. Notably, the system consumes only 19.6 mW of board-level active power-over three orders of magnitude lower than conventional CPU/GPU baselines on the same benchmark. Gel-Neuro also exhibits robust generalization across unseen contact depths, demonstrating the viability of direct sensor-to-chip tactile recognition on edge neuromorphic hardware. 
+
+Index Terms —Neuromorphic tactile perception, in-sensor com-puting, spiking convolutional neural network (SCNN), visuo-tactile sensor, texture recognition. 
+
+I. I NTRODUCTION 
+
+# TACTILE sensing provides high-fidelity local contact in-formation, including fine surface geometry and incipient slip, that is inherently difficult to infer from vision alone yet remains essential for dexterous robotic manipulation in cluttered or occluded environments [1]. Texture recognition serves as a rigorous benchmark for tactile systems because it simultaneously demands high spatial resolution to capture intricate surface profiles and exceptional temporal resolution to resolve transient contact dynamics [2]. When incorporating tactile feedback into closed-loop control, both latency and operating power directly dictate the available reaction window and the viability of edge deployment on resource-constrained platforms [3]. While camera-based visuo-tactile sensors offer rich spatial resolution by imaging the deformation of an 
+
+This work was supported in part by the Brain Science and Brain-like Intel-ligence Technology - National Science and Technology Major Project under Grant 2025ZD0215600, in part by the National Natural Science Foundation of China under Grant U25A20475, in part by the Beijing Municipal Natural Science Foundation under Grants F2024201068, L243014 and L232140, in part by Young Scientists Fund of The State Key Laboratory of Multimodal Artificial Intelligence Systems under Grant ES2P100114, and in part by the Fundamental Research Funds for the Central Universities. (Corresponding author: Houcheng Li and Long Cheng.) 
+
+The authors are all with the State Key Laboratory of Multimodal Artificial Intelligence Systems, Institute of Automation, Chinese Academy of Sciences, Beijing 100190, China, and also with the School of Artificial Intelligence, University of Chinese Academy of Sciences, Beijing 100049, China. All correspondences should be addressed to the corresponding author Prof. Long Cheng(long.cheng@ia.ac.cn). 
+
+(a) Visuo-tactile Sensor (b) Speck2f Neuromorphic System-on-Chip 
+
+Raw visuo -
+
+tactile events 
+
+Input 
+
+spikes 
+
+Output 
+
+spikes 
+
+On -Chip SNN inference 
+
+Fig. 1. GelNeuro tactile perception pipeline. (a) A visuo-tactile sensor is directly interfaced with the Speck2f neuromorphic SoC, which captures raw event frames accumulated from marker motions on the gel surface. (b) The Speck2f neuromorphic SoC handles edge computing, executing on-chip SCNN processing of the event stream with spike trains serving as both the input and output representations. 
+
+elastomeric medium [4], conventional implementations are fundamentally bottlenecked by their frame-based paradigms— typically limited by 30-60 fps sampling rates, dense data readouts, and heavy host-side processing overheads. Conse-quently, transferring massive image frames from the sensor to an external processor introduces severe latency penalties and substantial energy costs, severely restricting their utility on mobile and agile robotic platforms [5]. Dynamic vision sensors (DVS), or event cameras, offer a paradigm shift by asynchronously reporting pixel-level bright-ness changes with sub-millisecond temporal resolution and minimal data redundancy [6]. Integrating a DVS into a visuo-tactile front end allows the resulting event stream to preserve the sparse, high-frequency spatiotemporal structure of contact-induced marker motions, which can be naturally decoded by spiking neural networks (SNNs) through bio-inspired, spike-based representations [7]. Neuromorphic processors are purpose-built to exploit this sparse spike traffic for ultra-low-power computation, where event-driven neuron updates eliminate repeated, power-hungry dense-frame operations [8], [9]. These compelling advantages have motivated pioneering neuromorphic visuo-tactile sensors, such as NeuroTac [10], alongside recent exploratory studies evaluating tactile tex-ture recognition on Loihi2 and Speck platforms [11], [12]. Nevertheless, most existing pipelines still rely on a host 
+
+> arXiv:2607.05241v1 [cs.RO] 6 Jul 2026
+
+computer to read out raw sensor data, crop or accumulate events, and relay the preprocessed stream to the neuromorphic chip. This lingering sensor-host-chip architecture preserves a heavy off-chip data-movement bottleneck, thereby diminish-ing the latency and power benefits theoretically offered by event-driven perception. Furthermore, when transferring ideal, floating-point SNN models onto low-bit physical hardware, severe quantization noise and non-ideal device-level effects frequently degrade the inference accuracy originally observed in software simulations [13]. To overcome these critical limitations, this paper presents GelNeuro, a fully integrated sensing-and-computing neuro-morphic visuo-tactile system (as shown in Fig. 1). GelNeuro directly couples a GelSight Mini marker-gel tactile front end with the DVS interface and on-chip spiking processor of the Speck2f neuromorphic SoC. During physical interaction, contact-induced marker motions are seamlessly converted into asynchronous events and routed straight through the on-chip network to a SCNN classifier, completely eliminating host-computer preprocessing from the sensor-to-chip perception loop. This co-design simultaneously addresses two prominent deployment bottlenecks: the hardware relay overhead preva-lent in state-of-the-art tactile pipelines, and the quantization-induced performance degradation incurred when mapping high-precision SNNs onto fixed-point neuromorphic hard-ware. We comprehensively validate the complete system on a challenging 15-class natural texture recognition task via hardware-in-the-loop inference on the physical chip, providing exhaustive evaluations across inference window dynamics, cross-depth generalization, and power efficiency. The primary contributions of this study are summarized as follows:  
+
+> •
+
+To the best of the authors’ knowledge, this paper presents the first sensing-computing neuromorphic visuo-tactile sensor that directly interfaces an elastomeric optical gel front end with the Speck2f neuromorphic SoC. This architecture completely eliminates host-side data prepro-cessing and bus-relaying overheads, achieving a truly autonomous, fully integrated edge perception loop.  
+
+> •
+
+A novel hardware-aware SCNN mapping workflow is proposed, incorporating synaptic weight clamping and random input masking. This co-design effectively sup-presses quantization noise and device-level hardware ef-fects, ensuring smooth migration from software simula-tion to physical hardware.  
+
+> •
+
+Hardware-in-the-loop evaluations on a 15-class natural texture classification task demonstrate that the system achieves a 96.30% on-chip accuracy within an ultra-short 80 ms inference window while consuming merely 19.6 mW of active board-level power. Furthermore, its zero-shot generalization robustness is validated across unseen contact depths. The remainder of this paper is organized as follows: Section II describes the related work. Section III details the proposed GelNeuro system. Experimental results are presented in Sec-tion IV. Finally, Section V concludes the paper and outlines directions for future work. II. R ELATED WORK 
+
+A. Visuo-Tactile Sensing Hardware 
+
+Vision-based tactile sensors infer contact deformation by imaging markers or surface patterns in compliant elastomers, and have become a common route to high-spatial-resolution tactile sensing. Representative systems include the GelSight series [14] and the TacTip series [16]. Compact designs such as DIGIT [17] and GelSlim [18] have further improved integra-tion with robotic hands. Most of these systems, however, use conventional frame-based cameras, whose fixed frame rates limit their ability to resolve fast contact events such as slip onset and high-frequency friction. Event-camera tactile sen-sors have therefore been developed to preserve asynchronous temporal information at the sensing front end. Systems such as Evetac [19] and GelEvent [20] demonstrate that event-based optical tactile sensing can capture high-frequency contact dynamics. However, in many pipelines, the event stream is still accumulated into frames or pseudo-frames and processed by conventional convolutional neural networks (CNNs) [21]. This frame-based treatment discards part of the sparsity and timing structure that make event data attractive for low-latency tactile processing. 
+
+B. Neuromorphic Tactile Perception 
+
+Several studies have applied SNNs to tactile perception, motivated by the compatibility between spike-based represen-tations, event-driven sensing, and neuromorphic processors. Early work mainly used non-optical tactile arrays. Taunyazov et al. achieved fast texture classification with piezoresistive arrays and SNNs [22], [23]. Rongala et al. developed neu-romorphic fingertips inspired by human mechanoreceptors [24], Lee et al. demonstrated a neuro-inspired artificial pe-ripheral nervous system for scalable electronic skins [25], and Rasouli et al. reduced power consumption by combining tactile sensing with extreme learning machines [26]. Although these systems exploit temporal spike features, electrode-array implementations remain limited by spatial resolution and wiring complexity as the array scale increases. In optical tactile sensing, an event-driven perceptual framework was used for slip detection with the SLAYER algorithm [27]. NeuroTac was later used to compare spike coding strategies for texture recognition [10]. More recently, real-time texture classification was demonstrated with NeuroTac on a Loihi2 simulation platform [11], and neuromorphic tactile inference was explored on the physical Speck2f chip [12]. These systems advance neuromorphic tactile processing, but the sensing front end is still generally connected to the neuromorphic processor through a host computer for event readout, preprocessing, or spatiotemporal relay. The resulting sensor-host-chip pipeline leaves the direct sensor-to-chip tactile architecture largely unaddressed. 
+
+C. Edge Deployment and In-Sensor Computing 
+
+Near-sensor and in-sensor computing reduce data movement by placing part of the computation close to the sensing front end [5]. This idea has been explored in flexible electronic TABLE I GEL NEURO HARDWARE COMPONENTS         
+
+> Component Specifications
+> Tactile front end GelSight Mini marker gel
+> Illumination LED COB band, 4000 K height 5 mm, width 2.2 mm, 12 V
+> DVS module Speck2f built-in event camera 128 ×128-pixel resolution
+> Housing Custom 3-D printed housing and camera mount
+> Processor board Speck2f Dev Kit for on-chip SCNN inference
+
+skins with analog computing elements [28], but such devices remain difficult to scale to high-resolution optical tactile feature extraction. Event-based vision system-on-chips (SoCs) provide a complementary route. The Speck series integrates a DVS with asynchronous spiking convolutional processing resources [29], making it possible to process sparse tactile events close to the sensor. Deploying SNNs on physical edge chips, however, also imposes fixed-point constraints. When high-precision models are mapped to low-bit hardware representations, quantization can reduce the accuracy obtained in simulation [30]. Direct sensor-to-chip routing and robust fixed-point deployment therefore remain coupled challenges for neuromorphic visuo-tactile systems. III. M ETHODS 
+
+A. GelNeuro Design and Operation 
+
+The proposed GelNeuro combines an elastomeric optical tactile front end with the Speck2f near-sensor neuromorphic SoC in a directly interfaced visuo-tactile module. Following the optical layout of Evetac [19], the tactile front end uses a GelSight Mini marker-gel module, lateral illumination from a monochrome COB LED strip, and the built-in 128 × 128 
+
+-pixel DVS of Speck2f as the imaging core [29], as shown in Fig 2(a). The focal setting and camera distance were selected so that the DVS field of view covers the gel surface and each internal marker occupies sufficient pixels for event generation. A custom 3D printed housing fixes the camera, gel, and light source. During contact, microscopic marker motion produces local brightness changes, from which the DVS outputs asynchronous events containing spatial location, polarity, and timestamp information ( x, y, p, t ). The hardware components of GelNeuro are detailed in Table I. During inference, the DVS output is not relayed through a host computer before reaching the neuromorphic processor. The raw asynchronous event stream first passes through an on-chip preprocessing module for spatial region of interest (ROI) cropping. The resulting sparse event stream is then routed through the network-on-chip (NoC) to the on-chip spiking con-volutional processing cores without frame buffering. Training is still performed offline on a personal computer (PC), but the network and deployment steps are constrained by the on-chip event representation and fixed-point arithmetic. In hardware inference, the front-end event stream is processed directly by the chip, forming a sensor-to-SCNN tactile pipeline without host-computer preprocessing. 
+
+B. Texture Dataset Construction 
+
+The dataset contains 15 natural texture materials, including several smooth textures with similar surface appearances, to assess discrimination of fine texture cues, as shown in Fig. 2(d). For data collection, the GelNeuro sensor was mounted on the end-effector flange of a Franka Emika robotic arm, as illustrated in Fig. 2(b). For each sample, the robot pressed the sensor normal to the texture surface to a prescribed depth and then slid at 20 mm/s. Each sliding motion lasted 1000 ms and was treated as one sample. In preliminary trials, we observed that indentation depths above 0.5 mm tended to damage the gel; the maximum depth was therefore limited to 0.5 mm. The training set was collected at three indentation depths (0.1 mm, 0.3 mm, and 0.5 mm) and three sliding angles relative to the texture axis (0 ◦, 45 ◦, and 90 ◦). For each texture, 15 samples were recorded for each depth-angle combination, giving 135 training samples per class and 2025 samples in total. The test set was collected independently and divided into two groups. The in-distribution (ID) test set used the same three depths as the training set to evaluate baseline recognition performance, with 27 samples per class and 405 samples in total. The out-of-distribution (OOD) test set used two intermediate depths, 0.2 mm and 0.4 mm, which were excluded from training to evaluate generalization to unseen contact depths, with 18 samples per class and 270 samples in total. 
+
+C. Offline Training and Deployment 1) SCNN Topology and Offline Training: For SCNN train-ing, the recorded tactile events are converted into a compact spatiotemporal tensor before being passed to the network. The event stream is cropped to a 100 × 100 region of interest (ROI) centered on the marker deformation area, excluding peripheral events outside the active contact region. For offline optimization, the cropped events are accumulated in 1 ms bins to form an input tensor of size (2, T , 100, 100), where the 2 channels denote event polarity and T is the selected temporal window. This binning step provides the discrete time steps required for training with surrogate gradients [31] and backpropagation through time (BPTT) [32], but it is not used to reconstruct image frames. During on-chip inference, events passing the same ROI are delivered asynchronously through the Speck2f pipeline to the processing cores. The network uses non-leaky integrate-and-fire (IAF) neu-rons [33], which retain membrane potential over the short inference window and are suitable for sparse tactile events. To fit the nine physical processing cores on Speck2f, we used a compact topology with 5 convolutional layers and 1 fully connected (FC) readout layer, and removed bias terms to match the chip computational graph and routing constraints. At each time step, the two polarity channels form two 100 × 100 
+
+event maps. These maps pass through 5 convolutional layers with kernel size 4 × 4, stride 2, and padding 1. The channel dimensions are 16, 32, 64, 64, and 64, while the spatial resolution is downsampled from 100 × 100 to 3 × 3. The resulting 64 × 3 × 3 feature tensor is flattened and mapped to 15 output neurons by the FC layer. (a) Sensor Design 
+
+> LED
+> strip
+> Speck2f
+> DVS camera
+> GelSight
+> Mini
+> dotted gel
+> 3D
+> printed
+> camera
+> housing
+
+(b) Data Collection (c)Training & Deployment (d) Classification  
+
+> 15 types of texture data Quantized deployment
+> SCNN training
+
+ʏ ʐ ʑ ʒ ʓ ʔ ʕ 
+
+ʗ
+
+ʖʘ
+
+⑪ ⑬⑫ ⑮⑭ 
+
+> 15 types of objects
+> Visualization of classification
+> results
+> Fig. 2. System overview and experimental workflow. (a) Exploded view of the tactile module: GelSight Mini dotted gel, COB LED strip, 3D printed camera housing, and Speck2f DVS module. (b) Robotic sliding setup and representative event stream from marker motion on the gel surface. (c) Training and deployment pipeline with 1 ms event binning, hardware-aware weight clamping, INT8 quantization, and layer-to-core mapping on Speck2f. (d) Numbered texture set and visualization of classification results. The 15 texture classes are: 1 copper, 2 Polylactic acid, 3 A4 paper, 4 non-woven fabric, 5 silk, 6 leather, 7 fashion fabric, 8 cotton, 9 filmed acrylic, 10 acrylic, 11 fleece, 12 piqu´ e, 13 lace, 14 cardboard, and 15 burlap.
+
+To improve robustness to frictional jitter and thermal noise during sliding, a 10% random input mask is applied to the binned event tensor during training. The network was implemented in Sinabs and optimized with the surrogate-gradient BPTT formulation described above, using 5-fold cross-validation to reduce overfitting. Standard Kaiming ini-tialization can produce little firing activity in early SCNN training, which weakens gradient flow through deeper layers. Therefore, we use an over-driven initialization strategy, in which Kaiming-initialized weights are multiplied by 2 to increase the initial membrane drive and firing activity. A dropout layer (rate = 0.3) is used before the FC readout. Classification is performed by rate coding [34], selecting the output neuron with the highest accumulated spike count. 
+
+2) Quantized Deployment and On-Chip Inference: For de-ployment on Speck2f, the 32-bit floating-point weights learned offline must be converted to the chip’s signed 8-bit range, [-128, 127]. Direct post-training conversion is sensitive to large-magnitude weights, since a small number of outliers can enlarge the scaling range and reduce the effective resolution of the remaining weights. Therefore, we apply hardware-aware synaptic weight clamping during training. After each BPTT update, every trainable weight is symmetrically clipped to 
+
+[−c, c ]. Before deployment, the clipped weights are discretized by the Sinabs/DynapCNN toolchain to the integer representa-tion used by the chip. This deployment-time mapping can be written as 
+
+wq = round 
+
+(
+
+clamp (w, −c, c ) × 127 
+
+c
+
+)
+
+, (1) where w is the floating-point weight before clipping, c is the clamping threshold, 127  
+
+> c
+
+is the quantization scaling factor, and round (·) denotes round-to-nearest integer conversion. The threshold c controls the floating-point range assigned to the available 8-bit levels and is evaluated experimentally in Sec. IV-A. After quantization, the network is loaded onto Speck2f for hardware-in-the-loop inference. During real-device evaluation, asynchronous tactile event streams are delivered to the chip in the same event format used by the sensor front end. The on-chip inference window can be configured independently and is denoted as Tinfer . Within this window, the readout layer continuously integrates spikes from the 15 output neurons, and the neuron with the largest spike count determines the predicted texture class. 
+
+D. Evaluation Metrics and Protocols 1) Temporal Performance Metrics: Preliminary analysis showed that tactile deformation events caused by sliding friction are concentrated within the first 100 ms of contact. We therefore evaluated temporal performance in two settings. In the matched-window setting, the input samples were tem-porally cropped to 8 lengths from 20 ms to 150 ms, and separate models were trained and tested at each length. This experiment measures the effect of available event duration on texture classification. In the early-inference setting, the model trained with Ttrain = 80 ms was deployed on Speck2f. Since the on-chip SCNN updates its membrane states and output spike counts as events arrive, the readout can be stopped at a prescribed Tinfer without waiting for the full training window. We therefore shortened Tinfer from 80 ms to 20 ms, forcing the classifier to make a decision from only the initial segment of contact. For very short windows, some samples do not generate any readout-layer spike. We therefore report the silent rate ,defined as the proportion of samples with no output spike at the readout layer, together with classification accuracy. 
+
+2) Cross-Depth Generalization: To evaluate generalization across contact depth, the test set is divided according to whether the indentation depth was used during training. The in-distribution (ID) group contains samples at 0.1 mm, 0.3 mm, and 0.5 mm, while the out-of-distribution (OOD) group contains the held-out intermediate depths of 0.2 mm and 0.4 mm. Because depth changes the contact patch and the density of deformation-induced events, this split evaluates a physical domain shift rather than a random resampling of the same contact condition. Accuracy is reported separately for ID and OOD depths to test whether the trained SCNN preserves texture-discriminative information under unseen indentation depths. 
+
+3) Power Consumption Metrics: To compare the energy performance of GelNeuro with conventional computing plat-forms, we measured power consumption under the 80 ms texture-classification task. Power on the Speck2f board was recorded and compared with an Intel i9-14900KF CPU and an NVIDIA RTX 4090 GPU, both while idling and during continuous inference. The active-inference power is reported together with the idle power, and their difference is used as the dynamic inference component. IV. E XPERIMENTAL RESULTS AND DISCUSSION 
+
+A. Effect of Training and Inference Windows 
+
+The impact of matched training and testing windows rang-ing from 20 ms to 150 ms was initially evaluated in both PC software simulation and physical Speck hardware deployment. At 20-40 ms, the contact-induced event stream is still sparse, and the deployed SCNN has limited time to accumulate mem-brane potential across layers; the on-board accuracy therefore remains low. The PC model already reaches higher accuracy in the same short windows, suggesting that early tactile cues are present, while the fixed-point hardware mapping and finite on-chip integration time make early readout more difficult. Increasing the window provides more spatiotemporal evidence and raises the Speck accuracy to 96.3% at Ttrain = 80 
+
+ms. Further extending the window to 120 ms or 150 ms gives only marginal improvement, with accuracy fluctuating around 97%. We therefore use 80 ms as the baseline window for the following on-chip evaluation, since it captures most discriminative events while preserving a short response time. Subsequently, early inference capabilities were investigated by applying the model trained at the 80 ms baseline while systematically shortening the actual on-board inference win-dow (Tinfer ). As illustrated in Fig. 3, on-device accuracy increases with the available integration time, while the silent rate decreases. With only 20 ms of input, the stimulus is often too short for the output layer to generate a decision, resulting in a silent rate of 19.8% and an accuracy of 27.9%. At 60 ms, accuracy increases to 85.4% and the silent rate decreases to 4.4%. With the full 80 ms inference window, the system reaches 96.3% accuracy and a silent rate of 0.2%. This trend reflects the progressive accumulation of tactile evidence on the chip: the network can produce early, coarse decisions from short contact segments, and a modest extension of the window is sufficient to obtain stable texture recognition. 
+
+B. Weight Clamping for Quantized Deployment 
+
+The impact of the clamping threshold ( c) on deployment accuracy was investigated after mapping the trained model                          
+
+> 20 30 40 60 80 100 120 150 Training window (ms)
+> 50
+> 60
+> 70
+> 80
+> 90
+> 100 Accuracy (%)
+> c=1.1 c=1.1 c=1.1 c=1.1 c=0.9 c=0.8 c=1.2 c=0.9
+> (a) Matched-window accuracy
+> PC simulation
+> Speck deployment
+> 25
+> 50
+> 75
+> 100 Accuracy (%)
+> (b) Early inference, D = 80 ms
+> Speck deployment
+> 20 30 40 50 60 70 80 Inference window (ms)
+> 0
+> 10
+> 20 Silent rate (%)  Silent rate
+> Fig. 3. Effect of temporal windows on texture classification. (a) Matched training/evaluation window D; labels denote Speck clamp thresholds. (b) Early inference with the D= 80 ms model as Tinfer is shortened; silent rate denotes samples without an output-layer decision spike.
+
+onto the 8-bit Speck2f hardware. Training and testing dura-tions were fixed at 80 ms, and c was swept from 0.5 to 1.8. Figure 4 compares the full-precision personal computer (PC) model with the deployed Speck model across this range. The PC model remains close to 100% accuracy for c ≥ 0.6. On the chip, accuracy rises rapidly as c is increased from small values, reaches its maximum at c = 0 .9, and then decreases or fluctuates for larger thresholds. This result shows that the clamp threshold cannot be selected from the quantization step size alone. Reducing c
+
+narrows the floating-point range mapped to the INT8 interval, so weights that remain inside [−c, c ] are represented with a finer step size. However, when c is too small, high-magnitude weights learned by the PC model are clipped before integer mapping. At c = 0.6, this clipping changes the effective network parameters and the on-board accuracy drops to about 60%. At c = 0 .9, the threshold is large enough to retain discriminative weights while still keeping the mapped range compact, giving 96.3% on-board accuracy and the smallest gap to the PC model. Increasing c beyond this point retains more weights, but the same 8-bit levels must cover a wider range, reducing the resolution of smaller weights. Based on this trend, subsequent experiments search the clamping threshold in the range of 0.8 to 1.2. 
+
+C. Cross-Depth Generalization 
+
+To assess domain robustness, cross-depth generalization was verified on OOD target depths of 0.2 mm and 0.4 mm that were unseen during training. As depicted in Fig. 5, the base-line ID configurations preserve high classification accuracies 0.5 0.7 0.9 1.1 1.3 1.5 1.7 Clamp threshold c
+
+50 
+
+60 
+
+70 
+
+80 
+
+90 
+
+100 Accuracy (%) 
+
+(a) Clamp-threshold sensitivity 
+
+PC simulation 
+
+Speck deployment               
+
+> 12345678910 11 12 13 14 15
+
+Predicted class                                                                                                                                                                                                                   
+
+> 12345678910 11 12 13 14 15
+> True class
+> 27 00000000000000027 00000000000000027 00000000000000027 00000000000000125 00100000000001026 00000000000000027 00000000000000027 00000000001000026 00000000000000027 00000000000000027 00000000000000027 00000000000000027 00000000000000027 00000000000000027
+
+(b) PC simulation               
+
+> 12345678910 11 12 13 14 15 NS
+
+Predicted class                                                                                                                                                                                                                                  
+
+> 12345678910 11 12 13 14 15
+> 26 000000001000000026 00000000000001
+> 0026 000000100000000027 000000000000000225 000000000000000027 000000000000000027 000000000010100025 000000000401000022 0000000
+> 20000000025 000000000000000027 000000000000000027 000000000000000027 000000100000000026 000000000000000027 0
+
+Speck deployment 
+
+Fig. 4. Hardware-aware weight clamping for on-chip INT8 deployment. (a) Accuracy versus clamp threshold c at D = Tinfer = 80 ms for PC simulation and Speck deployment. (b) Confusion matrices at c = 0 .9; PC and Speck accuracies are 99.0% and 96.3%, respectively. NS denotes no decision spike. 
+
+throughout the evaluation spectrum. Crucially, accuracy on the OOD variants scales upward with extended integration times, stabilizing at 74.8% for 0.2 mm and 85.2% for 0.4 mm given a 120 ms temporal window. Because varying the pressing depth modulates the gel contact area and underlying stress propagation, it shifts both the geometric boundaries and firing frequencies of the tactile event stream. This OOD validation thus presents a true physical domain shift rather than a simple numerical perturbation. Operating without zero-shot fine-tuning on these test depths, the neuromorphic network still preserves robust discriminative features far exceeding the chance baseline. This resilience indicates that GelNeuro decouples texture features from depth-dependent event inten-sities, proving its capacity to generalize across variable contact conditions. 
+
+D. Edge Power Consumption 
+
+Board-level active power consumption was measured under the baseline 80 ms inference task and systematically compared against standard CPU and GPU baselines. As illustrated in Fig. 6, the Speck2f platform draws merely 1.4 mW in the idle state, whereas the Intel i9-14900KF CPU and NVIDIA RTX 4090 GPU exhibit idle power draws of 7.7 W and 25.9 W, respectively. During continuous tactile spike-stream inference, the total active power of the Speck2f board rises to 19.6 mW, representing a dynamic power increment of 18.2 mW above its idle baseline. Evaluated on the identical texture classification task, the CPU and GPU baselines incur substantial power overheads of 74.7 W and 87.4 W, respectively. Consequently, the operating power of the integrated GelNeuro system is over three orders of magnitude lower than conventional digital com-puting architectures, delivering an approximate 3800 × energy reduction relative to the high-performance CPU baseline. This reduction comes from the event-driven operation of both the tactile front end and the spiking processor. When no tactile events are generated, the Speck2f board remains close to its idle state. During sliding contact, incoming events trigger updates only in the routed on-chip neurons, so computation scales with tactile activity rather than with a fixed image frame rate. In contrast, frame-based tactile pipelines repeatedly read 
+
+20 30 40 60 80 100 120 150 
+
+Training window D (ms) 
+
+0.5 
+
+0.4 
+
+0.3 
+
+0.2 
+
+0.1                                    
+
+> Contact depth (mm)
+> 58.5 73.3 68.2 92.6 95.6 91.8 100.0 97.8
+> 45.2 70.4 68.9 81.5 78.5 76.3 85.2 80.0 71.1 80.0 84.4 92.6 97.0 93.3 96.3 97.8
+> 33.3 33.3 45.9 57.8 65.2 68.9 74.8 69.6
+> 45.2 60.7 69.6 83.7 96.3 97.0 96.3 97.8
+
+(a) Accuracy across contact depths 
+
+30 
+
+45 
+
+60 
+
+75 
+
+90 
+
+> Acc. (%)
+
+20 30 40 60 80 100 120 150 Training window D (ms) 
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 Accuracy (%) 
+
+(b) 
+
+Depth-wise accuracy 
+
+> 0.1 mm
+> 0.3 mm
+> 0.5 mm
+> 0.2 mm
+> 0.4 mm
+
+Fig. 5. Cross-depth evaluation of on-chip texture recognition. (a) Speck accuracy for each contact depth and training window. (b) Depth-wise accuracy trends. Depths of 0.1, 0.3, and 0.5 mm are used for training; 0.2 and 0.4 mm are held out for zero-shot depth generalization. 
+
+out and process dense images even when only a small portion of the contact pattern changes. The measured power level supports the use of this architecture in edge tactile systems where low operating power is a design constraint. 
+
+E. Discussion 
+
+Table II contrasts GelNeuro with the closest state-of-the-art tactile texture recognition and neuromorphic hardware deploy-ment baselines, including Evetac [19] exclusively as an event-TABLE II COMPARISON WITH REPRESENTATIVE TACTILE PERCEPTION PIPELINES (NR: N OT REPORTED )                                             
+
+> Work Sensor readout Model type Inference mode / path Accuracy / task Time / latency Power
+> Li and Adelson (GelSight) [15] Frame/RGB camera Handcrafted texture features PC inference; host preproc. Texture: 99.79% (40 cls.) NR NR
+> Funk et al. (Evetac) [19] Event camera Dot/event-feature CNN PC inference; host preproc. Slip/grasp: 93% grasp success 1000 Hz; 100 μsinference NR
+> Brayshaw et al. (NeuroTac) [11] Event camera SNN Loihi2 chip inference; host relay Texture: 94% (11 cls.) 154 ms 2.25 W
+> Xu et al. (NeuroTac) [12] Event camera SCNN Speck2f chip inference; host preproc. Texture: 87.33% (10 cls.) 1000 ms 8.04 mW
+> Taunyazov et al. [22] Non-visual tactile Spike-coded SNN PC inference; host encoding Texture: 94.6% (20 cls.) 4000 ms NR
+> GelNeuro Event camera INT8 SCNN Speck2f chip inference; direct sensor-to-chip Texture: 96.3% (15 cls.) 80 ms 19.6 mW
+> Speck GPU RTX 4090
+> CPU i9-14900KF
+> 10 0
+> 10 1
+> 10 2
+> 10 3
+> 10 4
+> 10 5
+> Power (mW)
+> 1.4 mW 25.9 W 7.7 W 19.6 mW 87.4 W 74.7 W
+> Board-level power
+> Idle Active inference
+> Fig. 6. Board-level idle and active-inference power. Speck is compared with CPU and GPU baselines under the 80 ms inference setting; power is plotted in mW on a logarithmic scale.
+
+based slip-detection reference. The comparison highlights that GelNeuro uniquely conceptualizes on-chip SCNN inference coupled with direct, autonomous sensor-to-chip tactile event routing. By directly interfacing an elastomeric optical tactile front end with the Speck2f neuromorphic SoC, the proposed architecture effectively bridges the traditional separation be-tween sensing and computation in visuo-tactile perception. Within this tightly integrated configuration, contact-induced tactile events are routed directly through the on-chip network to the SCNN classifier, completely bypassing host-computer preprocessing during active inference. Physical hardware-in-the-loop evaluations demonstrate that the complete system achieves a 96.3% texture classification accuracy within a brief 80 ms inference window, while drawing only 19.6 mW of board-level active power. As summarized in Table II, these at-tributes position GelNeuro in a distinctly superior deployment regime relative to prior texture-recognition pipelines, which remain fundamentally constrained by host-side preprocessing overheads or sensor-to-processor hardware relays. Further-more, compared with standard CPU/GPU platforms, GelNeuro suppresses active inference power by more than three orders of magnitude. These quantitative findings substantiate that direct, event-driven near-sensor processing can simultaneously optimize processing latency and power efficiency without compromising texture-recognition fidelity. The hardware evaluations also elucidate several fundamen-tal challenges that persist when migrating an offline-trained SCNN onto physical neuromorphic substrates. Although the Speck2f SoC processes asynchronous events continuously, standard backpropagation through time (BPTT) training inher-ently requires the continuous event stream to be discretized into uniform temporal bins. In preliminary evaluations con-ducted at a single 0.5 mm indentation depth, refining the bin width from 1 ms to 0.5 ms elevated the accuracy within a tight 20 ms window from 93.4% to 96.1%. However, shrinking the bin width heavily extends the temporal unrolling length during BPTT, thereby exponentially driving up the training memory overhead. Consequently, the 1 ms temporal discretization adopted in this work represents a pragmatic trade-off bound by the current software optimization framework, rather than an intrinsic constraint of the asynchronous chip architecture. Fixed-point hardware quantization serves as another primary source of accuracy degradation. While the proposed hardware-aware weight clamping strategy mitigates quantization drift when mapping the 32-bit floating-point software model to the 8-bit fixed-point (INT8) hardware representation, it cannot completely close the precision gap induced by hardware vir-tualization. Furthermore, continuous deployment on physical silicon is inevitably susceptible to circuit-level crosstalk and thermal fluctuations. The 10% random input masking deployed during training effectively bolsters the network’s resilience against such environmental perturbations, yet real-world hard-ware occasionally exhibits complex non-ideal noise distribu-tions that are not fully spanned by offline synthetic data. These experimental insights directly illuminate subsequent optimization trajectories. Future endeavors will focus on inves-tigating advanced compilation strategies to further suppress the remaining 8-bit mapping loss, specifically exploring whether quantization-aware training (QAT) can yield performance su-perior to the current post-training weight-clamping paradigm. Additionally, lightweight surrogate-gradient or proxy-gradient algorithms will be explored to accommodate finer temporal discretizations without incurring the severe memory penalties of standard BPTT. V. C ONCLUSION AND FUTURE WORK 
+
+This work demonstrates GelNeuro as a sensing-computing integrated neuromorphic tactile system, using texture recog-nition as a validation task for direct sensor-to-chip event processing. By routing tactile events from the optical gel front end to the on-chip SCNN processor without host-side preprocessing, GelNeuro preserves the sparse temporal struc-ture of contact-induced signals through to on-chip inference. On 15 natural textures, the deployed system achieved 96.3% accuracy within an 80 ms inference window while consuming 19.6 mW of board-level active power, and retained useful performance at unseen contact depths. These results support direct neuromorphic tactile processing as a practical route toward low-latency, low-power perception on robotic edge platforms. In future investigations, beyond tactile texture recognition, the core architecture of GelNeuro is well-suited for extension to transient slip detection and real-time, closed-loop slip-preventive control. In these time-critical scenarios, the ultra-low-latency characteristics inherited from the direct sensor-to-chip perception pathway are expected to provide a more pronounced and definitive operational advantage. REFERENCES [1] N.F. Lepora, “Tactile robotics: Past and future,” The International Journal of Robotics Research , DOI: 10.1177/02783649261421615, 2026. [2] T. Liu, G. Brayshaw, A. Li, X. Xu, and B. Ward-Cherrier, “Neuro-morphic touch for robotics-A review,” Neuromorphic Computing and Engineering , vol. 5, no. 3, article number 032001, 2025. [3] Z. Zhang and C. Lee, “Recent Advances in Neuromorphic Tactile Perception for Robotic Applications,” AI Sensors , vol. 2, no. 1, article number 3, 2026. [4] S. Zhang Z. Chen, Y. Gao, W. Wan, J. Shan, H. Xue, F. Sun, Y. Yang, and B. Fang, “Hardware Technology of Vision-Based Tactile Sensor: A Review,” IEEE Sensors Journal , vol. 22, no. 22, pp. 21410–21427, 2022. [5] F. Zhou and Y. Chai, “Near-sensor and in-sensor computing,” Nature Electronics , vol. 3, no. 11, pp. 664–671, 2020. [6] G. Gallego et al., “Event-Based Vision: A Survey,” IEEE Transactions on Pattern Analysis and Machine Intelligence , vol. 44, no. 1, pp. 154– 180, 2022. [7] K. Roy, A. Jaiswal, and P. Panda, “Towards spike-based machine intelligence with neuromorphic computing,” Nature , vol. 575, no. 7784, pp. 607–617, 2019. [8] M. Davies et al., “Loihi: A Neuromorphic Manycore Processor with On-Chip Learning,” IEEE Micro , vol. 38, no. 1, pp. 82–99, 2018. [9] P.A. Merolla et al., “A million spiking-neuron integrated circuit with a scalable communication network and interface,” Science , vol. 345, no. 6197, pp. 668–673, 2014. [10] B. Ward-Cherrier, N. Pestell, and N. F. Lepora, “NeuroTac: A Neu-romorphic Optical Tactile Sensor applied to Texture Recognition,” in 
+
+Proceedings of 2020 IEEE International Conference on Robotics and Automation (ICRA) , Paris, France, 2020, pp. 2654–2660. [11] G. Brayshaw, B. Ward-Cherrier, and M. J. Pearson, “A Neuromor-phic System for the Real-time Classification of Natural Textures,” in 
+
+Proceedings of 2024 IEEE International Conference on Robotics and Automation (ICRA) , Yokohama, Japan, 2024, pp. 1070–1076. [12] X. Xu, A. Li, and B. Ward-Cherrier, “Exploratory Movement Strategies for Texture Discrimination with a Neuromorphic Tactile Sensor,” in 
+
+Proceedings of 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , Hangzhou, China, 2025, pp. 17869–17874. [13] J. Li, M. Xu, H. Dong, B. Lan, Y. Liu, H. Chen, Y. Zhuang, Y. Xie, L. Chen, “Balancing accuracy and efficiency: Co-design of hybrid quantization and unified computing architecture for spiking neural networks,” Frontiers in Neuroscience , vol. 19, article number 1665778, 2025. [14] W. Yuan, S. Dong, and E. Adelson, “GelSight: High-Resolution Robot Tactile Sensors for Estimating Geometry and Force,” Sensors , vol. 17, no. 12, article number 2762, 2017. [15] R. Li and E. Adelson, “Sensing and Recognizing Surface Textures Using a GelSight Sensor,” in Proceedings of 2013 IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , 2013, pp. 1241– 1247. [16] B. Ward-Cherrier et al., “The TacTip Family: Soft Optical Tactile Sensors with 3D-Printed Biomimetic Morphologies,” Soft Robotics ,vol. 5, no. 2, pp. 216–227, 2018. [17] M. Lambeta et al., “DIGIT: A Novel Design for a Low-Cost Compact High-Resolution Tactile Sensor With Application to In-Hand Manip-ulation,” IEEE Robotics and Automation Letters , vol. 5, no. 3, pp. 3838–3845, 2020. [18] I.H. Taylor, S. Dong, and A. Rodriguez, “GelSlim 3.0: High-Resolution Measurement of Shape, Force and Slip in a Compact Tactile-Sensing Finger,” in Proceedings of 2022 International Conference on Robotics and Automation (ICRA) , Philadelphia, PA, USA, 2022, pp. 10781– 10787. [19] N. Funk, E. Helmut, G. Chalvatzaki, R. Calandra, and J. Peters, “Eve-tac: An Event-Based Optical Tactile Sensor for Robotic Manipulation,” 
+
+IEEE Transactions on Robotics , vol. 40, pp. 3812–3832, 2024. [20] D. Yin et al., “GelEvent: A Novel High-Speed Tactile Sensor With Event Camera,” IEEE Transactions on Instrumentation and Measure-ment , vol. 74, pp. 1–13, 2025. [21] P. Kang et al., “Boost event-driven tactile learning with location spiking neurons,” Frontiers in Neuroscience , vol. 17, p. 1127537, 2023. [22] T. Taunyazov et al., “Fast Texture Classification Using Tactile Neural Coding and Spiking Neural Network,” in 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , 2020, pp. 9890– 9895. [23] T. Taunyazov et al., “Event-Driven Visual-Tactile Sensing and Learning for Robots,” Robotics: Science and Systems XVI , 2020. [24] U. B. Rongala, A. Mazzoni, and C. M. Oddo, “Neuromorphic Artificial Touch for Categorization of Naturalistic Textures,” IEEE Transactions on Neural Networks and Learning Systems , vol. 28, no. 4, pp. 819–829, 2017. [25] W.W. Lee et al., “A neuro-inspired artificial peripheral nervous system for scalable electronic skins,” Science Robotics , vol. 4, no. 32, article number eaax2198, 2019. [26] M. Rasouli et al., “An Extreme Learning Machine-Based Neuromorphic Tactile Sensing System for Texture Recognition,” IEEE Transactions on Biomedical Circuits and Systems , vol. 12, no. 2, pp. 313–325, 2018. [27] S.B. Shrestha and G. Orchard, “SLAYER: Spike Layer Error Reas-signment in Time,” in Proceedings of Advances in neural information processing systems , article number 31, 2018. [28] Y. Chen et al., “Capacitive in-sensor tactile computing,” Nature Com-munications , vol. 16, no. 1, article number 5691, 2025. [29] M. Yao et al., “Spike-based dynamic computing with asynchronous sensing-computing neuromorphic chip,” Nature Communications , vol. 15, no. 1, article number 4464, 2024. [30] B. Jacob et al., “Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference,” in Proceedings of 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition ,2018, pp. 2704–2713. [31] E. O. Neftci, H. Mostafa, and F. Zenke, “Surrogate Gradient Learning in Spiking Neural Networks: Bringing the Power of Gradient-Based Optimization to Spiking Neural Networks,” IEEE Signal Processing Magazine , vol. 36, no. 6, pp. 51–63, 2019. [32] Y. Wu, L. Deng, G. Li, J. Zhu, and L. Shi, “Spatio-Temporal Back-propagation for Training High-Performance Spiking Neural Networks,” 
+
+Frontiers in Neuroscience , vol. 12, article number 331, 2018. [33] B. Rueckauer, I.A. Lungu, Y. Hu, M. Pfeiffer, and S.C. Liu, “Conver-sion of Continuous-Valued Deep Networks to Efficient Event-Driven Networks for Image Classification,” Frontiers in Neuroscience , vol. 11, p. 682, Dec. 2017. [34] W. Guo, M.E. Fouda, A. M. Eltawil, and K.N. Salama, “Neural Coding in Spiking Neural Networks: A Comparative Study for Robust Neuromorphic Systems,” Frontiers in Neuroscience , vol. 15, article number 638474, Mar. 2021.

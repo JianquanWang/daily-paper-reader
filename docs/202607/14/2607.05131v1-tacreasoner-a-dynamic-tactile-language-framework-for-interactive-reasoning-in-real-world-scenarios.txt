@@ -1,0 +1,307 @@
+Title: TacReasoner: A Dynamic Tactile-Language Framework for Interactive Reasoning in Real-World Scenarios
+
+URL Source: https://arxiv.org/pdf/2607.05131v1
+
+Published Time: Tue, 07 Jul 2026 03:19:23 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# TacReasoner: A Dynamic Tactile-Language Framework for Interactive Reasoning in Real-World Scenarios 
+
+Kailin Lyu 1,2, Di Wu 1, Long Xiao 1, Jianning Zeng 1, Jianwei He 1, Chang Lin 1, Lianyu Hu 3,Lin Shu 1,4, Jie Hao 1,∗, and Ce Hao 2,∗
+
+Fig. 1: The core contributions of TacReasoner. (i) We propose a Dynamic-aware Tactile Encoder to strengthen dynamic tactile representation learning. Upon it, we build TouchCoT-10K , a tactile CoT dataset that provides explicit supervision for tactile reasoning. (ii) We further introduce DynTac-Bench to support dynamic perception and tactile interaction tasks. (iii) Across multiple tactile reasoning benchmarks, TacReasoner achieves statistically significant gains over prior methods. 
+
+Abstract — Among the five primary human senses, tactile is arguably the most fundamental to survival, as it enables the perception of physical contact and interaction in real-world environments. In this paper, we explore two key challenges of integrating tactile sensing into intelligent systems for multi-modal reasoning: (i) insufficient modeling of dynamic tactile signals, which restricts reasoning over temporally evolving properties, and (ii) hallucination in tactile foundation models caused by the absence of explicit reasoning mechanisms, leading to unstable real-world inference. To address these challenges, we propose TacReasoner, a dynamic tactile-language frame-work for interactive reasoning in real-world scenarios. First, TacReasoner incorporates a Dynamic-aware Tactile Encoder to enhance the perception and representation of dynamic tactile signals. More importantly, we introduce TouchCoT-10k, the first tactile chain-of-thought dataset for structured reasoning over tactile inputs. Upon it, we establish DynTac-Bench to sys-
+
+This work was supported by the Zhongguancun Academy (Grant No. C20250502) and the Guangzhou Key Research and Development Program (Grant No. 2025B01J4002). 
+
+> 1
+
+Institute of Automation, Chinese Academy of Sciences, Beijing, China. 
+
+> 2
+
+Beijing Zhongguancun Academy, Beijing, China. 
+
+> 3
+
+Nanyang Technological University, Singapore. 
+
+> 4
+
+Guangdong Institute of Artificial Intelligence and Advanced Computing. 
+
+> ∗
+
+Jie Hao and Ce Hao are the corresponding authors. 
+
+tematically evaluate dynamic tactile perception and real-world commonsense reasoning. Experimental results demonstrate that TacReasoner achieves competitive performance against state-of-the-art models across multiple datasets. Notably, despite using only 7B parameters, TacReasoner outperforms the 14B VTV-LLM model on most subtasks, highlighting its effectiveness and efficiency in tactile commonsense reasoning. 
+
+I. INTRODUCTION For humans, tactile is a crucial sense that provides physical information beyond what vision can provide (e.g., material properties, texture information), especially during occlusion [1], [2], [3]. This in turn improves our ability to perform physical reasoning and act in our world. For example, when a person touches a hard grain of rice, they can infer that it is under-ripe; similarly, when touching a soft sponge, they can deduce that it is suitable for wiping based on the context. Therefore, integrating tactile information into the commonsense reasoning framework and developing tactile reasoning capabilities for real-world scenarios is crucial for advancing embodied intelligence and holds significant practical importance. 
+
+> arXiv:2607.05131v1 [cs.AI] 6 Jul 2026
+
+In recent years, several studies have explored integrating tactile perception with large language models to enable robots to perform tactile understanding tasks guided by natural language prompts. For example, Octopi fine tunes a CLIP encoder [4] with predefined attributes to learn tactile representations and adapts Vicuna for downstream reason-ing [5]. Octopi 1.5 further incorporates retrieval augmented generation to improve attribute retrieval accuracy [6]. VTV-LLM leverages VideoMAE to learn tactile video representa-tions [7]. Despite these advances, existing approaches still struggle to achieve reliable and robust tactile reasoning in real world environments , leaving the final step to empower tactile perception for real-world robotic applications. Their core limitations can be summarized into two key issues: 
+
+(i) First, regarding tactile representation, existing methods generally lack explicit modeling of dynamic temporal de-pendencies in tactile signals and cannot capture physical contact process [5], [6]. Although some works treat tactile signals as video sequences for reconstruction [7], their ob-jectives are limited to pixel-level recovery and static attribute classification in key contact regions. The supervision signals focus on appearance fidelity rather than physical variations. Such methods fail to characterize cross-frame deformation propagation, shear accumulation, and slip variations during contact, preventing the model from learning genuine dynamic physical laws. From the perspective of neurobiological mech-anisms [8], human tactile perception relies on the integration of continuous temporal signals by dynamic mechanorecep-tors. Existing methods violate this core perceptual principle and thus cannot achieve reliable physical reasoning. 
+
+(ii) In addition, regarding tactile reasoning, learning paradigms that rely on static attributes and fixed question-answering templates induce semantic hallucination and limit generalization ability. Current datasets are mostly con-structed around limited predefined attributes and trained with template-based queries, such as the recently proposed PHYSICLEAR [5] and VTV-150K [7]. This forces models to learn shallow and spurious semantic correlations instead of causal reasoning. Meanwhile, tactile sensors lack unified standards [9], leading to large discrepancies in imaging mechanisms and physical responses. Without explicit con-straints on intermediate reasoning steps, models easily overfit to sensor-specific superficial patterns rather than general physical laws. This further causes severe semantic hallucina-tion when facing novel objects, heterogeneous sensors, and unstructured environments, failing to meet the requirements of robotic applications in real-world scenarios. To address these challenges, we propose a novel tactile-language framework, TacReasoner , as shown in Fig. I. First, inspired by biological neuroscience, we model the dynamic neural mechanisms underlying human tactile perception and incorporate a dynamic perception module to enhance tactile sensing capability. Second, we construct the first chain-of-thought dataset for tactile reasoning and optimize the reasoning process to move beyond reliance on discrete at-tribute labels. This design enables more efficient reasoning in real world scenarios and effectively mitigates semantic hallucination in tactile reasoning. We conduct comprehensive evaluations on tactile attribute inference, comparative tasks, and the more challenging tactile reasoning tasks introduced in this work. Extensive experimental results demonstrate that TacReasoner unifies tactile perception and reasoning through the joint optimization of data and architecture, achieving superior reasoning accuracy over state-of-the-art methods and facilitating reliable and robust reasoning in real-world scenarios. In this work, our main contributions are as follows:  
+
+> •
+
+Framework : We propose TacReasoner , a framework that models dynamic perceptual mechanisms to approximate human tactile perception and enhance the capability of large language models to understand the tactile modality.  
+
+> •
+
+Datasets : We construct the first chain of thought dataset for tactile attribute reasoning— TouchCoT-10k , and intro-duce a suite of challenging benchmark tasks for tactile reasoning, named DynTAC-Bench . These benchmarks fa-cilitate improved tactile reasoning and provide a rigorous evaluation of tactile-language models.  
+
+> •
+
+Practice : TacReasoner outperforms existing tactile-language models across multiple mainstream datasets and subtasks, and demonstrates more reliable physical reason-ing, making it more suitable for robotic interaction in real-world environments. We hope this work encourages further discussion and exploration in the field and provides new insights for future research on tactile intelligence. II. R ELATED WORK 
+
+A. Visuo-tactile Perception 
+
+In recent years, tactile sensing has evolved from early sensors that measured only basic physical properties to sophisticated vision-based systems capable of capturing high resolution contact information [10], [11]. Visuo-tactile sen-sors have attracted significant attention due to their ability to record high resolution spatiotemporal deformations of contact surfaces. Building on these, many studies leverage visuo-tactile sensing to infer multidimensional tactile proper-ties, enabling dexterous manipulation tasks such as material classification [12], [13], grasping [14], [15], and insertion [16], [17]. Recent research has shifted toward representa-tion learning for tactile data. Existing approaches leverage vision inspired representation learning, employ visual self-supervised objectives for fine grained feature extraction [9], [18], utilize tactile video reconstruction for feature learning and achieve semantic level understanding through multi-modal alignment with vision and language [7]. To address sensor heterogeneity, some studies adopt joint training and alignment strategies to enforce cross sensor representation consistency [9], [19]. In contrast to prior work, we focus on modeling the dynamic characteristics of tactile signals and unlocking the potential of tactile representations for complex tactile reasoning. 
+
+B. Tactile-Language Model 
+
+Multimodal large language models jointly model language and visual information, substantially enhancing cross modal reasoning and advancing research paradigms [20]. Early studies primarily focused on vision language models [21], [22]. More recently, researchers have begun leveraging the reasoning and comprehension capabilities of large language models to model tactile signals [5], [6], [7], [23], gradu-ally establishing a tactile-language modeling paradigm for embodied interaction. Yu et al [5]. proposed the Octopi framework and constructed the PHYSICLEAR dataset to support basic tactile commonsense reasoning. Building on this foundation, Octopi 1.5 [6] introduces a retrieval aug-mented generation module that retrieves similar objects from a database to improve prediction performance. VTV-LLM [7] focuses on visuo-tactile video modeling and collects cross sensor data to expand task coverage. Although prior work has achieved notable progress, it does not fully account for the dynamic interactive nature of tactile signals or the issue of semantic hallucination during reasoning. In this work, we systematically model the dynamic interaction characteristics of tactile perception and construct the first chain of thought dataset for tactile reasoning to supervise intermediate reason-ing processes. This design effectively mitigates hallucination and enhances tactile reasoning in real world settings. III. M ETHOD 
+
+As shown in Figure 3, TacReasoner integrates tempo-ral and state information into the tactile-language reason-ing framework, enabling dynamic perception and structured modeling of tactile interactions. By explicitly modeling the temporal evolution and causal dependencies inherent in the contact process, TacReasoner progressively refines intermediate reasoning representations, thereby enhancing tactile understanding. The following sections present the data generation pipeline, the dynamic-aware tactile encoder, and the overall training paradigm. 
+
+A. Data Generation 
+
+The field of tactile-language reasoning suffers from a lack of high quality prompt tuning datasets, which fundamentally constrains the ability of models to perform reliable common-sense reasoning and decision making in real world scenarios. Prior work primarily relies on attribute classification or template-based question-answering, providing only discrete labels or brief responses, and lacks structured modeling of contact dynamics and causal dependencies, resulting in shallow semantic associations. Furthermore, as discussed in Section I, tactile sensors are not standardized, and significant differences in color, size, and artifacts exist between tactile images captured by different sensors [11]. This disparity leads models to potentially rely on fixed optical and visual features for reasoning. Due to these limitations, models are prone to increased semantic hallucination and constrained generalization when faced with diverse objects and hetero-geneous tactile signal distributions. To address this gap, we have constructed TouchCoT-10k , a high-quality tactile rea-soning chain-of-thought dataset based on the intrinsic state changes of objects during tactile dynamic interactions. The detailed pipeline generation process is provided in Figure 2. <Question>                
+
+> Describe the physical properties of<video_start><video><video _end>.
+> TouchCoT-10K
+> Query Video
+> <think>At the moment of maximum contact , the contact area exhibits asharp contour… During sliding ,the contact area produces slight texture movement….</think>. <answer> It presents …and strong friction. </answer>
+> Task Types & Distribution
+> Data Preparation LLM Detailed description
+> Concise think process Manual Filtering & Verification
+
+Fig. 2: Overview of the TouchCoT-10K construction pipeline and task taxonomy .
+
+Step 1: Data Preparation. We collect and organize tactile video samples acquired through a standardized exploration procedure, ensuring that each sequence includes the indenta-tion to maximum contact and sliding interaction phases. Task metadata are systematically structured, including question type labels and step indicators, to distinguish reasoning tasks and enforce consistent, learnable output formats. 
+
+Step 2: Chain-of-Thought Generation. In this stage, tactile perception tasks are formalized as cross modal question answering and descriptive generation. We em-ploy template based prompts to guide a large language model (e.g., deepseek [24]), to perform stepwise reasoning grounded in deformation evolution, contact area variation, and geometric cues derived from tactile videos. Outputs are standardized into structured <think></think> and 
+
+<answer></answer> formats. The reasoning process is aligned with the standardized interaction phases, leveraging interpretable cues from maximum contact and sliding stages to infer physical properties. 
+
+Step 3: Manual Filtering. After generation, we conduct rigorous consistency checks and manual auditing to ensure data quality. Samples are filtered if the reasoning chain fails to cover key interaction stages or if there are semantic inconsistencies between the reasoning process and the final answer. This procedure ensures logical coherence between reasoning chains and final attribute prediction. 
+
+Step 4: Formatting and Data Integration. In the final stage, we organize question type annotations, tac-tile video inputs, structured prompts, reasoning chains, and final answers into a unified format to construct training ready chain of thought samples. Each instance follows an explicit output structure defined as CoT = ...<think>...</think><answer> ... </answer> .This standardized integration results in the high quality TouchCoT-10k dataset, which supervises TacReasoner to learn dynamic tactile reasoning and enhances tactile under-standing and decision reliability in real-world scenarios. 
+
+B. Dynamic-aware Tactile Encoder 
+
+As discussed in Section I, tactile representation fundamen-tally arises from dynamic interaction processes. Although existing tactile-language models can parse multi-frame tactile sequences and generate outputs [5], [7], they lack explicit modeling of contact temporal evolution, resulting in in-Frame t-1  Frame t  Frame t+1   
+
+> Embed(t)
+> Temporal Encoder
+> Aggregator
+> Patchify
+> Frame t
+> Patchify
+> VTV-
+> Encoder
+> Pooler
+> Cross
+> Attention Question Embedding
+> FF N
+> Dynamic Feature
+
+## Dynamic-aware 
+
+## Tactile Encoder 
+
+> Video Frames
+> Text Prompt
+> Tactile -Language
+> adapter
+> Text
+> Projector
+> Large Language Model
+
+## Stage  1: Tactile -Text Alignment 
+
+> Tactile
+> Encoder
+> Video Frames
+> TouchCoT-10k
+> Tactile -Language
+> adapter
+> Text
+> Projector
+> Large Language Model
+
+## Stage  2: End-to-end 
+
+## Fine -t uning 
+
+> Tactile
+> Encoder
+> LoRA
+
+Fig. 3: The framework of TacReasoner. TacReasoner consists of a tactile encoder, a tactile language adapter, and a large language model. The training procedure follows a two stage strategy. In Stage I , we train the tactile encoder and the tactile-language adapter to adapt the large language model to tactile inputs. In Stage II , we conduct end to end fine tuning on TouchCoT 10k to activate the reasoning capability of the model and generate accurate tactile descriptions. sufficient capture of dynamic features. Addressing these limitations is essential for the reliable deployment of tactile language models in real-world scenarios. To address the aforementioned issues, we introduce the Dynamic-aware Tactile Encoder to explicitly model tempo-ral dynamics in tactile interactions while preserving stable appearance semantics. The module integrates spatial mor-phology and contact dynamics without increasing the input complexity of the language model. As shown in Figure 3, we adopt a decoupled design that separately models appearance and temporal branches, followed by attention-based feature fusion for unified enhancement. Given a tactile video se-quence V = {It}Tt=0 , where It ∈ RH×W ×3, we first extract appearance features using a pretrained VTV encoder [7]: 
+
+Fapp = fenc (V ) = ViT 
+
+
+
+{Patch (It) + TE (t)}Tt=0 
+
+
+
+, (1) where Patch (·) denotes patch embedding and TE (t) repre-sents temporal positional encoding. The global CLS token is adopted as the appearance representation Fapp ∈ RB×C ,and the encoder is frozen during training to preserve stable geometric semantics. To model contact dynamics, we introduce a trainable temporal branch. Given raw frames X ∈ RB×T ×3×H×W ,we compute frame differences ∆It = It − It−1 to explicitly capture inter-frame deformation. The difference sequence is encoded by a lightweight temporal encoder: 
+
+Ftemp = Enc temp 
+
+ {∆It}Tt=1 
+
+ , Ftemp ∈ RB×L×C , (2) Notably, to incorporate task-specific semantic information, we encode the question text into embeddings and inject them as conditional signals to enable question-guided temporal attention. The temporal features are then aggregated: 
+
+¯Ftemp = Aggregator( Ftemp ). (3) Then, we fuse appearance and temporal representations via cross-attention: 
+
+Fattn = Attention( Q = Fapp , K = ¯Ftemp , V = ¯Ftemp ), (4) 
+
+Fenh = FFN( Fattn ) + Fapp . (5) Finally, the enhanced tactile representation is projected into the language model embedding space: 
+
+EV = W2 GELU( W1Fenh + b1) + b2. (6) 
+
+C. Overall training paradigm 
+
+In the previous section, we introduced the dynamic-aware tactile encoder, which achieves efficient tactile representation through dynamic perception. We next present a two-stage training paradigm that allows the LLM to integrate tactile and linguistic embeddings for multimodal reasoning and response generation. 
+
+Stage I: Tactile-Text Alignment. At this stage, the objec-tive is to adapt tactile tokens produced by the tactile encoder to the LLM, enabling effective interpretation of tactile inputs. A tactile-language adapter maps tactile tokens into the LLM text embedding space by treating tactile patches as pseudo-text tokens. The adapter is trained using paired tactile images and language descriptions from the raw instruction data of VTV-150K [7], while the LLM remains frozen [21]. ① ② ③ ④ ⑤
+
+Press Hover  Rotation  Hover Fig. 4: DynTAC data acquisition process. The robotic arm initializes away from the object surface, performs pressing, rotation, and sliding upon contact, and retracts, generating a tactile video of approximately five seconds. It then repositions and repeats the procedure to obtain five videos in total. All remaining data are collected under the same protocol. The model is optimized by minimizing the cross-entropy loss over the generated token sequence Y =[y1, y 2, . . . , y M ] ∈ RM ×D :
+
+Lce = −E(Yi|V,T <i )∼πθ [log πθ (Yi | V, T <i )] , (7) where teacher forcing is employed during training, and 
+
+πθ (Yi | V, T <i ) denotes the probability of predicting token 
+
+Yi conditioned on tactile representation V and the preceding 
+
+i − 1 target tokens T<i .
+
+Stage II: End-to-end Supervised Fine-Tuning. In this stage, we activate the model’s tactile reasoning capability through LoRA-based supervised fine-tuning [25] on the TouchCoT-10K dataset. The objective is to enable the model to learn structured tactile reasoning patterns while main-taining logical consistency between intermediate chain-of-thought representations and final attribute predictions. To preserve stable perceptual representations, we freeze the tactile encoder, and fine-tune the tactile-language adapter and the LLM using instruction data. Parameter-efficient adaptation is applied to the self-attention layers via LoRA. Training samples follow a triplet format (V, p, O ), where 
+
+V denotes the tactile video input, p the textual prompt, and O the structured output sequence. Each output adopts a standardized chain-of-thought format: 
+
+O = <think> T </think><answer> A </answer> ,where T represents the reasoning process and A the final attribute prediction. Through high-quality CoT supervision, the model learns to align dynamic tactile evidence with struc-tured reasoning outputs. The optimization objective mini-mizes the conditional cross-entropy loss over the generated token sequence Y = [ y1, . . . , y M ] ∈ RM ×D :
+
+LSFT = −E(V,p,O )∼D TouchCoT 
+
+> M
+
+X
+
+> i=1
+
+log πθ (yi | EV , p, y <i ),
+
+(8) where EV denotes the enhanced tactile embedding produced by the dynamic-aware tactile encoder, and teacher forcing is applied during training. This stage establishes tactile-language alignment for structured reasoning. IV. D YN TAC-B ENCH 
+
+To evaluate model reasoning in dynamic tasks and real-world scenarios, We propose a new benchmark, DynTAC-Bench , as shown in Fig. 5, which covers tasks ranging from 
+
+Fig. 5: Overview of the DynTAC Dataset. (1) The top left panel shows five 1:1 real and fake fruit pairs. The bottom row presents detailed views, with red dashed circles marking fake objects that are indistinguishable from real ones under visual inspection or static touch. (2) The top right panel displays five categories of daily objects. fundamental tactile perception to complex reasoning. We introduce its task taxonomy and dataset construction below. 
+
+A. Dataset Construction 
+
+We construct the high-quality chain-of-thought dataset TouchCoT-10K based on the raw VTV-150K dataset, as detailed in Section III-A. To further support dynamic per-ceptual reasoning, we introduce the DynTAC dataset (Fig-ure 5), which comprises five 1:1 real and fake fruit pairs and five categories of daily objects. The fake fruits are highly realistic and indistinguishable from real ones through visual inspection or static touch, necessitating dynamic tac-tile perception for reliable discrimination. The daily object categories exhibit substantial variation in material properties and appearance, enabling comprehensive evaluation of model generalization in real-world tactile perception. Tactile data are collected using a UR5 robotic arm under a standardized interaction protocol, as shown in Figure 4. The data acquisi-tion process incorporates diverse dynamic tactile interaction modalities, including pressing, rotation, and sliding, thereby generating structured temporal signals that support the eval-uation of dynamic perception and reasoning tasks. 
+
+B. Task Category 
+
+Fundamental Property Understanding. It requires rec-ognizing and describing an object’s basic physical properties, including hardness, roughness, and texture. The model must TABLE I: Performance comparison of TacReasoner against seven state-of-the-art methods on the VTV-150K [7] dataset. The evaluation covers different tasks, with results reported in percentages (%) and the boldface indicates the best performance. Notably, TacReasoner-7B outperforms the 14B-parameter VTV-LLM on most sub-tasks.                                                                                                                                    
+
+> Models Hardness Protrusion Elasticity Friction Combined SFD SOI OSC TSA Average GPT-4o [26] 34.7 32.6 32.6 18.7 2.1 40.9 38.4 16.6 36.0 28.0 Gemini-2.5-Pro-Exp [27] 36.2 34.7 39.1 21.0 4.3 42.6 29.4 18.5 40.0 29.5 LLaVA-OneVision-7B [22] 27.5 32.6 26.0 20.2 0.7 40.9 28.2 11.7 30.0 24.2 LLaVA-Video-Qwen2-7B [28] 30.4 29.7 28.9 18.1 2.1 33.6 29.4 17.2 36.0 25.0 InternVL2.5-VL-8B [29] 18.1 23.9 21.0 13.7 0.0 24.5 17.9 11.1 24.0 17.1 VideoLLaMA3-7B [30] 15.2 21.7 14.4 10.8 0.0 11.4 12.8 7.4 20.0 12.6 Qwen2.5-VL-7B [21] 25.3 28.9 17.3 15.9 1.4 22.9 28.2 16.0 30.0 20.6 VTV-LLM-7B 73.9 75.0 67.3 56.5 35.6 71.3 57.6 43.2 64.0 60.4 VTV-LLM-14B 72.1 78.2 68.1 52.8 38.2 72.1 59.7 45.9 72.0 62.1
+> TacReasoner-7B 78.16 77.82 76.54 58.46 40.35 73.56 70.32 54.27 71.0 66.7
+> ∆(with VTV-LLM-7B) +4.26 +2.82 +9.24 +1.96 +4.75 +2.26 +12.72 +11.07 +7.0 +6.3
+> TacReasoner-14B 77.84 78.62 79.76 54.75 41.58 76.93 74.89 58.41 75.0 68.6
+
+perceive these attributes from tactile signals and convert them into human-interpretable textual outputs. 
+
+Commonsense-Driven Reasoning . This subtask extends beyond tactile perception by requiring the integration of external commonsense knowledge for reasoning. It involves understanding an object’s behavior, function, or usage in spe-cific contexts and making high-level decisions grounded in tactile evidence. Specifically, it encompasses Surface Feature Distinction (SFD), Surface Optimality Identification (SOI), Object Sensation Correlation (OSC), and Tactile Scenario Analysis (TSA). SFD compares tactile properties across ob-jects to determine relative differences. SOI analyzes multiple surfaces to identify which exhibits the highest degree of a specific attribute. OSC associates tactile perceptual cues with the identity of a real-world object. TSA evaluates the application of haptic knowledge to real-world scenarios that require physical reasoning. Notably, the TSA task is excluded from the training set. 
+
+Dynamic-Aware Reasoning. This subtask focuses on modeling the temporal dynamics of tactile interactions, re-quiring the model to perform state estimation and semantic reasoning based on sequential contact information. In Real vs. Fake Object Recognition , the model infers whether dynamically perceived tactile attributes are consistent with the physical characteristics of authentic objects. In Object Contact State Estimation , the model analyzes continuous tactile variations to determine the current stage of interaction. V. E XPERIMENTS 
+
+In this section, we evaluate the proposed method in terms of physical property prediction and tactile reasoning. We design a series of experiments to address the following questions: (1) Can TacReasoner improve physical property prediction and support reasoning in everyday scenarios? (2) 
+
+Does TacReasoner enhance dynamic perception and achieve more accurate performance on dynamic-aware reasoning tasks? (3) Can TacReasoner generalize its understanding of physical properties to unseen daily objects? 
+
+A. Implementation Details 
+
+All models are trained on two NVIDIA A100-80G GPUs. The training procedure follows our proposed two-stage Object 1: At the moment of maximum contact, the contact area exhibits a sharp contour, while the center shows high-contrast texture features. During sliding, the contact area produces negligible texture movement. During indentation, the contact area remains stable. Object 2: At the moment of maximum contact, the contact area exhibits a moderately clear contour, while the center shows high-contrast texture features. During sliding, the contact area produces slight texture movement. During indentation, the contact area expands moderately.    
+
+> Conclusion: Yes.
+> Is the object in the first video less elastic than the one in the second video ？
+> Video1 Video2
+
+Fig. 6: The task examples and the corresponding pre-dictions from TacReasoner. Video1 shows a wrench, and Video2 shows an avocado. TacReasoner accurately answers questions across diverse sensor inputs by reasoning over intrinsic tactile physical states. paradigm. In Stage I, the Tactile-Language Adapter are trained using the raw instruction data from VTV-150K [7] with the AdamW [31] optimizer and a learning rate of 
+
+2 × 10 −4. In Stage II, the adapter module and the LoRA parameters of the LLM are fine-tuned using TouchCoT-10K dataset with the AdamW optimizer. The learning rates for both the adapter module and the LLM are set to 2 × 10 −4.For LoRA, we adopt a scaling factor of 256, a rank of 128, and a maximum of 10,000 training steps. To evaluate model performance, we construct an independent test set comprising 545 question-answer pairs for novel objects not seen during training . The LLM backbone is based on Qwen 2.5 [21], and we experiment with two model scales containing 7B and 14B parameters. 
+
+B. Tactile-grounded physical property prediction 
+
+We quantitatively compare TacReasoner against VTV-LLM [7], two proprietary multimodal models (GPT-4o [26], Gemini-2.5-Pro-Exp [27]), and five open-source video-based VLMs: LLaVA-OneVision-7B [22], LLaVA-Video [28], InternVL2.5-VL-8B [29], VideoLLaMA3-7B [30], and Qwen2.5-VL-7B [21]. All evaluations are performed on 500 question answer pairs sampled from the VTV-150K dataset TABLE II: Results on the tactile dynamic-aware reasoning tasks. This task requires leveraging dynamic tactile cues for reasoning. TacReasoner achieves consistent improvements over VTV-LLM on both RFOR and OCSE tasks. 
+
+Random VTV-LLM-7B TacReasoner-7B 
+
+RFOR 50.00 43% 68% 
+
+OCSE 33.33 46% 53% It is fake. A real strawberry should be soft, have moderate protrusions, and be elastic. However, this object is hard, has strong protrusions, and is non-elastic, so it is fake.          
+
+> Is the the Strawberry in the video real or fake ?
+> Video
+> It is in the releasing phase, as the texture in the tactile images gradually becomes lighter and the geometric shape becomes increasingly blurred.
+> What state is this object in ?Please determine it based on the video.
+> Video
+> (a) Real vs. Fake Object Recognition (b) Object Contact State Estimation
+
+Fig. 7: The reasoning examples of TacReasoner on tactile dynamic-aware reasoning tasks. TacReasoner achieves ac-curate reasoning across all tasks. [7]. Since most of the VLM models have parameters around 7B, we adopt TacReasoner-7B to ensure a fair compari-son. To guarantee result robustness, we report the average performance over three runs with different random seeds. The experimental results are summarized in Table I. The results demonstrate that on the Tactile Feature Analysis (TFA) task, TacReasoner-7B outperforms VTV-LLM-7B by 
+
+4.26% , 2.82% , 9.24% , and 1.96% in hardness, bumpiness, elasticity, and friction prediction, respectively, validating the effectiveness of our approach. Notably, elasticity prediction improves by nearly 10% , and friction also shows measurable gains. As both elasticity and friction are dynamic properties, these improvements highlight that TacReasoner effectively captures dynamic tactile features and leverages them to enhance tactile understanding. 
+
+C. Tactile scenario reasoning 
+
+To further evaluate the reasoning capability of TacRea-soner, we assess its performance on SFD, SOI, OSC, and TSA tasks, which require the model to leverage physical properties and perform comparison, matching, and inference. As shown in Table I, TacReasoner achieves larger gains on these reasoning tasks than on TFA task. Specifically, compared with VTV-LLM-7B, TacReasoner improves per-formance by 2.26% , 12.72% , 11.07% and 7.0% on SFD, SOI, OSC, and TSA, respectively, demonstrating strong competitive capability. In addition, we provide a qualitative SFD example in Figure 6 to illustrate TacReasoner effectively performing commonsense physical reasoning. Remarkably, TacReasoner-7B surpasses VTV-LLM-14B [7] in overall per-formance and on most subtasks, despite using significantly fewer parameters. This improvement stems from its effective tactile representation learning and its ability to elicit genuine reasoning in tactile-language models. 
+
+D. Tactile Dynamic-Aware Reasoning 
+
+As stated in Section I, the essence of tactile perception lies in capturing dynamic information and performing reasoning. TABLE III: Ablation study on DynEncoder and TouchCoT-10K SFT settings using the TacReasoner-7B model.                            
+
+> Setting Accuracy (%) DynEncoder SFT w/ TouchCoT-10K SFD SOI OSC TSA Average 71.3 57.6 43.2 64.0 59.0
+> ✓72.4 64.5 48.6 66.0 62.9
+> ✓75.2 68.5 50.7 69.0 65.8
+> ✓✓73.6 70.3 54.3 71.0 67.3
+
+TABLE IV: Ablation study on training paradigm settings using the TacReasoner-7B model. 
+
+Settings SFD SOI OSC TSA Average w/o stage 1 56.8 58.4 32.6 56.0 51.0 w/o stage 2 52.7 43.8 27.6 39.6 40.9 VTV-150K 72.4 64.5 48.6 66.0 62.9 
+
+Ours 73.6 70.3 54.3 71.0 67.3 
+
+We evaluate this capability using the Real vs. Fake Object Recognition (RFOR) and Object Contact State Estimation 
+
+(OCSE) tasks in DynTAC-Bench. For each task, 3 samples are randomly selected per category. For Object Contact State Estimation, state transition intervals (e.g., contact, sliding, and release) are randomly segmented for evaluation, yielding 45 test samples in total. These samples are evaluated using TacReasoner-7B and VTV-LLM-7B [7], with results reported in Table II. TacReasoner improves accuracy over VTV-LLM-7B by 25% on RFOR task and 7% on OCSE task, respectively, and substantially outperforms the random base-line. These results demonstrate that TacReasoner effectively captures dynamic tactile variations and performs reasoning. Figures 7(a) and (b) further provide qualitative examples of TacReasoner in tactile dynamic aware reasoning. 
+
+E. Ablation Studies 
+
+In this section, we conduct ablation studies to analyze the impact of key factors in the TacReasoner model, including model scale, the dynamic-aware tactile encoder, TouchCoT 10K, and the training strategy, as detailed below. 
+
+Impact of the model scale. To investigate the impact of model scale on visuo-tactile understanding, we evaluate LLM backbones of varying sizes and report the performance of TacReasoner with Qwen-2.5-14B [21], as shown in Table I. The results demonstrate consistent improvements across most subtasks as model size increases, with especially significant improvements on reasoning-oriented tasks such as SFD. 
+
+Impact of the Dynamic-aware Tactile Encoder (DynEn-coder). We perform an ablation study on DynEncoder, as reported in Table III. VTV-LLM models tactile dynamics via video reconstruction but operates on partial regions with-out conditional guidance, limiting dynamic representation. DynEncoder introduces inter-frame dynamic modeling and question-guided conditioning, enabling query-relevant tactile reasoning. It achieves consistent gains on reasoning tasks and improves average performance by 4.6%, validating its effectiveness in enhancing tactile understanding. 
+
+Impact of the Training Paradigm and TouchCoT 10K. Ta-ble IV validates our two-stage training paradigm via ablation study. Removing Stage 1 misaligns tactile and text tokens, reducing average performance to 51%. Omitting Stage 2 removes end-to-end fine-tuning, causing unstable LLM token generation and a sharp performance drop to 40.9%. These results confirm that progressive training is essential for improving model abilities. As shown in Tables III and IV, training with TouchCoT-10K and VTV-150K under the same paradigm shows that TouchCoT-10K brings significant gains, validating its efficacy. This benefit stems from CoT data supervising and activating the LLM’s reasoning process. VI. C ONCLUSION AND FUTURE WORK 
+
+In this work, we present TacReasoner , a dynamic tactile-language reasoning framework for real-world scenarios that mitigates inadequate modeling of contact temporal evolution and semantic hallucination. TacReasoner explicitly captures temporal dynamics and causal dependencies during inter-action through the Dynamic-aware Tactile Encoder, pro-ducing enhanced tactile embeddings tailored for reason-ing. To support structured reasoning, we construct the first chain-of-thought dataset for tactile reasoning, TouchCoT-10K , and employ supervised fine-tuning to align dynamic tactile evidence with structured attribute-level conclusions. Furthermore, We introduce DynTAC-Bench to evaluate per-formance across diverse tasks, especially dynamic-aware reasoning. Extensive experiments show that TacReasoner outperforms strong baselines across datasets and reasoning tasks, demonstrating its effectiveness for dynamic tactile understanding and decision making. Future work will further improve interaction diversity, cross-sensor and cross-scenario generalization, and deployment on real robotic systems. REFERENCES [1] F. Hutmacher, “Why is there so much more research on vision than on any other sensory modality?” Frontiers in psychology , vol. 10, p. 481030, 2019. [2] B. O’Shaughnessy, “The sense of touch,” Australasian journal of philosophy , vol. 67, no. 1, pp. 37–58, 1989. [3] J. Dargahi and S. Najarian, “Human tactile perception as a standard for artificial tactile sensing—a review,” The international journal of medical robotics and computer assisted surgery , vol. 1, no. 1, pp. 23–35, 2004. [4] A. Radford, J. W. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell, P. Mishkin, J. Clark et al. , “Learning transferable visual models from natural language supervision,” in International conference on machine learning . PmLR, 2021, pp. 8748–8763. [5] S. Yu, K. Lin, A. Xiao, J. Duan, and H. Soh, “Octopi: Object property reasoning with large tactile-language models,” arXiv preprint arXiv:2405.02794 , 2024. [6] S. Yu, K. Lin, and H. Soh, “Demonstrating the octopi-1.5 visual-tactile-language model,” arXiv preprint arXiv:2507.09985 , 2025. [7] Y. Xie, M. Li, S. Li, X. Li, G. Chen, F. Ma, F. R. Yu, and W. Ding, “Universal visuo-tactile video understanding for embodied interaction,” arXiv preprint arXiv:2505.22566 , 2025. [8] G. A. Tabot, S. S. Kim, J. E. Winberry, and S. J. Bensmaia, “Restoring tactile and proprioceptive sensation through a brain interface,” Neuro-biology of disease , vol. 83, pp. 191–198, 2015. [9] F. Yang, C. Feng, Z. Chen, H. Park, D. Wang, Y. Dou, Z. Zeng, X. Chen, R. Gangopadhyay, A. Owens et al. , “Binding touch to everything: Learning unified multimodal tactile representations,” in 
+
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2024, pp. 26 340–26 353. [10] M. Meribout, N. A. Takele, O. Derege, N. Rifiki, M. El Khalil, V. Tiwari, and J. Zhong, “Tactile sensors: A review,” Measurement ,vol. 238, p. 115332, 2024. [11] Y. Liu, R. Bao, J. Tao, J. Li, M. Dong, and C. Pan, “Recent progress in tactile sensors and their applications in intelligent systems,” Science Bulletin , vol. 65, no. 1, pp. 70–88, 2020. [12] F. Yang, C. Ma, J. Zhang, J. Zhu, W. Yuan, and A. Owens, “Touch and go: Learning from human-collected vision and touch,” arXiv preprint arXiv:2211.12498 , 2022. [13] K. Lyu, L. Xiao, J. Zeng, J. Dong, X. Liu, Z. Zou, H. Yang, L. Shu, and J. Hao, “Touchformer: A robust transformer-based framework for multimodal material perception,” in Proceedings of the AAAI Conference on Artificial Intelligence , vol. 40, no. 22, 2026, pp. 18 496– 18 504. [14] M. Li, Y. Bekiroglu, D. Kragic, and A. Billard, “Learning of grasp adaptation through experience and tactile sensing,” in 2014 IEEE/RSJ International Conference on Intelligent Robots and Systems . Ieee, 2014, pp. 3339–3346. [15] A. Bicchi and V. Kumar, “Robotic grasping and contact: A review,” in 
+
+Proceedings 2000 ICRA. Millennium conference. IEEE international conference on robotics and automation. Symposia proceedings (Cat. No. 00CH37065) , vol. 1. IEEE, 2000, pp. 348–353. [16] S. Dong and A. Rodriguez, “Tactile-based insertion for dense box-packing,” in 2019 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2019, pp. 7953–7960. [17] M. Suomalainen, Y. Karayiannidis, and V. Kyrki, “A survey of robot manipulation in contact,” Robotics and Autonomous Systems , vol. 156, p. 104224, 2022. [18] J. Zhao, Y. Ma, L. Wang, and E. H. Adelson, “Transferable tactile transformers for representation learning across diverse sensors and tasks,” arXiv preprint arXiv:2406.13640 , 2024. [19] R. Feng, J. Hu, W. Xia, T. Gao, A. Shen, Y. Sun, B. Fang, and D. Hu, “Anytouch: Learning unified static-dynamic representation across mul-tiple visuo-tactile sensors,” arXiv preprint arXiv:2502.12191 , 2025. [20] M. Li, K. Chen, Z. Bi, M. Liu, X. Song, Z. Jiang, T. Wang, B. Peng, Q. Niu, J. Liu et al. , “Surveying the mllm landscape: A meta-review of current surveys,” arXiv preprint arXiv:2409.18991 , 2024. [21] C. Wu, J. Li, J. Zhou, J. Lin, K. Gao, K. Yan, S.-m. Yin, S. Bai, X. Xu, Y. Chen et al. , “Qwen-image technical report,” arXiv preprint arXiv:2508.02324 , 2025. [22] B. Li, Y. Zhang, D. Guo, R. Zhang, F. Li, H. Zhang, K. Zhang, P. Zhang, Y. Li, Z. Liu et al. , “Llava-onevision: Easy visual task transfer,” arXiv preprint arXiv:2408.03326 , 2024. [23] K. Lyu, D. Wu, P. Zhang, Y. Zheng, Y. Lai, L. Xiao, K. Wu, P. Li, C. Gao, L. Hu et al. , “Touchthinker: Scaling tactile commonsense reasoning to the open world with large-scale data and action-aware representation,” arXiv preprint arXiv:2606.11637 , 2026. [24] Z. Deng, W. Ma, Q.-L. Han, W. Zhou, X. Zhu, S. Wen, and Y. Xiang, “Exploring deepseek: A survey on advances, applications, challenges and future directions,” IEEE/CAA Journal of Automatica Sinica ,vol. 12, no. 5, pp. 872–893, 2025. [25] B. Zhang, Z. Liu, C. Cherry, and O. Firat, “When scaling meets llm finetuning: The effect of data, model and finetuning method,” arXiv preprint arXiv:2402.17193 , 2024. [26] A. Hurst, A. Lerer, A. P. Goucher, A. Perelman, A. Ramesh, A. Clark, A. Ostrow, A. Welihinda, A. Hayes, A. Radford et al. , “Gpt-4o system card,” arXiv preprint arXiv:2410.21276 , 2024. [27] G. Comanici, E. Bieber, M. Schaekermann, I. Pasupat, N. Sachdeva, I. Dhillon, M. Blistein, O. Ram, D. Zhang, E. Rosen et al. , “Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities,” arXiv preprint arXiv:2507.06261 , 2025. [28] Y. Zhang, J. Wu, W. Li, B. Li, Z. Ma, Z. Liu, and C. Li, “Video instruction tuning with synthetic data, 2024,” URL https://arxiv. org/abs/2410.02713 , vol. 17. [29] Z. Chen, W. Wang, Y. Cao, Y. Liu, Z. Gao, E. Cui, J. Zhu, S. Ye, H. Tian, Z. Liu et al. , “Expanding performance boundaries of open-source multimodal models with model, data, and test-time scaling,” 
+
+arXiv preprint arXiv:2412.05271 , 2024. [30] B. Zhang, K. Li, Z. Cheng, Z. Hu, Y. Yuan, G. Chen, S. Leng, Y. Jiang, H. Zhang, X. Li et al. , “Videollama 3: Frontier multimodal foundation models for image and video understanding,” arXiv preprint arXiv:2501.13106 , 2025. [31] P. Zhou, X. Xie, Z. Lin, and S. Yan, “Towards understanding conver-gence and generalization of adamw,” IEEE transactions on pattern analysis and machine intelligence , vol. 46, no. 9, pp. 6486–6493, 2024.
