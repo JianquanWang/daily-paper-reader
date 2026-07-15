@@ -1,0 +1,281 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-15T19:01:10.370388+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 11,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.11734v1",
+      "source": "arxiv",
+      "title": "NeuralActuator: Neural Actuation Modeling for Robot Dynamics and External Force Perception",
+      "abstract": "Differentiable simulators have advanced policy learning and model-based control, yet actuator dynamics remain an important source of sim-to-real error. This is particularly acute on low-cost platforms, where the linear current-to-torque relation $τ= K_tI$ becomes unreliable during commanded-target tracking because of friction, hysteresis, backlash, and thermal effects. We present NeuralActuator, a neural actuator model that jointly predicts (i) a simulator-equivalent generalized-effort surrogate for trajectory propagation on low-cost servo platforms, (ii) external force with a contact-probability gate for sensorless force perception, and (iii) a motor-condition score for the supervised joint. We also introduce the Neural Actuation Dataset (NAD), collected with a twin-arm teleoperation system that records robot states and actuator telemetry together with external-force labels. The torque-surrogate head is trained through differentiable simulation from pose trajectories without direct generalized-effort labels, while the force, gate, and motor-condition heads receive direct supervision. A Transformer captures temporal dependencies while supporting real-time inference. We evaluate NeuralActuator on a 5-DoF OpenManipulator-X, a 6-DoF SO-101, and a 7-DoF Franka Emika Panda, spanning three actuator families and platforms costing approximately USD 500 to over USD 30,000. The low-cost platforms support dynamics and force evaluation, while the offline Franka experiment provides an additional payload-force-estimation benchmark. Experiments further demonstrate its application for motor condition estimation on OpenManipulator-X and improved behavior-cloning performance when NeuralActuator is used as a pretrained module.",
+      "authors": [
+        "Zhiyang Dou",
+        "John U. Onyemelukwe",
+        "Hangxing Zhang",
+        "Heng Zhang",
+        "Minghao Guo",
+        "Yunsheng Tian",
+        "Michal Piotr Lipiec",
+        "Joshua Jacob",
+        "Chao Liu",
+        "Peter Yichen Chen",
+        "Yuri Ivanov",
+        "Wojciech Matusik"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.GR",
+        "cs.LG"
+      ],
+      "published": "2026-07-13T15:58:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.11734v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "neural actuator model for external force perception with contact-probability gate; sensorless force sensing",
+      "llm_evidence_cn": "用于外力感知的神经执行器模型，带接触概率门；无传感器力感知",
+      "llm_evidence": "用于外力感知的神经执行器模型，带接触概率门；无传感器力感知",
+      "canonical_evidence": "用于外力感知的神经执行器模型，带接触概率门；无传感器力感知",
+      "llm_tldr_en": "Proposes NeuralActuator, a neural model that jointly predicts simulator-equivalent generalized effort, external force with contact probability, and motor condition score for low-cost robots, enabling sensorless force perception.",
+      "llm_tldr_cn": "针对低成本机器人执行器动力学非线性导致力感知不准的问题，提出NeuralActuator神经模型，联合预测等效广义力、带接触概率门的外力以及电机状态分数，实现了无传感器外力感知，有助于提高轨迹传播和力交互的准确性。",
+      "llm_tldr": "针对低成本机器人执行器动力学非线性导致力感知不准的问题，提出NeuralActuator神经模型，联合预测等效广义力、带接触概率门的外力以及电机状态分数，实现了无传感器外力感知，有助于提高轨迹传播和力交互的准确性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.06442v1",
+      "source": "arxiv",
+      "title": "SIEVE: Structure-Aware Data Selection for Imitation Learning with VLA Models",
+      "abstract": "Vision-Language-Action (VLA) models are typically trained by imitation learning on large-scale robot demonstration datasets, but more data does not necessarily yield better policies due to redundancy, noise, and uneven coverage. Existing data selection methods often assess demonstrations at either the trajectory or state-action level, missing the reusable structures that compose long-horizon behaviors. In this paper, we propose SIEVE, a structure-aware data selection method for VLA imitation learning. SIEVE views demonstrations as compositions of reusable primitives and transition interfaces. It first discovers visuo-motor primitives from segmented trajectories, then allocates selection budgets to composition patterns by maximizing reuse-aware structural exposure under diminishing returns. Finally, it selects medoid trajectories within each composition-pattern bucket to retain central, stable, and imitation-friendly demonstrations. Experiments across multiple datasets, benchmarks, and VLA models show that SIEVE consistently outperforms competitive data selection baselines. Notably, SIEVE can surpass full-data training while using only 50% of demonstrations and 50% of training steps, suggesting that reusable structure, captured through primitives and transitions, is an important signal for efficient VLA imitation learning.",
+      "authors": [
+        "Changti Wu",
+        "Bin Yu",
+        "Zhaolong Shen",
+        "Shijie Lian",
+        "Xiaopeng Lin",
+        "Cong Huang",
+        "Zhirui Zhang",
+        "Lei Zhang",
+        "Kai Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-07T16:10:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.06442v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "structure-aware data selection for VLA imitation learning; enhances VLA model training",
+      "llm_evidence_cn": "面向VLA模仿学习的结构感知数据选择；提升VLA模型训练效果",
+      "llm_evidence": "面向VLA模仿学习的结构感知数据选择；提升VLA模型训练效果",
+      "canonical_evidence": "面向VLA模仿学习的结构感知数据选择；提升VLA模型训练效果",
+      "llm_tldr_en": "SIEVE selects demonstrations for VLA imitation learning by discovering reusable visuo-motor primitives, improving data efficiency and policy performance.",
+      "llm_tldr_cn": "该论文指出VLA模型在模仿学习中数据并非越多越好，存在冗余和噪声问题。提出SIEVE方法，将演示分解为可复用的视觉运动原语和转换接口，通过最大化复用感知的覆盖来分配选择预算。实验表明，在多个机器人操作任务上，使用SIEVE筛选的数据训练的VLA策略在成功率和泛化性上优于全数据和随机选择基线。",
+      "llm_tldr": "该论文指出VLA模型在模仿学习中数据并非越多越好，存在冗余和噪声问题。提出SIEVE方法，将演示分解为可复用的视觉运动原语和转换接口，通过最大化复用感知的覆盖来分配选择预算。实验表明，在多个机器人操作任务上，使用SIEVE筛选的数据训练的VLA策略在成功率和泛化性上优于全数据和随机选择基线。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.06988v2",
+      "source": "arxiv",
+      "title": "WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time",
+      "abstract": "Steering robot foundation models (RFMs) toward new task variants or user-preferred behaviors remains challenging, often requiring additional robot demonstrations, task-specific fine-tuning, or long-context conditioning. We present WAM-TTT, a test-time training framework for steering world action models from raw human videos. Rather than treating human videos as trajectories to imitate, WAM-TTT absorbs them into a lightweight adaptive memory inside a frozen WAM through self-supervised video prediction. To make this memory useful for control, we introduce a meta-training stage that aligns human demonstrations with robot behaviors using paired human-robot data and a key--value memory reconstruction objective. At test time, only unlabeled human videos are required to adapt the memory, while the pretrained WAM remains frozen. This enables efficient and reusable steering without robot actions, human-side annotations, or task-specific fine-tuning, while preserving the generalization ability of the foundation model. Extensive experiments show that WAM-TTT consistently outperforms in-context human-video conditioning baselines across diverse manipulation tasks and generalization settings.",
+      "authors": [
+        "Yusen Feng",
+        "Bingchen Han",
+        "Jiangran Lyu",
+        "Kai Liu",
+        "Yixin Zheng",
+        "Yuxuan Wan",
+        "Weiheng Liu",
+        "Sun Han",
+        "Ruiqin Li",
+        "Yulong Zhang",
+        "Fangfu Liu",
+        "Xuesong Shi",
+        "Libin Liu",
+        "Yizhou Wang",
+        "Zhizheng Zhang",
+        "He Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-07-08T04:23:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.06988v2",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "world-action models for manipulation; test-time adaptation from human videos",
+      "llm_evidence_cn": "世界动作模型用于操作；基于人类视频的测试时自适应",
+      "llm_evidence": "世界动作模型用于操作；基于人类视频的测试时自适应",
+      "canonical_evidence": "世界动作模型用于操作；基于人类视频的测试时自适应",
+      "llm_tldr_en": "Proposes WAM-TTT, a test-time training framework that adapts frozen world-action models to new tasks using unsupervised human videos, without requiring robot demonstrations or fine-tuning.",
+      "llm_tldr_cn": "针对机器人基础模型难以适应新任务变体的问题，提出WAM-TTT测试时训练框架，通过自监督视频预测将人类视频吸收到冻结的世界动作模型中，并引入元训练对齐人机演示，实现在测试时仅用未标注人类视频进行任务调整，无需额外机器人数据。",
+      "llm_tldr": "针对机器人基础模型难以适应新任务变体的问题，提出WAM-TTT测试时训练框架，通过自监督视频预测将人类视频吸收到冻结的世界动作模型中，并引入元训练对齐人机演示，实现在测试时仅用未标注人类视频进行任务调整，无需额外机器人数据。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.08436v1",
+      "source": "arxiv",
+      "title": "EgoWAM: World Action Models Beyond Pixels with In-the-Wild Egocentric Human Data",
+      "abstract": "Egocentric human data offers scalable supervision for robot manipulation. However, behavior cloning entangles transferable content like objects, scenes, and task semantics, with non-transferable factors like human morphology, head motion, and behavioral style. We study whether World Action Models (WAMs) provide a better training signal by requiring policies to predict not only actions, but also how the scene evolves. The central question is what world representation best enables human-to-robot transfer. We hypothesize that an effective world target should abstract appearance, capture agent-invariant physical effects, and separate camera motion from environment change. We introduce EgoWAM, a controlled human-robot co-training framework that fixes the policy backbone, action head, and data mixture while varying only the world prediction target, comparing Pixel, DINO, and 3D motion flow. Across three real-world bimanual tasks, WAM co-training scales more effectively with in-the-wild egocentric human data than behavior cloning. Pixel-based prediction transfers weakly, while DINO and 3D flow yield substantial gains: DINO improves out-of-distribution object and scene generalization by up to 4x, and 3D flow improves in-domain performance by 20-30%. More details: https://gatech-rl2.github.io/egowam.github.io",
+      "authors": [
+        "Baoyu Li",
+        "Xinchen Yin",
+        "Mengying Lin",
+        "Yixin Zhang",
+        "Danfei Xu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-07-08T16:11:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.08436v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "world action models for human-to-robot transfer; egocentric video training",
+      "llm_evidence_cn": "世界动作模型用于人机迁移；第一人称视频训练",
+      "llm_evidence": "世界动作模型用于人机迁移；第一人称视频训练",
+      "canonical_evidence": "世界动作模型用于人机迁移；第一人称视频训练",
+      "llm_tldr_en": "Studies world action models for human-to-robot transfer using egocentric human data, proposing EgoWAM that learns agent-invariant world representations to disentangle appearance and camera motion.",
+      "llm_tldr_cn": "针对第一人称人类数据中形态和运动差异限制机器人迁移的问题，研究世界动作模型的有效世界表示，提出EgoWAM框架，通过人机联合训练学习抽象外观和运动的世界目标，提升从人类视频到机器人策略的迁移效果。",
+      "llm_tldr": "针对第一人称人类数据中形态和运动差异限制机器人迁移的问题，研究世界动作模型的有效世界表示，提出EgoWAM框架，通过人机联合训练学习抽象外观和运动的世界目标，提升从人类视频到机器人策略的迁移效果。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.10504v1",
+      "source": "arxiv",
+      "title": "SUREFlow: State-space Uncertainty-aware REsidual Flow Matching for Robust Robot Manipulation",
+      "abstract": "Generative vision-language-action policies have advanced robot manipulation, but they often exhibit instability under noise, partial observability, and stochastic initial conditions. During extended rollouts, small velocity errors accumulate, degrading execution reliability. Existing diffusion and flow-based policies typically assume homoscedastic residuals and lack explicit uncertainty modeling within action generation, limiting robustness during iterative rollout. We propose SUREFlow, a state-space uncertainty-aware residual flow matching framework built on a Mamba backbone. The method jointly predicts action velocities and input-dependent residual uncertainty, enabling selective refinement of unreliable action dimensions without environment feedback while preserving computational efficiency. On LIBERO, SUREFlow achieves 92.5% average success rate (SR), outperforming the Mamba-based MaIL by 34.2%. On LIBERO-PRO, it attains around 49% SR using only 179M parameters, achieving performance comparable to large VLAs with 3-7B parameters. SUREFlow source code is available on: https://github.com/tanvirnwu/SUREFlow",
+      "authors": [
+        "Md Tanvir Islam",
+        "Sai Navaneet Peddapalli",
+        "Sangmoon Lee",
+        "Sangtae Ahn"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-11T23:25:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.10504v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "uncertainty-aware flow matching for VLA policies; improves robot manipulation robustness",
+      "llm_evidence_cn": "面向VLA策略的不确定性感知流匹配；提升机器人操作鲁棒性",
+      "llm_evidence": "面向VLA策略的不确定性感知流匹配；提升机器人操作鲁棒性",
+      "canonical_evidence": "面向VLA策略的不确定性感知流匹配；提升机器人操作鲁棒性",
+      "llm_tldr_en": "SUREFlow introduces state-space uncertainty-aware residual flow matching for VLA policies, enabling selective refinement of unreliable action dimensions for robust robot manipulation.",
+      "llm_tldr_cn": "该论文关注生成式视觉-语言-动作策略在噪声、部分可观测和随机初始条件下的不稳定性。提出SUREFlow框架，基于Mamba骨干网络联合预测动作速度和输入依赖的残差不确定性，在迭代展开中选择性修正不可靠的动作维度，从而提升机器人长时操作任务的鲁棒性。实验验证了其在连续控制中的有效性。",
+      "llm_tldr": "该论文关注生成式视觉-语言-动作策略在噪声、部分可观测和随机初始条件下的不稳定性。提出SUREFlow框架，基于Mamba骨干网络联合预测动作速度和输入依赖的残差不确定性，在迭代展开中选择性修正不可靠的动作维度，从而提升机器人长时操作任务的鲁棒性。实验验证了其在连续控制中的有效性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.12287v1",
+      "source": "arxiv",
+      "title": "Reducing Temporal Redundancy for Efficient Vision-Language-Action Inference",
+      "abstract": "Vision-Language-Action (VLA) models exhibit strong generalization for robotic manipulation, yet their high inference latency limits real time deployment. We identify two primary sources of temporal redundancy in existing VLA pipelines: repeated visual encoding of highly similar consecutive frames and multi step iterative sampling in diffusion based policies. To address this, we propose a system level acceleration strategy that reduces computation in both perception and action generation. On the perception side, we incrementally update only tokens corresponding to dynamic scene regions instead of re-encoding entire frames. On the policy side, we compress diffusion sampling into a compact 2-step schedule through efficiency oriented training while preserving action precision. Experiments on Libero, RobotWin, and Real Robot Platforms demonstrate over 2 times speedup while maintaining high performance, achieving up to 98% success rate on general manipulation benchmarks. Our codes will be released on Github.",
+      "authors": [
+        "Yuzhou Wu",
+        "Yuxin Zheng",
+        "Muchun Niu",
+        "Yishan Yang",
+        "Tianhao Liu",
+        "hanwen kang",
+        "Jiajian Jing",
+        "Linfeng Zhang",
+        "Chuan Wen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-14T02:48:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.12287v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "reducing temporal redundancy in VLA inference; directly addresses VLA model efficiency for robot control",
+      "llm_evidence_cn": "减少VLA推理中的时间冗余；直接针对机器人控制中VLA模型的效率问题",
+      "llm_evidence": "减少VLA推理中的时间冗余；直接针对机器人控制中VLA模型的效率问题",
+      "canonical_evidence": "减少VLA推理中的时间冗余；直接针对机器人控制中VLA模型的效率问题",
+      "llm_tldr_en": "Proposes system-level acceleration for VLA models by incremental visual token update and 2-step diffusion sampling, reducing latency without sacrificing performance.",
+      "llm_tldr_cn": "该论文指出视觉-语言-动作（VLA）模型在机器人操作中推理延迟高的问题，源于连续帧的重复视觉编码和扩散策略的多步迭代采样。提出系统级加速策略：在感知侧仅增量更新动态区域令牌，在策略侧通过效率导向训练将扩散采样压缩为两步。实验表明该方法在保持性能的同时显著降低延迟，对实时机器人控制有重要意义。",
+      "llm_tldr": "该论文指出视觉-语言-动作（VLA）模型在机器人操作中推理延迟高的问题，源于连续帧的重复视觉编码和扩散策略的多步迭代采样。提出系统级加速策略：在感知侧仅增量更新动态区域令牌，在策略侧通过效率导向训练将扩散采样压缩为两步。实验表明该方法在保持性能的同时显著降低延迟，对实时机器人控制有重要意义。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
