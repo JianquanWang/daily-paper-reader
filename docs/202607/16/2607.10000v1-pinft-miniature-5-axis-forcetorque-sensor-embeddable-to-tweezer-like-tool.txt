@@ -1,0 +1,241 @@
+Title: PinFT: Miniature 5-Axis Force/Torque Sensor Embeddable to Tweezer-like Tool
+
+URL Source: https://arxiv.org/pdf/2607.10000v1
+
+Published Time: Tue, 14 Jul 2026 00:24:05 GMT
+
+Number of Pages: 7
+
+Markdown Content:
+# PinFT: Miniature 5-Axis Force/Torque Sensor Embeddable to Tweezer-like Tool 
+
+Leo King, Jenny Chen, Tae Myung Huh 
+
+Abstract — We present PinFT, a miniature five-axis capacitive force/torque sensor designed for direct tip-level integration into tweezer-like tools. The sensor employs a compact three-PCB stack with segmented plated through-hole electrodes and a sili-cone elastomer dielectric, enabling five-degree-of-freedom force and torque sensing ( Fx, Fy , Fz , Tx, Ty ) through displacement of a central 2 mm-diameter stainless steel pin. The fabricated pro-totype was calibrated using a higher-order polynomial mapping, yielding mean absolute errors of approximately 0.23 N for forces and 2.5 mN ·m for torques, with coefficients of determination (R2) exceeding 0.97 across all axes. To demonstrate practical utility, a 3D-printed tweezer integrating PinFT sensors at both tips was mounted on a parallel-jaw gripper and evaluated across three representative manipulation tasks: grasping a sub-millimeter SMD capacitor, pulling a simulated hair from a silicone substrate, and tearing a compliant silicone specimen. In all cases, per-tip force sensing reliably captured character-istic force signatures that distinguish successful manipulation from failure events—including slip and object ejection—using gradient-based features derived from internal grasp force and net interaction force. These results demonstrate that direct, per-tip force sensing enables standard parallel-jaw grippers to monitor and interpret fine manipulation tasks performed through a handheld tweezer. 
+
+I. I NTRODUCTION 
+
+Humans routinely use tools to extend their manipulation capabilities, achieving levels of precision and delicacy that are difficult to attain with bare hands alone. Instruments like tweezers enable reliable interaction with small fragile objects essential in domains ranging from microsurgery to electron-ics assembly. The effectiveness arises from complementary factors: mechanical leverage attenuates finger forces to en-able controlled, low-force interaction at the tool tips, while slender contact geometries provide access and precision at size scales where fingertips are too large. Moreover, during tool use, humans perceive the tool as an extension of the body, with tool-mediated haptic signals conveying contact, force, and slip information. Localizing sensation at the tool-tip, effectively acting as an extended fingertip [1]. Robotic manipulation could benefit from similar principles by leveraging handheld tools, such as tweezers, to achieve fine and delicate interactions beyond the capabilities of conventional parallel-jaw grippers. Prior work has explored specialized end-effectors that emulate forceps- or tweezer-like kinematics [2]; however, broader usability would be achieved if standard robotic grippers could flexibly manip-ulate a variety of task-specific tools. A key challenge in enabling such tool-mediated manipulation is providing the                   
+
+> All authors are with Dept. of Electrical and Computer Engineer-ing, University of California Santa Cruz, Santa Cruz, CA, USA.
+
+thuh@ucsc.edu        
+
+> Fig. 1: The PinFT-integrated robotic tweezer system. Left: Close-up of the dual-tip configuration, where each tweezer tip is instrumented with a miniature PinFT five-axis capacitive force/torque sensor. The inset shows a sub-millimeter SMD capacitor used in precision grasping experiments. Top right: Integration of the 3D-printed tweezer tool mounted on a parallel-jaw gripper. Bottom right: Definition of the local force and torque coordinate frame ( Fx,Fy,Fz,Tx,Ty) measured at each tip through the central 2 mm stainless steel sensing pin.
+
+robot with tactile or force feedback that accurately reflects interactions occurring at the tool–object interface. One approach is to infer tool–object interaction forces using tactile or force sensors mounted at the gripper [3]. Such methods require explicit modeling of tool geometry, compliance, and dynamics [4] to estimate contact forces at the tip, often necessitating tool-environment-specific calibra-tion [5] which limits generalization across tools and tasks. An alternative is to directly sense interaction forces at the tool itself. Existing force-sensing forceps and tweezers typically place sensors at the joining feature of the two tips, measuring the net force applied to an object once it is rigidly grasped [6], [7]. However, tip-level sensing—measuring forces independently at each side of the tweezer—can pro-vide richer and more localized information about contact onset, force distribution, and incipient slip at each jaw. While some surgical instruments integrate tip-level force sensors [8], [9], these designs are tightly coupled to specific tool geometries and lack modularity, making adaptation to new tools or tip geometries cumbersome. In this paper, we propose a miniature force–torque sensor that enables direct measurement of interaction forces at the tool tip, as shown in Fig. 1. The main contributions are:  
+
+> •
+
+A compact capacitive force–torque sensor design ca-pable of measuring five-axis force and torque using a simple three printed circuit board (PCB) stack. The re-sulting slender form factor enables seamless integration into a tweezer-like tool, while allowing customizable arXiv:2607.10000v1 [cs.RO] 10 Jul 2026 tool tips to be easily fabricated and mounted.  
+
+> •
+
+Demonstration that direct tool-tip force sensing enables standard parallel-jaw grippers to monitor fine manipu-lation tasks performed through a handheld tweezer. 
+
+A. Related Work: Tool-Mounted Force and Tactile Sensors 
+
+Prior work has shown placing force or tactile sensors directly on a tool/tool’s tip improves force measurement fidelity by capturing interaction forces at the point of contact, an approach widely adopted in medical/surgical robotics [9]. Distal sensing has been integrated into a range of surgical instruments. Tool-tip force sensors have been incorporated into surgical drills to isolate drill–tissue interaction forces from non-contact loads [10], and into microsurgical instru-ments using fiber Bragg grating (FBG) sensors to resolve sub-millinewton forces [11]. Several studies embed sens-ing elements directly into forceps or gripper jaws, includ-ing strain-gauge-based micro-forceps for microsurgery [12], [13], capacitive force-sensing surgical forceps [8], and mo-torized micro-forceps with integrated 3-DOF force sensing for vitreoretinal surgery [6]. More recently, modular jaw-mounted force sensors using miniature MEMS load cells have enabled multi-axis force measurement near the tool tip in robot-assisted minimally invasive surgery [14], while multimodal, haptics-enabled forceps have been proposed to support task-autonomous surgical behaviors [7]. Despite these advances, existing tool-mounted sensors face notable limitations. Many rely on bulky commercial force/torque sensors [10] or specialized MEMS- and fiber-optic-based fabrication [11]–[13], limiting accessibility and reproducibility. Moreover, most miniature designs measure only one to three force components [6], [14], and sensing in forceps-like tools is often implemented at intermediate structural rather than at the individual tips. As a result, internal grasping forces cannot be directly measured, and se-cure grasp is typically assumed, yielding limited information about the grasp state. Existing tip-level sensing solutions are further highly customized for specific surgical instruments [8], [9], restricting their applicability to a broader range of tool tips, including general-purpose tweezer-like tools. II. D ESIGN OF PIN FT To enable force–torque sensing at the tip of tweezer-like hand tools, we propose a compact stacked PCB-based capaci-tive sensor with a silicone elastomer dielectric and segmented plated through-hole electrodes, as shown in Fig. 2. This architecture achieves five-degree-of-freedom sensing—three forces and two moments, excluding torsion about the pin axis—transmitted through a central 2 mm stainless steel pin. While prior work has employed plated through-holes for capacitive sensing [15], our design differs by vertically stacking the electrodes and routing the applied load directly through the central pin, resulting in a significantly reduced form factor. 
+
+A. Simulation 
+
+We validated the sensor design using finite element analy-sis (FEA) in COMSOL Multiphysics. The model consists of 
+
+> Fig. 2: Cross-sectional view of the PinFT sensor showing the grounded central pin surrounded by segmented plated through-hole electrodes (left), and the top (CIN1–CIN3) and bottom (CIN4–CIN6) PCB electrode layouts (right)
+
+a 3 mm diameter plated through-hole with a concentrically positioned M2 pin (2 mm diameter) surrounded by silicone elastomer. We assigned a dielectric constant of 2.8 to the silicone layer (from the COMSOL material library), and set the PCB thickness to 1.6 mm. The pin was electrically grounded while each electrode segment was connected to a 1 V terminal to compute Maxwell self-capacitance. We performed electrostatic simulations under three fun-damental deformation modes: lateral displacement in the x-direction, vertical displacement in the z-direction, and pure rotation about the y-axis, as illustrated in Fig. 3. For representative deformations (x = 0.3 mm, z = 0.3 mm, θ =3.5°), each mode produced distinct capacitance distributions across the six electrode channels. Peak capacitance changes from the nominal state ranged from 0.08 to 0.27 pF—well within the measurable range of commercial capacitive-to-digital converters such as the AD7147. These results confirm that different force and torque combinations produce unique six-channel capacitance signatures suitable for calibration-based force/torque estimation. To test design sensitivity, we simulated pin diameters of 1.5, 2.0, and 2.5 mm with fixed 3 mm hole diameter and x = 0.2 mm displacement. Peak capacitance changes increased over 10× from 0.06 pF (1.5 mm) to 0.71 pF (2.5 mm) as the annular gap decreased. However, the 2.5 mm pin’s 0.25 mm gap complicates uniform silicone filling and bonding. We selected the 2.0 mm diameter (M2 pin) to balance sensitivity and manufacturability. 
+
+B. Sensor Fabrication 
+
+The sensor consists of three stacked PCBs. The top and bottom PCBs form the sensing electrodes, while the middle PCB integrates a capacitance-to-digital converter (CDC chip, AD7147). The CDC supports a 16 pF input range with 16-bit resolution, which sufficiently covers the capacitance variation predicted by simulation. As shown in Fig. 4a, each PCB contains three 3 mm through-holes. The central plated through-hole on the top and bottom PCBs serves as the sensing electrode, which is segmented into three electrically isolated sections using C1 C2 C3 C4 C5 C6              
+
+>       
+> x(a) Lateral displacement  
+>       
+>  
+>        z(b) Vertical displacement  
+>       
+>  
+>        3(c) Rotational displacement
+> Fig. 3: Simulated capacitance changes of the six sensing channels in re-sponse to central pin displacement: (a) lateral displacement along the x-axis, (b) vertical displacement along the z-axis, and (c) rotational displacement about θ.
+
+a 0.2 mm wire saw. The two side through-holes are used for alignment and mounting during assembly and can be removed in future designs to further reduce the sensor footprint. During assembly, each segmented electrode on the top and bottom PCBs is electrically connected to the CDC on the middle PCB by forming solder balls on the middle PCB and reflowing them through the corresponding solder joint vias. The three aligned PCBs are bonded using cyanoacrylate adhesive to create a rigid stacked structure. A 2 mm-diameter stainless steel dowel pin, shown in Fig. 4b, serves as the grounded central electrode. The pin is M2-threaded at both ends to accommodate constraining nuts, while the central sensing region remains unthreaded to provide a smooth surface for silicone adhesion. A custom 3D-printed casting mold (Fig. 4c) is used to position the pin and nuts and to define the silicone geometry. The mold includes inlet and outlet ports for silicone injection and constrains the nut locations to maintain a uniform 0.5 mm silicone gap between the nuts and the PCB surfaces. Silicone adhesive (Sil-Poxy, Smooth-On) is injected using a syringe (Fig. 4d) until material exits the outlet port, indi-cating complete filling of the sensing region. After curing, the mold is removed, leaving a compliant silicone layer encapsulating the sensing region. A compact tweezer tip (Fig. 4e) is subsequently fabricated via 3D printing and mechanically clamped onto the exposed end of the central pin. III. S ENSOR CHARACTERIZATION 
+
+Using the fabricated sensor, we calibrated it against force/torque inputs applied on a tweezer tip. As shown in Fig. 5f, the PinFT with tweezertip is rigidly mounted to the ATI Gamma F/T sensor via a 3D-printed interface. Ground-truth forces and torques were measured using an ATI Gamma F/T sensor, sampled at 200 Hz through a LabJack T7 DAQ. The fabricated PinFT sensor was sampled via an ESP32 microcontroller communicating with the CDC at 220 Hz. Synchronization between the two systems was achieved using a digital sync pin from the ESP32 to the LabJack DAQ. The resulting signals from ATI Gamma F/T were     
+
+> (a) Exploded view of sensor layers (b) Silicone casting mold alignment
+> (c) Cast mold cross-section (d) Silicone injection
+> (e) Sensor with Tip (f) Top view (g) Side view
+> Fig. 4: Sensor manufacturing workflow: electrode stacking, silicone casting, and final CAD geometry. All dimensions are in millimeters.
+
+linearly interpolated in MATLAB to match sampling rates. We manually applied forces and torques to the tweezer tip block to span the intended dynamic range, totaling 190,000 samples, or 15.7 minutes of equivalent data to calibrate (interpolated CDC to 200Hz to align data). For the calibration model, we seek a higher-order multi-variable mapping, similar to [16] as: 
+
+ˆy = M ϕ(C), (1) where C ∈ R6 is a vector of capacitance count change from nominal value of 6 channel, ϕ(·) builds a feature vector from c, and y ∈ R6 is an estimate of {Fx, F y , F z , T x, T y },axis denoted in Fig. 2. We estimate M by a least square fit. For ϕ(c), we chose 1st and 2nd order polynomial of each capacitance (similar to [16]) and additional cross product up to quadruple accounting for highly coupled capacitance measures: 
+
+ϕ(C) =  Ci, C 2 
+
+> i
+
+, C iCj , C iCj Ck, C iCj CkCl
+
+⊤ ∈ R77 
+
+i, j, k, l ∈ { 1, . . . , 6} all distinct (2) 
+
+A. Calibration Results 
+
+As shown in Fig. 5 and summarized in Table I, the cali-brated 5-DOF PinFT sensor demonstrates close agreement Time (s)                               
+
+> 0246810
+> Fx (N)
+> 0
+> 2
+> 4
+> 6
+> 8PinFT Ground Truth (a) Est./True F xTime (s)
+> 0246810
+> Fy (N)
+> -5
+> 0
+> 5
+> 10 (b) Est./True F yTime (s)
+> 0246810
+> Fz (N)
+> -4
+> -2
+> 0
+> 2
+> 4
+> 6(c) Est./True F zTime (s)
+> 0246810
+> Tx (N·m)
+> -0.1
+> -0.05
+> 0
+> 0.05
+> 0.1
+> (d) Est./True T xTime (s)
+> 0246810
+> Ty (N·m)
+> 0
+> 0.02
+> 0.04
+> 0.06
+> 0.08
+> 0.1 (e) Est./True T y
+
+zx (f) Calibration Setup                                          
+
+> Fig. 5: (a–e) Comparison between PinFT estimated and ground-truth forces (N) and torques (N·m) over time. (f) Final assembled PinFT sensor mounted on the calibration platform.
+> FxFyFzTxTy
+> F/T Range ±7N±7N±9N±0.1Nm ±0.1Nm
+> MAE 0.22 N 0.20 N 0.23 N 2.6 mNm 2.0 mNm
+> 95pct |Err |0.61 N 0.55 N 0.61 N 7.2 mNm 5.9 mNm
+> R20.97 0.99 0.97 0.99 0.99
+> Noise (1 σ)16 mN 8.8 mN 50 mN 0.13 mNm 0.19 mNm TABLE I: PinFT calibrated performance specifications reporting cali-brated range, mean absolute error (MAE), 95th-percentile absolute error (95 pct |Err |), coefficient of determination ( R2), and noise ( 1σ) for each sensing axis. All metrics are computed on test data excluded from calibration training.
+
+with the ground-truth force/torque measurements. Across the held-out test dataset, the mean absolute error (MAE) is approximately 0.23 N for forces and 2.5 mN ·m for torques, with coefficients of determination ( R2) exceeding 0.97 for all axes. These results indicate that the proposed calibration effectively captures the dominant multi-axis force–torque relationships within the tested operating regime. The calibration range is limited to forces below 9 N and torques below 0.1 N ·m, primarily due to the mechanical robustness of the bonded structure comprising the Sil-Poxy elastomer, pins, and stacked PCBs. While this range is narrower than that of commercial force/torque sensors, it is sufficient for the delicate manipulation tasks targeted in this work, as demonstrated in the following sections. Within a comparable force range, the achieved force and torque errors are on par with those reported for CoinFT [16], while PinFT offers a substantially smaller sensor footprint. The 95th-percentile absolute error (95pct |Err |) is slightly higher than the MAE, with force errors remaining below approximately 0.6 N across all axes. This corresponds to 7.8% of full scale and reflects worst-case performance rather than average accuracy. Given the low-cost construction and compact form factor of the proposed sensor, this level of ac-curacy is acceptable for applications that require coarse force estimation combined with continuous contact monitoring, rather than metrology-grade force measurement. In addition, the measured noise levels are low relative to the operating force range, supporting reliable detection of contact onset and changes in interaction forces. The Fz axis exhibits higher noise due to its lower sensitivity resulting from the sensor design. IV. R OBOTIC TWEEZER APPLICATION 
+
+To evaluate the performance of PinFT in practical robotic tasks, a 3D-printed tweezer integrated with PinFT was mounted on a parallel-jaw gripper to manipulate selected objects while measuring tool-tip force/torque. The experi-ments demonstrate characteristic force/torque signatures cor-responding to stable grasping, slip, and tearing events. 
+
+A. Experiments 
+
+We 3D-printed a PLA tweezer, as shown in Fig. 6, that integrates PinFT sensors on both tip sides. The body incorporates an elastic loop for passive reopening, and for robotic actuation, one handle is rigidly bolted to a parallel-jaw gripper finger while a pusher mounted on the opposing finger closes the tweezer. Testing tasks, shown in Fig. 7, were selected to represent typical tweezer operations: picking up a small surface-mount capacitor, pulling a simulated hair embedded in a silicone block (string surrogate), and pulling/tearing a compliant silicone specimen. These tasks span delicate, fine-scale, and compliant interactions, enabling evaluation of the sensor’s (a) Tweezer assembly (b) Tweezer on parallel-jaw gripper 
+
+Fig. 6: Tweezer design integrated with PinFT and attachment to a robotic parallel-jaw gripper.   
+
+> (a) SMD Capacitor (b) Simulated Hair (c) Silicone Test Piece
+
+Fig. 7: Test objects used in tweezing experiments: (a) SMD capacitor (L ×W×H = 0.4 ×0.2 ×0.2 mm), (b) simulated hair embedded in silicone (diameter = 1 mm), and (c) silicone test piece (L ×W×H = 60 ×20 ×1 mm, Ecoflex-0030). 
+
+ability to capture direct tool-tip forces under diverse contact conditions. The PLA tweezer with integrated PinFT sensors was mounted on the parallel-jaw gripper of a Franka Emika Research 3 robot. As the focus of this work is force sensing rather than vision perception or motion planning, the arm was manually positioned to the desired engagement pose, after which the gripper closed to a user-defined width and executed lifting or pulling motions. Closing widths were selected from preliminary trials to produce both secure and borderline grasps, allowing comparison of successful and unsuccessful manipulation, while embedded force/torque data were collected throughout each trial. 
+
+B. Results 1) Picking up a Small SMD Capacitor: In grasping small SMD capacitors, among the 5-DOF measurements, Fx and 
+
+Fz exhibit the most task-relevant force profiles, as shown in Fig. 8. When grasping such small objects on a table surface, the tweezer tips must make contact with the table to ensure proper engagement, resulting in negative Fz forces during the approach phase. The individual tip sensors enable detection of which tip contacts the table first; in both cases shown in Fig. 8, the right tip exerts greater force on the table than the left tip. This differential contact information can be exploited for tip contact force balancing control. As the tweezer closes, Fx increases, corresponding to the internal grasping force. However, for small object manipu-lation, grasp force magnitude alone is not a sufficient metric for success. Excessive grasp force can cause the object to slip or eject from between the tips, as illustrated in Fig. 8b. When the object is lost, a sudden decrease in the mean grasp force (denoted ¯Fx) is observed. To quantify this event, we computed d ¯Fx/dt after smooth-ing the signal using a Savitzky–Golay filter (3rd order              
+
+>    
+> 
+>      
+>    
+> 
+> xzxzLeft Right
+> (a) Capacitor Grasped      
+>    
+> 
+>      
+>    
+> (b) Capacitor Ejected
+
+Fig. 8: Tweezer grasping experiment on an SMD capacitor. The black line in Fx represents the mean of the left and right grasp forces. Slip events are indicated by a sudden drop in grasp force, reflected as a negative peak in d ¯Fx/dt at the moment of ejection. Dashed vertical lines denote key transition events.             
+
+> 
+> 
+>        
+> 
+> 
+> Left Right
+> 7FxFz net
+> (a) Simulated Hair Pulled Out        
+> 
+> 
+>        
+> 
+> (b) Simulated Hair Slip
+
+Fig. 9: Tweezer grasping and pull experiment on simulated hair showing (a) successful pullout and (b) slip during pull. In the successful case, dF/dt 
+
+fluctuations appear only in the pull force ( Fz, net ) while the grasp force ( ¯Fx)remains stable. In the slip case, negative peaks are observed in both the pull force and grasp force, indicating loss of grip. 
+
+polynomial, window size 41 samples). The gradient of the filtered signal is shown in the bottom plot of Fig. 8. Upon object ejection, a pronounced negative gradient is observed, consistent with the values summarized in Table II. Importantly, this internal grasp-force change, as well as the balancing behavior in Fz between the two tips, can only be detected by having force/torque sensing at each individual tweezer tip. Such individual and internal force in-teractions cannot be measured by an external wrist-mounted force/torque sensor, which captures only net interaction forces at the robot interface rather than internal grasp forces between the tips. 
+
+2) Pulling Simulated Hair: Without prior knowledge of the required pull force or internal grasp force, we monitor pull success by observing the two-axis force components Fx
+
+and Fz , as shown in Fig. 9. When the hair is successfully pulled out, the internal grasping force maintains the hair within the tweezer while the vertical force is applied for extraction. This is evident in                               
+
+> 
+> 
+>       
+> 
+>   
+> Left Right
+> 7FxFy net
+> xy
+> xy
+> ynet (a) Silicone Pullout and Tear        
+> 
+> 
+>       
+> 
+>   (b) Silicone Slip
+> Fig. 10: Tweezer pull and tearing experiment on a silicone test piece showing (a) successful pullout and tearing and (b) slip during pull. In the successful case, dF/dt fluctuations appear only in the pull force ( Fy, net ) while the grasp force ( ¯Fx) remains stable. In the slip case, negative peaks are observed in both the pull force and grasp force; an attenuation in the rising slope of
+> Fy, net prior to the slip event indicates sliding of the piece before full loss of grip.
+
+the bottom panel of Fig. 9a, where during the pulling phase (between the two dashed vertical lines), dF z, net /dt exhibits noticeable variations due to the elimination of pulling resis-tance from the silicone substrate. In contrast, d ¯Fx/dt , rep-resenting the mean grasp force, remains relatively constant throughout the pulling motion. Conversely, when the hair pull fails, the gripper exhibits a noticeable negative dF z, net /dt accompanied by negative 
+
+d ¯Fx/dt . This concurrent decrease occurs because the pulling force on the hair ceases as the gripper loses its grip through slippage. This is also shown in the data summary in Table II. These results demonstrate that multi-axis tip-level sensing enables clear differentiation between object-environment in-teractions (i.e., hair pull-out) and object-tweezer events (i.e., tweezer slips on the hair), providing critical information for pullout success detection. 
+
+3) Tearing Silicone Specimen: In this experiment, the silicone specimen is grasped and pulled along the y-axis until the silicone block either tears or slips. The robot pull motion was commanded with identical control parameters in all trials. As shown in Fig. 10 and Table II, successful tear and slip failure cases exhibit similar patterns to those observed in Section IV-B.2. Successful tears are characterized by a drop in dF y, net /dt while maintaining ¯Fx, whereas failure cases show a concurrent drop in both dF y, net /dt and d ¯Fx/dt .An additional distinguishing characteristic is the slope of 
+
+Fy, net prior to the sudden drop. In successful tear cases, 
+
+Fy, net exhibits a consistent ramp-up followed by an abrupt drop at rupture, while in failure cases, the slope attenuates before failure occurs. This slope change is attributed to incipient slip rather than variations in grasp force, as Fx
+
+(the grasp force) remains steady or slightly increases during the event. When handling deformable compliant materials, such slope attenuation can serve as an early indicator of incipient slip, enabling adaptive control to increase grasp force preemptively and prevent failure. This capability is                                                  
+
+> Success Failure Min( d¯Fx/dt )Min( dF net /dt )Min( d¯Fx/dt )Min( dF net /dt )
+> SMD -0.68 ±0.08 –-1.44 ±0.32 –
+> Hair -0.44 ±0.05 -3.44 ±1.29 -0.85 ±0.23 -2.89 ±0.45
+> Silicone -0.62 ±0.21 -4.24 ±1.48 -1.03 ±0.14 -4.38 ±0.15
+> TABLE II: Negative peak dF/dt values (mean ±std) over three trials for each object and outcome (Success/Failure). ¯Fxdenotes the grasp force, and
+> Fnet denotes the net pull-direction force: Fzfor Hair and Fyfor Silicone.
+
+particularly valuable for handling delicate specimens where excessive grasp force is undesirable—tip-level multi-axial sensing may provide the necessary feedback to appropriately adjust the grasp force. V. C ONCLUSION 
+
+We presented PinFT , a compact five-axis capacitive force/torque sensor designed for direct tool-tip integration in tweezer-like tools. The sensor employs a three-PCB stack with segmented plated through-hole electrodes and a silicone elastomer dielectric, enabling five-degree-of-freedom force and torque sensing transmitted through a central M2 pin. Finite-element analysis guided the structural design, and calibration of the fabricated prototype yielded mean absolute errors of approximately 0.23 N for forces and 2.5 mN ·m for torques, with R2 exceeding 0.97 across all measured axes. When integrated into a robotic tweezer mounted on a parallel-jaw gripper, PinFT captured distinctive multi-axis force signatures across three representative manipulation tasks: grasping a small SMD capacitor, pulling a simulated hair from a silicone substrate, and tearing a compliant silicone specimen. In all cases, tip-level sensing enabled reliable discrimination between successful manipulation and failure modes such as slip and object ejection. Gradient-based features derived from internal grasp force and net interaction force proved particularly effective for detecting incipient failure, highlighting the importance of distal, per-tip sensing for fine manipulation. The current design is limited to forces below 9 N and torques below 0.1 N ·m, primarily constrained by the me-chanical robustness of the bonded silicone–PCB structure. Extending the force range would require stiffer dielectric materials or structural reinforcement, potentially reducing sensitivity. Future work will focus on real-time closed-loop force control using PinFT measurements to enable adaptive, failure-aware manipulation of delicate objects. In addition, the tool-level sensing capability may support learning-from-demonstration paradigms, where human manipulation data collected through the instrumented tweezer can inform robot policies for delicate handling tasks. REFERENCES [1] L. E. Miller, L. Montroni, E. Koun, R. Salemme, V. Hayward, and A. Farn` e, “Sensing with tools extends somatosensory processing beyond the body,” Nature , vol. 561, no. 7722, pp. 239–242, Sept. 2018, publisher: Nature Publishing Group. [Online]. Available: https://www.nature.com/articles/s41586-018-0460-0 [2] M. Verotti, A. Dochshanov, and N. P. Belfiore, “A Comprehensive Survey on Microgrippers Design: Mechanical Structure,” 
+
+Journal of Mechanical Design , vol. 139, no. 6, p. 060801, June 2017. [Online]. Available: https://asmedigitalcollection. asme.org/mechanicaldesign/article/doi/10.1115/1.4036351/472999/ A-Comprehensive-Survey-on-Microgrippers-Design [3] L. Li and T. G. Thuruthel, “Grasp independent indirect tool force estimation using vision-based tactile sensors,” IEEE Robotics and Automation Letters , vol. 11, no. 1, pp. 73–80, 2025. [4] J. Guo, B. Xiao, and H. Ren, “Compensating uncertainties in force sensing for robotic-assisted palpation,” Applied Sciences , vol. 9, no. 12, p. 2573, 2019. [5] E. Nasiri and L. Wang, “Admittance control for adaptive remote center of motion in robotic laparoscopic surgery,” in 2024 21st International Conference on Ubiquitous Robots (UR) . IEEE, 2024, pp. 51–57. [6] B. Gonenc, A. Chamani, J. Handa, P. Gehlbach, R. H. Taylor, and I. Iordachita, “3-dof force-sensing motorized micro-forceps for robot-assisted vitreoretinal surgery,” IEEE sensors journal , vol. 17, no. 11, pp. 3526–3541, 2017. [7] T. Liu, T. Zhang, J. Katupitiya, J. Wang, and L. Wu, “Haptics-enabled forceps with multimodal force sensing: Toward task-autonomous surgery,” IEEE/ASME Transactions on Mechatronics , vol. 29, no. 3, pp. 2208–2219, 2023. [8] U. Kim, D.-H. Lee, W. J. Yoon, B. Hannaford, and H. R. Choi, “Force sensor integrated surgical forceps for minimally invasive robotic surgery,” IEEE Transactions on Robotics , vol. 31, no. 5, pp. 1214– 1224, 2015. [9] P. Puangmali, K. Althoefer, L. D. Seneviratne, D. Murphy, and P. Dasgupta, “State-of-the-art in force and tactile sensing for minimally invasive surgery,” IEEE sensors Journal , vol. 8, no. 4, pp. 371–381, 2008. [10] Y. Chen, A. Goodridge, M. Sahu, A. Kishore, S. Vafaee, H. Mohan, K. Sapozhnikov, F. X. Creighton, R. H. Taylor, and D. Galaiya, “A force-sensing surgical drill for real-time force feedback in robotic mastoidectomy,” International journal of computer assisted radiology and surgery , vol. 18, no. 7, pp. 1167–1174, 2023. [11] X. He, J. Handa, P. Gehlbach, R. Taylor, and I. Iordachita, “A sub-millimetric 3-dof force sensing instrument with integrated fiber bragg grating for retinal microsurgery,” IEEE Transactions on Biomedical Engineering , vol. 61, no. 2, pp. 522–534, 2013. [12] A. Menciassi, A. Eisinberg, M. C. Carrozza, and P. Dario, “Force sensing microinstrument for measuring tissue properties and pulse in microsurgery,” IEEE/ASME transactions on mechatronics , vol. 8, no. 1, pp. 10–17, 2003. [13] J. Hricko and ˇ S. Havl´ ık, “Small-size robotic tools with force sensing,” in Modern Machinery Science Journal: 20th International Workshop on Robotics in Alpe-Adria-Danube Region.-2011, special edition ,2011, pp. 73–77. [14] Z. Chua and A. M. Okamura, “A modular 3-degrees-of-freedom force sensor for robot-assisted minimally invasive surgery research,” 
+
+Sensors , vol. 23, no. 11, p. 5230, 2023. [15] U. Kim, H. Jeong, H. Do, J. Park, and C. Park, “Six-axis force/torque fingertip sensor for an anthropomorphic robot hand,” IEEE Robotics and Automation Letters , vol. 5, no. 4, pp. 5566–5572, 2020. [16] H. Choi, J. E. Low, T. M. Huh, G. A. Uribe, S. Hong, K. A. Hoffman, J. Di, T. G. Chen, A. A. Stanley, and M. R. Cutkosky, “Coinft: A coin-sized, capacitive 6-axis force torque sensor for robotic applications,” 
+
+arXiv preprint arXiv:2503.19225 , 2025.

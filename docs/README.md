@@ -6,39 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-15
-- 运行时间：2026-07-15 19:05:53 UTC
+- 最新运行日期：2026-07-16
+- 运行时间：2026-07-16 20:22:36 UTC
 - 运行状态：成功
-- 本次总论文数：6
-- 精读区：0
-- 速读区：6
+- 本次总论文数：4
+- 精读区：1
+- 速读区：3
 
 ### 今日简报（AI）
-今日速读3篇论文，聚焦机器人动力学建模与VLA模型数据筛选。重点关注《NeuralActuator》中神经驱动建模方法，可同时处理机器人动力学与外力的感知。建议优先阅读这篇7.0分的论文，对理解机器人控制与环境交互有直接帮助。
-- 详情：[/202607/15/README](/202607/15/README)
+今日聚焦机器人多模态嵌入、微型力传感器、视觉界面代理及LoRA微调效率四大方向。最值得精读《Kepler-Encoder-v0.1: Towards a Multimodal Embedding Model for Robots》（8.0分），其多模态嵌入思路与工业操作中的LoRA微调效率研究（6.0分）可互补探索。建议优先深入精读论文，再结合传感器与界面代理的实践验证。
+- 详情：[/202607/16/README](/202607/16/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Kepler-Encoder-v0.1: Towards a Multimodal Embedding Model for Robots](/202607/16/2607.13522v1-kepler-encoder-v01-towards-a-multimodal-embedding-model-for-robots)  
+   标签：评分：8.0/10、query:tactile-vla
+   evidence：融合视觉、本体感觉、力/扭矩的多模态编码器
 
 ### 速读区论文标签
-1. [NeuralActuator: Neural Actuation Modeling for Robot Dynamics and External Force Perception](/202607/15/2607.11734v1-neuralactuator-neural-actuation-modeling-for-robot-dynamics-and-external-force-perception)  
+1. [PinFT: Miniature 5-Axis Force/Torque Sensor Embeddable to Tweezer-like Tool](/202607/16/2607.10000v1-pinft-miniature-5-axis-forcetorque-sensor-embeddable-to-tweezer-like-tool)  
    标签：评分：7.0/10、query:tactile-vla
-   evidence：用于外力感知的神经执行器模型，带接触概率门；无传感器力感知
-2. [SIEVE: Structure-Aware Data Selection for Imitation Learning with VLA Models](/202607/15/2607.06442v1-sieve-structure-aware-data-selection-for-imitation-learning-with-vla-models)  
+   evidence：微型5轴力/扭矩传感器，用于机器人操作中的触觉传感
+2. [VIA: Visual Interface Agent for Robot Control](/202607/16/2607.11119v1-via-visual-interface-agent-for-robot-control)  
+   标签：评分：7.0/10、query:tactile-vla
+   evidence：视觉语言动作模型用于机器人控制，但缺少触觉
+3. [On the Efficiency of LoRA Fine-Tuning for Vision-Language-Action Models in Industrial Robotic Manipulation](/202607/16/2607.10172v1-on-the-efficiency-of-lora-fine-tuning-for-vision-language-action-models-in-industrial-robotic-manipulation)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向VLA模仿学习的结构感知数据选择；提升VLA模型训练效果
-3. [WAM-TTT: Steering World-Action Models by Watching Human Play at Test Time](/202607/15/2607.06988v2-wam-ttt-steering-world-action-models-by-watching-human-play-at-test-time)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：世界动作模型用于操作；基于人类视频的测试时自适应
-4. [EgoWAM: World Action Models Beyond Pixels with In-the-Wild Egocentric Human Data](/202607/15/2607.08436v1-egowam-world-action-models-beyond-pixels-with-in-the-wild-egocentric-human-data)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：世界动作模型用于人机迁移；第一人称视频训练
-5. [SUREFlow: State-space Uncertainty-aware REsidual Flow Matching for Robust Robot Manipulation](/202607/15/2607.10504v1-sureflow-state-space-uncertainty-aware-residual-flow-matching-for-robust-robot-manipulation)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：面向VLA策略的不确定性感知流匹配；提升机器人操作鲁棒性
-6. [Reducing Temporal Redundancy for Efficient Vision-Language-Action Inference](/202607/15/2607.12287v1-reducing-temporal-redundancy-for-efficient-vision-language-action-inference)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：减少VLA推理中的时间冗余；直接针对机器人控制中VLA模型的效率问题
+   evidence：LoRA微调VLA模型用于工业操作，未涉及触觉
 
 
 <div class="dpr-home-promo-card">

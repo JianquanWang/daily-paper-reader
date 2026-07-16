@@ -1,0 +1,170 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-16T20:19:47.785000+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.13522v1",
+      "source": "arxiv",
+      "title": "Kepler-Encoder-v0.1: Towards a Multimodal Embedding Model for Robots",
+      "abstract": "A robot must understand the state of its own body, but a camera sees only part of it. Force and contact leave almost no trace in a single frame, and raw vision features read force at $R^2$ at or below $0.10$ on every robot we test. We present Kepler-Encoder-v0.1, a robot-first multimodal encoder that treats robot state as a modality and fuses vision, proprioception, and force/torque into a single shared latent with a learned-query cross-attention layer, trained self-supervised by masked cross-modal prediction under the LeJEPA/SIGReg objective. At evaluation only vision enters, which poses a sharp question. Does fusing state into training make the vision-only latent carry anything the pixels do not already contain? On the RH20T corpus the answer is yes, precisely where the camera is weakest. On held-out scenes, the vision-only latent recovers end-effector state, and force in particular, significantly above both raw frozen-ViT features and a compute-matched vision-only control on every sensored robot, though absolute force recovery at a single timestep is modest; on motor state, which the camera largely sees, it is statistically tied with the strongest vision baselines, and it is the only feature whose latent geometry tracks state. A single embodiment-agnostic encoder covers four robots, and a data-matched control shows this breadth reflects embodiment diversity rather than data volume. The frozen latent is directly useful. Its own cross-modal prediction error is a training-free invalid-state monitor (AUROC $0.90$ on out-of-range states, $0.69$ on scene-swapped states), and a diffusion decoder (PixNerd) reconstructs the camera frame from the latent, confirming the spatial compression preserves world-state. This report validates the single-timestep case; native-rate temporal fusion is the next step.",
+      "authors": [
+        "Ishneet Sukhvinder Singh",
+        "Dhanoosh Pooranakumaran",
+        "Alex Nguyen",
+        "Jia Qi Yip"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-15T07:21:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.13522v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Multimodal encoder fusing vision, proprioception, and force/torque for robot perception",
+      "llm_evidence_cn": "融合视觉、本体感觉、力/扭矩的多模态编码器",
+      "llm_evidence": "融合视觉、本体感觉、力/扭矩的多模态编码器",
+      "canonical_evidence": "融合视觉、本体感觉、力/扭矩的多模态编码器",
+      "llm_tldr_en": "Introduces Kepler-Encoder, a multimodal encoder that fuses vision, proprioception, and force/torque via cross-attention, achieving zero-shot force inference from vision only.",
+      "llm_tldr_cn": "机器人多模态感知是触觉大模型的核心能力。本文提出Kepler-Encoder，将机器人状态（包括力/扭矩）作为模态，通过交叉注意力融合视觉、本体感知和力触觉信息，并在掩码跨模态预测下自监督训练。实验表明，训练中使用力触觉模态可使纯视觉推理的力估计R^2从0.10提升至显著水平，证明触觉模态对视觉表征的增强作用。该编码器可直接作为触觉VLA模型的感知骨干。",
+      "llm_tldr": "机器人多模态感知是触觉大模型的核心能力。本文提出Kepler-Encoder，将机器人状态（包括力/扭矩）作为模态，通过交叉注意力融合视觉、本体感知和力触觉信息，并在掩码跨模态预测下自监督训练。实验表明，训练中使用力触觉模态可使纯视觉推理的力估计R^2从0.10提升至显著水平，证明触觉模态对视觉表征的增强作用。该编码器可直接作为触觉VLA模型的感知骨干。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.10000v1",
+      "source": "arxiv",
+      "title": "PinFT: Miniature 5-Axis Force/Torque Sensor Embeddable to Tweezer-like Tool",
+      "abstract": "We present PinFT, a miniature five-axis capacitive force/torque sensor designed for direct tip-level integration into tweezer-like tools. The sensor employs a compact three-PCB stack with segmented plated through-hole electrodes and a silicone elastomer dielectric, enabling five-degree-of-freedom force and torque sensing ($F_x$, $F_y$, $F_z$, $T_x$, $T_y$) through displacement of a central 2\\,mm-diameter stainless steel pin. The fabricated prototype was calibrated using a higher-order polynomial mapping, yielding mean absolute errors of approximately 0.23\\,N for forces and 2.5\\,mN$\\cdot$m for torques, with coefficients of determination ($R^2$) exceeding 0.97 across all axes. To demonstrate practical utility, a 3D-printed tweezer integrating PinFT sensors at both tips was mounted on a parallel-jaw gripper and evaluated across three representative manipulation tasks: grasping a sub-millimeter SMD capacitor, pulling a simulated hair from a silicone substrate, and tearing a compliant silicone specimen. In all cases, per-tip force sensing reliably captured characteristic force signatures that distinguish successful manipulation from failure events -- including slip and object ejection -- using gradient-based features derived from internal grasp force and net interaction force. These results demonstrate that direct, per-tip force sensing enables standard parallel-jaw grippers to monitor and interpret fine manipulation tasks performed through a handheld tweezer.",
+      "authors": [
+        "Leo King",
+        "Jenny Chen",
+        "Tae Myung Huh"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-10T21:58:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.10000v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Miniature 5-axis force/torque sensor for tactile sensing in robotic manipulation",
+      "llm_evidence_cn": "微型5轴力/扭矩传感器，用于机器人操作中的触觉传感",
+      "llm_evidence": "微型5轴力/扭矩传感器，用于机器人操作中的触觉传感",
+      "canonical_evidence": "微型5轴力/扭矩传感器，用于机器人操作中的触觉传感",
+      "llm_tldr_en": "Presents a compact 5-axis force/torque sensor embeddable in tweezer tools, enabling fine-grained tactile sensing for robotic manipulation.",
+      "llm_tldr_cn": "触觉传感硬件是触觉基础模型的关键基础设施。本文提出PinFT，一种可嵌入镊子状工具的微型五轴电容式力/扭矩传感器，精度高、体积小。该传感器可直接在机器人末端提供多轴力触觉反馈，为触觉大模型和世界模型提供高质量数据源，推动通用触觉传感的应用。",
+      "llm_tldr": "触觉传感硬件是触觉基础模型的关键基础设施。本文提出PinFT，一种可嵌入镊子状工具的微型五轴电容式力/扭矩传感器，精度高、体积小。该传感器可直接在机器人末端提供多轴力触觉反馈，为触觉大模型和世界模型提供高质量数据源，推动通用触觉传感的应用。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.10172v1",
+      "source": "arxiv",
+      "title": "On the Efficiency of LoRA Fine-Tuning for Vision-Language-Action Models in Industrial Robotic Manipulation",
+      "abstract": "Deploying billion-parameter Vision-Language-Action (VLA) models on industrial hardware requires fine-tuning to bridge the embodiment gap. Full Fine-Tuning (FFT) provides maximal plasticity but requires data centre-grade GPUs. We present a systematic study of Low-Rank Adaptation (LoRA) for $π_0$, a flow-matching VLA, evaluated on four precision assembly tasks with a UR5e robotic manipulator. Across a sweep of LoRA ranks (r=8 to 256), allocation strategies, and component-freezing ablations, we find no statistically significant advantage of FFT over certain LoRA configurations. Performance saturates at r=32, and uniform allocation across the Vision-Language-Model (VLM) backbone and action expert proves sufficient. Freezing the VLM or restricting the vision encoder to LoRA significantly degrades performance, indicating that embodiment adaptation requires both semantic and visual plasticity. These results suggest that LoRA at r=32 with full vision encoder fine-tuning is a practical approach, reducing static peak VRAM from 36.2 to 10.8 GiB (parameters and optimizer states, activation memory excluded) without detectable performance loss.",
+      "authors": [
+        "Finn Ferchau",
+        "Daniel Pommer",
+        "Cristian Axenie"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-07-11T07:30:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.10172v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "LoRA fine-tuning of VLA models for industrial manipulation, no tactile",
+      "llm_evidence_cn": "LoRA微调VLA模型用于工业操作，未涉及触觉",
+      "llm_evidence": "LoRA微调VLA模型用于工业操作，未涉及触觉",
+      "canonical_evidence": "LoRA微调VLA模型用于工业操作，未涉及触觉",
+      "llm_tldr_en": "Systematic study of LoRA fine-tuning for pi0 VLA on assembly tasks, finding efficient configurations, but no tactile sensing incorporated.",
+      "llm_tldr_cn": "部署VLA模型到工业硬件需要微调以弥合具身差距。本文系统研究了LoRA在π0 VLA模型上的微调策略，发现r=32即可达到全微调性能，且均匀分配注意力最优。该工作为高效部署VLA提供了指导，但未涉及触觉模态。对于多模态触觉VLA需求，其方法可迁移但缺少触觉整合。",
+      "llm_tldr": "部署VLA模型到工业硬件需要微调以弥合具身差距。本文系统研究了LoRA在π0 VLA模型上的微调策略，发现r=32即可达到全微调性能，且均匀分配注意力最优。该工作为高效部署VLA提供了指导，但未涉及触觉模态。对于多模态触觉VLA需求，其方法可迁移但缺少触觉整合。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi modal tactile vision language action model for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.11119v1",
+      "source": "arxiv",
+      "title": "VIA: Visual Interface Agent for Robot Control",
+      "abstract": "Robot manipulation is a complex task that requires visual understanding, physical reasoning, planning, and closed-loop control. General-purpose foundation models (FMs) have grown remarkably capable of some of these, especially vision and reasoning. To leverage this for generalist robot policies, current methods typically involve converting existing FMs into vision-language-action (VLA) models by fine-tuning on robot data to output low-level actions. However, VLAs are often orders of magnitude smaller than frontier FMs given the limited data and compute available for fine-tuning, which in turn limits their general capability. Inspired by the growing ability of FMs to operate software through visual interfaces, we ask whether that same competence suffices to control a robot. We present VIA (Visual Interface Agent for robot control), a framework that recasts robot control as an agentic task: an off-the-shelf FM-powered agent drives a manipulator through a browser-based 3D interface by taking screenshots, issuing intuitive commands, observing the outcome, and adjusting. The agent receives no robot-specific fine-tuning and no access to privileged state information: it perceives visual input and acts through a small set of general tools. VIA inherits the agent's general reasoning, closed-loop error recovery, and ability to plan and re-plan from what it observes. It solves a diverse suite of tabletop manipulation tasks zero-shot with both Claude Code and Codex. With the strongest model (Fable 5) it achieves 96.7% success on three LIBERO-Goal tasks and 100% on a long-horizon rainbow assembly task. Performance improves with the scale and strength of the underlying model. These results suggest that frontier agents already possess skills that transfer directly to robot control given the right interface: your coding or computer-use agent is, in a sense, secretly a robot-control agent.",
+      "authors": [
+        "Hengyuan Hu",
+        "Priya Sundaresan",
+        "Jensen Gao",
+        "Dorsa Sadigh"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-07-13T05:52:12+00:00",
+      "link": "https://arxiv.org/pdf/2607.11119v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "vision-language-action model for robot control, but lacks tactile",
+      "llm_evidence_cn": "视觉语言动作模型用于机器人控制，但缺少触觉",
+      "llm_evidence": "视觉语言动作模型用于机器人控制，但缺少触觉",
+      "canonical_evidence": "视觉语言动作模型用于机器人控制，但缺少触觉",
+      "llm_tldr_en": "VIA explores using foundation models as visual interfaces to control robots, bypassing traditional VLA fine-tuning, but does not incorporate tactile sensing.",
+      "llm_tldr_cn": "现有VLA模型因规模和计算限制泛化能力不足。本文提出VIA，通过将机器人控制转化为视觉界面操作，利用预训练基础模型完成任务规划与执行。实验表明该方法在多种操作任务上有效，但未引入触觉模态。对于触觉VLA需求，其范式可借鉴但缺少触觉感知。",
+      "llm_tldr": "现有VLA模型因规模和计算限制泛化能力不足。本文提出VIA，通过将机器人控制转化为视觉界面操作，利用预训练基础模型完成任务规划与执行。实验表明该方法在多种操作任务上有效，但未引入触觉模态。对于触觉VLA需求，其范式可借鉴但缺少触觉感知。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
