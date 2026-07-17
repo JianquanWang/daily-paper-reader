@@ -1,0 +1,215 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-17T19:40:11.048272+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.14609v1",
+      "source": "arxiv",
+      "title": "Representation-Aligned Tactile Grounding for Contact-Rich Robotic Manipulation",
+      "abstract": "Tactile-enhanced vision-language-action (VLA) policies have been introduced for contact-rich manipulation, where critical interaction states are often hidden from vision. Future tactile prediction is a promising way to use touch because it turns tactile outcomes into supervision for action-induced contact dynamics. Yet VLA policies contain representations with different roles, from perceptual encoding to motor prediction, making it unclear where this supervision should be applied. We study this as a representation-alignment problem. Through a linear probe analysis, we find that future tactile states are most predictable from intermediate action-expert features, rather than from vision-language features or final action states. Motivated by this observation, we introduce a lightweight Latent Tactile Predictor (LTP), which predicts compact future tactile embeddings from the identified intermediate representation. By avoiding direct prediction of noisy raw tactile signals, LTP provides an action-outcome grounding signal that aligns intermediate action representations with future contact consequences. Experiments on real-world contact-rich manipulation tasks show that representation-aligned tactile grounding outperforms less aligned or multi-interface tactile prediction, highlighting the importance of where tactile supervision is applied.",
+      "authors": [
+        "Ruilin Chen",
+        "Jingkai Jia",
+        "Tong Yang",
+        "Xinyu Zhou",
+        "Qiao Sun",
+        "Jiangwei Zhong",
+        "Shizeng Zhang",
+        "Nuo Chen",
+        "Bailin He",
+        "Wei Li",
+        "Wenqiang Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T06:12:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.14609v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "tactile-enhanced VLA policies for contact-rich manipulation",
+      "llm_evidence_cn": "触觉增强的VLA策略用于接触丰富操作",
+      "llm_evidence": "触觉增强的VLA策略用于接触丰富操作",
+      "canonical_evidence": "触觉增强的VLA策略用于接触丰富操作",
+      "llm_tldr_en": "Proposes a representation-aligned tactile grounding method that identifies which VLA representations best predict future tactile states for action-induced contact dynamics, improving tactile-enhanced VLA policies in contact-rich manipulation.",
+      "llm_tldr_cn": "针对接触丰富操作中触觉增强的VLA策略中未来触觉预测的表示对齐不明确问题，提出表示对齐的触觉接地方法。通过线性探针分析发现中间动作专家特征最可预测未来触觉状态，从而指导监督信号的应用。实验表明所提方法显著提升了VLA模型在接触操作任务中的性能，为触觉与VLA的有效融合提供了新方向。",
+      "llm_tldr": "针对接触丰富操作中触觉增强的VLA策略中未来触觉预测的表示对齐不明确问题，提出表示对齐的触觉接地方法。通过线性探针分析发现中间动作专家特征最可预测未来触觉状态，从而指导监督信号的应用。实验表明所提方法显著提升了VLA模型在接触操作任务中的性能，为触觉与VLA的有效融合提供了新方向。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14487v1",
+      "source": "arxiv",
+      "title": "MIDAS Hand: Modular low-Impedance Direct-drive Anthropomorphic Sensing Hand",
+      "abstract": "Dexterous manipulation is limited not only by algorithms but by a shortage of accessible hand hardware that combines human-scale morphology, ease of manufacturing or maintenance, tactile sensing, and practical cost. Existing dexterous hands tend to optimize some of these properties at the expense of others. We present MIDAS Hand, a low-cost, open-source, human-scale dexterous hand with integrated tactile sensing for manipulation research. MIDAS Hand provides 16 total degrees of freedom (DoF) with 13 active DoF, directly driven actuation with measurably low backdrive torque, and 283 three-axis tactile taxels in a compact 700 g package with a bill of materials under 3,000 USD. Built from 3D-printed components, it assembles in under three hours while providing the strength, repeatability, and maintainability needed for repeated real-world experiments. Alongside the hardware, we release a full stack: design files, build documentation, control and tactile Python APIs, simulation models, and retargeting and teleoperation pipelines. We characterize MIDAS Hand through workspace and grasp-taxonomy analysis, payload and reliability tests, backdrivability measurements, and teleoperation demonstrations with tactile sensing, showing that it offers a balanced, reproducible platform for tactile dexterous manipulation and human-to-robot data collection. Project page: https://midas-hand.com",
+      "authors": [
+        "Alvin Zhu",
+        "Mingzhang Zhu",
+        "Beom Jun Kim",
+        "Quanyou Wang",
+        "Jose Victor S. H. Ramos",
+        "Dennis Hong"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T01:59:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.14487v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "integrated tactile sensing hardware for dexterous manipulation research",
+      "llm_evidence_cn": "集成触觉传感的灵巧手硬件，用于多模态触觉感知研究",
+      "llm_evidence": "集成触觉传感的灵巧手硬件，用于多模态触觉感知研究",
+      "canonical_evidence": "集成触觉传感的灵巧手硬件，用于多模态触觉感知研究",
+      "llm_tldr_en": "MIDAS Hand is a low-cost, open-source dexterous hand with 283 three-axis tactile taxels, enabling tactile sensing for manipulation research.",
+      "llm_tldr_cn": "现有灵巧手硬件在触觉传感、成本、易制造性等方面难以兼顾。MIDAS Hand是一款低成本的开放源码灵巧手，具有16自由度（13主动）和283个三轴触觉感应单元，采用直接驱动和3D打印组件，总物料成本低于3000美元。该手支持丰富触觉感知，为多模态触觉机器人研究提供了实用硬件平台。",
+      "llm_tldr": "现有灵巧手硬件在触觉传感、成本、易制造性等方面难以兼顾。MIDAS Hand是一款低成本的开放源码灵巧手，具有16自由度（13主动）和283个三轴触觉感应单元，采用直接驱动和3D打印组件，总物料成本低于3000美元。该手支持丰富触觉感知，为多模态触觉机器人研究提供了实用硬件平台。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.14728v1",
+      "source": "arxiv",
+      "title": "VQ-Touch: A Data-Efficient Tactile Generation Framework Across Sensors and Scenarios",
+      "abstract": "Tactile image generation significantly reduces the dependency on expensive and wear-prone sensors by synthesizing high-fidelity tactile data, offering an efficient solution for tactile information acquisition in robotic perception and human-machine interaction systems. However, existing methods depend on large-scale, diverse datasets from specific sensors and lack efficient data utilization and robust generalization capabilities, struggling in vision-limited environments. To address this, we introduce VQ-Touch, a tactile generation framework that supports both cross-sensor and multi-scenario applications. Specifically, to efficiently extract complex deformation and texture features from the data, we propose DM-VQGAN, an effective tactile representation learner. Furthermore, we introduce a discrete diffusion decoder with a unified conditioning interface, supporting multimodal generation tasks such as images and labels, and enhances the model's generalization capability through few-shot mixed training, thus achieving compatibility with current mainstream sensors and their variants. Experiments show that VQ-Touch surpasses state-of-the-art methods in multiple tasks.",
+      "authors": [
+        "Kailin Lyu",
+        "Long Xiao",
+        "Jianing Zeng",
+        "Di Wu",
+        "Lin Shu",
+        "Jie Hao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-16T08:53:41+00:00",
+      "link": "https://arxiv.org/pdf/2607.14728v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "data-efficient tactile generation framework for cross-sensor scenarios",
+      "llm_evidence_cn": "数据高效的跨传感器触觉生成框架",
+      "llm_evidence": "数据高效的跨传感器触觉生成框架",
+      "canonical_evidence": "数据高效的跨传感器触觉生成框架",
+      "llm_tldr_en": "Introduces VQ-Touch, a tactile generation framework that uses DM-VQGAN for efficient tactile image synthesis across sensors and scenarios, enabling robust tactile data generation for robotic perception.",
+      "llm_tldr_cn": "针对现有触觉生成方法依赖特定传感器大规模数据、泛化能力弱且数据效率低的问题，提出VQ-Touch框架。该框架通过DM-VQGAN有效提取触觉数据中的复杂变形和纹理特征，实现跨传感器和多场景的触觉图像生成。实验表明，VQ-Touch在多种传感器和环境下均能生成高质量触觉图像，显著提升数据利用效率，为机器人触觉感知提供经济高效的通用数据获取方案。",
+      "llm_tldr": "针对现有触觉生成方法依赖特定传感器大规模数据、泛化能力弱且数据效率低的问题，提出VQ-Touch框架。该框架通过DM-VQGAN有效提取触觉数据中的复杂变形和纹理特征，实现跨传感器和多场景的触觉图像生成。实验表明，VQ-Touch在多种传感器和环境下均能生成高质量触觉图像，显著提升数据利用效率，为机器人触觉感知提供经济高效的通用数据获取方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.13479v1",
+      "source": "arxiv",
+      "title": "Topology-Agnostic Mesh Reconstruction of Deformable Objects from Sparse Touch",
+      "abstract": "Estimating the full shape of a deformable object is especially challenging when vision is unavailable: in the dark, inside an opaque bag, behind the manipulating hand, or under heavy self-occlusion. Touch is the natural sensor in these settings, but touches are sparse and local. We present a single topology-agnostic estimator that reconstructs the full mesh of a deformable object from only a few touches and no vision, using one permutation-invariant cross-attention architecture that handles a 1D rope, a 2D cloth, and a 3D volumetric soft body. The learned estimator reduces reconstruction error by roughly two-thirds relative to non-learned geometric mesh completion and a Gaussian-process surface baseline, and it outperforms a simpler global-pool set encoder, with the gap growing as more touches are observed. We then show that the estimator's deep-ensemble uncertainty can be used to learn where to touch next, which lowers error further and beats both random touching and a Gaussian-process active baseline at sparse budgets. This gain is modest on average but grows with self-occlusion and on the error tail. When vision is also available, where to touch barely matters, motivating the vision-free setting we study.",
+      "authors": [
+        "Everest Yang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-07-15T06:17:35+00:00",
+      "link": "https://arxiv.org/pdf/2607.13479v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "uses sparse touch for mesh reconstruction, a form of tactile feedback learning",
+      "llm_evidence_cn": "利用稀疏触觉进行网格重建，是触觉反馈学习的一种形式",
+      "llm_evidence": "利用稀疏触觉进行网格重建，是触觉反馈学习的一种形式",
+      "canonical_evidence": "利用稀疏触觉进行网格重建，是触觉反馈学习的一种形式",
+      "llm_tldr_en": "Learns to reconstruct deformable object meshes from few touch points using a permutation-invariant cross-attention architecture, reducing error by two-thirds.",
+      "llm_tldr_cn": "该论文针对无视觉条件下从稀疏触觉点重建可变形物体完整网格的问题，提出了一种拓扑无关的估计器，采用置换不变交叉注意力架构，统一处理一维绳索、二维布料和三维软体。实验表明，相比非学习的几何补全和高斯过程基线，重建误差降低了约三分之二，实现了从稀疏局部触觉到全局形状的泛化。",
+      "llm_tldr": "该论文针对无视觉条件下从稀疏触觉点重建可变形物体完整网格的问题，提出了一种拓扑无关的估计器，采用置换不变交叉注意力架构，统一处理一维绳索、二维布料和三维软体。实验表明，相比非学习的几何补全和高斯过程基线，重建误差降低了约三分之二，实现了从稀疏局部触觉到全局形状的泛化。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.14842v1",
+      "source": "arxiv",
+      "title": "KineFuse: Kinematic-Aware Haptic Fusion for In-Hand Occluded-Object Pose Tracking",
+      "abstract": "Dexterous in-hand manipulation requires continuous 6D pose tracking, yet the manipulating fingers inevitably occlude the object from the camera. We study how to structure the sparse haptic signals already available on multi-fingered hands, including proprioception, proximal force/torque, and binary contact, to complement a pretrained visual pose tracker under occlusion. We propose a kinematic-aware finger-level encoder and systematically compare it against four alternative designs through three levels of evaluation: per-frame refinement, sequential open-loop tracking, and closed-loop manipulation. Our experiments reveal that (i) per-frame evaluation cannot distinguish encoder quality, while sequential tracking amplifies architectural differences by up to 15 times; (ii) the structured encoder learns task-specific cross-modal gating, using vision exclusively for translation and dedicating one attention head to haptics for rotation, without explicit supervision; and (iii) compact finger-level tokenization with 4 tokens outperforms both flat fusion and joint-level representations, which suppress vision through norm dominance. We validate that improved tracking yields higher success in a downstream reorientation task and provide qualitative real-world demonstrations. Our project page is available at https://cold-young.github.io/kine-fuse/.",
+      "authors": [
+        "Chanyoung Ahn",
+        "Jaesung Lee",
+        "Sungwoo Park",
+        "Donghyun Hwang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T11:07:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.14842v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-modal haptic fusion with visual pose tracking for dexterous manipulation",
+      "llm_evidence_cn": "触觉与视觉融合的多模态感知用于灵巧操作",
+      "llm_evidence": "触觉与视觉融合的多模态感知用于灵巧操作",
+      "canonical_evidence": "触觉与视觉融合的多模态感知用于灵巧操作",
+      "llm_tldr_en": "KineFuse structures sparse haptic signals (proprioception, force/torque, binary contact) to complement visual pose tracking under occlusion, achieving robust 6D pose tracking for in-hand manipulation.",
+      "llm_tldr_cn": "KineFuse针对手中操作中物体被遮挡的问题，提出运动学感知的指级编码器，将稀疏触觉信号（本体感、力/力矩、二值接触）与视觉姿态跟踪相结合。通过序列跟踪和闭环操作实验验证，该方法能有效处理遮挡，提升姿态跟踪鲁棒性。属于多模态触觉感知在机器人操作中的应用。",
+      "llm_tldr": "KineFuse针对手中操作中物体被遮挡的问题，提出运动学感知的指级编码器，将稀疏触觉信号（本体感、力/力矩、二值接触）与视觉姿态跟踪相结合。通过序列跟踪和闭环操作实验验证，该方法能有效处理遮挡，提升姿态跟踪鲁棒性。属于多模态触觉感知在机器人操作中的应用。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
