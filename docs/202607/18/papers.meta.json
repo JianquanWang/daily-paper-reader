@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-18",
+  "date": "2026-07-18",
+  "generated_at": "2026-07-18T19:06:56",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/18/2607.14578v1-beyond-implicit-force-evaluating-explicit-force-torque-proxies-in-action-chunking-with-transformers",
+      "section": "quick",
+      "title_en": "Beyond Implicit Force: Evaluating Explicit Force-Torque Proxies in Action Chunking with Transformers",
+      "authors": "King Hang Wong, Lingqiao Liu, Feras Dayoub",
+      "date": "2026-07-16",
+      "pdf": "https://arxiv.org/pdf/2607.14578v1",
+      "score": "7.0",
+      "evidence": "通过遥操作误差隐式编码力，提升操作中的触觉感知",
+      "tldr": "接触丰富的操作中力感知至关重要，ACT策略通过主从遥操作跟踪误差隐式获取力信息。本文提出预测未来从动关节状态的ACT变体消除此隐式线索，并评估从电机电流或关节力提取的简单扭矩代理的替代效果。在表面跟随、插入、刚度判别和基于力的停止四个真实任务中，移除隐式线索导致力关键阶段严重失败，而扭矩代理不仅恢复鲁棒行为，还进一步改进了基础ACT策略。本工作揭示隐式遥控线索是可恢复的力感知来源，并证明基于电机电流的简单扭矩代理可在无外部力传感器情况下匹配或增强其效果，为实际部署提供可行方案。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Contact-rich manipulation requires policies to infer interaction state from signals that are often weakly observable through vision and kinematics alone. Action Chunking with Transformers (ACT) has shown strong performance in fine-grained manipulation, but many deployments collect demonstrations through leader-follower teleoperation, where tracking error between commanded leader motion and executed follower motion implicitly encodes contact, resistance, and constraint violation. This paper examines whether ACT's apparent force-awareness depends on this hidden interaction cue. We introduce an observation-centric ACT variant that predicts future follower joint states instead of leader commands, thereby removing the teleoperation-induced discrepancy signal while preserving the rest of the learning pipeline. We then evaluate whether simple joint-torque proxies, derived from onboard motor current or joint effort, can recover contact-aware behavior without external force/torque sensors. Across four real-world tasks spanning surface following, insertion, stiffness discrimination, and force-based stopping, removing the implicit cue leads to severe failures in force-critical phases. In contrast, torque-augmented policies recover robust contact behavior and improve the base ACT policy. These results demonstrate that, on real hardware, the implicit teleoperation cue is a recoverable source of force-awareness, where torque signals are available, a simple proxy matches, surpasses, or further enhances it.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/18/2607.14695v1-reflex-real-time-vla-control-through-streaming-inference",
+      "section": "quick",
+      "title_en": "Reflex: Real-Time VLA Control through Streaming Inference",
+      "authors": "Yuanchun Guo, Bingyan Liu",
+      "date": "2026-07-16",
+      "pdf": "https://arxiv.org/pdf/2607.14695v1",
+      "score": "6.0",
+      "evidence": "面向机器人控制的实时VLA流式推理",
+      "tldr": "流匹配视觉-语言-动作模型因迭代去噪导致推理延迟高、缓存无效。Reflex利用时间步不变性将注意力分割为静态、滑动和动态区域，实现O(1)增量缓存更新；并引入AdaRMSNorm防止数值崩溃，结合异步流水线和算子融合。在LIBERO和Kinetix上实现2.58倍加速和50Hz稳定流式推理，延迟降低54%，为实时机器人控制提供了高效部署方案。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Flow matching Vision-Language-Action (VLA) models promise precise continuous control, but their iterative denoising nature introduces fundamental incompatibilities with real-time robotics: global timestep injection invalidates KV-caching, forcing a choice between slow $O(N^2)$ re-computation or mathematically incorrect cache reuse. We present \\textbf{Reflex}, a framework that enables \\textit{real-time streaming inference} for flow matching policies by exploiting the \\textit{Timestep-Invariance Property} -- that perception encoders are functionally independent of the denoising loop. Reflex partitions the attention context into static, sliding, and dynamic regions, enabling $O(1)$ incremental cache updates while preserving full-batch-equivalent attention outputs for fixed inputs. To ensure stability under continuous high-frequency inference, we introduce \\textit{AdaRMSNorm}, an adaptive normalization layer that prevents BFloat16 numerical collapse by gating on flow phase. We further maximize throughput through an \\textit{async pipeline} that decouples visual encoding from action generation, combined with \\textit{operator fusion} that reduces kernel overhead. On LIBERO and Kinetix benchmarks, Reflex achieves a 2.58$\\times$ inference speedup and 50Hz stable streaming, reducing reaction latency by up to 54\\% and enabling efficient deployment without performance degradation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

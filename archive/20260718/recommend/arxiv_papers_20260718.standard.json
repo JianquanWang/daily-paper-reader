@@ -1,0 +1,90 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-18T19:05:48.258895+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.14578v1",
+      "source": "arxiv",
+      "title": "Beyond Implicit Force: Evaluating Explicit Force-Torque Proxies in Action Chunking with Transformers",
+      "abstract": "Contact-rich manipulation requires policies to infer interaction state from signals that are often weakly observable through vision and kinematics alone. Action Chunking with Transformers (ACT) has shown strong performance in fine-grained manipulation, but many deployments collect demonstrations through leader-follower teleoperation, where tracking error between commanded leader motion and executed follower motion implicitly encodes contact, resistance, and constraint violation. This paper examines whether ACT's apparent force-awareness depends on this hidden interaction cue. We introduce an observation-centric ACT variant that predicts future follower joint states instead of leader commands, thereby removing the teleoperation-induced discrepancy signal while preserving the rest of the learning pipeline. We then evaluate whether simple joint-torque proxies, derived from onboard motor current or joint effort, can recover contact-aware behavior without external force/torque sensors. Across four real-world tasks spanning surface following, insertion, stiffness discrimination, and force-based stopping, removing the implicit cue leads to severe failures in force-critical phases. In contrast, torque-augmented policies recover robust contact behavior and improve the base ACT policy. These results demonstrate that, on real hardware, the implicit teleoperation cue is a recoverable source of force-awareness, where torque signals are available, a simple proxy matches, surpasses, or further enhances it.",
+      "authors": [
+        "King Hang Wong",
+        "Lingqiao Liu",
+        "Feras Dayoub"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T05:16:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.14578v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "force-awareness in manipulation, implicit force encoding via teleoperation error",
+      "llm_evidence_cn": "通过遥操作误差隐式编码力，提升操作中的触觉感知",
+      "llm_evidence": "通过遥操作误差隐式编码力，提升操作中的触觉感知",
+      "canonical_evidence": "通过遥操作误差隐式编码力，提升操作中的触觉感知",
+      "llm_tldr_en": "Evaluates whether ACT's force-awareness relies on implicit force cues from teleoperation; proposes observation-centric variant removing teleoperation error, showing explicit force proxies improve manipulation in contact-rich tasks.",
+      "llm_tldr_cn": "该论文针对接触丰富操作中力感知的重要性展开研究，发现现有的动作分块变换器（ACT）通过遥操作的跟踪误差隐式编码力信息。作者提出一种以观测为中心的ACT变体，直接预测跟随者关节状态而非领导者命令，从而移除隐式力线索。实验表明显式的力-力矩代理信号能显著提升ACT在接触操作中的表现，为机器人触觉反馈学习提供了新的视角和方法。",
+      "llm_tldr": "该论文针对接触丰富操作中力感知的重要性展开研究，发现现有的动作分块变换器（ACT）通过遥操作的跟踪误差隐式编码力信息。作者提出一种以观测为中心的ACT变体，直接预测跟随者关节状态而非领导者命令，从而移除隐式力线索。实验表明显式的力-力矩代理信号能显著提升ACT在接触操作中的表现，为机器人触觉反馈学习提供了新的视角和方法。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.14695v1",
+      "source": "arxiv",
+      "title": "Reflex: Real-Time VLA Control through Streaming Inference",
+      "abstract": "Flow matching Vision-Language-Action (VLA) models promise precise continuous control, but their iterative denoising nature introduces fundamental incompatibilities with real-time robotics: global timestep injection invalidates KV-caching, forcing a choice between slow $O(N^2)$ re-computation or mathematically incorrect cache reuse. We present \\textbf{Reflex}, a framework that enables \\textit{real-time streaming inference} for flow matching policies by exploiting the \\textit{Timestep-Invariance Property} -- that perception encoders are functionally independent of the denoising loop. Reflex partitions the attention context into static, sliding, and dynamic regions, enabling $O(1)$ incremental cache updates while preserving full-batch-equivalent attention outputs for fixed inputs. To ensure stability under continuous high-frequency inference, we introduce \\textit{AdaRMSNorm}, an adaptive normalization layer that prevents BFloat16 numerical collapse by gating on flow phase. We further maximize throughput through an \\textit{async pipeline} that decouples visual encoding from action generation, combined with \\textit{operator fusion} that reduces kernel overhead. On LIBERO and Kinetix benchmarks, Reflex achieves a 2.58$\\times$ inference speedup and 50Hz stable streaming, reducing reaction latency by up to 54\\% and enabling efficient deployment without performance degradation.",
+      "authors": [
+        "Yuanchun Guo",
+        "Bingyan Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T07:56:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.14695v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "real-time VLA streaming inference for robot control",
+      "llm_evidence_cn": "面向机器人控制的实时VLA流式推理",
+      "llm_evidence": "面向机器人控制的实时VLA流式推理",
+      "canonical_evidence": "面向机器人控制的实时VLA流式推理",
+      "llm_tldr_en": "Reflex enables real-time streaming inference for flow matching VLA policies by exploiting timestep-invariance and incremental cache updates, achieving O(1) updates.",
+      "llm_tldr_cn": "该论文针对流匹配VLA模型实时推理的难题，提出Reflex框架，通过利用时间步不变性将注意力上下文划分为静态、滑动和动态区域，实现O(1)增量缓存更新，在保持全批等效注意力输出的同时显著加速推理速度，为VLA模型的实时机器人控制提供了可扩展的解决方案。",
+      "llm_tldr": "该论文针对流匹配VLA模型实时推理的难题，提出Reflex框架，通过利用时间步不变性将注意力上下文划分为静态、滑动和动态区域，实现O(1)增量缓存更新，在保持全批等效注意力输出的同时显著加速推理速度，为VLA模型的实时机器人控制提供了可扩展的解决方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
