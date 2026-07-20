@@ -1,0 +1,213 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-20T19:57:06.614392+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.15448v1",
+      "source": "arxiv",
+      "title": "VTAP Gripper: Synergizing Fingertip Sensing and a Visuo-Tactile Active Palm for Dexterous In-Hand Manipulation",
+      "abstract": "This paper presents a tactile-reactive gripper that integrates a Visuo-Tactile Active Palm (VTAP) and compliant, reconfigurable fingers equipped with tactile array sensors. The design exploits structured finger-palm synergy and multi-modal perception to achieve both robust grasping and fine manipulation. The actuated bi-modal palm seamlessly combines long-range visual localization with contact-rich tactile feedback, substantially extending the system's manipulation capability. To bridge the embodiment gap between human hand motion and the heterogeneous three-finger structure, we further propose a staged, gesture-conditioned retargeting framework for dexterous teleoperation. Extensive experiments validate the system across a range of challenging tasks: reactive grasping of YCB and fragile objects, in-hand syringe reorientation and plunger actuation, singulation of clustered objects down to 3 mm in diameter, and vision-tactile peg-in-hole insertion. Results demonstrate that high manipulation performance can be achieved through coordinated finger-palm interaction and multi-modal sensing, without resorting to high degrees of freedom anthropomorphic designs. The VTAP gripper and its retargeting framework offer a practical reference architecture for dexterous gripper design, manipulation, and contact-rich data collection in support of learning-based approaches. Project webpage: https://yuhochau.github.io/vtap/.",
+      "authors": [
+        "Yuhao Zhou",
+        "Sheeraz Athar",
+        "Zhixian Hu",
+        "Binghao Huang",
+        "Yunzhu Li",
+        "Juan Wachs",
+        "Yu She"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-16T20:41:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.15448v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-modal tactile perception with tactile array sensors and visuo-tactile palm",
+      "llm_evidence_cn": "多模态触觉感知，集成触觉阵列传感器和视觉-触觉主动手掌",
+      "llm_evidence": "多模态触觉感知，集成触觉阵列传感器和视觉-触觉主动手掌",
+      "canonical_evidence": "多模态触觉感知，集成触觉阵列传感器和视觉-触觉主动手掌",
+      "llm_tldr_en": "VTAP Gripper integrates fingertip tactile sensors and a visuo-tactile active palm for dexterous in-hand manipulation, achieving robust grasping and fine manipulation via structured finger-palm synergy.",
+      "llm_tldr_cn": "针对精细手内操作中感知不足的问题，设计了VTAP夹爪，结合指尖触觉阵列传感器和视觉-触觉主动手掌，利用手指-手掌协同和多模态感知实现稳健抓取和精细操作。主动手掌融合远程视觉定位与接触丰富触觉反馈，并提出手势条件重定向框架解决异构结构映射问题。实验验证了系统在多种操作任务中的有效性。",
+      "llm_tldr": "针对精细手内操作中感知不足的问题，设计了VTAP夹爪，结合指尖触觉阵列传感器和视觉-触觉主动手掌，利用手指-手掌协同和多模态感知实现稳健抓取和精细操作。主动手掌融合远程视觉定位与接触丰富触觉反馈，并提出手势条件重定向框架解决异构结构映射问题。实验验证了系统在多种操作任务中的有效性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.16146v1",
+      "source": "arxiv",
+      "title": "VTLoc: Learning-based Tactile Contact Localization in Visual Point Clouds",
+      "abstract": "Vision and touch are complementary modalities essential for robotic perception and manipulation. While vision provides global object context, touch offers precise local information at contact points. Integrating these modalities for contact localization, i.e., predicting the location of touch on an object's surface, poses significant challenges due to the need for accurate spatial alignment between tactile data and visual geometry. To address this challenge, we propose VTLoc, a novel visual-tactile framework that localizes contact points from tactile readings using a 3D point cloud as visual input. VTLoc introduces two key components: a geometric multi-modal alignment module, which reconstructs a pseudo-point cloud from fused visual-tactile features and aligns it with the visual point cloud to enforce spatial consistencies across modalities; and an iterative localizing updater, which iteratively refines the predicted contact location using fused visual-tactile features. Evaluated on a new benchmark of 100 real-world objects, VTLoc improves single-touch contact localization by reducing local-to-global correspondence ambiguity.",
+      "authors": [
+        "Zhiyuan Wu",
+        "Zhuo Chen",
+        "Shan Luo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-17T17:27:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.16146v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-modal visual-tactile contact localization",
+      "llm_evidence_cn": "视觉-触觉多模态接触定位",
+      "llm_evidence": "视觉-触觉多模态接触定位",
+      "canonical_evidence": "视觉-触觉多模态接触定位",
+      "llm_tldr_en": "VTLoc fuses tactile readings with visual point clouds to precisely localize contact points, enabling robust multi-modal perception.",
+      "llm_tldr_cn": "视觉和触觉融合在机器人感知中至关重要，但接触点定位因模态对齐困难而具有挑战性。VTLoc利用几何多模态对齐模块将触觉特征与视觉点云融合，重建伪点云以预测接触位置。实验在模拟和真实场景中均达到亚厘米级定位精度，为触觉引导的操作任务提供了可靠的空间感知。",
+      "llm_tldr": "视觉和触觉融合在机器人感知中至关重要，但接触点定位因模态对齐困难而具有挑战性。VTLoc利用几何多模态对齐模块将触觉特征与视觉点云融合，重建伪点云以预测接触位置。实验在模拟和真实场景中均达到亚厘米级定位精度，为触觉引导的操作任务提供了可靠的空间感知。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.15582v1",
+      "source": "arxiv",
+      "title": "A Model-Based Decoupling Strategy for Proprioception and Contact Sensing in an Architected Soft Manipulator",
+      "abstract": "Soft continuum robots require embedded sensing for proprioception and contact detection, yet integrating sensors into sparse, highly deformable architected structures remains challenging. We present a model-based strategy that decouples proprioceptive and contact signals from a common set of fluidic pressure sensors embedded in a soft architected segment. Each segment of the Innervated Trimmed Helicoid (ITH) contains six air channels routed in a localized zigzag pattern along the circumference. With only three principal kinematic degrees of freedom (axial compression, bending in x, bending in y), the six pressure readings form an overdetermined system. A piecewise constant curvature model maps pressures to shape, and Huber regression identifies outlier channels whose residuals indicate external contact. On a single ITH segment, this approach achieves proprioceptive shape estimation with a relative bending error of 0.11 +/- 0.02 and a contact detection rate of 97% across 178 trials. We integrate eight ITH segments into Air-Helix, a tendon-driven soft continuum manipulator, and present exploratory whole-arm demonstrations that include tactile teaching by demonstration, admittance-controlled force regulation, and tactile object reconstruction. The results suggest that localized fluidic innervation combined with model-based redundancy resolution is a practical path toward concurrent proprioception and contact sensing in architected soft robots.",
+      "authors": [
+        "Francesco Stella",
+        "Annan Zhang",
+        "Cosimo Della Santina",
+        "Josie Hughes",
+        "Daniela Rus"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-17T03:03:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.15582v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "model-based strategy for decoupling proprioception and contact sensing in soft manipulators",
+      "llm_evidence_cn": "基于模型的解耦策略用于软体机械臂的本体感觉和接触感知",
+      "llm_evidence": "基于模型的解耦策略用于软体机械臂的本体感觉和接触感知",
+      "canonical_evidence": "基于模型的解耦策略用于软体机械臂的本体感觉和接触感知",
+      "llm_tldr_en": "This paper presents a model-based method to decouple proprioceptive and contact signals from fluidic pressure sensors in a soft architected manipulator, using a piecewise constant curvature model and overdetermined system to map pressures to shape and contact.",
+      "llm_tldr_cn": "该论文针对软体连续机器人的感知难题，提出一种基于模型的方法，从嵌入式流体压力传感器中解耦本体感觉和接触信号。利用分段常曲率模型和过确定系统，将六个压力读数映射为形状和接触信息，实现了软体机械臂的自感知能力，为多模态触觉感知提供了新思路。",
+      "llm_tldr": "该论文针对软体连续机器人的感知难题，提出一种基于模型的方法，从嵌入式流体压力传感器中解耦本体感觉和接触信号。利用分段常曲率模型和过确定系统，将六个压力读数映射为形状和接触信息，实现了软体机械臂的自感知能力，为多模态触觉感知提供了新思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.15633v1",
+      "source": "arxiv",
+      "title": "Scalable Open-Source Visuotactile Sensor for 6-Axis Contact Wrench Estimation in Tensegrity Robots",
+      "abstract": "This paper presents a scalable, open-source visuotactile sensing system for tensegrity robots that enables six-axis wrench estimation and contact detection. The proposed endcap sensor integrates an elastomeric shell, a 3D-printed thermoplastic polyurethane (TPU) interface, and a rigid base housing an embedded camera and LED illumination ring. A novel gyroid-infill bonding technique is introduced to form a durable elastomer-TPU interface without adhesives, yielding a lightweight and modular design compatible with large-scale tensegrity structures. A tactile-to-wrench neural network maps shear vector fields to six-dimensional force and torque measurements. Experimental results demonstrate accurate and stable wrench estimation with a mean squared error (MSE) of 0.1531 on static validation data and out-of-domain generalization under dynamic motion. Furthermore, full-system integration on a 12 kg tensegrity robot confirms the sensor's ability to reliably identify ground contacts. The system substantially improves the practicality of tactile feedback for tensegrity robots, offering a low-cost, reproducible, and physically interpretable pathway toward contact-aware proprioception and state estimation. Open source files are available at \\href{https://github.com/Jonathan-Twz/tensegrity-gelfoot}{github.com/Jonathan-Twz/tensegrity-gelfoot}",
+      "authors": [
+        "Wenzhe Tong",
+        "Jonathan Mi",
+        "Xili Yi",
+        "Nima Fazeli",
+        "Xiaonan Huang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-17T05:21:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.15633v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "visuotactile sensor for contact wrench estimation",
+      "llm_evidence_cn": "视觉触觉传感器用于接触力估计",
+      "llm_evidence": "视觉触觉传感器用于接触力估计",
+      "canonical_evidence": "视觉触觉传感器用于接触力估计",
+      "llm_tldr_en": "A scalable open-source visuotactile sensor estimates 6-axis wrench using a neural network from shear vector fields, enabling tactile feedback for tensegrity robots.",
+      "llm_tldr_cn": "机器人力估计通常需要昂贵传感器。本文设计可扩展的视觉触觉传感器，集成弹性壳和嵌入式相机，利用剪切向量场通过神经网络估计六轴力与力矩。实验表明在桁架机器人上实现准确而稳定的力估计。该传感器开源且模块化，为多模态触觉感知提供了易用方案。",
+      "llm_tldr": "机器人力估计通常需要昂贵传感器。本文设计可扩展的视觉触觉传感器，集成弹性壳和嵌入式相机，利用剪切向量场通过神经网络估计六轴力与力矩。实验表明在桁架机器人上实现准确而稳定的力估计。该传感器开源且模块化，为多模态触觉感知提供了易用方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.16123v1",
+      "source": "arxiv",
+      "title": "BayesContact: Uncertain Pose Estimation via Visuo-Tactile Proposals and Simulation-based Inference",
+      "abstract": "Contact-rich manipulation requires pose estimates that are often more accurate than what depth-only sensing provides. Existing methods, relying on vision and contact, employ costly offline training procedures that need to be retrained for new environments and geometries. We propose BayesContact, a Simulation-Based Inference framework for visuo-tactile pose estimation in peg-in-hole insertion. BayesContact maintains a particle belief over object pose and fuses depth observations with force/torque-derived contact evidence. We employ simulation based forward models to approximate these observation likelihoods. For each pose hypothesis, a renderer predicts depth measurements and a physics simulator predicts contact outcomes under guarded probing actions; both are scored against real observations to update the belief. The resulting multimodal belief also enables information-gain-based probing for active disambiguation. Across simulated geometries and real-robot experiments, BayesContact improves pose observability and insertion success over vision-only inference by 30%",
+      "authors": [
+        "Aditya Kamireddypalli",
+        "Matias Mattamala",
+        "Joao Moura",
+        "Russell Buchanan",
+        "Sethu Vijayakumar",
+        "Subramanian Ramamoorthy"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-17T17:00:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.16123v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "visuo-tactile pose estimation using force/torque contact evidence",
+      "llm_evidence_cn": "视觉-触觉位姿估计，融合力/力矩接触证据",
+      "llm_evidence": "视觉-触觉位姿估计，融合力/力矩接触证据",
+      "canonical_evidence": "视觉-触觉位姿估计，融合力/力矩接触证据",
+      "llm_tldr_en": "BayesContact proposes a Simulation-Based Inference framework for visuo-tactile pose estimation in peg-in-hole insertion, fusing depth and force/torque data via particle belief, without costly retraining.",
+      "llm_tldr_cn": "针对接触丰富操作中位姿估计精度不足的问题，提出BayesContact框架，基于仿真推理融合深度观测和力/力矩接触证据进行视觉-触觉位姿估计。通过粒子信念维护物体位姿后验，利用渲染器预测深度、物理仿真预测接触结果。实验表明该方法无需重新训练即可适应新环境，显著提升了插入任务的准确性。",
+      "llm_tldr": "针对接触丰富操作中位姿估计精度不足的问题，提出BayesContact框架，基于仿真推理融合深度观测和力/力矩接触证据进行视觉-触觉位姿估计。通过粒子信念维护物体位姿后验，利用渲染器预测深度、物理仿真预测接触结果。实验表明该方法无需重新训练即可适应新环境，显著提升了插入任务的准确性。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

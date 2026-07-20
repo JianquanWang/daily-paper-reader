@@ -1,0 +1,435 @@
+Title: VTAP Gripper: Synergizing Fingertip Sensing and a Visuo-Tactile Active Palm for Dexterous In-Hand Manipulation
+
+URL Source: https://arxiv.org/pdf/2607.15448v1
+
+Published Time: Mon, 20 Jul 2026 00:19:55 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# VTAP Gripper: Synergizing Fingertip Sensing and a Visuo-Tactile Active Palm for Dexterous In-Hand Manipulation 
+
+Yuhao Zhou 1, Sheeraz Athar 1,†, Zhixian Hu 1,†, Binghao Huang 2, Yunzhu Li 2, Juan Wachs 1, and Yu She 1,∗
+
+Abstract — This paper presents a tactile-reactive gripper that integrates a Visuo-Tactile Active Palm (VTAP) and compliant, reconfigurable fingers equipped with tactile array sensors. The design exploits structured finger-palm synergy and multi-modal perception to achieve both robust grasping and fine manipulation. The actuated bi-modal palm seamlessly combines long-range visual localization with contact-rich tactile feedback, substantially extending the system’s manipulation capability. To bridge the embodiment gap between human hand mo-tion and the heterogeneous three-finger structure, we further propose a staged, gesture-conditioned retargeting framework for dexterous teleoperation. Extensive experiments validate the system across a range of challenging tasks: reactive grasping of YCB and fragile objects, in-hand syringe reorientation and plunger actuation, singulation of clustered objects down to 3 mm in diameter, and vision-tactile peg-in-hole insertion. Results demonstrate that high manipulation performance can be achieved through coordinated finger-palm interaction and multi-modal sensing, without resorting to high degrees of freedom anthropomorphic designs. The VTAP gripper and its retargeting framework offer a practical reference architecture for dexterous gripper design, manipulation, and contact-rich data collection in support of learning-based approaches. Project webpage: https://yuhochau.github.io/vtap/ .
+
+I. I NTRODUCTION 
+
+The field of robotics is transitioning from structured industrial deployments to consumer-facing services, where robots must operate in dynamic, semi-structured human environments. In industrial settings, manipulation is typ-ically dominated by predefined pick-and-place operations within controlled work cells. In contrast, real-world human environments involve diverse objects, clutter, and varying contact conditions, requiring robots to perform post-grasp actions such as in-hand reorientation and precise align-ment. Parallel grippers remain popular because they are mechanically simple and easy to control, and learning-from-demonstration methods such as diffusion policy [1] further motivate scalable manipulation hardware. However, the lim-ited reconfiguration of parallel grippers restricts dexterous tasks in human-centered environments. Anthropomorphic hands provide higher dexterity but are often bulky, expensive, and difficult to control [2]. Multi-finger grippers aim to balance actuation complexity and dexterity, especially when            
+
+> ∗Corresponding author. †Equal contribution.
+> 1Edwardson School of Industrial Engineering, Purdue University, West Lafayette, IN, USA.
+
+{zhou1437, sathar, hu934, jpwachs, shey }@purdue.edu  
+
+> 2Department of Computer Science, Columbia University, New York, NY, USA.
+
+{binghao.huang, yuzhu.li }@columbia.edu               
+
+> This work was supported in part by the National Science Foundation under Award 2423068 and Award 2520136; and in part by the U.S. Department of Agriculture under Award 2023-67021-39072 and Award 2024-67021-42878. vision mode tactile mode
+
+① ②
+
+③ ④  
+
+> vision mode
+> Fig. 1. Overview of the proposed gripper. The system enables in-hand book insertion into a tightly packed shelf (State 1–2) using the actuated palm with Visuo-Tactile sensing, followed by dexterous in-hand extraction with contact-rich feedback from the fingertip tactile arrays (State 3–4).
+
+augmented with tactile feedback to expand manipulation capabilities, yet several challenges remain in this area. First, in most existing robotic grippers, sensing and ac-tuation are primarily confined to the fingers. Interactions between the object and the palm are often neglected, despite the fact that palm-object contact plays a critical role in many grasping and manipulation tasks [3], [4]. Beyond sensing considerations, the mechanical design of non-anthropomorphic multi-finger grippers rarely exploits additional degrees of freedom (DOFs) at the palm. An active palm addresses this gap by enabling controllable object manipulation, particularly in in-hand manipulation scenarios where coordinated contact redistribution across fingers and palm is essential [5]. Second, many existing robotic grippers rely on a single sensing modality, using either vision or tactile sensing. However, a single modality is often insufficient for achieving comprehensive environmental perception in robotic manipu-lation. Integrating tactile and visual sensing within a unified sensing framework can effectively mitigate occlusion issues while enhancing perceptual robustness. Nevertheless, com-pactly incorporating multiple sensing modalities, including fingertip tactile sensing, palm tactile sensing, and visual perception, into a single gripper design remains a signifi-cant challenge. Addressing this can substantially expand the functional scope and application potential of robotic grippers. In this work, we present the VTAP Gripper (Fig. 1), with the following contributions: arXiv:2607.15448v1 [cs.RO] 16 Jul 2026 • We propose a tactile-reactive gripper equipped with an actuated bi-modal palm that integrates vision and touch. The design enables structured finger-palm synergy, sup-porting fine-grained in-hand manipulation while provid-ing both long-range perception and contact-rich feed-back.  
+
+> •
+
+We develop a staged, gesture-conditioned retargeting framework tailored to the proposed gripper. The frame-work reduces embodiment mismatch, ensures stable and accurate teleoperation, and establishes an efficient data collection approach for downstream learning-based dexterous manipulation policies.  
+
+> •
+
+We perform experiments on diverse objects and manip-ulation tasks. The results demonstrate the advantages of integrating an actuated bi-modal tactile palm, showing robust grasping performance and enhanced dexterous in-hand manipulation capability. II. R ELATED WORKS 
+
+A. Tactile-Reactive Gripper Design 
+
+Recent progress in tactile sensing has enabled finer-grained perception and substantially expanded the appli-cation scope of tactile-reactive grippers. For instance, the integration of piezoresistive sensors into robotic fingers has demonstrated strong adaptability in grasping and manipulat-ing objects [6]. Furthermore, recent studies have incorpo-rated vision-based tactile sensors, particularly the GelSight family [7], into robotic grippers to provide high-resolution tactile feedback for manipulation and closed-loop control [8]. Such dense contact information is especially critical for challenging dexterous in-hand manipulation tasks, including small/fragile object manipulation [9]–[11], thin and flexible object handling [12], and deformable linear object manipu-lation [13], [14]. Although these designs are well-suited for inter-finger manipulation, the interaction between the object and the palm is often overlooked. To enhance manipulation dexterity, several studies have introduced active palm actuation, demonstrating improved in-hand manipulation through controllable contact redistribution and additional degrees of freedom [15]–[17]. From a sensing perspective, vision-based tactile palms have been proposed to provide richer contact information [18]. More recently, dual-modality palm designs integrating vision and tactile sensing within a single structure have been explored, for example through mechanical mode-switching mechanisms [19] or stereo vision systems [20], enabling both pre-contact perception and post-contact tactile feedback. Despite these advances, coordinated sensing across both the fingers and the palm remains underexplored. In particular, compactly integrating multi-modal palm sensing, coordinated finger sensing, and active palm actuation within a unified gripper architecture remains an open challenge. 
+
+B. End-effector Teleoperation for Data Collection 
+
+Learning-from-demonstration methods have recently gained significant attention in robotics due to their ability to directly transfer human manipulation skills to robotic (a)  (b)    
+
+> Visuo-Tactile Palm
+> TPU (95A) Fin-Ray Finger
+> w/ FlexiTac Sensor
+> Actuonix
+> L8-P-50
+> Dynamixel
+> 2XC430-W250-T (c)
+> Dynamixel
+> 2XL430-W250-T
+> Sensing and Actuation PCB/Cables Box
+> Fig. 2. (a) Mechanical design and overall structure of the proposed gripper. (b) Active bi-modal palm module. A linear actuator is mounted on the base frame, enabling vertical sliding of the palm. (c) Each finger is actuated by two 2-DOF servo motors. A tactile array sensor is mounted on the fingertip.
+
+systems. Their appeal lies in enabling efficient skill acquisition without extensive manual controller design. For parallel gripper end-effector control during data collection, prior approaches have utilized interfaces such as 3D SpaceMouse devices [1], VR controllers [21], and handheld devices to capture human finger motion. These systems typically rely on additional hardware angle encoders to map human joint states to the robot, as demonstrated in platforms such as UMI [22], Gello [23], and Aloha [24]. In contrast, for anthropomorphic robotic hands with four or five fingers and typically 16 or more DOFs, task-space retargeting is widely adopted [25]. Human hand keypoints captured via VR devices or data gloves are mapped to robot joint configurations through inverse kinematics. Optimization-based methods are commonly employed to regularize finger positions and orientations, minimizing discrepancies between human and robot hands while preserving overall hand shape [26]. However, retargeting for non-anthropomorphic multi-finger grippers, whose DOFs lie between simple parallel grippers and anthropomorphic hands, is more challenging. Their task-driven and non-structured designs often lack direct kinematic correspondence with the human hand. Neverthe-less, these grippers provide a compelling balance between structural simplicity and manipulation capability, making them promising platforms for fine in-hand manipulation. Developing effective retargeting strategies for such systems therefore remains an important and underexplored problem. III. M ETHOD 
+
+A. Gripper Design 
+
+Fig. 2(a) presents an overview of the proposed gripper. The design aims to tightly integrate multi-modal sensing with dexterous actuation, thereby enabling both robust grasping and fine in-hand manipulation. To achieve this objective, an actuated palm module is introduced, as shown in Fig. 2(b). A linear actuator (L8-P-50, Actuonix) is mounted within a central slot spanning the upper and lower base frames of the gripper, providing a maximum stroke of 50 mm. The actuator output rod is mechanically coupled to the palm, which integrates a vision-tactile bi-modal sensor. As illustrated in Fig. 2(c) and with the coordinate defini-tion in Fig. 3(a), the gripper consists of three fully actuated and kinematically identical fingers. Each finger is driven by two servo motors, each providing 2 DOFs. A Dynamixel 2XC430-W250-T motor controls radial/ulnar deviation ( q1)within ±60 ◦, and its secondary axis provides metacarpopha-langeal (MCP) flexion-extension ( q2), corresponding to the proximal joint analogous to the human knuckle, from −25 ◦
+
+to +90 ◦. A Dynamixel 2XL430-W250-T motor enables abduction/adduction primitives ( q3) within ±55 ◦, while the final actuation axis provides proximal interphalangeal (PIP) flexion-extension ( q4), from −60 ◦ to +90 ◦. The finger is 3D printed in thermoplastic polyurethane (TPU) with a Fin-Ray structure, introducing passive compliance to adapt to objects of varying geometries without explicit contact modeling. Together with an additional 1-DOF active palm, the system provides a total of 13 degrees of freedom. To formally analyze the manipulation capability of the proposed design, we derive the kinematic model of a single finger, as shown in Fig. 3(a). For theoretical analysis, the finger is modeled as a rigid serial chain, and the midpoint of the fingertip is defined as the contact point. Each finger comprises four revolute joints forming a kinematic chain from the base frame O to the fingertip frame E, with joint configuration defined as q = [ q1, q 2, q 3, q 4]⊤. The forward kinematics from O to E is expressed as:  
+
+> EO
+
+T (q) = 1 
+
+> O
+
+T 21T 32T 43T E 
+
+> 4
+
+T =
+
+R(q) p(q)
+
+01×3 1
+
+
+
+, (1) where R(q) ∈ SO (3) and p(q) ∈ R3 denote the fingertip orientation and position, respectively. The individual trans-formation matrices are defined as: 
+
+ 
+
+> 1
+> O
+
+T = Dp1 RZ (ϕ)RY
+
+ π
+
+2
+
+
+
+RX (−q1)
+
+> 21
+
+T = Dl1 RZ
+
+
+
+− π
+
+2
+
+
+
+RX
+
+ π
+
+2 + q2
+
+
+
+> 32
+
+T = Dl2 RZ
+
+
+
+− π
+
+2
+
+
+
+RX (−q3)
+
+> 43
+
+T = Dl3 RZ
+
+ π
+
+2
+
+
+
+RX (q4) 
+
+> E
+> 4
+
+T = Dl4
+
+(2) where Dli represents translation along the fixed link vector 
+
+li, and RX , RY , and RZ denote rotations about the cor-responding coordinate axes. p1 denotes the base offset, and 
+
+ϕ represents the initial azimuthal orientation of each finger’s first joint about the base frame. The three fingers are arranged around the palm, each spanning a 120° sector: [−60 ◦, 60 ◦],
+
+[60 ◦, 180 ◦], and [180 ◦, 300 ◦].Based on the forward kinematics, the reachable workspace of the gripper is estimated via Monte Carlo sampling within the joint limits. Specifically, 5000 random joint configura-tions are generated for each joint within its feasible range, and the corresponding fingertip positions are computed and visualized in a 3D coordinate system. The aggregated point cloud approximates the workspace envelope, as shown in Fig. 3(b), demonstrating broad and effective spatial coverage around the base frame. For the fingers, the workspace spans ℰ         
+
+> 𝒪𝒪
+> l4
+> (a) (b)
+> 𝒪𝒪 (0, 0, 0) l3
+> p1
+> x𝒪𝒪
+> y𝒪𝒪
+> z𝒪𝒪
+> x1y1
+> q1
+> q2
+> q3
+> q4
+> z1
+> x2
+> y2
+> z2
+> x3
+> y3z3
+> x4
+> y4
+> l1
+> z4
+> l2
+> zℰ
+> xℰ
+> yℰ
+> Fig. 3. (a) Schematic representation of the finger kinematics. (b) Workspace of all three fingertips. 100 mm (a) (c)
+> (b) Protective Silicone Layer Paint Coat Transparent Silicone Acrylic LED Ring Housing Camera Camera Base
+> vision mode
+> vision
+> tactile
+> Fig. 4. (a) Visualization of vision and tactile outputs from the proposed bi-modal palm. (b) Mechanical design of the actuated palm module. (c) Experimental demonstration of long-range visual perception, detecting a
+> 30 ×30 mm ArUco marker.
+
+approximately 469 mm along the X-axis, 477 mm along the 
+
+Y -axis, and 311 mm along the Z-axis. 
+
+B. Multi-Modal Perception 
+
+Fingertip tactile arrays: to provide rich tactile feedback at the fingertips while maintaining mechanical compliance suitable for Fin-Ray fingers, we integrate thin piezoresistive 
+
+FlexiTac sensors [27], [28]. The sensors provide a spatial resolution of 32 × 12 taxels over an active sensing area of 
+
+66 × 25 mm 2. Variations in electrical resistance under ap-plied pressure transduce mechanical stimuli into measurable electrical signals, yielding an effective spatial resolution of approximately 2 × 2 mm 2 per sensing unit. 
+
+Visuo-Tactile bi-modal palm: in addition to the finger-tip sensing, the system incorporates a multi-modal palm perception module. The overall design and representative sensing outputs under the two modalities are illustrated in Fig. 4(a) and (b). To achieve a relatively large depth of field while enabling simultaneous observation of near-field tactile deformations and far-field environmental context, a USB camera sensor (GC0307, GalaxyCore) with a field of view of 50 ◦ was selected after experimental validation. This dual capability allows the palm to function both as a conventional vision sensor for global scene perception (Fig. 4(c)) and as an optical tactile sensor during contact-rich interactions. From bottom to top, the camera is enclosed within a 
+
+50 mm diameter cylindrical housing, whose distal end holds a detachable sensing cartridge providing a 40 mm diameter sensing area. A circumferential ring of multi-color LEDs (red, green, blue, and white) provides controllable internal illumination based on diffuse reflection. The sensing car-tridge consists of a 4 mm thick acrylic substrate supporting a 
+
+5 mm thick silicone elastomer layer. The outer surface of the transparent silicone is coated with mirror-effect paint and covered by a thin protective silicone layer. This reflective coating enables controllable optical transparency: when the LEDs are off, the module remains transparent for external scene imaging; when activated, the illumination is reflected toward the deformable surface, transforming the module into an optical tactile sensor that captures surface deformation. This mechanism enables seamless switching between vision-based perception and tactile sensing without mechanical reconfiguration or stereo camera systems [19], [20]. 
+
+C. Retargeting for Three-Finger Gripper 
+
+Non-anthropomorphic grippers face a substantial embodi-ment gap that prevents the direct transfer of human-to-robot retargeting methods. While anthropomorphic hands offer a natural joint-to-joint correspondence, our three-finger gripper exhibits distinct kinematic and geometric challenges. First, differences in kinematic structure and joint ordering lead to substantial workspace discrepancies, preventing direct use of anatomy-based optimization objectives; for example, the proposed gripper allows large radial-ulnar deviation beyond human capability. Second, the reference frame definitions differ: the base frame of the three-finger gripper is located at the geometric center of the fingers rather than at a wrist-equivalent location, invalidating wrist-centered vector align-ment. To address these issues, we develop a staged control framework for the proposed three-finger gripper, together with task-specific strategies for fine in-hand manipulation, as presented in Fig. 5. 
+
+Gesture-conditioned subspace retargeting: to address structural mismatch, we propose a gesture-conditioned sub-space retargeting strategy. Gesture recognition selects grasp priors that constrain radial-ulnar deviation, reducing the configuration space to three representative primitives for three-finger reconfigurable grippers: cage, power, and pinch grasps. Left-hand palm open-close gestures switch between these predefined modes by updating the first joint ( q1) of each finger (Fig. 5(b)). Furthermore, to preclude kinematic ambi-guity arising from the lack of a direct anatomical counterpart, the adduction/abduction DOF is fixed, thereby constraining the subsequent kinematic search space and ensuring phys-ically plausible configurations. To address the base frame challenge, we introduce an intermediate coordinate frame I,defined by applying a constant SE (3) transformation to the VR-captured human wrist coordinate frame W.After subspace reduction, the remaining MCP and PIP DOFs for each finger are optimized inspired by the estab-lished dexterous hand retargeting principles [26]. We use 𝓞𝓞     
+
+> ℐ
+> 𝒲𝒲
+> Relative fingertips position
+> Fingertip orientation Thumb/Index finger vector
+> (a) (b)
+> (c) (d)
+> Thumb-Middle fingertips vector
+> Fig. 5. Overview of the proposed retargeting framework for teleoperated dexterous manipulation. (a) Experimental setup. (b) Gesture recognition for selecting grasp primitives of the reconfigurable three-finger gripper (cage, power, and pinch). (c) Key optimization objectives for human-to-gripper retargeting. (d) Mapping of thumb-index rolling motions to the gripper’s adduction/abduction DOF for fine in-hand singulation.
+
+the following primary objectives and present the intuitively crucial factors and definitions in Fig. 5(c) and (d): 
+
+1) Fingertip positions relative to the wrist: leveraging the intermediate base frame, geometric discrepancies introduced by heterogeneous embodiments are mitigated. For the three principal fingers for controlling the gripper (thumb, index, and middle), we define the fingertip position loss as: 
+
+Lpos =
+
+> 3
+
+X
+
+> i=1
+
+vgi − vIi 
+
+> 22
+
+, (3) where vgi denotes the vector from the gripper base frame 
+
+O to the i-th fingertip, and vIi represents the corresponding vector from the intermediate base frame I to the i-th fingertip of the human hand. 
+
+2) Fingertip orientations: To enhance orientation observ-ability under VR capture, and given the absence of an equivalent distal interphalangeal (DIP) articulation in the pro-posed gripper, varying from [26], [29], the human fingertip orientation is defined using the vector from the PIP joint to the fingertip. The corresponding loss is formulated as: 
+
+Lrot =
+
+> 3
+
+X
+
+> i=1
+
+rgi − rIi 
+
+> 22
+
+, (4) where rgi represents the vector from the center of the contact plane to the i-th robotic fingertip, and rIi is the corresponding human PIP-to-fingertip vector. Combining with the smooth-ness regularization term Lvel = P6 
+
+> j=1
+
+wj qtj − qt−1
+
+> j
+> 22
+
+,where wj represents the joint-specific weight, the overall objective function is formulated as: 
+
+L = λ1Lpos + λ2Lrot + Lvel , (5) where λ1 and λ2 are global scalar weights. To improve numerical stability against tracking noise while preserving sensitivity to small tracking errors, we employ a Huber-type robust penalty function across all internal sub-terms. Therefore, at each timestep, an optimization problem can be formulated as follows, subject to the joint limits: 
+
+q∗ 
+
+> t
+
+= arg min L(qt), s.t. qmin ≤ qt ≤ qmax . (6) 
+
+Singulation retargeting: we design a retargeting strategy for singulation tasks, which require isolating a single object from multiple clustered items [30]. Such tasks are representa-tive of dexterous manipulation scenarios and demand precise regulation of fingertip spacing and relative orientation. As illustrated in Fig. 5(d), humans accomplish in-hand singulation manipulation through coordinated thumb-index rolling/shearing motions, continuously adjusting both inter-fingertip distance and angular alignment. Inspired by this mechanism, we leverage the reconfigurable pinch mode and the adduction/abduction DOF, mapping only the human thumb and index finger to the two active gripper fingers. Under the gesture-conditioned pinch mode introduced previ-ously, two geometric cues are monitored: the angle between the thumbtip-MCP vector and the index fingertip-PIP vector, and the Euclidean distance between the thumb and index fingertips. When the vectors approach parallel alignment and the fingertip distance falls below a predefined threshold, the controller transitions into singulation mode. In this mode, a geometric mapping is applied. The human fingertip distance is linearly mapped to equal-magnitude but opposite-direction actuation of the two q3 joints, while the relative angle between the fingertip vectors determines the sign of the motion. Additionally, the flexion of the corresponding MCP joints q2 is regulated through a linear mapping of the thumb-middle distance to enable fine ad-justment along the flexion direction, resulting in coordinated control over two active DOFs per finger. IV. E XPERIMENT 
+
+A. Tactile-Reactive Grasping and Manipulation 
+
+We installed the proposed gripper on a UR5e robot arm. To evaluate reactive grasping with fingertip tactile feedback, we adopt a threshold-based stopping criterion using tactile signals for adaptive grasping: 
+
+Q =
+
+> 3
+
+X
+
+> i=1
+
+"
+
+α ∆Cf + (1 − α) X
+
+> m,n
+
+Sf (m, n )
+
+#
+
+, Q > T th ,
+
+(7) where ∆Cf denotes the change in non-zero contact pix-els and P 
+
+> m,n
+
+Sf (m, n ) represents the cumulative signal magnitude of the tactile array taxels on the i-th finger. The parameter α ∈ [0 , 1] balances contact area and signal intensity. During grasping, each finger continues flexion until 
+
+Q exceeds an empirically selected termination threshold Tth .We evaluate the proposed method on five objects from the YCB object set [31] together with four additional everyday objects. The objects are grouped into three categories corre-sponding to the gripper’s representative grasp configurations (cage, power, and pinch, from top to bottom), as illustrated in Fig. 6. To evaluate grasping performance, we design an                        
+
+> Fig. 6. Tactile-reactive grasping experiments under three representative configurations: cage grasping of large and articulated objects (top), power grasping of wide and heavy objects (middle), and pinch grasping of fragile objects (bottom). TABLE I GRASPING SUCCESS ON SELECTED OBJECTS OVER 10 T RIALS
+> Objects Soccer Baseball Rope Box Drill Hammer Potato Chip Light Bulb Strawberry Success 10/10 10/10 10/10 9/10 5/10 10/10 10/10 10/10 10/10
+
+experiment that integrates the palm’s visual modality with fingertip tactile sensing: objects are randomly placed within the gripper workspace with arbitrary initial orientations, and the palm camera estimates the object orientation using mor-phological processing and Canny edge detection, enabling the end-effector pose to be adjusted to an orientation-aligned grasp pose. The tactile-reactive controller is then activated to execute grasping and lifting. A trial is considered successful if the object remains stably grasped throughout the lifting process without dropping. The results in Table I show a high overall grasping success rate of 93 .3% . The fingertip tactile sensors enabled damage-free grasping of fragile objects, while the power mode and actuated palm supported stable handling of large, wide, and thin cylindrical objects such as the hammer. Object manipulation experiments were further conducted to evaluate in-hand dexterity. A 40 mm diameter sphere was rotated about the x-, y-, and z-axes via coordinated finger motions, as shown in Fig. 7. Using predefined orientation trajectories to independently actuate each axis, the object achieved rotations of approximately ±15 ◦ about the x- and 
+
+y-axes and ±20 ◦ about the z-axis. These results demonstrate +x rotation         
+
+> -xrotation
+> +yrotation +zrotation
+> -yrotation -zrotation Fig. 7. In-hand object reorientation experiments.
+
+the gripper’s capability for multi-axis in-hand re-orientation. 
+
+B. Syringe Re-orientation and Plunger Actuation 
+
+We validate the effectiveness of the proposed gripper and retargeting framework through a series of in-hand manipu-lation experiments. At each frame ( ∼ 25 Hz), hand poses are captured using a Meta Quest 3 VR device, and the corresponding joint configuration qt is solved. The resulting commands are temporally upsampled via interpolation to a 
+
+100 Hz control stream. The gripper executes these commands using its built-in current-based PD controller, while the UR5e is controlled via RTDE-based position control. The first task evaluating the proposed retargeting strategy is inspired by a laboratory pipetting scenario: extracting a syringe from a stand and depressing the plunger to transfer liquid into a beaker. Experimental snapshots are shown in Fig. 8. The radial-ulnar DOF is configured for pinch grasping (State 1). When the thumb and index finger close (State 2), the gripper performs a two-finger pinch grasp on the syringe. The tactile arrays capture the contact distribution and in-hand orientation (State 3). Contraction of the middle finger then triggers dexterous in-hand reorientation, aligning the syringe outlet downward (State 4). Finally, contraction of the little finger commands the actuated palm to depress the plunger, completing the liquid transfer (States 5-6). We use the success rate as the evaluation metric, defined as successful liquid transfer while the syringe remains securely grasped throughout the task. Over 20 consecutive teleopera-tion trials, the task achieved a success rate of 65% (13 /20 )with an average completion time of 33 .4 ± 5.43 s. 
+
+C. In-Hand Singulation Manipulation 
+
+The in-hand singulation task requires the proposed gripper to grasp a cluster of objects and progressively isolate a single target through fingertip manipulation [14], [30]. As shown in Fig. 9(a), the gripper first grasps multiple mung beans ① ②
+
+③
+
+⑤ ⑥
+
+④ 
+
+> Fig. 8. In-hand syringe reorientation and plunger actuation via teleoperation using the proposed gripper. The sequence illustrates pinch-based grasping, in-hand reorientation to align the syringe outlet, and coordinated palm actuation for controlled plunger depression.
+
+from a container (States 1–3). During States 4–5, coordinated thumb-index rolling motions are mapped to the gripper’s adduction/abduction DOFs, enabling controlled singulation through in-finger manipulation. To evaluate generality, five target objects with varying size, shape, and stiffness were selected, as illustrated in Fig. 9(b): mung beans, soft gummy bear candies, irregular chocolate spheres, 7 mm diameter steel balls, and cotton swabs. The first row in Fig. 9(b) illustrates the initial grasp, where the tactile arrays clearly indicate multiple patterns. In the second row, partial object removal occurs during manipula-tion. Finally the last row demonstrates successful singulation, with only a single object remaining, evidenced by a distinct tactile contact pattern on each fingertip. In addition to tactile sensing, the bi-modal palm provides visual feedback during in-hand manipulation, enabling additional perception of the grasp state. From a data collection perspective, this integrated multi-modal observation capability offers strong potential for facilitating learning-based policy training, particularly in confined manipulation spaces where conventional waist-mounted cameras are prone to occlusion [32]. Compared with existing tactile-enabled grippers and their teleoperation setups for similar tasks [33], the proposed framework eliminates the need for teleoperated arm or exter-nal motion capture systems, while enabling the manipulation of objects with diameters as small as 3 mm. Furthermore, compared with compact vision-based tactile sensors such as GelSight Mini, the fingertip tactile array offers an approxi-mately 215% larger sensing area, facilitating interaction with a broader range of object geometries. 
+
+D. Multi-Modal Peg-in-hole 
+
+Finally, we design a fully autonomous peg-in-hole task to demonstrate the functionality of the bi-modal actuated palm in an industrial setting. The objective consists of: (a) 
+
+①
+
+②
+
+③    
+
+> Mung bean Gummy bear Chocolate Steel ball Cotton swab
+
+①
+
+②
+
+③
+
+①
+
+②
+
+③
+
+①
+
+②
+
+③
+
+①
+
+②
+
+③
+
+① ② ③ ④ ⑤
+
+(b)  
+
+> t = 0s
+> t = 20s
+> t = 31s
+> t = 0s
+> t = 3s
+> t = 5s
+> t = 0s
+> t = 13s
+> t = 32s
+> t = 0s
+> t = 12s
+> t = 19s
+> t = 0s
+> t = 15s
+> t = 26s Fig. 9. Sequential images of in-hand singulation. (a) Overview of the teleoperated singulation process for grasping granular mung beans from a bowl, where the human thumb-index fingertip vectors are retargeted to control the proposed gripper. (b) Singulation results on five representative objects with varying size, geometry, and stiffness. From the first to the last row: initial multi-object grasp with multiple tactile contact patterns, intermediate object removal during in-hand manipulation, and successful isolation of a single object verified by a distinct tactile contact pattern on each fingertip.
+
+(1) localizing a hexagonal prism, (2) precisely detecting a 
+
+15 mm diameter hole on its side surface, and (3) completing insertion onto a 14 mm peg. A 30 × 30 mm ArUco marker is mounted on the top surface of the prism for coarse pose estimation, and the peg pose is assumed known. As shown in Fig. 10, during State 1, the palm operates in vision mode to estimate the initial prism pose and guide the grasp. After contact is established, the palm switches to tactile mode by activating internal illumination, and the actuated palm presses against the prism surface to initiate tactile-based hole localization (State 2). The end-effector then moves downward while maintaining contact until the hole center is identified from tactile feedback (State 3). For hole detection, raw tactile images are converted to grayscale and processed using gradient-based edge extraction, followed by contour filtering and algebraic circle fitting. The estimated circle parameters are further refined via outlier rejection to obtain an accurate hole center for in-hand pose correction. Finally, States 4-6 demonstrate successful peg insertion with a tolerance of 1 mm, validating the precision and robustness of the proposed bi-modal palm. We conducted 10 consecutive trials, achieving an overall success rate of 70% .V. D ISCUSSION AND CONCLUSION 
+
+Several issues observed in the experiments merit discus-sion. In the grasping experiments, the lower success rate for the drill was mainly due to its relatively high weight ① ② ③
+
+⑤ ⑥④        
+
+> vision mode tactile mode tactile mode
+> Fig. 10. Peg-in-hole insertion enabled by the bi-modal actuated palm. Vision mode is used for initial pose estimation, followed by tactile-based hole localization through edge extraction and circle fitting. Finally, the robotic arm adjusts the end-effector pose based on the estimated hole center and executes peg insertion with a 1mm tolerance.
+
+and asymmetric mass distribution, which occasionally caused slip before the tactile-reactive closure generated sufficient stabilizing contact force. In the syringe task, most failures occurred when the syringe slipped during the retargeted little-finger motion used to depress the plunger. This was mainly caused by VR hand-tracking occlusion: when the headset moved closer to capture the little-finger motion, the thumb or index finger occasionally lost tracking, leading the system to interpret the gesture as finger release and causing the pinch grasp to open unintentionally. This limitation could be mitigated by using data gloves or by leveraging the other hand to control the palm actuation. In summary, this work introduces the VTAP gripper and its dexterous retargeting framework, demonstrating robust grasping and fine fingertip in-hand manipulation. Experimen-tal results show that high manipulation performance does not necessarily require high-DOF anthropomorphic hands; comparable dexterity can instead be achieved through coor-dinated finger-palm synergy enabled by the actuated palm. The proposed bi-modal palm provides complementary visual and tactile feedback, benefiting tasks that require multi-modal perception. Future work will investigate integrated finger-palm feedback control to further improve contact-rich manipulation. Furthermore, the retargeting strategy offers a practical reference for controlling non-anthropomorphic three-finger grippers in dexterous manipulation, with poten-tial for scalable data collection. ACKNOWLEDGMENT 
+
+The authors would like to thank Zhonghao Mai for helping with the VR hand-keypoint acquisition module. REFERENCES [1] C. Chi, Z. Xu, S. Feng, E. Cousineau, Y. Du, B. Burchfiel, R. Tedrake, and S. Song, “Diffusion policy: Visuomotor policy learning via action diffusion,” Int. J. Robot. Res. , vol. 44, no. 10-11, pp. 1684–1704, 2025. [2] A. Wilson, S. Wang, B. Romero, and E. Adelson, “Design of a fully actuated robotic hand with multiple gelsight tactile sensors,” arXiv preprint arXiv:2002.02474 , 2020. [3] T. Feix, J. Romero, H.-B. Schmiedmayer, A. M. Dollar, and D. Kragic, “The grasp taxonomy of human grasp types,” IEEE Trans. Hum. Mach. Syst. , vol. 46, no. 1, pp. 66–77, 2016. [4] I. M. Bullock, R. R. Ma, and A. M. Dollar, “A hand-centric clas-sification of human and robot dexterous manipulation,” IEEE Trans. Haptics , vol. 6, no. 2, pp. 129–144, 2012. [5] M. Pozzi, M. Malvezzi, D. Prattichizzo, and G. Salvietti, “Actuated palms for soft robotic hands: review and perspectives,” IEEE/ASME Trans. Mechatron. , vol. 29, no. 2, pp. 902–912, 2023. [6] Z. Lu, H. Guo, W. Zhang, and H. Yu, “Gtac-gripper: A reconfigurable under-actuated four-fingered robotic gripper with tactile sensing,” 
+
+IEEE Robot. Autom. Lett. , vol. 7, no. 3, pp. 7232–7239, 2022. [7] W. Yuan, S. Dong, and E. H. Adelson, “Gelsight: High-resolution robot tactile sensors for estimating geometry and force,” Sensors , vol. 17, no. 12, p. 2762, 2017. [8] Z. Zhang, H. Ma, Y. Zhou, J. Ji, and H. Yang, “Gelroller: A rolling vision-based tactile sensor for large surface reconstruction using self-supervised photometric stereo method,” in Proc. IEEE Int. Conf. Robot. Autom. IEEE, 2024, pp. 7961–7967. [9] W. K. Do, B. Aumann, C. Chungyoun, and M. Kennedy, “Inter-finger small object manipulation with densetact optical tactile sensor,” IEEE Robot. Autom. Lett. , vol. 9, no. 1, pp. 515–522, 2023. [10] Z. Hu, Y. Cheng, J. Wachs, and Y. She, “Vibrissae-inspired vision-based magnetic-actuated whisker,” Nat. Commun. , vol. 17, no. 1, p. 939, 2025. [11] R. Zhang, M. A. Mirzaee, and W. Yuan, “Fruittouch: A perceptive gripper for gentle and scalable fruit harvesting,” IEEE Robot. Autom. Lett. , vol. 11, no. 7, pp. 8276–8283, 2026. [12] J. Jiang, X. Zhang, D. F. Gomes, T.-T. Do, and S. Luo, “Rotipbot: Robotic handling of thin and flexible objects using rotatable tactile sensors,” IEEE Trans. Robot. , vol. 41, pp. 3684–3702, 2025. [13] Y. She, S. Wang, S. Dong, N. Sunil, A. Rodriguez, and E. Adelson, “Cable manipulation with a tactile-reactive gripper,” Int. J. Robot. Res. ,vol. 40, no. 12-14, pp. 1385–1401, 2021. [14] Y. Zhou, P. Zhou, S. Wang, and Y. She, “In-hand singulation, scooping, and cable untangling with a 5-dof tactile-reactive gripper,” Adv. Robot. Res. , vol. 1, no. 2, p. 202500020, 2025. [15] C. B. Teeple, G. R. Kim, M. A. Graule, and R. J. Wood, “An active palm enhances dexterity of soft robotic in-hand manipulation,” in Proc. IEEE Int. Conf. Robot. Autom. IEEE, 2021, pp. 11 790–11 796. [16] A. Pagoli, F. Chapelle, J. A. Corrales, Y. Mezouar, and Y. Lapusta, “A soft robotic gripper with an active palm and reconfigurable fingers for fully dexterous in-hand manipulation,” IEEE Robot. Autom. Lett. ,vol. 6, no. 4, pp. 7706–7713, 2021. [17] Y. Zhou, W. S. Lee, Y. Gu, and Y. She, “Tactile-reactive gripper with an active palm for dexterous manipulation,” npj Robotics , vol. 4, p. 13, 2026. [18] N. Zhang, J. Ren, Y. Dong, X. Yang, R. Bian, J. Li, G. Gu, and X. Zhu, “Soft robotic hand with tactile palm-finger coordination,” Nat. Commun. , vol. 16, no. 1, p. 2395, 2025. [19] Y. Dong, J. Ren, Z. Liu, Z. Peng, Z. Yuan, N. Zhang, and G. Gu, “Look-to-touch: A vision-enhanced proximity and tactile sensor for distance and geometry perception in robotic manipulation,” 
+
+IEEE/ASME Trans. Mechatron. , 2026. [20] J. Ma, S. Cui, H. Chu, M. Tan, S. Wang, and Y. Wang, “Hy-dropalm: Dual-mode visual-tactile sensing for underwater humanoid robot hands,” IEEE Trans. Autom. Sci. Eng. , vol. 23, pp. 3998–4008, 2026. [21] T. Zhang, Z. McCarthy, O. Jow, D. Lee, X. Chen, K. Goldberg, and P. Abbeel, “Deep imitation learning for complex manipulation tasks from virtual reality teleoperation,” in Proc. IEEE Int. Conf. Robot. Autom. , 2018, pp. 5628–5635. [22] C. Chi, Z. Xu, C. Pan, E. Cousineau, B. Burchfiel, S. Feng, R. Tedrake, and S. Song, “Universal manipulation interface: In-the-wild robot teaching without in-the-wild robots,” in Robot.: Sci. Syst. , 2024. [23] P. Wu, Y. Shentu, Z. Yi, X. Lin, and P. Abbeel, “Gello: A general, low-cost, and intuitive teleoperation framework for robot manipulators,” in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst. IEEE, 2024, pp. 12 156–12 163. [24] Z. Fu, T. Z. Zhao, and C. Finn, “Mobile aloha: Learning bimanual mobile manipulation using low-cost whole-body teleoperation,” in 
+
+Proc. Conf. Robot Learn. , 2024. [25] C. Wang, H. Shi, W. Wang, R. Zhang, L. Fei-Fei, and C. K. Liu, “Dexcap: Scalable and portable mocap data collection system for dexterous manipulation,” in Robot.: Sci. Syst. , 2024. [26] C. Xin, M. Yu, Y. Jiang, Z. Zhang, and X. Li, “Analyzing key objectives in human-to-robot retargeting for dexterous manipulation,” 
+
+IEEE Robot. Autom. Pract. , vol. 1, pp. 29–34, 2026. [27] B. Huang, J. Xu, I. Akinola, W. Yang, B. Sundaralingam, R. O’Flaherty, D. Fox, X. Wang, A. Mousavian, Y.-W. Chao et al. ,“Vt-refine: Learning bimanual assembly with visuo-tactile feedback via simulation fine-tuning,” in Proc. Conf. Robot Learn. , 2025. [28] B. Huang and Y. Li, “Flexitac: A low-cost, open-source, scal-able tactile sensing solution for robotic systems,” arXiv preprint arXiv:2604.28156 , 2026. [29] Y. Qin, Y.-H. Wu, S. Liu, H. Jiang, R. Yang, Y. Fu, and X. Wang, “Dexmv: Imitation learning for dexterous manipulation from human videos,” in European Conference on Computer Vision . Springer, 2022, pp. 570–587. [30] Y. Zhou, P. Zhou, S. Wang, and Y. She, “In-hand singulation and scooping manipulation with a 5 dof tactile gripper,” in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst. IEEE, 2024, pp. 5238–5243. [31] B. Calli, A. Singh, A. Walsman, S. Srinivasa, P. Abbeel, and A. M. Dollar, “The ycb object and model set: Towards common benchmarks for manipulation research,” in Proc. Int. Conf. Adv. Robot. IEEE, 2015, pp. 510–517. [32] Q. K. Luu, P. Zhou, Z. Xu, Z. Zhang, Q. Qiu, and Y. She, “Manifeel: Benchmarking and understanding visuotactile manipulation policy learning,” arXiv preprint arXiv:2505.18472 , 2025. [33] J. Huang, K. Chen, J. Zhou, X. Lin, P. Abbeel, Q. Dou, and Y. Liu, “Dih-tele: Dexterous in-hand teleoperation framework for learning multiobjects manipulation with tactile sensing,” IEEE/ASME Trans. Mechatron. , vol. 30, no. 5, pp. 3840–3851, 2025.

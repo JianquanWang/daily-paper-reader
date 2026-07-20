@@ -1,0 +1,395 @@
+Title: VTLoc: Learning-based Tactile Contact Localization in Visual Point Clouds
+
+URL Source: https://arxiv.org/pdf/2607.16146v1
+
+Published Time: Mon, 20 Jul 2026 01:13:46 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+> 1
+
+# VTLoc: Learning-based Tactile Contact Localization in Visual Point Clouds 
+
+Zhiyuan Wu, Zhuo Chen, and Shan Luo 
+
+Abstract —Vision and touch are complementary modalities essential for robotic perception and manipulation. While vi-sion provides global object context, touch offers precise local information at contact points. Integrating these modalities for contact localization, i.e., predicting the location of touch on an object’s surface, poses significant challenges due to the need for accurate spatial alignment between tactile data and visual geometry. To address this challenge, we propose VTLoc, a novel visual-tactile framework that localizes contact points from tactile readings using a 3D point cloud as visual input. VTLoc introduces two key components: a geometric multi-modal alignment module, which reconstructs a pseudo-point cloud from fused visual-tactile features and aligns it with the visual point cloud to enforce spatial consistencies across modalities; and an iterative localizing updater, which iteratively refines the predicted contact location using fused visual-tactile features. Evaluated on a new benchmark of 100 real-world objects, VTLoc improves single-touch contact localization by reducing local-to-global correspondence ambiguity. Code and data are available on: https://georgewuzy.github.io/vtloc-website/. 
+
+Index Terms —Tactile Sensing, Contact localization, Visual-tactile learning 
+
+I. I NTRODUCTION 
+
+Vision and touch are two fundamental sensory modalities for robots, offering complementary information that enhances perception and manipulation capabilities [1], [2]. Vision pro-vides a global understanding of objects and their environments by capturing shape, texture, and spatial relationships, while touch delivers fine-grained local information about surface geometry and contact forces [3]. Recent research has increas-ingly focused on fusing visual and tactile data to leverage these complementary strengths [4], [5]. However, many ex-isting approaches rely primarily on direct image or feature concatenation [6], without explicitly addressing the challenge of localizing tactile perception within the visual scene. Given an object’s visual representations like a mesh or point cloud, the location on its surface where contact occurs can be predicted from tactile readings [7]. This task, known as contact localization , has attracted growing attention in recent years [8], [9], as it is crucial for accurate object recognition, ma-nipulation, and interaction. Single-touch contact localization provides a contact estimate from a single tactile observation that can be used to initialize and refine localization in multi-touch and sequential tactile localization frameworks [10]. 
+
+> This work was supported in part by the EPSRC project “TacDiff: Designing Tactile-based Robots via Differentiable Simulations” (UKRI3438). (Corre-sponding author: Shan Luo.) Zhiyuan Wu, Zhuo Chen, and Shan Luo are with Department of Engineer-ing, King’s College London, Strand, London, WC2R 2LS, United Kingdom,
+> {zhiyuan.1.wu, zhuo.7.chen, shan.luo }@kcl.ac.uk.
+
+Existing contact localization methods can be divided into same-dimensional and cross-dimensional matching. In same-dimensional approaches, the input and output spaces share the same dimensionality, e.g., mapping 2D tactile images to 2D contact points in visual images [11], [12] or aligning 3D tactile point clouds with 3D object surfaces [13]. In contrast, cross-dimensional matching involves localizing 2D tactile images within a 3D scene [7], [10], which is more challenging as it requires learning mappings across different spatial dimensions. Prior work in cross-dimensional matching often relies on strong data priors or constraints, e.g. , constructing a large tac-tile codebook from randomized sensor poses sampled across an object mesh [10], which limits applicability in real-world settings due to high data and computation requirements. To address the challenges of cross-modal contact local-ization, ObjectFolder Real [7] introduces a benchmark of localizing 2D tactile images on the surface of 3D point clouds. Building on this foundation, we propose VTLoc (Visual 
+
+Tactile Loc alization), a novel framework that predicts contact coordinates on an object’s surface from tactile readings, using the object’s 3D point cloud as visual input, which can be easily obtained via an RGB-D camera or 3D scanner. Inspired by human perception, where an internal object representation is formed and refined through sensory feedback [14], VT-Loc introduces two key modules: The geometric multi-modal alignment (GMA) module reconstructs a pseudo-point cloud from visual and tactile features and aligns it with the original point cloud, to enhance the geometric consistency and spatial reasoning of both modalities; The iterative localizing updater (ILU) performs iterative contact location regression, refining the prediction by matching tactile features with visual input. The final contact location is selected from a candidate contact set, and a 3D contact probability heat-map is generated to indicate the likelihood of contact at each point in the point cloud. To validate our proposed VTLoc method, we construct a new contact localization benchmark based on ObjectFolder Real [7], comprising 100 real-world objects. Qualitative and quantitative results on this benchmark demonstrate the effec-tiveness of the proposed VTLoc. The key contributions of this work are as follows:  
+
+> •
+
+We propose VTLoc, a novel framework for visual-tactile contact localization that predicts surface coordinates from tactile readings, using a 3D point cloud as visual input.  
+
+> •
+
+We design two core modules: a geometric multi-modal alignment module that enhances spatial consistency be-tween tactile and visual modalities, and an iterative local-izing updater that iteratively refines contact predictions.  
+
+> •
+
+We establish a new benchmark for contact localization arXiv:2607.16146v1 [cs.RO] 17 Jul 2026 2(b) Tactile Image (a) Real -world Contact  (c) Point Cloud with Normals  
+
+> Reference
+> (d) Contact Probabilities
+> 1.0
+> 0.0
+> Contact Ground Truth Tactile Sensor
+> Fig. 1. An example of a swan in the ObjectFolder Real [7] dataset, demonstrating the effectiveness of our VTLoc method. (a) Tactile contact in the real world. (b) Tactile image collected from the tactile sensor during interaction with the object. (c) Point cloud with normals. (d) Predicted probability heat-map and the corresponding contact ground truth for reference.
+
+with 100 real-world objects and demonstrate the effec-tiveness of VTLoc through extensive experiments. II. R ELATED WORKS 
+
+Contact localization has been a long-standing challenge in robotic perception and multi-modal sensing [7]. Early efforts, such as Corcoran et al. [8] and Petrovskaya et al. [15], intro-duced probabilistic Bayesian frameworks to estimate contacts over an object’s surface. Li et al. [16] proposed to localize tactile images with a height map via image registration to help localize objects in hand. Furthermore, Bimbo et al. [17], for instance, used the covariance of tactile sensor arrays to infer contact pose of objects. Recent efforts have focused on tactile representation learning for more accurate and generalizable contact localization. These methods can be classified into two categories: 1) Same-dimensional matching , where the dimensionality of the tactile input matches the output space. For example, Luo 
+
+et al. [11] employed recursive Bayesian filtering to localize a 2D tactile image within a 2D visual map. Subsequent works such as those by Bauza et al. [12], [18] leveraged geometric contact rendering to refine 2D contact localization. Bauza et al. 
+
+[19] localizes contact objects through Iterative Closest Point (ICP)-based pose estimation and tactile imprint matching. More recently, Li et al. [13] proposed a contrastive learning framework to embed 3D tactile signals and object surfaces in a shared feature space. 2) Cross-dimensional matching , where the dimensionality of the tactile input differs from the output space. This sce-nario is especially relevant for vision-based tactile sensors [20], which produce 2D tactile images but require contact localization in 3D space. For example, MidasTouch [10] per-forms localization by querying a precomputed tactile codebook generated from 50,000 randomized sensor poses on each object mesh. While effective, such methods rely heavily on object-specific priors and offline sampling, limiting scalability and real-world applicability. Moreover, they only have 10 objects with merely five trajectories collected per object. More recently, GelSLAM [21] developed by Huang et al. performs tactile-based contact localization on objects through spatial alignment of tactile readings using differential representations. In contrast to prior work, as summarized in Table I, our proposed VTLoc framework addresses these limitations by directly learning to predict contact locations from 2D tactile images and 3D point clouds without reliance on dense object-specific sampling. By introducing a Geometric Multi-Modal Alignment module and an Iterative Localizing Updater, VT-Loc explicitly models the spatial relationship between tactile Reference  
+
+> Sensor’s Center Point
+> Defined Contact Point
+> Sensor’s Direction
+> Fig. 2. The contact point is defined as the projected point of the tactile sensor’s center point along its surface normal onto the object.
+
+and visual data and progressively refines contact predictions, achieving robust localization across diverse object geometries. III. L EARNING -BASED TACTILE CONTACT LOCALIZATION IN VISUAL POINT CLOUD 
+
+A. Problem Setting 
+
+We refer to the same problem setting of contact localization in ObjectFolder [7]: Given the object’s mesh and sensory observations of the contact position, contact localization aims to predict the vertex coordinate of the surface location on the mesh where the contact happens. Specifically, we define the “contact point” as the projected point of the center of the tactile sensor surface on the mesh of the object along the surface normal, as shown in Fig. 2. We consider a robot equipped with a vision-based tactile sensor that captures RGB tactile images from real-world object interactions. As shown in Fig. 1, the system receives two inputs: 1) A tactile image T ∈ RH×W ×3, where H and W
+
+represent the height and width of the tactile image. Each pixel in T represents a specific location on the tactile sensor. 2) A 3D point cloud P ⊂ R3 representing the target object, containing N p points. The point cloud can be complete or partial, easily calculated via an RGB-D camera or 3D scanner. Each point p ∈ P is defined as: 
+
+p = ( x, y, z ), (1) where (x, y, z ) are the spatial coordinates of the point in 3D space. In addition, each point is associated with a surface normal vector (nx, n y , n z ).Based on retrieval frameworks in [7], [22], we define a contact set Sc ⊂ R3, which contains all ground truth contact points where contact data were collected around each object: 
+
+Sc = {cgt = ( xc, y c, z c) | xc, y c, z c ∈ R}, (2) where c refers to any ground truth contact point. The objective is to predict the contact coordinates cp on the object’s surface where the contact occurs and a corresponding 3D contact probability map P s ⊂ R3:
+
+P s = {(p, s p) | p ∈ P }, (3) where sp denotes the predicted likelihood that point p is the actual contact location. 3
+
+TABLE I COMPARISON OF VARIOUS VISUAL -TACTILE CONTACT LOCALIZATION WORKS .Works Input Output [8], [9] Sensor data & Sensor configuration Contact location in robot hand [17] Sensor data & Sensor pose & Object point cloud Contact pose of object [11] Tactile image & visual image Contact location in visual image [12], [13], [18] Tactile image & Pre-computed poses Contact pose distribution [10] Tactile image & Pre-computed tactile codebook Contact location on object [7], Ours Tactile image & Object point cloud Contact location on object Geometric Multi -modal Alignment (GMA)    
+
+> Tactile
+> Encoder
+> Tactile Input
+> Concat Point Cloud
+> Disentangle
+> Real -world Contact Tactile Sensing
+> Point Cloud with Normals
+> Iterative Localizing Updater (ILU)
+> PCD
+> Encoder
+> Minimizing
+> Chamfer Distance
+> Disentangled Point Cloud
+> Predicted Contact Location
+
+…
+
+Fig. 3. VTLoc workflow that predicts coordinates on an object’s surface from tactile readings where the contact occurs. The framework includes a geometric multi-modal alignment (GMA) module, which enhances geometric consistency by minimizing the Chamfer distance between the pseudo-point cloud reconstructed from fused visual and tactile features and the original point cloud. An iterative localizing updater is introduced to perform iterative refinement to predict the contact prediction cp (denoted by a star). This prediction is used to retrieve the top-K most likely contact candidates {c∗ 
+
+> 1
+
+, . . . , c∗ 
+
+> k
+
+} from the contact set Sc. Finally, a 3D contact probability heat-map is generated over the point cloud, reflecting the likelihood of contact at each point. 
+
+B. Network Overview 
+
+As illustrated in Fig. 3, our model takes as input a tactile contact image T and a point cloud P that represents the object geometry and contains coordinates and surface normals. To extract meaningful representations, we employ a ResNet-18 [23] followed by a flattening Multi-Layer Perceptron (MLP) to encode the tactile input, producing a tactile feature vector 
+
+F t ∈ RC , where C denotes the number of feature channels. Simultaneously, we utilize PointNet++ [24] as a point cloud encoder to a corresponding feature vector F p ∈ RC .The extracted tactile and visual representations are then fused and passed through two key modules: the geometric multi-modal alignment (GMA) module and the iterative local-ization updater (ILU) module. The GMA module aligns the fused features in 3D space to enforce geometric consistency across modalities, while the ILU performs iterative regression to refine the predicted contact location cp.
+
+C. Geometric Multi-Modal Alignment 
+
+Human contact localization follows a perceptual paradigm: mentally reconstructing an object, then iteratively matching the touched region using tactile memory [14]. Inspired by this paradigm, we first introduce a Geometric Multi-modal 
+
+Alignment (GMA) module to reconstruct a pseudo point cloud from visual and tactile features to align visual and tactile modalities. The GMA module takes the fused feature vector F f =[F t, F p] as input, and reconstructs a pseudo-point cloud P d
+
+from this representation. This reconstruction serves to preserve and reintroduce explicit geometric structure from the fused visual-tactile features. The reconstructed P d is then aligned with the input point cloud P by minimizing the Chamfer Distance, encouraging the tactile and visual encoders to learn geometrically consistent representations. This disentangling process maps F f to a structured point cloud representation through learned weights W d ∈
+
+RN d×2C×Cd
+
+:
+
+F d(j, l ) = X F f (i) · W d(i, j, l ), (4) where F d is the disentangled pseudo-point cloud, and N d and 
+
+Cd denote the number of reconstructed points and the number of output channels, respectively. An MLP then decodes each feature vector in F d into a 3D point with an associated normal, yielding pd =[xd, y d, z d, n dx, n dy , n dz ]. We optimize a reconstruction loss be-tween P d and P (see Sec. III-F for details) to enforce spatial alignment between the tactile and point-cloud modalities in both spatial coordinates and surface normals. This process enhances the 3D geometric understanding of the fused tactile and visual modalities. 
+
+D. Iterative Localization Updater 
+
+Humans refine contact localization through an iterative pro-cess, comparing current sensory feedback against stored tactile memory to gradually improve precision [14]. Inspired by this mechanism, we propose the Iterative Localizing Updater (ILU), a module that mimics this iterative refinement by generating a sequence of contact predictions during training. As illustrated in Fig. 3, the ILU begins from an initial estimate ˆc0 = 0, and predicts a sequence of contact locations 
+
+{ˆc1, . . . , ˆcN } over N iterations. At each step k, the model refines its estimate by computing an update direction ∆ˆ c,applied as: 
+
+ˆck+1 = ˆ ck + ∆ˆ c. (5) The ILU takes the tactile feature F t, the point cloud feature 
+
+F p, and a hidden state hk as inputs, producing both an updated 
+
+∆ˆ c and an updated hidden state hk+1 . Drawing inspiration 4
+
+from iterative refinement strategies in matching tasks, such as optical flow estimation and stereo matching [25], [26], we implement the ILU using a linear Gated Recurrent Unit (GRU). The initial hidden state is initialized as h0 = T (F t), where 
+
+T represents a tanh activation that maps the feature values to the range [−1, 1] . At each iteration, the hidden state is updated via: 
+
+hk+1 = ( 1 − zk) ⊙ hk + zk ⊙ qk, (6) where ⊙ denotes element-wise multiplication, and zk is the update gate, defined as: 
+
+zk = σ (Linear z ([ hk, x])) , (7) with 
+
+x = [ F p, ReLU (F t)] . (8) The candidate hidden state qk is computed as: 
+
+qk = T (Linear q ([ rk ⊙ hk, x])) , (9) where rk represents the reset gate, expressed as: 
+
+rk = σ (Linear r ([ hk, x])) . (10) For each hidden state hk, an MLP layer serves as a decoder to derive ∆ˆ c for the contact location update. During inference, the final predicted location ˆcN is utilized as the predicted contact location cp for matching with Sc. The cumulative loss is computed as the sum of prediction errors at all intermediate steps, enabling the ILU to learn accurate and stable refinement trajectories (see Sec. III-F for details). At inference time, the final estimate ˆcN is used as the predicted contact location cp
+
+for matching within the candidate contact set Sc.
+
+E. Contact Probability Calculation 
+
+To get the 3D probability map from the predicted contact position cp, we calculate a contact score Sc∗ 
+
+> i
+
+for every potential contact points c∗ 
+
+> i
+
+in the contact set Sc as: 
+
+Sc∗ 
+
+> i
+
+= ∥cp − c∗ 
+
+> i
+
+∥2 , (11) where ∥·∥ denotes the Euclidean distance that quantifies the discrepancy between cp and the points in Sc. We can therefore obtain the Top-K optimal contact locations C∗ =
+
+{c∗
+
+> 1
+
+, . . . , c∗ 
+
+> K
+
+} by ranking Sc∗ 
+
+> i
+
+in ascending order. For each point p ∈ P , we find the nearest contact candidate 
+
+c∗ 
+
+> p
+
+from C∗ as: 
+
+c∗ 
+
+> p
+
+= arg min   
+
+> c∗
+> i∈C∗
+
+∥p − c∗ 
+
+> i
+
+∥2 , (12) and we have a weighted index w as: 
+
+w = arg min  
+
+> j
+
+p − c∗ 
+
+> j
+> 2
+
+. (13) We can compute a contact score sp for each point p by calculating a weighted distance: 
+
+sp = 1
+
+w e−∥ p−c∗ 
+
+> w∥
+
+, (14) Therefore, we have a 3D probability heat-map P s ⊂ R3:
+
+P s = {(p, s p) | p ∈ P }, (15) and further a normalized heat-map ˆP within 0 to 1:
+
+ˆP = P s − min (P s)
+
+max (P s) − min (P s) . (16) In ˆP , each point is assigned a probability score that reflects its likelihood of being a contact location. 
+
+F. Loss Function 
+
+The loss function for our model comprises a reconstruction loss Lrecon for the GMA module, calculated using Chamfer Distance (CD) [27], expressed as: 
+
+Lrecon = X 
+
+> pd∈Pd
+
+min  
+
+> p∈P
+
+∥pd −p∥2 + X
+
+> p∈P
+
+min  
+
+> pd∈Pd
+
+∥p−pd∥2. (17) Additionally, we incorporate a sequence loss Lseq for the ILU, formulated as: 
+
+Lseq =
+
+> N
+
+X
+
+> i=1
+
+γN −i cgt − ci , (18) where cgt represents the ground-truth contact location, and 
+
+γN −i denotes exponentially increasing weights, with γ set to 
+
+0.9. Consequently, the overall loss function is expressed as: 
+
+L = Lseq + λLrecon , (19) where λ is empirically set to 1.IV. E XPERIMENTS 
+
+A. Dataset 
+
+We develop our benchmark based on the ObjectFolder Real [7]. As shown in examples in Fig. 4, we select 100 real-world daily objects and resample their point clouds of both positions and normals, with 30-50 contact locations for each object. We split our data into training and testing sets at the data level using a 7:3 ratio. From the test set, we select 9-15 representa-tive points per object as discrete contact candidates. Referring to [7], for each object, an EinScan Pro HD 2020 handheld 3D scanner is utilized to capture high-quality 3D meshes and corresponding color textures in a controlled dark environment. The scanner achieves high accuracy by projecting a visible light array onto the object and recording the texture through an integrated camera. To effectively obtain point cloud data, we randomly sample 1,024 points from each 3D mesh, capturing their spatial coordinates and normal vectors, as illustrated in Fig. 4 (b). The tactile data are collected using a Franka Emika Panda robot arm equipped with a GelSight tactile sensor [20], which features a sensing area of 32 × 24 mm 2. For each object, suitable surrounding contact points are selected. In the tactile data collection setup, the robot arm employs position-controlled motion along the surface normal of each target point. To ensure both hardware safety and data reproducibility, the motion stops at a predefined operational threshold, e.g. , a safe penetration depth of ∼1.0 mm into the ∼2 mm thick silicone layer [20]. This criterion maximizes the compression for high-fidelity geometry capture while strictly avoiding the underlying acrylic plate to prevent irreversible damage. Four RealSense cameras (with standard calibration) were used for 5Comb  Plate  Vase Spoon  Wrench   
+
+> (a) Reference
+> Bowl
+> (b) Normal (c) Tactile Maps
+> ‘Non -uniform’ Subset ‘Uniform’ Subset
+> Reference
+> Fig. 4. Examples of resampled data in our proposed benchmark. We choose 100 daily objects from ObjectFolder Real [7] and resample them to get point clouds of both positions and normals, with 30-50 contact locations for each object. The dataset is quantitatively divided into a ‘non-uniform’ subset, whose objects are characterized by distinct surface curvature variations, and a ‘uniform’ subset, whose objects exhibit more uniform surface curvature variations.
+
+alignment between contact points and the object mesh using the Iterative Closest Point (ICP) algorithm. To avoid contact ambiguity of multiple possible contact points that can produce similar tactile readings, we divide the objects into “non-uniform” and “uniform” subsets according to their normal variation. For each normalized point cloud P
+
+of an object, we compute the local normal variation as: 
+
+∆n = || ni+1 − ni|| || pi+1 − pi|| , (20) where ni and pi are the normal vector and position at vertex 
+
+i. 16 objects are classified as “non-uniform”, where less than 70% of their points are below a normal variation threshold of 30, indicating a lower degree of smoothness for the surface and less ambiguity, e.g. , comb, spoon, fork, and wrench. The remaining 84 objects are classified as “uniform”. 
+
+B. Evaluation Metrics 
+
+We first evaluate the millimeter error (mm Error) and the normalized distance (ND) between the predicted contact position cp and the ground truth contact position cgt , which can be defined as mm Error = ∥cp −cgt ∥ and ND = ∥cp−cgt ∥ 
+
+> D
+
+.
+
+D is the object scale, i.e. , the maximum distance between any two points of the object point cloud. ND provides a scale-invariant measure across objects of varying dimensions, e.g. ,a small pot and a large pan. Second, we evaluate Top-1 and Top-5 accuracy (Top-1 Acc, Top-5 Acc). The Top-1 Acc measures whether the predicted contact position cp is closest to the ground truth contact candidate among the discrete set of test candidates described in Sec. IV.A. Top-5 Acc is defined similarly for the five nearest candidates. Finally, for the normalized 3D probability heat-map ˆP ,we evaluate its mean probability error (MPE) against the normalized ground truth probability heat-map ˆP gt 
+
+⊂ R3,whose every point score sgt  
+
+> p
+
+is obtained as: 
+
+sgt  
+
+> p
+
+= e−∥p−cgt ∥. (21) The MPE is calculated as the mean absolute error between the 
+
+ˆP and ˆP gt 
+
+across all points. 
+
+C. Comparison with Baselines 
+
+We compare our VTLoc with several baselines for visual-tactile contact localization, including the Point Filtering method and the Multi-sensory Contact Regression (MCR) method from the ObjectFolder benchmark [7], and Midas-Touch [10] in the single-contact setup. We first compared them in our ‘non-uniform’ subset. For objects with non-uniform surface curvature variations, each tactile image corresponds to a unique location on object without ambiguity, directly reflecting the performance of tactile contact localization al-gorithms. As reported in Tab. II, when only coordinates are used as point cloud input, VTLoc outperforms all baselines. In particular, VTLoc improves ND by 14.87% compared to the Point Filtering method and by 3.11% compared to MCR that achieves the best among baselines due to its fusion of point cloud and tactile features. For Top-5 Acc, VTLoc improves by 30.19% compared to the Point Filtering method, and by 5.66% compared to MCR. These gains stem from our proposed ILU, which effectively decouples the two modalities by converging updates toward a consistent predicted point, along with a GMA module that enhances the network’s geometric understanding. Furthermore, incorporating normals into the point cloud (in addition to coordinates) yields further improvements. Specifically, com-pared to taking only coordinates as input, VTLoc with both coordinates and normals further improves ND by 0.74%, Top-1 Acc by 6.91%, Top-5 Acc by 1.88%, and MPE by 7.16%, highlighting the importance of richer geometric input for tactile contact localization. Next, we evaluated the performance of VTLoc on the ‘uni-form’ subset. As shown in Tab. III, VTLoc achieves significant improvements on objects with uniform surface curvature varia-tions. In particular, VTLoc reduces ND by 12.11% compared to the Point Filtering method, and by 10.01% compared to MCR. For Top-5 Acc, VTLoc improves by 25.35% compared to the Point Filtering method and by 9.16% compared to MidasTouch that performs the best among baselines. However, VTLoc’s performance on this subset remains relatively lower compared to the ‘non-uniform’ subset, due to the inherent geometric ambiguity of uniform objects. Interestingly, adding normals as input further degrades VTLoc’s performance on the ‘uniform’ subset. This is likely because the geometric 6Wrench  Bowl  Plate     
+
+> (b)  (a)
+> Max Min
+> Probability Colorbar Contact Ground Truth
+> Spoon Comb Swan
+> (b)  (a)
+
+Fig. 5. Qualitative results of contact probabilities. (a) Reference and contact tactile images of objects in real world. (b) 3D probability heat-map with highlighted contact ground truth. VTLoc exhibits robust performance in connecting visual and tactile modalities, even in challenging cases such as the intricate geometry of the swan. More results are available in the demo video. TABLE II QUANTITATIVE RESULTS OF OUR PROPOSED VTL OC COMPARED WITH OTHER BASELINES IN OUR ‘NON -UNIFORM ’ SUBSET .Methods Modality mm Error (mm) ↓ ND (%) ↓ Top-1 Acc ( %) ↑ Top-5 Acc ( %) ↑ MPE ↓
+
+Coordinates Normals Chance - - - - 12.58 50.94 0.2940 Point Filtering ✓ 71.81 35.78 11.32 54.09 0.2788 MCR ✓ 46.82 24.02 27.04 78.62 0.1441 MidasTouch - - 50.01 26.74 36.48 76.73 0.1594 Ours ✓ 39.24 20.91 37.74 84.28 0.1117 Ours ✓ ✓ 37.57 20.17 44.65 86.16 0.1037 
+
+TABLE III QUANTITATIVE RESULTS OF OUR PROPOSED VTL OC COMPARED WITH OTHER BASELINES IN OUR ‘UNIFORM ’ SUBSET .Methods Modality mm Error (mm) ↓ ND (%) ↓ Top-1 Acc ( %) ↑ Top-5 Acc ( %) ↑ MPE ↓
+
+Coordinates Normals Chance - - - - 6.26 36.54 0.2599 Point Filtering ✓ 95.31 48.82 7.62 39.01 0.2404 MCR ✓ 87.47 46.72 16.31 51.06 0.2039 MidasTouch - - 88.56 47.26 18.79 55.20 0.2114 Ours ✓ 68.40 36.71 21.79 64.36 0.1650 
+
+Ours ✓ ✓ 69.09 37.02 21.34 63.02 0.1659 
+
+information of uniform objects does not offer meaningful cues for tactile-based localization, making additional normals either ineffective or even counterproductive in this scenario. Additionally, Fig. 5 presents qualitative results of contact probability heat-map obtained by VTLoc, showcasing sev-eral representative objects. For each object, we visualize the probability map and the ground truth contact location for reference. The 3D heat-maps demonstrate a high degree of interpretability and reliability, offering an intuitive understand-ing of contact likelihood across object surface. Remarkably, VTLoc exhibits robust performance in challenging cases, such as intricate geometry of the swan, highlighting its strong gener-alization capability across diverse and complex shapes. These results emphasize the effectiveness of our method in achieving accurate and interpretable tactile contact localization. 
+
+D. Contact Localization with Symmetry Priors 
+
+Many daily objects, like bowls and plates, exhibit geometric symmetries, creating inherent ambiguity in contact localiza-tion, as symmetric locations produce identical tactile patterns. Referring to previous works like [28], our method can address this inherent ambiguity with symmetry priors. As shown in Fig. 6, by applying rotational mapping of the predicted contact candidates around the symmetry axis, we generate a rotationally symmetric contact probability heatmap that better reflects all plausible contact locations on the symmetric bowl. 
+
+E. Multi-Contact Localization with VTLoc 
+
+To investigate whether the single-contact improvement of VTLoc can be extended to multi-contact localization, we evaluate VTLoc with sequential tactile observations. Following the Monte Carlo filtering in MidasTouch [10], we replace the regression decoder with a probabilistic scoring head over the discrete contact candidates, producing a likelihood distribution for each tactile observation. For each target contact, we use the tactile images and relative motions from the three preceding contact indices in the data-collection order as sequential inputs for belief update. As shown in Tab. IV, incorporating multiple 7                                                                                                       
+
+> TABLE IV QUANTITATIVE COMPARISON OF MULTI -CONTACT LOCALIZATION RESULTS ON THE TWO SUBSETS .Subsets Methods mm Error (mm) ↓ND (%) ↓Top-1 Acc (%) ↑Top-5 Acc (%) ↑MPE ↓
+> Non-Uniform MidasTouch 16.22 8.76 72.96 99.37 0.0459
+> Ours 9.01 4.85 80.62 100.00 0.0323
+> Uniform MidasTouch 35.17 18.84 50.95 85.81 0.0937
+> Ours 28.86 15.49 61.45 94.75 0.0718
+> TABLE V ABLATION STUDY ON GMA WITH DIFFERENT MODALITIES . W E PRESENT STATISTICAL QUANTITATIVE RESULTS COMPARING VTL OC WITH AND WITHOUT THE GMA MODULE ,AS WELL AS EVALUATE PERFORMANCE ACROSS DIFFERENT COMBINATIONS OF INPUT MODALITIES .Methods Modality ND (%) ↓Top-1 Acc ( %)↑Top-5 Acc ( %)↑MPE ↓
+> Coordinates Normals w/o GMA ✓22.58 ±0.68 34.91 ±1.47 82.36 ±1.57 0.1232 ±0.0057
+> ✓✓22.29 ±1.78 33.65 ±3.22 81.13 ±2.28 0.1227 ±0.0094 w/ GMA ✓21.69 ±0.54 36.48 ±1.60 83.28 ±2.12 0.1171 ±0.0101
+> ✓✓20.50 ±0.48 41.35 ±2.90 85.22 ±1.36 0.1091 ±0.0054 Contact Ground Truth
+> Max Min
+> Probability Colorbar
+> Symmetry Axis
+> Fig. 6. Qualitative contact probability heatmap example of a bowl with rotational symmetry prior, demonstrating that our VTLoc can address the inherent symmetrical ambiguity of contact localization itself. The symmetry axis is manually specified from the known object geometry.
+
+contacts improves localization performance compared with the single-contact setting. For example, on the non-uniform subset, the ND metric decreases from 20.17% to 4.85%. Furthermore, VTLoc consistently outperforms MidasTouch across all evaluation metrics on both subsets. On the non-uniform subset, VTLoc achieves an ND of 4.85%, compared with 8.76% for MidasTouch, representing an improvement of 3.91%. The performance gains are more pronounced on the non-uniform subset, where richer local geometric variations provide additional cues that can be accumulated across se-quential tactile observations. These results demonstrate that the stronger single-contact localization capability of VTLoc translates into improved multi-contact localization through more accurate likelihood estimation and belief updates. 
+
+F. Ablation Study 
+
+We perform ablation studies to evaluate the effectiveness of our GMA and ILU modules. Objects with non-uniform surface curvature variations demonstrate more pronounced differences, making them better suited for assessing contact localization performance. Therefore, we utilize the ‘non-uniform’ subset for our ablation studies. 
+
+1) Effectiveness of the GMA Module: To assess the effec-tiveness of the GMA module, we perform an ablation study on different input modalities, i.e. , coordinates and normal vectors. As shown in Tab. V, VTLoc without GMA shows no im-provement when adding normals to coordinates, and for some metrics, performance degrades (e.g., a drop in Top-1 and Top-5 Acc), likely due to the baselines lacking strong analytical capabilities for multi-modal point clouds. In contrast, VTLoc with GMA achieves improvements of 1.19% in ND, 4.87% in Top-1 Acc, 1.94% in Top-5 Acc, and 6.8% in MPE compared with using coordinates alone. Adding normals further enhances performance, as they provide richer geometric information. 
+
+2) Impact of Iteration Number in ILU: We conduct an ablation study to evaluate the effect of the iteration number 
+
+N in ILU. As shown in Tab. VI, compared with the baseline (N = 0 ), using N = 16 reduces ND from 22.97% to 20.17%, increases Top-1 Acc from 29.56% to 44.65% and Top-5 Acc from 79.87% to 86.16%, and reduces MPE from 0.1129 to 0.1037. Performance improves consistently as N increases, peaking at N = 16 , but declines beyond this point due to over-iteration, which leads to overfitting and reduces generalization. It is noteworthy that VTLoc maintains a total parameter size of 124.28 MiB and an average inference time of 128.05 ms. Increasing N has no impact on the parameter count and adds only 4.49 ms to inference time compared to the baseline ( N =0). These results demonstrate that our approach is efficient and practical for real-world robotics applications. 
+
+3) Contact Localization for Unknown Objects: We also conduct experiments on unknown objects: splitting the data into training and testing sets by the object level in a 7:3 ratio. As reported in Tab. VII, our method shows superior perfor-mance against baselines, achieving significant improvements in both Top-1 and Top-5 accuracy metrics while maintaining the lowest MPE score among all methods. V. C ONCLUSION AND DISCUSSION 
+
+In this paper, we present VTLoc, a novel framework for visual-tactile contact localization in point cloud that estimates contact localization probability of each point by matching tac-tile features with the geometric features of the point cloud. We introduce a geometric multi-modal alignment (GMA) module to align tactile and visual modalities by leveraging geometric information and an iterative localizing updater (ILU) that performs contact location regression in an iterative way. To validate our methods, we establish a visual-tactile point cloud contact localization benchmark comprising 100 real-world objects. Our quantitative and qualitative results show that VTLoc improves single-touch contact localization by reducing 8
+
+TABLE VI ABLATION STUDY ON ILU ITERATION NUMBERS . W E PRESENT BOTH EVALUATION METRICS AND INFERENCE TIME TO PROVIDE A COMPREHENSIVE ASSESSMENT .Iteration Numbers ND (%) ↓ Top-1 Acc ( %) ↑ Top-5 Acc ( %) ↑ MPE ↓ Inference Time (ms) ↓
+
+0 22.97 29.56 79.87 0.1129 123.56 
+
+4 20.80 37.74 84.28 0.1101 123.92 8 20.72 38.99 85.53 0.1049 125.31 16 20.17 44.65 86.16 0.1037 128.05 32 20.56 40.88 85.53 0.1214 134.29 64 21.61 36.48 83.65 0.1279 145.99 TABLE VII QUANTITATIVE RESULTS OF OUR PROPOSED VTL OC FOR UNKNOWN OBJECTS .Methods ND (%) ↓ Top-1 Acc ↑ Top-5 Acc ↑ MPE ↓
+
+Chance 98.95 2.88 16.04 0.2727 Point Filtering 44.47 3.26 15.22 0.2594 MCR 42.27 4.32 16.39 0.2403 
+
+Ours 36.69 8.65 32.79 0.1883 
+
+local-to-global correspondence ambiguity through geometric multi-modal alignment and iterative localization refinement. Despite the great effectiveness demonstrated by our VTLoc, it still has limitations. Contact localization is inherently am-biguous, as similar tactile readings can arise from different contact locations, e.g. , touching a flat surface at the same pose. In such cases, performing localization iteratively across multiple contacts can help reduce uncertainty and improve downstream tasks such as object pose estimation and manip-ulation. Additionally, we only focus on hard objects. When extending to soft objects, temporal tactile sequences can be considered to capture deformation dynamics during contact. REFERENCES [1] Z. Wu, Y. Lin, Y. Zhao, X. Zhang, Z. Chen, N. Lepora, and S. Luo, “Vitacgen: Robotic pushing with vision-to-touch generation,” IEEE Robotics and Automation Letters , vol. 10, no. 11, pp. 12 269–12 276, 2025. [2] Z. Wu, R. A. Potamias, X. Zhang, Z. Zhang, J. Deng, and S. Luo, “Cedex: Cross-embodiment dexterous grasp generation at scale from human-like contact representations,” arXiv preprint arXiv:2509.24661 ,2025. [3] Z. Chen, N. Ou, X. Zhang, Z. Wu, Y. Zhao, Y. Wang, E. S. Papastavridis, N. Lepora, L. Jamone, J. Deng et al. , “Training tactile sensors to learn force sensing from each other,” Nature Communications , vol. 17, no. 1, p. 2101, 2026. [4] S. Luo, W. Yuan, E. Adelson, A. G. Cohn, and R. Fuentes, “Vitac: Feature sharing between vision and tactile sensing for cloth texture recognition,” in 2018 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2018, pp. 2722–2727. [5] Z. Wu, Y. Zhao, and S. Luo, “Convitac: Aligning visual-tactile fusion with contrastive representations,” in 2025 IEEE/RSJ International Con-ference on Intelligent Robots and Systems (IROS) . IEEE, 2025, pp. 8545–8552. [6] S. Luo, J. Bimbo, R. Dahiya, and H. Liu, “Robotic tactile perception of object properties: A review,” Mechatronics , vol. 48, pp. 54–67, 2017. [7] R. Gao, Y. Dou, H. Li, T. Agarwal, J. Bohg, Y. Li, L. Fei-Fei, and J. Wu, “The objectfolder benchmark: Multisensory learning with neural and real objects,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2023, pp. 17 276–17 286. [8] C. Corcoran and R. Platt, “A measurement model for tracking hand-object state during dexterous manipulation,” in 2010 IEEE International Conference on Robotics and Automation . IEEE, 2010, pp. 4302–4308. [9] A. Molchanov, O. Kroemer, Z. Su, and G. S. Sukhatme, “Contact localization on grasped objects using tactile sensing,” in 2016 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) .IEEE, 2016, pp. 216–222. [10] S. Suresh, Z. Si, S. Anderson, M. Kaess, and M. Mukadam, “Midas-touch: Monte-carlo inference over distributions across sliding touch,” in 
+
+Conference on Robot Learning . PMLR, 2023, pp. 319–331. [11] S. Luo, W. Mou, K. Althoefer, and H. Liu, “Localizing the object contact through matching tactile features with visual map,” in 2015 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2015, pp. 3903–3908. [12] M. B. Villalonga, A. Rodriguez, B. Lim, E. Valls, and T. Sechopoulos, “Tactile object pose estimation from the first touch with geometric contact rendering,” in Conference on Robot Learning . PMLR, 2021, pp. 1015–1029. [13] H. Li, S. Dikhale, J. Cui, S. Iba, and N. Jamali, “Hypertaxel: Hyper-resolution for taxel-based tactile signals through contrastive learning,” in 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2024, pp. 7499–7506. [14] L.-S. Lange, A. Chrysidou, P. Liu, and E. Kuehn, “Tactile memory impairments in younger and older adults,” Scientific Reports , vol. 14, no. 1, p. 11766, 2024. [15] A. Petrovskaya and O. Khatib, “Global localization of objects via touch,” 
+
+IEEE Transactions on Robotics , vol. 27, no. 3, pp. 569–585, 2011. [16] R. Li, R. Platt, W. Yuan, A. Ten Pas, N. Roscup, M. A. Srinivasan, and E. Adelson, “Localization and manipulation of small parts using gelsight tactile sensing,” in 2014 IEEE/RSJ International Conference on Intelligent Robots and Systems . IEEE, 2014, pp. 3988–3993. [17] J. Bimbo, S. Luo, K. Althoefer, and H. Liu, “In-hand object pose estimation using covariance-based tactile to geometry matching,” IEEE Robotics and Automation Letters , vol. 1, no. 1, pp. 570–577, 2016. [18] M. Bauza, A. Bronars, and A. Rodriguez, “Tac2pose: Tactile object pose estimation from the first touch,” The International Journal of Robotics Research , vol. 42, no. 13, pp. 1185–1209, 2023. [19] M. Bauza, O. Canal, and A. Rodriguez, “Tactile mapping and local-ization from high-resolution tactile imprints,” in 2019 International Conference on Robotics and Automation (ICRA) . IEEE, 2019, pp. 3811–3817. [20] W. Yuan, S. Dong, and E. H. Adelson, “Gelsight: High-resolution robot tactile sensors for estimating geometry and force,” Sensors , vol. 17, no. 12, p. 2762, 2017. [21] H.-J. Huang, M. A. Mirzaee, M. Kaess, and W. Yuan, “Gelslam: A real-time, high-fidelity, and robust 3d tactile slam system,” arXiv preprint arXiv:2508.15990 , 2025. [22] Y. Wi, A. Zeng, P. Florence, and N. Fazeli, “Virdo++: Real-world, visuo-tactile dynamics and perception of deformable objects,” in Conference on Robot Learning . PMLR, 2023, pp. 1806–1816. [23] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proceedings of the IEEE conference on computer vision and pattern recognition , 2016, pp. 770–778. [24] C. R. Qi, L. Yi, H. Su, and L. J. Guibas, “Pointnet++: Deep hierarchical feature learning on point sets in a metric space,” Advances in neural information processing systems , vol. 30, 2017. [25] Z. Wu, Y. Feng, C.-W. Liu, F. Yu, Q. Chen, and R. Fan, “S 3m-net: Joint learning of semantic segmentation and stereo matching for autonomous driving,” IEEE Transactions on Intelligent Vehicles , vol. 9, no. 2, pp. 3940–3951, 2024. [26] Z. Wu, J. Li, Y. Feng, C. Liu, W. Ye, Q. Chen, and R. Fan, “Sg-roadseg: End-to-end collision-free space detection sharing encoder rep-resentations jointly learned via unsupervised deep stereo,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2024, pp. 11 063–11 069. [27] H. Fan, H. Su, and L. J. Guibas, “A point set generation network for 3d object reconstruction from a single image,” in Proceedings of the IEEE conference on computer vision and pattern recognition , 2017, pp. 605–613. [28] A. A. Bonzini, L. Seminara, S. Macci` o, A. Carf` ı, and L. Jamone, “Robotic haptic exploration of object shape with autonomous symmetry detection,” IEEE Transactions on Robotics , vol. 41, pp. 2391–2405, 2025.

@@ -1,0 +1,454 @@
+Title: A Model-Based Decoupling Strategy for Proprioception and Contact Sensing in an Architected Soft Manipulator
+
+URL Source: https://arxiv.org/pdf/2607.15582v1
+
+Published Time: Mon, 20 Jul 2026 00:32:27 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+> Accepted for publication in the proceedings of the 2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)
+
+# A Model-Based Decoupling Strategy for Proprioception and Contact Sensing in an Architected Soft Manipulator 
+
+Francesco Stella ∗1,2,5, Annan Zhang ∗5, Cosimo Della Santina 3,4, Josie Hughes 2, Daniela Rus 5
+
+Abstract — Soft continuum robots require embedded sens-ing for proprioception and contact detection, yet integrating sensors into sparse, highly deformable architected structures remains challenging. We present a model-based strategy that decouples proprioceptive and contact signals from a common set of fluidic pressure sensors embedded in a soft architected segment. Each segment of the Innervated Trimmed Helicoid (ITH) contains six air channels routed in a localized zigzag pattern along the circumference. With only three principal kinematic degrees of freedom (axial compression, bending in x,bending in y), the six pressure readings form an overdetermined system. A piecewise constant curvature model maps pressures to shape, and Huber regression identifies outlier channels whose residuals indicate external contact. On a single ITH segment, this approach achieves proprioceptive shape estimation with a relative bending error of 0.11 ± 0.02 and a contact detection rate of 97% across 178 trials. We integrate eight ITH segments into Air-Helix , a tendon-driven soft continuum manipulator, and present exploratory whole-arm demonstrations that include tactile teaching by demonstration, admittance-controlled force regulation, and tactile object reconstruction. The results suggest that localized fluidic innervation combined with model-based redundancy resolution is a practical path toward concurrent proprioception and contact sensing in architected soft robots. 
+
+I. I NTRODUCTION 
+
+Soft continuum manipulators are valued for their com-pliance and ability to safely interact with unstructured en-vironments [1], [2]. However, the same deformability that makes them attractive also makes sensing difficult: effective closed-loop control and contact-rich manipulation require both proprioception (knowledge of the robot’s own shape) and exteroception (detection of external contacts), yet in-tegrating sensors into highly deformable, sparse structures without compromising their mechanical properties remains an open challenge [3]. A variety of embedded sensing modalities have been explored for soft robots. Piezoresistive and capacitive skins can cover large areas but suffer from poor repeatability, parasitic capacitance, and the need for stable mounting surfaces that sparse lattice structures do not provide [4]– [6]. Optical fibers [7], [8] and compact IMUs [9]–[11] offer localized shape estimates but require complex routing and       
+
+> ∗These authors contributed equally.
+> 1Embodied AI SA, Lausanne, Switzerland
+> 2CREATE Lab, STI, EPFL, CH-1015 Lausanne, Switzerland
+> 3Department of Cognitive Robotics, Delft University of Technology, 2628 CD Delft, The Netherlands
+> 4Institute of Robotics and Mechatronics, German Aerospace Center, 82234 Wessling, Germany
+> 5MIT Computer Science & Artificial Intelligence Laboratory, Mas-sachusetts Institute of Technology, Cambridge, MA 02139, USA Email correspondence to:
+
+zhang@csail.mit.edu 
+
+rigid attachments. Vision-based tactile sensors provide high resolution at the end effector, but are bulky and require con-trolled optical conditions, making whole-body deployment impractical on sparse lattice structures. Liquid metal sensors offer high compliance but face leakage risks and toxicity concerns. Strain gauges and conductive elastomers have been embedded in soft actuators [12], [13], but strain gauges are fragile under the large strains typical of soft robots, and conductive elastomers suffer from hysteresis, signal drift, and limited durability under repeated loading [14], [15]. Internal pressure sensors have also been used to reconstruct the 3D deformation of pneumatic soft robots [16], although these approaches are coupled to the pressurized actuators themselves. Across these approaches, most methods measure the robot’s shape or detect contact, but rarely both through a single sensing modality. Fluidic innervation, the principle of embedding sealed air channels within a soft structure and reading their internal pressure, has emerged as a sensing approach compatible with 3D-printed architected materials [17]. Because the channels are printed as part of the structure itself, they do not require additional mounting surfaces or complex routing, and they preserve the mechanical compliance of the host material. Since its introduction, fluidic innervation has been extended to sensorized grippers that detect contact location and slip [18], [19], durable tactile sensors [20], wear-able human-robot interfaces [21], and learned proprioceptive models from soft wrist-like platforms [22]. Recent work [23] showed that air channels can be embedded into helicoid-structured segments via multi-material printing, and the helicoid architecture has been further developed for soft-rigid hybrid designs [24]. However, the channels in [23] follow the helicoid curve continuously over the full segment height, coupling the response of each channel to global deformations in a way that does not naturally separate proprioceptive from contact-induced signals. More broadly, a model-based framework that exploits sensor redundancy to decouple pro-prioception from contact detection using fluidic innervation has not been demonstrated. A closely related effort by Wang et al. [25] achieved simultaneous proprioception and contact detection in a rod-driven soft robot by comparing shapes predicted from actuator commands (via a PCC model) against shapes measured by surface strain sensors. Their approach requires knowledge of the actuator inputs and a separate set of surface sensors to detect discrepancies. In contrast, we exploit the geometric redundancy within a single sensor modality: six fluidic channels resolve three kinematic DOFs, and the overdetermined sensory system itself reveals                
+
+> ©2026 IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works. arXiv:2607.15582v1 [cs.RO] 17 Jul 2026 Embedded air channels
+> Pressure sensor sreadings
+> Sec. 1 Sec. 2
+> Air -Helix
+> Sec. 3
+> Tendon guides
+> F
+> F
+> AB
+> C
+> 3D printed soft structure
+> Pressure sensor sreadings
+> Model -based
+> priors
+> Huber  regression
+> Iterative redoundant estimations
+> Robust shape & force estimation
+> Shape
+> Force
+> Contact
+> Δx
+> Δy
+> ΔL
+> Innervated Trimmed Helicoid
+
+Fig. 1: A The Air-Helix soft manipulator: eight ITH segments form three independently actuated sections, with motors at the base. B Detail of an Innervated Trimmed Helicoid segment with six fluidic channels routed in a localized zigzag pattern along the circumference, connected to pressure sensors. C Decoupling strategy: the six pressure readings are mapped to the three segment DOFs via a PCC model; Huber regression down-weights outlier channels (contact) while estimating shape from the consensus channels. contacts without requiring actuator feedback. In this work, we present a model-based decoupling strat-egy for proprioception and contact sensing in an architected soft manipulator segment, and demonstrate its integration in a complete tendon-driven continuum robot. The key de-sign element is the Innervated Trimmed Helicoid (ITH), an architected structure in which six air channels are routed in a localized zigzag pattern along the circumference of the segment (Fig. 1). Unlike continuous helicoid routing in [23], this localized topology produces six independent pressure measurements that are analytically related to the three kinematic degrees of freedom of the segment (ax-ial compression and bending in two directions) through a piecewise constant curvature (PCC) model. The resulting overdetermined system (six measurements, three unknowns) enables a Huber regression to simultaneously estimate the segment’s shape and flag outlier channels whose residuals indicate localized contact. The contributions of this paper are: 1) A localized air channel design for architected helicoid segments that yields six analytically interpretable, re-dundant pressure measurements per segment; 2) A model-based decoupling algorithm combining PCC kinematics with Huber regression to jointly estimate shape and detect contacts in real time; 3) Quantitative single-segment evaluation demonstrating proprioceptive accuracy (relative bending error 0.11 ±
+
+0.02 ) and contact detection reliability (97% over 178 trials); 4) Integration into Air-Helix , an eight-segment tendon-driven manipulator, with exploratory whole-arm demonstrations of tactile teaching and tactile object reconstruction. II. M ETHODS 
+
+A. Innervated Trimmed Helicoid Design 
+
+In this work we expand the design of the Trimmed Helicoid, a 3D-printed architected structure based on helicoid geometry, first introduced for soft continuum robots in [26]. This original design is parametrically designed to balance axial and bending stiffness for a wide workspace and ho-mogeneous compliance. The Innervated Trimmed Helicois (ITH) proposed in this article extends this design by embed-ding six independent air channels along the circumference, spaced 60 ◦ apart (Fig. 1B). A key design choice distinguishes the channel routing in this work from prior fluidic innervation of helicoid struc-tures [23]. Rather than routing the channels continuously along the helicoid curve over the full segment height, each channel here follows a localized zigzag path. This localized topology ensures that each channel’s pressure response is predominantly governed by the local deformation at its circumferential position, rather than being averaged over the full segment. The resulting six independent pressure signals are analytically related to the three segment DOFs through the kinematic model described in Sec. II-B. Each channel has an internal diameter of 3 mm and an external diameter of 4 mm, selected through a fabricability study (see supplementary material 1, Fig. S1). The channel follows five zigzag turns along the segment height of approx-imately 65 mm, for a total channel length of approximately 130 mm. The channels are sealed at one end and connected to differential pressure sensors (All Sensors) at the base via 1 mm rubber tubing.  
+
+> 1Available at https://tinyurl.com/helix-arm-SI
+
+The sensing principle follows from the ideal gas law: each sealed channel encloses a fixed mass of air, so when the structure deforms, the local change in channel cross-section alters the enclosed volume and produces a pressure change at the differential sensor. Because air is compressible, the response integrates deformation over the full channel length. The signal is therefore uniform regardless of where along the channel the deformation occurs. This is a key advantage over resistive or capacitive point sensors. A second, homologous chamber on the sensor’s reference port compensates for temperature-induced drift. Details of the 3D printing (DLP on Carbon printers, EPU 40) and channel cleaning are in the supplementary material. 
+
+B. Sensor-to-Shape Model 
+
+We model each ITH segment as a piecewise constant curvature (PCC) section [27], [28], fully described by three configuration variables q = [∆ L, ∆x, ∆y]⊤ representing changes in central length and bending in two orthogonal directions. The length of the j-th channel is related to the segment configuration by 
+
+Lj = L0 + ∆ L + ∆ x cos αj + ∆ y sin αj (1) where L0 is the undeformed segment length and αj ∈{0, π 
+
+> 3
+
+, 2π 
+
+> 3
+
+, π, 4π 
+
+> 3
+
+, 5π 
+
+> 3
+
+} is the angular position of the j-th channel. We measure each channel length ˆLj from its own pressure reading pj . A per-channel linear calibration ˆLj =
+
+L0 + sj pj is fit to the Instron force-displacement-pressure curves (Sec. III-A). This measurement is sensory and needs no tendon or actuator feedback. Writing the six channel measurements as b =[ ˆL1, . . . , ˆL6]⊤, the system takes the form b = Aq with 
+
+A =
+
+
+
+1 cos α1 sin α1
+
+1 cos α2 sin α2
+
+... ... ...
+
+1 cos α6 sin α6
+
+ ∈ R6×3 (2) This system is overdetermined: six measurements for three unknowns. The ordinary least-squares solution ˆq =(A⊤A)−1A⊤b provides the shape estimate in the absence of contact. The standard PCC forward kinematics then maps 
+
+q to end-effector pose (see supplementary material for full expressions). For the full Air-Helix robot, the shape of each segment is estimated independently, and the segment-to-segment homogeneous transformations are composed se-quentially to obtain the full-arm pose. The tendon-to-shape mapping q = hq (σ), which relates motor displacements σ to configuration variables, is used during Cartesian teleopera-tion (see supplementary material). 
+
+C. Huber Regression for Joint Shape and Contact Estimation 
+
+When an external contact deforms one or more channels beyond the PCC prediction, the corresponding measurements become outliers in the least-squares fit. We exploit this by replacing ordinary least squares with Huber regression via Iterative Reweighted Least Squares (IRLS), which simulta-neously estimates the segment shape and identifies contact channels. The residual for the j-th channel is 
+
+rj = ˆLj − (L0 + ∆ L + ∆ x cos αj + ∆ y sin αj ) (3) The Huber loss down-weights large residuals: 
+
+ρ(rj ) = 
+
+( 12 r2 
+
+> j
+
+if |rj | ≤ δδ|rj | − 12 δ2 if |rj | > δ 
+
+where δ = 1 .5 · MAD , with MAD the median absolute deviation computed from a calibration sequence of random deformations without contact (cf. Fig. 3A). The IRLS pro-cedure is: 1) Initialize ˆq from the ordinary least-squares solution. 2) Compute residuals rj and weights wj = 1 if |rj | ≤ δ,else wj = δ/ |rj |.3) Solve ˆq = (A⊤W A )−1A⊤W b with W =diag( w1, . . . , w 6).4) Repeat steps 2–3 until convergence. After convergence, channels with wj < 1 are flagged as contacts. The algorithm converges in 0.2 ms (MATLAB), and enables real-time operation at the 100 Hz sensor rate. This step enables joint shape and contact reconstruction, as shown in Section III. III. R ESULTS 
+
+We evaluate the proposed decoupling strategy at the single-segment level with quantitative ground-truth compari-son, and then present exploratory demonstrations on the full 
+
+Air-Helix manipulator. 
+
+A. Single-Segment Characterization 
+
+We characterize a single ITH segment under controlled loading using an Instron machine (Fig. 2). The segment is axially compressed while recording both force-displacement and pressure sensor data simultaneously. The material (EPU 40) exhibits repeatable behavior after four preconditioning cycles (Fig. 2G), consistent with prior durability studies [29]. The pressure response of all six channels is approximately linear with compression (Fig. 2A– C), which justifies the linear calibration mapping used in (1). Linear interpolation of these curves yields the per-channel pressure-to-length mapping ˆLj (pj ) used in Sec. II-B. To assess spatial uniformity, we performed a sensitivity analysis by applying controlled forces at 15 radial positions per channel (Fig. 2E–F). The response is coherent across positions along each channel, confirming that the enclosed air volume integrates local deformation uniformly over the full channel length. Across channels, the sensitivity varies mod-erately due to manufacturing tolerances in the DLP printing process, but the per-channel linear calibration compensates for these differences. Manual deformation tests (Fig. 2D) confirm that bending in x, axial compression, bending in 
+
+y, and localized touch each produce distinguishable sensor signatures, validating that the six-channel arrangement can resolve these distinct deformation modes. B Loading 
+
+Unloading 
+
+A B C
+
+D     
+
+> Contact
+> detected
+> Δx bending ΔLΔy bending Touch
+
+G
+
+1 [V/mm] 
+
+0 [V/mm] 
+
+2 [V/mm] 
+
+Sensibility 
+
+[V/mm] 
+
+# F 0 6
+
+2
+
+6
+
+10 
+
+> Load [N]
+
+1
+
+3
+
+5
+
+> ΔV [V]CC
+
+0 6
+
+2
+
+6
+
+10 
+
+> Load [N]
+
+1
+
+3
+
+5
+
+> ΔV [V]
+
+6
+
+2
+
+6
+
+10 
+
+> Load [N]
+
+1
+
+3
+
+5
+
+> ΔV [V]
+
+0 2 4 6
+
+2
+
+6
+
+10 
+
+> Load [N]
+
+1
+
+3
+
+5
+
+> ΔV [V]
+
+Compression  [mm] 
+
+0
+
+0 6
+
+2
+
+6
+
+10 
+
+> Load [N]
+
+1
+
+3
+
+5
+
+> ΔV [V]
+
+E F
+
+h
+
+Sensor 1 
+
+Sensor 2 
+
+Sensor 3 
+
+Sensor 4 
+
+Sensor 5 
+
+Sensor 6 
+
+> ΔV  [V]
+
+0
+
+5
+
+0 30 Time [s] 
+
+Force [N] 
+
+0 30 
+
+> Force [N]
+
+0
+
+-40 
+
+Compression  [mm] 
+
+0 30 
+
+> ΔV [V]
+
+0
+
+5
+
+> ΔV [V]
+
+0
+
+5
+
+Compression  [mm] 
+
+0 30   
+
+> 0 mm 15 mm 25 mm
+
+Fig. 2: Single-segment characterization. A–C) Force, compression, and pressure sensor readings during Instron loading. The approximately linear pressure-compression relationship enables the calibration mapping used in (1). D) Raw readings during manual deformation: bending in x, compression, bending in y, and localized touch produce distinguishable sensor signatures. 
+
+E–F) Sensitivity analysis across 15 radial positions per channel and 5 loading levels, showing coherent response along and across channels. G) Cyclic Instron compression showing repeatable sensor response after 4 preconditioning cycles. -0.5  
+
+> Time [s] 60
+> 0
+> 0
+> 5
+> ΔV [V]
+> s1
+> s2
+> s3
+> s4
+> s5
+> s6
+
+## C
+
+> 0
+> -0.5
+> 0.5
+> 1
+> 0
+> -10
+> -20
+
+## A
+
+## D
+
+## B        
+
+> Δx  ΔL [mm] Δy  0
+> -1
+> Time [s] 180 0
+> Δy 3
+> Δy 2
+> Δy 1
+> MC
+> Δx 3
+> Δx 2
+> Δx 1
+> MC
+> Δx 4
+> s1
+> s2
+> s3
+> s4
+> s5
+> s6q2[-]q3[mm] q1[-]
+> Shape
+> estimation
+> 0
+> 0.2
+> zx
+> Cartesian  error
+> [ee  error /robot  length ]
+> 0
+> s1
+> Contact
+> detected  [%]
+> 0
+> 0.1
+> 100
+> y
+> s2s3s4s5s6
+> q [cm ,-,-]
+> -0.3 0
+> ΔL
+> Δx
+> Δy
+
+Fig. 3: Single-segment proprioception and contact detection. A) Time series of estimated shape variables ( ∆L, ∆x, ∆y)from redundant sensor subsets, compared to OptiTrack ground truth during random tendon-driven motions. B) Summary metrics: single-section shape error, whole-robot end-effector Cartesian error, and contact detection rate. C) Full robot pose reconstructed from embedded sensing (bottom) vs. photographs (top). D) Contact detection during a fixed-pose experiment: sensor signals (top) and the Huber regression shape estimate (bottom) remain stable while six sequential touches are correctly flagged. 
+
+B. Proprioceptive Accuracy 
+
+A single ITH segment was actuated by three tendons executing random, non-periodic motions while an OptiTrack system recorded ground-truth tip position. The sensor-to-shape model (Sec. II-B) and Huber regression (Sec. II-C) were applied in real time to estimate the segment state. Fig. 3A shows a representative time series of the estimated 
+
+∆x and ∆y compared to ground truth. The redundant esti-mates from different sensor subsets are mutually consistent and track the motion-capture reference at high frequency. Over the full dataset (average actuation speed 1 rad/s), the relative bending error was 0.11 ± 0.02 (mean ± std). The supplementary material defines all reported error metrics. The same algorithm was deployed on the full eight-segment Air-Helix robot. Fig. 3C shows qualitative agree-ment between reconstructed and actual poses. The end-effector Cartesian error, normalized by total robot length, was 
+
+0.06 ±0.02 (Fig. 3B). We note that the whole-arm evaluation used static poses rather than continuous motion capture, so it should be interpreted as a preliminary assessment (Fig. 3C). 
+
+C. Contact Detection 
+
+To evaluate the decoupling of proprioception and contact, a single segment was actuated to a fixed configuration, and an operator sequentially touched each of the six channel locations on the segment surface. Fig. 3D shows that the Huber regression shape estimate ( ∆L, ∆x, ∆y) remains stable throughout the contact sequence, while the raw sensor signals clearly register each touch event. Channels with residuals exceeding the Huber threshold δ are flagged as contacts. The detection threshold δ = 1 .5 · MAD was set using a 60-second calibration phase during which the segment was actuated through random configurations without external A
+
+C     
+
+> t=2s t=19s t=39s t=45s t=5 5st=63s
+
+E           
+
+> 400
+> 060 Time [s]
+> ΔV [V]
+> 0
+> Section 1Section 2Section 3
+> Tactile -based teaching Tendon -based teaching
+> Replay Replay
+> 15
+> F [N ]
+> 0Time [s]
+> Fx
+> Fy
+> Fz
+
+D
+
+B
+
+> Fgoal
+> 0
+> 30
+
+Fig. 4: Exploratory whole-arm demonstrations. A) Tactile teaching: the user presses the robot body to indicate desired bending locations; contacts trigger local tendon contractions, building up the target shape incrementally. Replay is accurate. 
+
+B) Baseline tendon-based teaching: the user physically deforms the robot; replay is inaccurate due to tendon transmission losses. C) Force estimation at the gripper via redundant air chambers. D–E) Admittance control maintaining a target force at the end effector. contact. This calibration captures the natural residual vari-ability due to model mismatch and sensor noise, establishing the baseline above which a residual is treated as contact-induced. The threshold can be adjusted to trade off sensitivity against false-positive rate; the value 1.5 · MAD was found empirically to yield a good balance for the contact forces applied in our experiments. This experiment was repeated across 9 fixed configurations uniformly distributed over the workspace, totaling 178 con-tact events. The mean contact detection rate was 97% across all six channels (Fig. 3B). The spatial resolution of contact localization is limited to 60 ◦ sectors (one per channel); contacts falling between channels activate the nearest one. A single channel cannot localize contact along its own length since the pressure is uniform across the channel volume. Instead, the system compares residuals across channels and segments. This locates each contact to one 60 ◦ sector and one segment, about 65 mm axially. The current evaluation is limited to single contacts at a time. IV. E XPLORATORY WHOLE -A RM DEMONSTRATIONS 
+
+The single-segment results above establish the decoupling capability under controlled conditions. In this section, we present three exploratory demonstrations on the full Air-Helix 
+
+manipulator that illustrate how the joint proprioceptive and contact-sensing capabilities could be used in practice. These demonstrations are qualitative and should be understood as proofs of concept; rigorous quantitative evaluation of the full multi-segment system is left for future work. 
+
+A. Tactile Teaching by Demonstration 
+
+Teaching by demonstration on soft continuum arms is challenging because underactuated tendon-driven systems do not directly measure body deformation, and tendon trans-mission losses cause significant replay error. A baseline tendon-based teaching approach (Fig. 4B), in which the user physically deforms the robot with constant tendon tension and motor positions are recorded, produces noticeable error during replay. The decoupling strategy enables an alternative: tactile teaching (Fig. 4A). The user presses the robot body at the location where bending is desired. The contact detection algorithm identifies the pressed segment and channel, and the nearest tendon is contracted by a fixed increment ∆σ. By repeating this process along the body, the user incrementally builds the desired configuration using only internal actuation forces. Since the final shape is achieved through tendon positions rather than external deformation, replay is accurate. 
+
+B. Force Sensing and Admittance Control 
+
+The Instron characterization (Fig. 2) provides a mapping from channel deformation to applied force. This mapping allows estimating contact force magnitude from the Huber regression residuals: a channel flagged as an outlier has a residual rj corresponding to excess deformation beyond the PCC model prediction, which can be translated into a force estimate via the calibration curve. To explore this capability at the end effector, we designed and fabricated a gripper innervated with multiple air cham-Fig. 5: Tactile object reconstruction. A) The robot is teleoperated to contact objects at known locations; bull’s-eye plots show position and orientation estimation accuracy, which degrades at larger deformations. B) Contact point cloud from repeated interactions with an unknown object, reconstructed via Delaunay triangulation. C) Cylinder radius estimation from contact points (accuracy ±1.6 cm). bers: six at the connection with the arm and four in the gripper’s fingers (Fig. 4C; see supplementary material for design details). By combining the local force readings at the connection level, the forces and torques at the end effector along [x, y, z ] axes are estimated. Using this force estimate, a proportional admittance con-troller was implemented to maintain a target force at the end effector (see supplementary material for the control law). As shown in Fig. 4D–E, the robot was controlled in real time to maintain a desired force profile: when external perturbations increase the contact force, the robot retracts to restore the target, and vice versa. This demonstrates that the fluidic sensing can close the loop on force-controlled interaction. 
+
+C. Tactile Object Reconstruction 
+
+Combining proprioception with end-effector contact de-tection, the robot can estimate the location of objects in its workspace. The robot was teleoperated in Cartesian space (see supplementary material) with a hemispherical sensorized fingertip (supplementary material, Fig. S3) replacing the gripper. Contact events were detected via a pressure threshold on the tip’s embedded air chambers. In a first experiment (Fig. 5A), the robot contacted objects at known positions to evaluate localization accuracy against motion capture. Accuracy degrades with distance from the base due to accumulated shape estimation error along the kinematic chain and higher sensitivity to external forces due to a larger moment arm from the base of the robot. The robot also estimated the radius of three cylinders with an accuracy of ±1.6 cm (Fig. 5C), and reconstructed the surface of an unknown object from a contact point cloud using Delaunay triangulation (Fig. 5B). These experiments relied on end-effector contact only and did not exploit whole-body contact detection; extending the approach to leverage contacts along the full arm is a direction for future work. V. D ISCUSSION AND LIMITATIONS 
+
+We presented a model-based strategy for decoupling pro-prioceptive and contact signals from redundant fluidic pres-sure sensors embedded in an architected soft manipulator segment. The approach relies on two elements: (i) a local-ized zigzag channel design that produces six analytically interpretable pressure measurements per segment, and (ii) a Huber regression that separates shape-consistent signals from contact-induced outliers. At the single-segment level, the method achieves a relative bending error of 0.11 ± 0.02 
+
+and a 97% contact detection rate. Several limitations should be noted. First, the decoupling was validated on a single segment with single-point con-tacts; simultaneous multi-point contacts and the interaction between contacts on adjacent segments were not tested. With six sensors and three DOFs per segment, up to three contacts per segment are theoretically detectable, but this limit has not been experimentally established. Second, the contact detec-tion provides localization only at the resolution of individual channels ( 60 ◦ sectors), not continuous spatial estimation. Third, the linear pressure-to-length calibration relies on the Instron characterization at a fixed temperature and loading rate; the effects of dynamic loading, and long-term drift were not systematically studied. The supplementary mate-rial discusses the robustness of the pressure model further. Fourth, the whole-arm demonstrations are exploratory: the full-arm proprioceptive accuracy was assessed against static poses rather than continuous motion capture, and the tactile teaching and object reconstruction experiments were not evaluated quantitatively. However, compared to the expectation-based approach of Wang et al. [25], the method presented here does not require actuator command feedback or a model mapping commands to expected shape, and uses a single sensor modality rather than combining actuator feedback with separate surface sen-sors. This simplifies deployment on tendon-driven systems, where actuator-to-shape models are inaccurate due to friction and cable losses. Moreover, this same sensory approach could be combined with methods to learn the sensor-to-state mapping directly from data, as explored for fluidic innerva-tion in [22], which may be beneficial in multi-contact scenar-ios. While learned models can capture nonlinearities that the PCC model neglects, they require training data for each robot configuration and do not naturally separate proprioceptive from contact signals without explicit supervision. Our model-based approach has the advantage of providing interpretable residuals that directly indicate contact location, without task-specific training. Relative to prior work on fluidic innervation of helicoid segments [23], this paper’s contribution is the localized channel design and the model-based decoupling algorithm that exploits the resulting redundancy, rather than the fabrication method itself. Future work should address multi-contact detection limits and coupled contacts between adjacent segments through systematic testing, improve spatial resolution through denser channel layouts or signal interpolation, and validate the full-arm decoupling capability with continuous ground-truth tracking during dynamic contact scenarios. ACKNOWLEDGMENTS 
+
+This work was supported in part by the Singapore MIT Alliance on Research and Technology (SMART) under the Mens, Manus, et Machina (M3S) program, by the BARI EMERGE program under grant N00014-26-1-2304, and by the MIT-GIST collaboration. C.D.S. acknowledges support from the European Research Council Project RIPLEy. The authors thank Embodied AI SA for providing technical support and the motorized base for the Air-Helix robot, and Miguel Flores-Acton and Andy Yu for help with 3D printing, PCB design, and mechanical design. REFERENCES [1] D. Rus and M. T. Tolley, “Design, fabrication and control of soft robots,” Nature , vol. 521, no. 7553, pp. 467–475, 2015. [2] C. Della Santina, M. G. Catalano, and A. Bicchi, “Soft robots,” 
+
+Encyclopedia of Robotics , vol. 489, 2021. [3] C. Hegde, J. Su, J. M. R. Tan, K. He, X. Chen, and S. Magdassi, “Sensing in soft robotics,” ACS nano , vol. 17, no. 16, pp. 15 277– 15 307, 2023. [4] P. Maiolino, M. Maggiali, G. Cannata, G. Metta, and L. Natale, “A flexible and robust large scale capacitive tactile system for robots,” 
+
+IEEE Sensors Journal , vol. 13, no. 10, pp. 3910–3917, 2013. [5] O. Shorthose, A. Albini, L. He, and P. Maiolino, “Design of a 3d-printed soft robotic hand with integrated distributed tactile sensing,” 
+
+IEEE Robotics and Automation Letters , vol. 7, no. 2, pp. 3945–3952, 2022. [6] J. C. Case, G. Branin, E. Yang, S. J. Woodman, J. Gibert, and R. Kramer-Bottiglio, “Expanded quasi-static models to predict the performance of robotic skins on soft cylinders,” The International Journal of Robotics Research , p. 02783649241310885, 2025. [7] V. Modes, T. Ortmaier, and J. Burgner-Kahrs, “Shape sensing based on longitudinal strain measurements considering elongation, bending, and twisting,” IEEE Sensors Journal , vol. 21, no. 5, pp. 6712–6723, 2020. [8] Y. Cao, F. Feng, Z. Liu, and L. Xie, “Closed-loop trajectory track-ing control of a cable-driven continuum robot with integrated draw tower grating sensor feedback,” Journal of Mechanisms and Robotics ,vol. 14, no. 6, p. 061004, 2022. [9] F. Stella, C. Della Santina, and J. Hughes, “Soft robot shape estimation with imus leveraging pcc kinematics for drift filtering,” IEEE Robotics and Automation Letters , 2023. [10] J. Hughes, F. Stella, C. D. Santina, and D. Rus, “Sensing soft robot shape using imus: An experimental investigation,” in Experimental Robotics: The 17th International Symposium . Springer, 2021, pp. 543–552. [11] G. Pei, F. Stella, O. Meebed, Z. Bing, C. Della Santina, and J. Hughes, “Imu based pose reconstruction and closed-loop control for soft robotic arms,” in 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2024, pp. 1847–1852. [12] R. L. Truby, C. Della Santina, and D. Rus, “Distributed proprioception of 3d configuration in soft, sensorized robots via deep learning,” IEEE Robotics and Automation Letters , vol. 5, no. 2, pp. 3299–3306, 2020. [13] B. Shih, D. Shah, J. Li, T. G. Thuruthel, Y.-L. Park, F. Iida, Z. Bao, R. Kramer-Bottiglio, and M. T. Tolley, “Electronic skins and machine learning for intelligent soft robots,” Science Robotics , vol. 5, no. 41, p. eaaz9239, 2020. [14] T. G. Thuruthel, B. Shih, C. Laschi, and M. T. Tolley, “Soft robot per-ception using embedded soft sensors and recurrent neural networks,” 
+
+Science Robotics , vol. 4, no. 26, p. eaav1488, 2019. [15] B. W. K. Ang and C.-H. Yeow, “A learning-based approach to sensorize soft robots,” Soft Robotics , vol. 9, no. 6, pp. 1144–1153, 2022. [16] R. B. Scharff, G. Fang, Y. Tian, J. Wu, J. M. Geraedts, and C. C. Wang, “Sensing and reconstruction of 3-d deformation on pneumatic soft robots,” IEEE/ASME Transactions on Mechatronics , vol. 26, no. 4, pp. 1877–1885, 2021. [17] R. L. Truby, L. Chin, A. Zhang, and D. Rus, “Fluidic innervation sensorizes structures from a single build material,” Science advances ,vol. 8, no. 31, p. eabq4385, 2022. [18] A. Zhang, L. Chin, D. L. Tong, and D. Rus, “Embedded air channels transform soft lattices into sensorized grippers,” in 2024 IEEE Interna-tional Conference on Robotics and Automation (ICRA) . IEEE, 2024, pp. 5264–5270. [19] S. Shang, M. Seo, Y. Zhu, and L. Chin, “Forte: Tactile force and slip sensing on compliant fingers for delicate manipulation,” IEEE Robotics and Automation Letters , 2026. [20] A. Zhang, M. Flores-Acton, A. Yu, A. Gupta, M. Yao, and D. Rus, “Fluidically innervated lattices make versatile and durable tactile sensors,” arXiv preprint arXiv:2507.21225 , 2025. [21] N. Rubin, A. Schraeder, H. Sahu, T. C. Bulea, and L. Chin, “High-fidelity, customizable force sensing for the wearable human-robot interface,” arXiv preprint arXiv:2602.13436 , 2026. [22] A. Zhang, T.-H. Wang, R. L. Truby, L. Chin, and D. Rus, “Ma-chine learning best practices for soft robot proprioception,” in 2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2023, pp. 2564–2571. [23] A. Zhang, H. Matusik, M. Flores-Acton, E. R. Sologuren, J. Jacob, and D. Rus, “Printed helicoids with embedded air channels make sensorized segments for soft continuum robots,” in 2026 IEEE 9th International Conference on Soft Robotics (RoboSoft) . IEEE, 2026, pp. 9–16. [24] Z. J. Patterson, E. R. Sologuren, and D. Rus, “Design of trimmed helicoid soft-rigid hybrid robots,” in 2025 IEEE 8th International Conference on Soft Robotics (RoboSoft) . IEEE, 2025, pp. 1–7. [25] P. Wang, Z. Xie, W. Xin, Z. Tang, X. Yang, M. Mohanakrishnan, S. Guo, and C. Laschi, “Sensing expectation enables simultaneous proprioception and contact detection in an intelligent soft continuum robot,” Nature Communications , vol. 15, no. 1, p. 9978, 2024. [26] Q. Guan, F. Stella, C. Della Santina, J. Leng, and J. Hughes, “Trimmed helicoids: an architectured soft structure yielding soft robots with high precision, large workspace, and compliant interactions,” npj Robotics ,vol. 1, no. 1, p. 4, 2023. [27] C. Della Santina, A. Bicchi, and D. Rus, “On an improved state parametrization for soft robots with piecewise constant curvature and its use in model based control,” IEEE Robotics and Automation Letters ,vol. 5, no. 2, pp. 1001–1008, 2020. [28] R. J. Webster III and B. A. Jones, “Design and kinematic modeling of constant curvature continuum robots: A review,” The International Journal of Robotics Research , vol. 29, no. 13, pp. 1661–1683, 2010. [29] F. Stella, G. Pei, O. Meebed, Q. Guan, Z. Bing, C. Della Santina, and J. Hughes, “Toward long-lasting large-scale soft robots: The durability challenge in architectured materials,” in 2024 IEEE 7th International Conference on Soft Robotics (RoboSoft) . IEEE, 2024, pp. 190–196.
