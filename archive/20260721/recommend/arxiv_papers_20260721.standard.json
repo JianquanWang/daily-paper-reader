@@ -1,0 +1,250 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-21T19:42:30.658543+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2607.18231v1",
+      "source": "arxiv",
+      "title": "FM-VLA: Force-based Memory for Vision-Language-Action Models in Contact-Rich Manipulation",
+      "abstract": "Vision-language-action (VLA) models have achieved impressive generalization in robotic manipulation, and recent memory-augmented VLAs have relaxed the Markovian assumption by conditioning on past images or language summaries. Vision-based memory approaches address this by conditioning on sampled past image frames, but they are computationally expensive and fundamentally limited when temporal events are visually ambiguous, e.g., pushing a button multiple times with small movements. We propose FM-VLA, a VLA model with force-based memory, enabling temporal context reasoning for non-Markovian, contact-rich manipulation. We encode force histories into compact force memory tokens with a variational autoencoder (VAE) pretrained with force time series reconstruction. By projecting force latent representations and short state history as additional conditioning tokens to the action expert module, we enable VLAs to leverage accumulated contact event history to guide manipulation. We evaluate FM-VLA on three memory-dependent tasks, including finding a hidden block, pressing a button, and wiping a dish for a specific number of times. Our lightweight force memory achieves over 80% success rate with minimal inference overhead, significantly outperforming baseline approaches. Project page: https://qft-333.github.io/FM-VLA-Page/",
+      "authors": [
+        "Ruicheng Li",
+        "Qixiu Li",
+        "Ruichun Ma",
+        "Yu Deng",
+        "Lin Luo",
+        "Zhiying Du",
+        "Jianfeng Xiang",
+        "Huizhi Liang",
+        "Ruicheng Wang",
+        "Jiaolong Yang",
+        "Baining Guo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-20T17:58:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.18231v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "force-based memory for tactile VLA in contact-rich manipulation",
+      "llm_evidence_cn": "基于力的记忆用于接触丰富操作中的触觉VLA",
+      "llm_evidence": "基于力的记忆用于接触丰富操作中的触觉VLA",
+      "canonical_evidence": "基于力的记忆用于接触丰富操作中的触觉VLA",
+      "llm_tldr_en": "FM-VLA integrates force history into VLA via VAE-based force memory tokens, enabling temporal reasoning for contact-rich manipulation tasks where vision is ambiguous.",
+      "llm_tldr_cn": "FM-VLA针对接触丰富操作中视觉信息模糊的问题，提出在视觉-语言-动作（VLA）模型中引入基于力的记忆。它利用变分自编码器将力历史编码为紧凑的力记忆令牌，使模型能够在非马尔可夫任务中利用触觉上下文。实验表明该方法在需要触觉感知的操作任务中显著优于纯视觉记忆基线。该工作直接推动了触觉VLA模型的发展。",
+      "llm_tldr": "FM-VLA针对接触丰富操作中视觉信息模糊的问题，提出在视觉-语言-动作（VLA）模型中引入基于力的记忆。它利用变分自编码器将力历史编码为紧凑的力记忆令牌，使模型能够在非马尔可夫任务中利用触觉上下文。实验表明该方法在需要触觉感知的操作任务中显著优于纯视觉记忆基线。该工作直接推动了触觉VLA模型的发展。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.16739v1",
+      "source": "arxiv",
+      "title": "Retrofitting Existing 3D Objects with Surface-Conforming Capacitive Sensing",
+      "abstract": "Augmenting the surface of 3D objects with capacitive sensing is challenging when their volumes cannot be modified. In this paper, we present a generative computational fabrication pipeline that retrofits surface-only sensor layouts to 3D geometries for multi-touch interaction. Our method scans a real-world object to obtain its 3D mesh, generates and optimizes a 3D sensor design of drive and sense lines for mutual-capacitance sensing under physical and hardware constraints, and unfolds the design into individual 2D stencils that can be cut from conductive material. Our fabrication pipeline cuts these stencils from thin copper foil with a vinyl cutter and then assists manual sensor attachment by projecting the sensor design onto the dynamically registered real-world object. We connect the resulting electrode mesh to a mutual-capacitance scanning controller and resolve touch interaction in real time. We demonstrate our approach with four 3D geometries and evaluate our method and fabrication pipeline on them.",
+      "authors": [
+        "Andela Ilic",
+        "Junpeng Gao",
+        "Zhipeng Li",
+        "Yijing Jiang",
+        "Rachel Schuchert",
+        "Manuel Meier",
+        "Philipp Herholz",
+        "Christian Holz"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-07-18T10:02:24+00:00",
+      "link": "https://arxiv.org/pdf/2607.16739v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "capacitive touch sensor fabrication for 3D objects",
+      "llm_evidence_cn": "3D物体电容触觉传感器制造",
+      "llm_evidence": "3D物体电容触觉传感器制造",
+      "canonical_evidence": "3D物体电容触觉传感器制造",
+      "llm_tldr_en": "Retrofits 3D objects with surface-conforming capacitive touch sensors via generative pipeline, enabling multi-touch interaction.",
+      "llm_tldr_cn": "该论文提出一种计算制造管道，通过对真实物体三维扫描，生成和优化电容传感器布局，展开为2D铜箔模板进行切割和贴装，使任何3D物体具备多触点触觉交互能力。实验在多个物体上成功实现触觉传感，为通用触觉传感提供实用方案。",
+      "llm_tldr": "该论文提出一种计算制造管道，通过对真实物体三维扫描，生成和优化电容传感器布局，展开为2D铜箔模板进行切割和贴装，使任何3D物体具备多触点触觉交互能力。实验在多个物体上成功实现触觉传感，为通用触觉传感提供实用方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.13429v1",
+      "source": "arxiv",
+      "title": "Generalizable VLA Finetuning via Representation Anchoring and Language-Action Alignment",
+      "abstract": "Finetuning a pretrained vision-language model (VLM) on robot demonstrations via behavior cloning (BC) has become the standard recipe for vision-language-action (VLA) policies. However, BC finetuning progressively overwrites the pretrained representations that support visual and semantic generalization. Co-training on web image-text data, a common remedy, does not prevent this; it applies language and action losses to separate observations, leaving VLAs with language-action misalignment that standard manipulation benchmarks do not expose. We propose Anchor-Align, which augments BC with two objectives: Vision-Language Anchoring distills layer-wise representations from a frozen VLM copy to prevent this drift, while Language-Action Alignment converts each action target into a discrete motion-direction label and jointly trains language and action prediction on the same robot observation. On a physical xArm7 robot, across two widely used VLA architectures, Anchor-Align improves real-robot success on both (28% to 54% and 37% to 60%). At scale in simulation, we demonstrate consistent improvements on OOD perturbations, perceptual robustness, and long-horizon control across LIBERO-PRO, LIBERO-Plus, and CALVIN, respectively, suggesting that preserving pretrained representations and effective action learning are not fundamentally at odds. Project page: anchoralignvla.github.io",
+      "authors": [
+        "Dwip Dalal",
+        "Shivansh Patel",
+        "Chahit Jain",
+        "Jeonghwan Kim",
+        "Utkarsh Mishra",
+        "Alex Baratian",
+        "Hyeonjeong Ha",
+        "Heng Ji",
+        "Svetlana Lazebnik",
+        "Unnat Jain"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-15T04:13:54+00:00",
+      "link": "https://arxiv.org/pdf/2607.13429v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "generalizable VLA finetuning with representation anchoring and language-action alignment",
+      "llm_evidence_cn": "可泛化VLA微调，通过表示锚定和语言-动作对齐",
+      "llm_evidence": "可泛化VLA微调，通过表示锚定和语言-动作对齐",
+      "canonical_evidence": "可泛化VLA微调，通过表示锚定和语言-动作对齐",
+      "llm_tldr_en": "Proposes Anchor-Align to improve VLA finetuning by anchoring representations to a frozen VLM and aligning language with actions, enhancing generalization beyond seen demonstrations.",
+      "llm_tldr_cn": "该论文提出Anchor-Align方法，通过在微调时锚定到冻结VLM的逐层表示并引入语言-动作对齐损失，防止行为克隆对预训练表示的覆盖和语言-动作失配。实验表明该方法在多个操作基准上显著提升了VLA策略的泛化能力。这项工作为触觉VLA的微调提供了可借鉴的技术。",
+      "llm_tldr": "该论文提出Anchor-Align方法，通过在微调时锚定到冻结VLM的逐层表示并引入语言-动作对齐损失，防止行为克隆对预训练表示的覆盖和语言-动作失配。实验表明该方法在多个操作基准上显著提升了VLA策略的泛化能力。这项工作为触觉VLA的微调提供了可借鉴的技术。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17977v1",
+      "source": "arxiv",
+      "title": "RynnBrain 1.1: Towards More Capable and Generalizable Embodied Foundation Model",
+      "abstract": "We present RynnBrain 1.1, a family of embodied foundation models spanning 2B, 9B, and 122B-A10B scales. Trained with a unified spatio-temporal and physically grounded framework, RynnBrain 1.1 supports embodied perception, spatial reasoning, localization, and planning. Compared with RynnBrain 1.0, it further introduces contact-point prediction across the model family and native 3D grounding for the 2B and 9B models, yielding representations and outputs that are more directly aligned with robot manipulation. We also develop RynnBrain-VLA with a unified cross-embodiment action space and embodiment-specific masking, and deploy it on Unitree G1, Astribot-S1, and Tianji-Wuji. RynnBrain 1.1 achieves strong results on embodied cognition, localization, and 3D grounding, with the 122B-A10B model outperforming all evaluated proprietary and open-source models on VSI-Bench, MMSI, and RefSpatial-Bench. Real-robot experiments show that RynnBrain-initialized policies outperform Qwen-based and representative generalist VLAs, while joint multi-task and multi-embodiment training improves process scores and success rates over per-task training.",
+      "authors": [
+        "Kehan Li",
+        "Bohan Hou",
+        "Minghao Zhu",
+        "Tianyi Zhang",
+        "Zesen Cheng",
+        "Zhikai Wang",
+        "Sicong Leng",
+        "Xin Li",
+        "Xiao Lin",
+        "Biying Yao",
+        "Minghua Zeng",
+        "Jiangpin Liu",
+        "Ronghao Dang",
+        "Jiayan Guo",
+        "Siteng Huang",
+        "Haoyu Zhao",
+        "Heng Ping",
+        "Yaxi Zhao",
+        "Kexiang Wang",
+        "Tong Lu",
+        "Shengke Xue",
+        "Jiahao Tang",
+        "Yulei Wang",
+        "Zejing Wang",
+        "Jianwei Gao",
+        "Shijian Lu",
+        "Chengju Liu",
+        "Jianfei Yang",
+        "Mingxiu Chen",
+        "Deli Zhao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-20T14:13:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.17977v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Embodied foundation model with VLA and contact-point prediction; relevant to tactile-aware action",
+      "llm_evidence_cn": "具身基础模型包含VLA和接触点预测，与触觉感知相关",
+      "llm_evidence": "具身基础模型包含VLA和接触点预测，与触觉感知相关",
+      "canonical_evidence": "具身基础模型包含VLA和接触点预测，与触觉感知相关",
+      "llm_tldr_en": "RynnBrain 1.1 is a family of embodied foundation models supporting perception, planning, and VLA with contact-point prediction for better manipulation.",
+      "llm_tldr_cn": "RynnBrain 1.1是一系列规模从2B到122B的具身基础模型，统一了时空和物理感知框架，并新增了接触点预测功能。该模型直接输出与操作对齐的表征，并开发了RynnBrain-VLA统一动作空间。虽未明确使用触觉传感器，但接触点预测可隐含触觉信息，对实现触觉感知的VLA模型具有方法借鉴价值。",
+      "llm_tldr": "RynnBrain 1.1是一系列规模从2B到122B的具身基础模型，统一了时空和物理感知框架，并新增了接触点预测功能。该模型直接输出与操作对齐的表征，并开发了RynnBrain-VLA统一动作空间。虽未明确使用触觉传感器，但接触点预测可隐含触觉信息，对实现触觉感知的VLA模型具有方法借鉴价值。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.15746v1",
+      "source": "arxiv",
+      "title": "Towards Artificial Nerves: Biomimetic Optical-Fiber Tactile Sensing for Robots",
+      "abstract": "Robotic systems increasingly demand tactile sensing that approaches the adaptability and resolution of human skin to enable dexterous manipulation and safe interaction. OptiTac is a biomimetic tactile sensor that emulates the mechanoreceptor-to-nerve architecture of human touch by pairing each mechanical pin on a soft skin with an optical fiber acting as an artificial nerve. This design demonstrates an architectural principle for routing tactile information away from the sensing surface while preserving high spatial resolution, establishing a practical route toward distributed tactile sensing in future robotic systems. By treating tactile signals as images, simple analytical methods, rather than opaque deep-learning models, are used to infer contact location, size, and shape, providing interpretable and scalable tactile intelligence. This work demonstrates how evolutionary principles from biology can guide the development of artificial nerve systems for robots, offering a pathway toward human-like tactile perception in next-generation robotic platforms. More broadly, OptiTac establishes an artificial nerve-inspired sensing framework for interpretable robotic touch and a scalable route toward future distributed tactile systems.",
+      "authors": [
+        "Laura E. Butcher",
+        "Chris J. Ford",
+        "Nathan F. Lepora",
+        "Efi Psomopoulou"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-17T08:34:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.15746v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "biomimetic optical-fiber tactile sensor for robots",
+      "llm_evidence_cn": "仿生光纤触觉传感器用于机器人",
+      "llm_evidence": "仿生光纤触觉传感器用于机器人",
+      "canonical_evidence": "仿生光纤触觉传感器用于机器人",
+      "llm_tldr_en": "Proposes OptiTac, a biomimetic tactile sensor using optical fibers as artificial nerves, enabling high-resolution tactile sensing with simple analytical methods.",
+      "llm_tldr_cn": "该论文提出了一种名为OptiTac的仿生触觉传感器，通过将机械针与光纤配对模仿人体触觉的机械感受器到神经的结构，实现高空间分辨率的触觉信息传输。传感器将触觉信号视为图像，并使用简单的分析方法而非深度学习模型来推断接触状态。这项工作为未来机器人分布式触觉传感提供了一种实用架构。",
+      "llm_tldr": "该论文提出了一种名为OptiTac的仿生触觉传感器，通过将机械针与光纤配对模仿人体触觉的机械感受器到神经的结构，实现高空间分辨率的触觉信息传输。传感器将触觉信号视为图像，并使用简单的分析方法而非深度学习模型来推断接触状态。这项工作为未来机器人分布式触觉传感提供了一种实用架构。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
