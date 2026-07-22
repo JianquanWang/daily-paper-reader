@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-22T19:27:35.266121+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.14280v1",
+      "source": "arxiv",
+      "title": "DiMaS: Distribution Matching for Steering Vision-Language-Action Models",
+      "abstract": "Flow-matching-based vision-language-action (VLA) models have emerged as powerful policies for robotic manipulation, yet a critical capability remains underexplored: fine-grained behavioral control, the ability to govern how a robot performs a task by intervening on its internal representations. Representation steering is a well-established interpretability tool for language and vision-language models, where behavioral features are typically encoded as linear directions, but we show that these classic methods fall short in VLAs. We propose DiMaS, a Distribution-Matching Steering strategy tailored to flow-matching VLAs, which transports between representation distributions rather than shifting along a fixed direction, and show that it effectively controls behavior across two state-of-the-art VLAs. We further examine the generalizability of this strategy as the tasks it is learned from and evaluated on grow increasingly dissimilar, characterizing where behavioral control transfers and where it weakens. Finally, through an analysis of the representation structure of the action expert, we explain why classical linear steering falls short in the visuomotor setting: behavioral features are linearly decodable but not linearly steerable, which motivates the distribution-matching design of DiMaS. Our code is publicly available at https://github.com/pegah-kh/dimas, with additional results and videos at https://pegah-kh.github.io/dimas/",
+      "authors": [
+        "Pegah Khayatan",
+        "Sara Meziane",
+        "Jayneel Parekh",
+        "Matthieu Cord"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-07-15T18:39:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.14280v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "steering strategy for vision-language-action models",
+      "llm_evidence_cn": "针对视觉-语言-动作模型的引导策略",
+      "llm_evidence": "针对视觉-语言-动作模型的引导策略",
+      "canonical_evidence": "针对视觉-语言-动作模型的引导策略",
+      "llm_tldr_en": "DiMaS proposes a distribution-matching steering strategy for flow-matching VLAs, enabling fine-grained behavioral control in robotic manipulation.",
+      "llm_tldr_cn": "大型VLA模型在机器人操作中表现优异，但缺乏精细行为控制能力。DiMaS提出了一种分布匹配引导策略，专为流匹配VLA设计，通过传输表征分布而非固定方向移动来实现有效控制。实验证明该方法能精细调节机器人执行任务的方式，且优于传统线性引导方法。该工作为VLA模型的可解释性和可控性提供了新途径。",
+      "llm_tldr": "大型VLA模型在机器人操作中表现优异，但缺乏精细行为控制能力。DiMaS提出了一种分布匹配引导策略，专为流匹配VLA设计，通过传输表征分布而非固定方向移动来实现有效控制。实验证明该方法能精细调节机器人执行任务的方式，且优于传统线性引导方法。该工作为VLA模型的可解释性和可控性提供了新途径。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
