@@ -1,0 +1,926 @@
+Title: Deep learning-based prediction of time-resolved adhesive forces in viscoelastic Hertzian contacts
+
+URL Source: https://arxiv.org/pdf/2607.19060v1
+
+Published Time: Wed, 22 Jul 2026 00:59:09 GMT
+
+Number of Pages: 38
+
+Markdown Content:
+# Graphical Abstract 
+
+Deep learning-based prediction of time-resolved adhesive forces in viscoelastic Hertzian contacts 
+
+Ali Maghami, Merten Stender, Michele Ciavarella, Antonio Papangelo Time 
+
+Distributed 
+
+Dense 
+
+LSTM 
+
+128 
+
+LSTM 
+
+256 
+
+Concatenate 
+
+Physical 
+
+features 
+
+> Effective  surface  Enegry
+
+Deep learning predicts time -resolved adhesive forces in viscoelastic Hertzian contacts 
+
+• A Tabor -conditioned LSTM predicts complete adhesive -force histories less than a seccond , with median 
+
+errors of 2.2% in pull -off force and 1.1% in hysteresis .
+
+• The concatenated LSTM provides the best accuracy –complexity balance among 18 architectures .
+
+• The surrogate recovers the rate -dependent effective surface energy predicted by numerical simulations 
+
+and theory .arXiv:2607.19060v1 [cs.LG] 21 Jul 2026 Highlights 
+
+Deep learning-based prediction of time-resolved adhesive forces in viscoelastic Hertzian contacts 
+
+Ali Maghami, Merten Stender, Michele Ciavarella, Antonio Papangelo 
+
+• A seq2seq LSTM predicts time-resolved adhesive force in viscoelastic contact. 
+
+• Eighteen architectures compared; LSTM achieves 0.05 % mean-squared error. 
+
+• Fast parameter-independent inference time of about 0.25 s for a full force branch. 
+
+• Fixed measurement-step representation resolves heterogeneous sequence lengths. 
+
+• Fast pull-off and hysteresis prediction with controlled error. Deep learning-based prediction of time-resolved adhesive forces in viscoelastic Hertzian contacts 
+
+Ali Maghami a,b, ∗, Merten Stender a, Michele Ciavarella b, Antonio Papangelo b
+
+> aChair of Cyber-Physical Systems in Mechanical Engineering, Technische Universität Berlin, Straße des 17. Juni, Berlin, 10623, Germany
+> bTriboDynamics Lab, Department of Mechanics, Mathematics and Management, Polytechnic University of Bari, Via Orabona 4, Bari, 70125, Italy
+
+Abstract 
+
+Fast prediction of the response of adhesive soft viscoelastic contacts represents a current challenge in soft robotics and for gripping and manipulation tasks. Determining the complete time-resolved force trajectory requires full numerical simulations, whose computational cost is strongly parameter-dependent, making them impractical for real-time application or design-optimization loops. In this work, we overcome this limitation by training a scalar-conditioned, stateful, sequence-to-sequence deep learning model to predict the full force evolution from a pre-scribed displacement history for both short- and long-range adhesion regimes. The data set spans four orders of magnitude in loading and unloading rates and includes varied dwell times, with the Tabor parameter ranging from 0.2 to 3.2. To enable learning across these heterogeneous time scales, we introduce a fixed-measurement-step (FMS) representation that converts variable-length trajectories into fixed-length sequences while preserving their physical-time information. Different architectures were trained, including long short-term memory (LSTM) networks, tempo-ral convolutional neural (TCN) networks, and time-distributed dense layers with three different Tabor-conditioning mechanisms. The models were compared using global waveform and error metrics. We found that the best-performing model has an LSTM architecture with concatenated conditioning, which achieves a held-out mean-squared error of 5.0 × 10 −4, a median pull-off-force error of ≈ 2.2% , and a median hysteresis error of ≈ 1.1% . For the held-out protocols, the model predicts a complete force trajectory with a median inference time of 0.16 s. The model is tested across unseen parameter combinations and against analytical limiting cases, providing a rapid surrogate for repeated numerical evaluations with potential use in control-oriented applications. 
+
+Keywords: Viscoelastic adhesion, Hertzian contact, Deep learning, Time-resolved, Adhesive forces, Sequence-to-sequence modeling, Surrogate model 
+
+1. Introduction 
+
+The contact between a soft adhesive body and a rigid indenter under a prescribed loading-dwell-unloading cycle produces a time-resolved force trajectory that encodes substantially more information than the peak adherence force alone. The enclosed hysteresis loop as shown in Figure 1, determines the energy dissipated at the interface, the shape of the unloading branch governs the stability of the contact under varying rates, and the precise timing of the snap-off event is critical for controlled release in gripping, adhesion-switching applications and docking   
+
+> ∗Corresponding author
+> Email address: ali.maghami@tu-berlin.de (Ali Maghami)
+
+capabilities [1, 2, 3, 4]. Rapid prediction of this complete force history is essential for closed-loop control of soft robotic end-effectors [5, 6], for iterative material-design evaluations [7], and for dynamic biomechanical simulations [8]. Reproducing the force trajectory at a computational cost compatible with repeated real-time evaluation is the central challenge addressed in this work. The theoretical framework for adhesive Hertzian contact rests on two well-established elastic limiting solutions. The Johnson-Kendall-Roberts (JKR) theory [9], valid for soft compliant con-tacts governed by short-range surface forces, and the Derjaguin-Muller-Toporov (DMT) model, applicable to stiff contacts with long-range adhesion [10], predict pull-off forces of (3 /2) πR ∆γ0
+
+and 2πR ∆γ0, respectively, where R is the sphere radius and ∆γ0 is the thermodynamic surface en-ergy [11]. The transition between these two limiting regimes is governed by the Tabor parameter [12] μ =
+
+ R∆γ20
+
+> E∗2h30
+
+1/3
+
+, a dimensionless ratio between the height of the neck at the periphery of the contact patch and the range of surface forces h0, being E∗ = E/ (1 − ν2) with E the Young’s mod-ulus and ν the Poisson’s ratio, such that large μ corresponds to JKR-like and small μ to DMT-like behavior [11, 13, 14]. Intermediate values of μ require the introduction of a cohesive zone model, which was first introduced by Maugis [13] who showed that in the limit of large and small Tabor parameters, the JKR and DMT solutions can be retrieved, respectively. Crucially, these classical models consider the contacting material as elastic; hence, they are rate-independent, and the pull-off force is set by the geometry and surface energy regardless of how the pull-off state was reached. (b)  
+
+> rigid sphere
+> (a)
+> δ-h0
+> h(r,t)
+> uz(r,t) r2
+> (d) (c)
+> R
+> Viscoelastic substrate
+> R
+> 2R
+> ___
+> ry
+
+δ
+
+t
+
+δl
+
+δ0
+
+t1 t2
+
+t1 t2 tt3
+
+t3
+
+P
+
+Ppo 
+
+tpo 
+
+> η
+> E1
+> E2
+
+Pmc                  
+
+> Figure 1: Schematic of indentation of a viscoelastic substrate by a rigid spherical indenter: (a) the sphere, substrate and loading configuration, (b) geometric components of the gap function h(r, t )at an arbitrary contact point, including the indentation δ, the equilibrium spacing h0, the parabolic indenter profile r2/(2 R), and the viscoelastic surface deformations uz(r, t )which depend on the time t; (c) displacement-based loading-dwell-unloading protocol, with the initial and final indentation δ0chosen sufficiently far from the contact interface that the adhesive force is negligible at both sequence endpoints; (d) representative adhesive force response P(t)during the loading-dwell-unloading protocol, indicating the pull-off force Ppo , pull-off time tpo , and maximum compressive load Pmc .
+
+The adhesive response of soft polymers and elastomers departs fundamentally from this rate-2independent picture. Bulk viscoelastic dissipation amplifies the effective (often termed apparent) surface energy ∆γeff above the thermodynamic baseline [11, 15, 16, 17, 18, 19, 14, 20, 21, 22, 23], and the instantaneous contact force depends on the entire preceding loading path rather than on the current contact state alone [16, 20]; the amplification factor of the adherence force approaches the ratio E∞/E 0 which can reach several orders of magnitude in silicone-based polymers, being 
+
+E∞ the instantaneous and E0 the relaxed Young modulus [24, 25, 26, 19]. Analytical theories have addressed this problem in specific limiting regimes. Cohesive-zone models [24, 27] account for the rate-dependent process zone size at the contact edge (the crack "mouth"), while energy-based theories [26, 21] establishes an energy balance for the propagating contact front. Closed form analytical solutions exist for predicting ∆γeff based on the proposed theories [24, 27, 26], having the latter being extended also for viscoelastic materials with wide-band spectrum [19], nevertheless the latter approaches are restricted to quasi-static detachment from a fully relaxed initial state, apply in the JKR-like adhesion limit, and yield at most a scalar effective surface energy rather than a complete force trajectory. As Johnson observed, viscoelastic adhesion remains “ a difficult problem in contact mechanics ” [28], and no closed-form model provides the full force evolution under an arbitrary loading-dwell-unloading history; hence, the solution is restricted to numerical approaches [19, 29, 21, 22]. Numerical simulation removes many of the restrictions of analytical models. The bound-ary element method (BEM) combined with a time-marching Newton-Raphson scheme [30] can compute the complete force trajectory for any loading protocol, arbitrary Tabor parameter, and initial conditions [31, 29]. The computational cost, however, is substantial and strongly input-dependent. Hence, simulation time scales as O(N 2 
+
+> s
+
+Nt Niter ), where Ns is the number of spatial nodes, Nt the number of time steps, and Niter the average nonlinear iteration count per step, and it grows sharply with increasing Tabor parameter (which requires finer spatial discretization), increasing indentation depth, and decreasing unloading rate [19, 32]. Across the parameter space considered in this work, individual simulations range over more than three orders of magnitude on the same computational platform. This variability arises from the coupled effects of adaptive time-step refinement, spatial discretization requirements that scale with contact-zone extent, and nonlinear-iteration counts that increase with adhesive-zone complexity. Machine learning and deep learning (DL) offer fast surrogates with fixed inference cost once trained, irrespective of the complexity encoded in the input parameters [33, 34]. These methods have demonstrated broad potential in materials science [35, 36, 37, 38, 39], fracture mechanics [40, 41, 42, 43, 44], contact mechanics [45, 46, 47, 48, 49, 50], and tribology [51, 52, 53]. Within adhesion, existing studies have concentrated on the geometric optimization of fibrillar and mi-cropatterned contacts [54, 55, 56, 57, 58, 59] or on the prediction of scalar detachment quantities for flat-to-flat contact configurations [60]. A first step toward Hertzian viscoelastic adhesion was taken by Maghami et al. [45], who developed a physics-augmented tree-based machine learning framework for predicting the pull-off force and work-to-pull-off across wide ranges of the Tabor parameter, material properties, and unloading rate. These abstract detachment metrics, how-ever, are aggregate outcomes of the force–displacement response and do not explicitly capture the path-dependent force trajectory produced by viscoelastic memory during loading, dwell, and unloading. Resolving this missing trajectory-level information is the primary motivation of the present study. A key structural distinction separates this prediction task from abstract surrogate model-ing. Viscoelastic adhesive contact is governed by a Boltzmann convolution integral (see Eq. (3)): hence, it cannot be recovered from the instantaneous contact state alone. This motivates stateful sequence models such as LSTMs [61], which update an internal state along the loading history to predict the full force trajectory. Precedents for this approach include LSTM architectures that 3learn constitutive viscoelastic behavior from stress-strain histories [62], physically consistent for-mulations through structured network design [63], and effective surrogates for history-dependent contact and manipulation tasks [64, 65, 66, 67, 68]. Unlike the preceding work of Maghami et al. [45], which employed tree-based tabular models to predict abstract detachment quantities for contacts unloaded from a fully relaxed initial state, the present study targets the prediction of the full time-resolved adhesive force trajectory, including contact states that are not relaxed at the onset of unloading. The surrogate is therefore required to reproduce the loading branch, the dwell-induced relaxation transient, the complete unloading path, and the timing of the snap-off event from the prescribed displacement history and the Tabor parameter alone. This task cannot be reduced to a static input-output mapping and directly motivates the use of stateful deep sequence models. The constitutive description is restricted to a single-relaxation viscoelastic model so that this first sequence-prediction benchmark for viscoelastic adhesive contact can be posed, trained, and evaluated in a controlled and reproducible setting before extension to broader material spectra [19, 69, 70]. The objectives of this work are: (i) to introduce a fixed measurement-step representation to accommodate the heterogeneous time-sequence lengths arising from a broad numerical dataset spanning a variation of several orders of magnitude in terms of loading and unloading rates, indentation, dwell times for varying Tabor parameter; (ii) to perform an extensive architecture search over scalar-conditioned sequence-to-sequence models, spanning six family networks and three Tabor-conditioning mechanisms, to identify design choices that can inform future trajectory-level surrogates for history-dependent adhesive contact; (iii) to assess the role of physics-guided input features by contrasting a minimally processed input configuration with an augmented rep-resentation incorporating causal velocity and protocol edge-detection channels; (iv) to validate the reference surrogate against numerical simulations using physically interpretable detachment quantities, including pull-off force, pull-off time, and hysteresis also against analytical limiting case through effective surface energy; and (v) to provide a rich, first-of-its-kind dataset of time-resolved viscoelastic adhesive contact trajectories for future benchmarking and developments. The remainder of this paper is structured as follows: Section 2 describes the data-generation procedure, the sequence-model architectures, and the evaluation metrics; Section 3 presents the prediction results; Section 4 discusses the key findings; and Section 5 summarizes the main con-clusions. 
+
+2. Methods 
+
+2.1. Physical model 
+
+Let us consider a rigid sphere of radius R pressed against and subsequently retracted from an adhesive viscoelastic half-space (Figure 1), with the initial and final indentation chosen sufficiently remote from the interface that the adhesive force is negligible at both sequence endpoints. We restrict our attention to ramp loading and unloading performed respectively at the constant velocities vL and vU (Figure 1c). The Standard Linear Solid (SLS) is considered as a classical viscoelastic material model, constituted by a spring in parallel with a dashpot and the pair in series with a spring, as it reproduces the essential features of a viscoelastic material. The interactions between the rigid indenter and the viscoelastic halfspace are described by the Lennard-Jones traction-separation law [71, 72]: 
+
+σ(h) = 8∆ γ0
+
+3h0
+
+"h0
+
+h
+
+3
+
+−
+
+h0
+
+h
+
+9#
+
+, (1) 4where σ is the interfacial stress (positive when tensile), h is the local gap between surfaces, and 
+
+h0 is the equilibrium separation distance at which σ(h0) = 0 . The thermodynamic surface energy 
+
+∆γ0 is related to the maximum tensile stress σ0, occurring at h = 3 1/6h0, by ∆γ0 = 9√316 σ0h0 [73]. The gap function h(r, t ) between the rigid sphere and the substrate at radial coordinate r and time t is: 
+
+h(r, t ) = −δ(t) + h0 + r2
+
+2R + uz (r, t ), (2) where δ(t) is the indentation depth (positive as the sphere moves towards the substrate), and 
+
+uz (r, t ) is the viscoelastic surface displacement (positive in the half-space), which depends on the full loading history [74]. Applying the elastic-viscoelastic correspondence principle via Boltzmann superposition [73, 74, 75]: 
+
+uz (r, t ) = 
+
+Z ∞
+
+> 0
+
+G(r, s ) s
+
+Z t
+
+> −∞
+
+C(t − τ )∂σ (s, τ )
+
+∂τ dτ ds, (3) where G(r, s ) is the elastic Kernel function of the half-space (given explicitly in Appendix E) and 
+
+C(t) is the creep compliance function. For the SLS model adopted here the creep compliance function is 
+
+C(t) = 1
+
+E0
+
+
+
+1 + ( k − 1) exp 
+
+
+
+− tτr
+
+ 
+
+, (4) where τr is the retardation time, k = E0/E ∞ is the modulus ratio, and E0, E∞ are the rubbery and glassy moduli, respectively. Equations (1) to (4) are combined into a nonlinear convolution integral equation for the unknown gap field h(r, t ), whose numerical solution is carried out in dimensionless form. The nondimensional parameters are defined as 
+
+bδ = δh0
+
+, bt = tτr
+
+, bv = vτ r
+
+h0
+
+, bP = Pπ∆γ0R , (5) where bP is the dimensionless normal force. The Tabor parameter μ =
+
+ R∆γ20
+
+> E∗
+> 0 2h30
+
+1/3
+
+governs the transition between the long-range ( μ ≲ 0.2) and short-range ( μ ≳ 3) adhesion regimes, and it appears as the key non-geometric input to the surrogate models. The dimensionless governing equations are solved numerically by BEM combined with a Newton-Raphson iteration on Ns equally spaced nodes [31, 29, 45]. Temporal discretization pro-ceeds by a time-marching algorithm with step ∆bt, and spatial discretization employs the method of overlapping triangles [76], which assumes a piecewise-linear pressure distribution over each element. Details of the discretized equations, the influence matrix, and the dimensionless forms of Eqs. (1), (2), and (3) are given in Appendix E. The results obtained with this numerical code have been validated for both flat and Hertzian viscoelastic adhesive contacts in Ref.s [29, 45]. 
+
+2.2. Dataset generation 
+
+To systematically explore the adhesive response of the indenter-halfspace contact, five param-eters were varied: the loading rate bvL = bδl−bδ0
+
+> bt1
+
+and unloading rate bvU = bδl−bδ0
+
+> bt3−bt2
+
+(Figure 1(c)), each value independently drawn over [10 −1, 10 3], the dwell time btD = bt2 − bt1 over [10 −3, 3] , indentation depth bδl over [0, 100] and the Tabor parameter μ over [0 .2, 3.2] . We note that the initial and final indentation δ0 for all the samples are chosen sufficiently far from contact, equal to −π2/3μ.Lower loading rates produce rubbery, compliant responses; higher rates produce glassy, stiff ones. Short dwell times correspond to near-instantaneous unloading after the loading is completed, 5while longer dwell times allow stress relaxation. The Tabor parameter spans the regimes from long-range ( μ = 0 .2) to short-range ( μ = 3 ) adhesive interaction [73]. The modulus ratio was fixed at k = 0 .1. A total of 12,450 trajectories were generated from this parameter space.           
+
+> Figure 2: Representative force-time responses and empirical statistics for the simulated dataset. Panels (a)–(f) show six selected trajectories on linear time axes, spanning short, intermediate, and long pull-off times together with weak and strongly negative pull-off forces. The bottom row contains three histograms normalized by the total number of simulation considered: (g) pull-off time btpo on a logarithmic axis, (h) force-range ratio bPpo /bPmc on a logarithmic axis, and (i) BEM simulation time tCP U (s)distribution on a logarithmic axis, showing computational cost variability spanning more than three orders of magnitude. Loading-protocol parameters for panels (a)–(f) are listed in Table A.3 in Appendix A.
+
+Figure 2 summarizes the dataset variability using six representative force-time trajectories (panels (a-f)) together with the frequency plots of the dimensionless time at which pull-off happens 
+
+btpo (panel (g)), the pull-off-to-maximum-preload ratio bPpo /| bPmc | (panel (h)), where bPpo is the pull-off force and | bPmc | is the magnitude of the maximum compressive load reached in the same trajectory (see Figure 2d) , and BEM simulation time tCPU (Figure 2 (i)). In the investigated parameter space the dimensionless time at which the pull-off event may occur can vary over about 5 orders of magnitude (panel (g)), from very rapid snap-offs to cases extending to nearly 
+
+btpo ≈ 3 × 10 2, while the associated force response spans from a small positive regime prior to pull-off to markedly negative force values in compression resulting in a distribution of bPpo /| bPmc |
+
+that spans 5 orders of magnitude. For the learning surrogate, this means that it has to learn the trajectory while the pull-off event may be comparable to the compressive load scale in some histories but orders of magnitude smaller in others. As mentioned here and discussed in our previous works [19, 45], computational cost increases rapidly for large Tabor parameters, deeper indentation, and slower unloading. Individual simula-tions across the parameter space studied here ranged from a few seconds to hours of computational 6times, depending on input parameters (panel (i)), using MATLAB 2023b © on a desktop com-puter equipped with Windows 11 Pro, a 12th Gen Intel(R) Core(TM) i9-12900K, 3200 MHz, 16 Cores, and 96 GB RAM, and the total computation cost for the whole data set is approximately 478 CPU-hours, or about 20 CPU-days. This computational-cost skewness underscores the prac-tical motivation for a fixed-cost surrogate, while the BEM solver’s runtime scales nonlinearly with problem complexity and discretization requirements, the trained sequence model provides uniform inference time across the entire parameter space. This enables the rapid repeated evalu-ations required for control, optimization, and inverse-identification applications. Together, these observations imply two modeling challenges: (i) heterogeneous sequence lengths, because each trajectory terminates at a different number of time steps; and (ii) a broad dynamic range in both inputs and outputs, spanning several orders of magnitude. These challenges motivate the representation strategy described in the following subsection. 
+
+2.3. Data mapping 
+
+The two modeling challenges identified above (heterogeneous sequence lengths and broad dynamic range) make direct use of the raw BEM time series impractical for batch learning. Two naive alternatives exist, but are both unsatisfactory. An event-driven approach, which terminates each sequence at pull-off, implicitly informs the model of the pull-off time and can bias predictions. A fixed-time-grid approach, which uses the longest trajectory’s discretization for all samples, produces excessively long sequences, even when not needed. This amplifies vanishing-gradient problems and training cost drastically. We resolve both issues by representing the load-time trajectories with a fixed number of measurement steps, replacing the variable number of time steps. We will refer to this as a Fixed Measurement Step (FMS) representation. The FMS representation assigns a prescribed number of measurement points to each phase of the loading protocol instead of using the native adaptive BEM time discretization directly. In the present dataset, each trajectory is represented by N = 120 points, including 50 points for loading, 20 points for dwell, and 50 points for unloading. We note that the points are uniformly distributed within each phase. The proposed representation is conceptually similar to fixed-resolution approaches such as PAA/SAX [77], but it imposes a prescribed number of measurement points within each physical phase. Because each BEM simulation is generated on its own adaptive time grid, spline interpolation is used to map the raw trajectory onto this common FMS grid. Formally, let us consider a BEM-generated numerical trajectory represented as {btq, bδq, bPq}q=1 ,...,Q ,being Q the number of time steps for that trajectory before FMS resampling. The FMS mapping 
+
+S produces a fixed-length sequence through spline interpolation as follows: 
+
+S : btq, bδq, bPq q=1 ,...,Q 7 −→ btj , bδj , bPj j=1 ,...,N (6) where, j = 1 , . . . , N labels the fixed measurement steps after resampling. The FMS index ranges 
+
+j = 1 , . . . , N L, j = NL + 1 , . . . , N L + ND, and j = NL + ND + 1 , . . . , N preserve the loading, dwell, and unloading portions of the original BEM trajectory, while spline interpolation maps the adaptive BEM samples within each phase onto the prescribed number of measurement steps, being (NL, N D, N U ) = (50 , 20 , 50) .Figure 3 visualizes the FMS encoding after the preprocessing steps described above. The orig-inal indentation and force trajectories are first expressed on the native time axis, then remapped to the common measurement-step grid used by the sequence model. The mapped channels re-tain the loading, dwell, and unloading structure while giving every trajectory the same sequence length. 7Data mapping Figure 3: Fixed-measurement-step (FMS) mapping from the native BEM time series to a fixed-length sequence with N = 120 measurement steps. Panel (a) shows the normalized indentation history bδ as a function of normalized time bt on the original time axis. Panel (b) shows the corresponding normalized force response bP as a function of       
+
+> bt.Panel (c) shows the same indentation history after resampling onto the FMS measurement index. Panel (d) shows the mapped normalized time channel btassociated with each measurement step. Panel (e) shows the mapped normalized force target bPon the same fixed measurement grid.
+
+2.4. Surrogate-model inputs and targets 
+
+The surrogate receives two qualitatively different inputs. The first is dynamic and sequential, the FMS-resampled loading history, stored in a matrix X whose rows follow the measurement index j = 1 , . . . , N . The second is static, the Tabor parameter μ, which is fixed for the whole trajectory and specifies the adhesion regime. The target is also sequential, namely the normalized force history y. With N = 120 , the learning problem is written as 
+
+X = [ x1, x2, ..., xd] ∈ RN ×d, μ ∈ R, y = ( bP1, . . . , bPN )⊤ ∈ RN ,
+
+by = fθ(X, μ ), fθ : RN ×d × R → RN . (7) Here, X contains all time-varying quantities provided to the network, where d is the number of sequential features provided, also known as channel number. Furthermore, μ is supplied separately as a static scalar due to its nature. The loading rate, unloading rate, dwell duration, and maximum indentation are therefore represented through the sampled time-indentation history in X, not as separate static inputs. This design choice is intended to support the model’s potential for future generalization. We use two different types of feature definitions, where the purely data-driven representation uses: 
+
+X =
+
+hbt, bδ
+
+i
+
+, (8) containing time vetor bt and displacement vector bδ while the physics-guided representation has four channels as: 
+
+X =
+
+hbt, bδ, ˙bδ, ej
+
+i
+
+, (9) 8where ˙bδ is the velocity vector, and ej is edge vector. The two-channel representation is a minimal data-driven description of the prescribed protocol. The four-channel representation augments it with quantities that make the loading-history structure more explicit. The velocity channel is computed causally through finite difference method (FDM) from the FMS-resampled indentation sequence as ˙bδj = ( bδj − bδj−1)/(btj − btj−1) for j = 2 , . . . , N . The edge channel ej ∈ { 0, 1} is zero except at the onset and termination of the dwell plateau, where it marks the abrupt velocity changes between loading, dwell, and unloading. Unless otherwise stated, all experiments use the physics-guided four-channel representation; Appendix G compares it with the two-channel data-driven representation and shows that removing the velocity and edge channels produces a substantial increase in validation error. The trajectories are divided randomly into 80% training, 10% validation, and 10% test subsets using a fixed random seed. A symmetric logarithmic transform is applied to time, indentation, force, and Tabor parameter, with time transformed twice to compress its particularly broad dynamic range. The transformed sequence channels, the static Tabor input, and the force output are then normalized using statistics computed on the training set only. LSTM Block                         
+
+> LSTM Block
+> Initial state (c 0, h 0)Updated state (c N, h N)
+> LSTM Block
+> Causal Conv1D (dilation = d2=2) Causal Conv1D (dilation = d1=2)
+> Input feature s(hj,1 , ..., hj, H), j=1: N
+> Output (yj), j=1: NH: hidden units
+> Sequence Input
+> Physical features (FDM+Edge) Concat LSTM (256 units) LSTM (128 units) Time Distributed Dense Layer Tabor Paramter (static feature) LSTM layer TCN layer Dense layer Output layer Static Input Concatenation Physical feature Output
+
+Figure 4: Schematic overview of the neural-network components and representative sequence-to-sequence archi-tecture considered in this study: (a) LSTM module, (b) residual TCN block with causal convolutions, (c) dense layer, and (d) the M1-concat reference architecture (LSTM 256 →128 with concatenated Tabor conditioning and TimeDistributed Dense output layer), which achieves the best test-set performance among the eighteen compared models. The block labeled Physical features (FDM+Edge) in panel (d) denotes the two derived input channels appended to the base sequence: the finite-difference method (FDM) velocity ˙bδj and the binary edge-detection (Edge) indicator ej that marks rapid rate transitions at the onset and end of the dwell phase (see Section 2 for definitions). 
+
+2.5. DL Models’ architecture 
+
+As discussed in the previous sections, the considered viscoelastic material exhibits memory effects which means the adhesion force at a given step is not determined solely by the current displacement, but also by the preceding deformation history. In other words, the current state depends on previous states, which themselves carry information from earlier loading steps; this 9history-dependent behavior is what distinguishes the viscoelastic response from a purely elastic one. Similar requirements arise in other sequence-learning problems, such as speech recognition, audio processing, and machine translation, where the meaning of the current signal depends on its temporal context. This motivates the use of state-aware sequence models capable of preserving ordering and accumulating history. Figure 4 summarizes the three neural-network building blocks used for this purpose. Panel (a) shows a Long Short-Term Memory (LSTM) layer [61], in which the hidden cell states are updated while the sequence is traversed. This makes LSTM layers natural candidates for approximating the fading-memory character of the Boltzmann convolution in Eq. (3). Panel (b) shows a residual Temporal Convolutional Network (TCN) block [78], where causal one-dimensional convolutions with dilation extract local and progressively wider temporal patterns without using a recurrent state. This provides a complementary way of encoding the loading history and allows the comparison between recurrent and convolutional memory represen-tations. Panel (c) shows the dense readout used in a time-distributed form: the same affine map is applied to the latent features at each measurement step, producing one scalar force prediction while preserving the sequence length. The mathematical definitions of the LSTM cell, residual TCN block, and TimeDistributed Dense readout are given in Appendix F. All neural-network models were implemented in Python using TensorFlow/Keras 2.18.0. These building blocks were then combined into six families of sequence models, denoted M1– M6. M1 is the LSTM architecture, with two recurrent layers followed by a TimeDistributed Dense output layer. M2 adds layer normalization to the LSTM structure. M3 first applies one-dimensional convolutional layers to extract local temporal features and then processes the resulting sequence with an LSTM layer. M4 is a pure TCN model composed of four residual dilated causal blocks. M5 uses a transformer-encoder architecture as an attention-based alternative to recurrent and convolutional sequence encoders. M6 is a residual LSTM in which a skip connection combines two recurrent paths before the final recurrent layer. For each of the six families, the static Tabor parameter μ was supplied through one of three conditioning mechanisms. In concatenation conditioning, μ is repeated over the N measurement steps and appended to the sequence features before the first temporal layer. In FiLM conditioning, a small dense sub-network driven by μ produces feature-wise affine scale-and-shift coefficients applied to a hidden representation. In gated conditioning, μ parameterizes a softmax gate that forms a convex mixture of two compatible temporal branches. These three alternatives are shown by the dashed conditioning paths in Figure B.8 and are defined mathematically in Appendix C. Combining the six families with the three Tabor-conditioning mechanisms gives 18 sequence-to-sequence models. All eighteen models use the physics-guided four-channel input representation described in Section 2.3. Figure 4(d) illustrates the M1 architecture with concatenated Tabor conditioning. It is notable that this model is later identified as the best-performing configuration in 3 and is adopted as the reference surrogate. The complete set of M1–M6 architectures is schematically represented in Appendix B, Figure B.8. 
+
+2.6. Training and hyperparameters 
+
+All models were trained with the Adam optimizer [79], a learning rate of 10 −4 (known also as step-size taken during optimization), and mean-squared-error (MSE) loss applied to the trans-formed and standardized force sequence. Training was performed for at most 2000 epochs with a batch size of 8, where each epoch is a one complete pass over the entire training dataset. The learning rate was reduced by a factor of 0.5 after 20 epochs without improvement in the validation loss, down to a minimum value of 10 −7, and early stopping was activated after 30 non-improving epochs, with restoration of the best weights. The learning curves of the concatenation-conditioned models are shown at Figure 5(a), and the rest 12 models’ learning curves are available at Figure D.10 in Appendix D. 10 During hyperparameter tuning, the maximum number of epochs and the batch size were found to be the most influential training parameters. Our hyperparameter-selection strategy was first based on keeping the 18 candidate architectures fixed and varying the main training parameters, including the learning rate, number of epochs, and batch size. After identifying the best training configuration, additional sensitivity analyses were performed on the architecture-specific hyper-parameters, which led to the final architectural settings reported in the manuscript. The detailed hyperparameter-tuning results are not reported for the sake of conciseness. The longest training run, corresponding to M6 with gated conditioning, was completed in approximately 6 hours on a desktop workstation equipped with a 12th Gen Intel Core i9-12900K processor, 16 cores, and 96 GB RAM. 
+
+3. Results 
+
+All results reported in this section refer to the test set unless stated otherwise. We first use the model-comparison study to identify a reference sequence model for the remainder of the analysis, and then assess whether that model reproduces the canonical adhesion regimes and physically interpretable quantities relevant to detachment. 
+
+3.1. Model-family selection 
+
+Here, model comparison was based on global waveform metrics as well as MSE and mean absolute error (MAE). When comparing two curves or time-dependent signals, particularly in mechanical and engineering applications, MSE and MAE alone may be insufficient, since the global shape, phase, and qualitative evolution of the response can be more relevant than strictly point-to-point discrepancies. Therefore, in addition to these classical error measures, we consid-ered dynamic time warping-root MSE (DTW-RMSE) [81]. DTW-RMSE combines dynamic time warping with root mean squared error by first aligning two curves through an optimal warping path and then computing the RMSE over the aligned samples, making it suitable for signals with similar shapes but local temporal shifts or distortions [81, 82]. Figure 5 compares all eighteen models provided in Appendix B using validation-learning be-havior, shape-sensitive trajectory error, model size, and a test against analytical solution. The model denoted M1 with concatenated Tabor conditioning (blue triangle in Figure 5b) provides the best overall balance among the compared candidates when accuracy and learnable-parameter count are considered together. In particular, it attains a held-out MSE of 5.0 × 10 −4, an MAE of 9.2 × 10 −3, a DTW-RMSE of 1.48 × 10 −2, and uses 473,729 learnable parameters. Within this comparison, the concatenation conditioning strategy is therefore sufficient to outperform the FiLM and gated alternatives, and M1-concat is adopted as the reference model in the remaining results. The remaining validation learning curves are provided in Appendix D. A representative check of the sensitivity of this trained recurrent model to nearby FMS resolutions is provided in Appendix H. The data-fraction experiment in Figure 5(d) was introduced to distinguish architectural ade-quacy from simple data abundance and to estimate how rapidly predictive accuracy deteriorates when fewer BEM trajectories are available. The point at 100% corresponds to the selected refer-ence M1-concat model trained on the full training partition, whereas each reduced-fraction point is the mean over five retrainings on nested subsets of the same training partition. The validation and test partitions were kept identical to those used for the reference model, so changes in error can be attributed to the amount and coverage of available training information. The shaded band and error bars report the fold-to-fold standard deviation. The error increases progressively as the training fraction is reduced. Appendix G reports the associated validation histories for one fold. 11 Figure 5: Model selection, physical validation, and data-efficiency diagnostics for the M1-concat surrogate. (a) 
+
+Validation-loss learning curves for the concatenation-conditioned models. (b) Model size, measured by the number of learnable parameters, versus shape-sensitive trajectory error measured by DTW-RMSE. Marker shapes denote the conditioning mechanism: triangle = concatenation, star = FiLM, and diamond = gated conditioning; colors identify the six neural-network architectures M1–M6. (c) Normalized effective surface energy bΓeff = ∆ γeff /∆γ0
+
+versus normalized crack velocity evc. Red squares show the portion of the 19-point SLS numerical series from Figure 6 in Ref. [19] that lies within the displayed crack-velocity range, the black solid curve is the corresponding Persson & Brener theory [26] prediction, and the fourteen blue triangles are M1-concat predictions evaluated at 
+
+μ = 3 .24 and at the selected deposited SLS unloading rates from the inset of Figure 7 in [19], then plotted at their directly paired inset crack velocities [19, 80, 26]. (d) Data-efficiency test for the selected M1-concat architecture: the 100% point is the full-training reference model, whereas the reduced training fractions report the mean held-out test MSE over five nested training-subset folds; the shaded band and error bars denote one sample standard deviation across folds. Validation and test protocols are held fixed, so the trend isolates the effect of reducing the number of available BEM trajectories. Further learning-curve and feature-representation diagnostics are reported in Appendix G. 
+
+12 The trends in Figure 5, together with the validation curves in Appendix D (Figure D.10), reveal two effects. First, the conditioning mechanism matters because μ is a continuous adhesion-regime variable, controlling the DMT–JKR transition and cohesive-zone scale, while the network must also encode the viscoelastic loading history. The comparison does not indicate a universal superiority of concatenation conditioning. Based on the held-out MSE, concatenation performs best within M1 and M2, FiLM within M3 to M5, and gated conditioning within M6 (see Figure C.9). Thus, M1-concat is the best individual configuration, while the relative effectiveness of each conditioning mechanism depends on the temporal family and injection point. In M1-concat, 
+
+μ enters the LSTM at every measurement step, so the same recurrent gates learn both the fading-memory response associated with the Boltzmann convolution and the adhesion regime. Second, the family comparison shows that architectural simplicity and the internal memory are advantageous. The LSTM-based architecture (M1) gives the best selected model, while the TCN family (M4) is the strongest alternative, consistent with the fact that causal dilated convolutions can represent finite loading-history windows. However, the LSTM is better matched to viscoelastic adhesion. This phenomenon can be attributed to the fact that the LSTM cell state provides an adaptive fading memory, whereas the TCN memory is fixed by the receptive field. As shown in Figure 5(b), comparing M1 Concat with the M5 family of models, which contains a larger number of learnable parameters, it can be inferred that the number of parameters alone is not the primary factor determining performance. Rather, the way these parameters interact and are utilized within the model architecture plays a more significant role. 
+
+3.2. Verification in the fully relaxed short-range adhesion limit 
+
+For the general loading–dwell–unloading histories considered in this work, no closed-form analytical solution is available for the complete force trajectory. An analytical reference for detachment is available only in the fully relaxed, short-range adhesion limit and with sufficiently large preload, in which the contact is JKR-like and its receding edge can be treated as a viscoelastic interfacial crack. We therefore use this restricted regime as a controlled physical verification of M1-concat against the numerical study of Maghami et al. [19] and the Persson–Brener (PB) crack-propagation theory [26], rather than as a validation over the entire protocol space. The common comparison quantity is the rate-dependent effective surface energy ∆γeff (evc)
+
+that is the macroscopic energy per unit newly separated area required to advance the contact edge. Here vc denotes the contact-edge crack velocity and evc = vcτr/l 0 its normalization, with 
+
+τr and l0 = E∗ 
+
+> 0
+
+∆γ0/[π(ασ 0)2] denoting the characteristic material time and PB length scale [19], respectively. The parameter α ≈ π/ 9 is an empirical coefficient reported by [19] to relate the LJ maximum tensile stress σ0 with the critical stress σc introduce in PB theory [26]. The subscript c distinguishes crack velocity from the prescribed loading and unloading velocities vL
+
+and vU . Within linear viscoelastic fracture mechanics, ∆γeff combines the thermodynamic work of adhesion ∆γ0 with the bulk viscoelastic dissipation accompanying crack propagation and is therefore a crack-velocity-dependent fracture quantity, rather than an additional constant surface property. We use the normalized form bΓeff = ∆ γeff /∆γ0. In the fully relaxed short-range limit, and provided that the initial contact is sufficiently large to suppress finite-size effects, this quantity is related to the pull-off amplification by bΓeff ≃ | Ppo |/P JKR , where PJKR = 1 .5πR ∆γ0. PB theory supplies bΓeff directly as a function of evc, which is used in Figure 5(c) [19]. To approach the assumptions of this analytical limit with the present surrogate, all protocol quantities other than unloading velocity are fixed at μ = 3 .24 , bδl = 80 , bvL = 1 .3895 , and btD = 3 .0.The high Tabor parameter and large peak indentation promote short-range, preload-independent JKR-like detachment, while the long loading duration followed by the dwell brings the substrate close to its relaxed state before retraction. The unloading velocities are not chosen from an 13 auxiliary grid, and they are exactly the fourteen selected SLS retraction rates associated with the numerical results of Maghami et al. [19]. Because PB theory is expressed in crack-velocity space, each M1-concat prediction is assigned the crack velocity paired directly with that retraction rate in the inset of Figure 7 of Ref. [19]. The details are documented in Appendix A. M1-concat predicts the complete force trajectory for each of these fourteen protocols, and |Ppo |
+
+is extracted a posteriori as the maximum tensile-force magnitude during unloading. Figure 5(c) compares the resulting bΓeff values (blue triangles) with both the SLS BEM results (red squares) of Ref [19] and the corresponding PB solution (solid black line). The surrogate follows the reference trend closely at low and intermediate crack velocities. The larger deviations at the highest crack velocities are consistent with the increasingly localized pull-off event, for which the predicted maximum is more sensitive to the finite resolution of the fixed-measurement-step representation. Note that neither the PB nor the samples in Ref [19] were used in the training process of M1-Concat. We also note that the M1 Concat is trained to predict the whole trajectory on the whole training domain, while this test was to validate an abstract quantity on the specific relaxed short-range adhesion regime. 
+
+3.3. Canonical adhesion regimes 
+
+The predictions of the M1-concat model are shown in Figure 6 (for unseen data) to allow a direct comparison between the numerical BEM predictions (solid black line) and the M1 Concat ones (markers) for 12 different combinations of input parameters. It is worthwhile to recall that although the loading protocol is a function of 6 input parameters {bδ0, bvL, bvU , btD, bδl, μ } the surrogate model sees the displacement history plus the Tabor parameter. In Figure 6 we considered: (a) low Tabor parameter in combination with relatively long dwell time, (b) high Tabor parameter in combination with relatively long dwell time, (c) low Tabor parameter combined with very short dwell time, (d) high Tabor parameter combined with short dwell time. The parameter combinations are labeled with a number from 1 to 12, and the loading parameters are reported in Table 1. Hence, Figure 6 shows a combination of paradigmatic loading conditions in viscoelastic contacts, considering unloading paths that start when the substrate is relaxed or immediately after a rapid loading sequence in combination with different adhesion regimes, from short to long-range. Across all the tests, the surrogate reproduces the overall loop shape, the location of the pull-off event, and the inherent differences between glassy-like and rubbery-like responses. The agreement is particularly relevant in panels (c) and (d), where the short dwell and high rates preserve the memory of the preceding loading history and therefore provide the strongest test of the sequence model. Figure 6 demonstrates that the M1-concat provides consistent predictions for all the combinations tested and not only along the main loading-unloading branches but also when single points of particular interest are extracted (e.g., the pull-off force or the maximum preload). Notice also that Ref. [45] trained a machine learning model to predict the pull-off force when a viscoelastic substrate was unloaded from a fully relaxed condition. Here, this limitation is overcome as pull-off predictions show strong agreement for all the protocols tested. The remaining visible errors are concentrated near the sharp adhesive-instability and snap-off portions of the unloading branch, most clearly in the high-Tabor cases of panel (d and b), where a small shift in the transition position produces a large local force discrepancy. Table 1 reports the loading properties, the Tabor parameter ( μ), the simulation time, and the network inference time, showing that the M1 Concat model provides predictions about three orders of magnitude faster than a classical BEM numerical approach, regardless of the input parameters. Notice that this may play a crucial role in integrating real-time estimation of the contact state in practical engineering applications (grasping, crawling, manipulation) or in multi-body multi-degrees of freedom systems. 14 Figure 6: Force–indentation response of the M1-concat surrogate for the twelve representative unseen protocols listed in Table 1. Solid black curves show the BEM reference simulations, while colored markers show the surrogate predictions; the panel legends identify samples (1) to (12), and the in-panel labels report the corresponding Tabor parameter. Panels (a) and (c) show low-Tabor cases with μ = 0 .2, whereas panels (b) and (d) show high-Tabor cases with μ = 3 .2. Panels (a,b) correspond to longer-dwell protocols, while panels (c,d) correspond to short-dwell protocols with increasing loading rate, unloading rate, and peak indentation from the first to the third sample in each panel. Full loading parameters, BEM runtimes, and M1 Concat inference times are reported in Table 1. 
+
+15 Table 1: Loading-protocol parameters and computational timings for the numbered representative samples shown in Figure 6.                                                                                                     
+
+> Sample Loading rate bvL
+> Dwell time
+> btD
+> Unloading rate bvU
+> Tabor parameter μ
+> Peak indentation
+> bδl
+> BEM time (s) M1 Concat time (s) (1) 10 1200 0.25658 0.12
+> (2) 100 2200 0.210 456 0.21
+> (3) 1000 3200 0.215 488 0.26
+> (4) 10 11000 3.256585 0.17
+> (5) 100 21000 3.210 5764 0.16
+> (6) 1000 31000 3.215 1214 0.16
+> (7) 10 1.0×10 −310 0.25333 0.15
+> (8) 100 4.5×10 −3100 0.210 364 0.15
+> (9) 1000 8.0×10 −31000 0.215 424 .40.23
+> (10) 10 1.0×10 −310 3.25407 .50.23
+> (11) 100 4.5×10 −3100 3.210 258 .20.13
+> (12) 1000 8.0×10 −31000 3.215 254 .20.14
+> Reported BEM times correspond to the last successful time-discretization attempt. Although warm-up discretization and adaptive time steps were used in BEM, convergence may require additional trial-and-error attempts, which are not included in the computational-cost comparison.
+
+3.4. Physically interpretable error statistics 
+
+Table 2 stratifies prediction accuracy by sorting the test set 1245 evaluated samples into four equal groups ranked by per-sample force MSE, from Q1 (lowest-error quartile) to Q4 (highest-error quartile). Notice that the force MSE metric is computed over the whole trajectory; this may differ from the point-wise error on a single quantity, such as the pull-off force, the time at which pull-off happens, or the enclosed hysteresis loop. This stratification identifies which error regimes drive the overall figures and reveals whether physically central quantities such as pull-off force and enclosed hysteresis-loop degrade in concert with the global force-sequence error. For the i-th trajectory, the pull-off force bP (i)po is defined as the maximum tensile force reached during the unloading phase, and the pull-off time bt(i)po is the corresponding time instant. The enclosed hysteresis-loop area is evaluated in the normalized force–indentation plane as bA(i)hys =
+
+H bP (i) dbδ(i). The errors reported for pull-off force, pull-off time, and hysteresis area are relative errors, computed as 100 |by(i)M1 − y(i)BEM |/|y(i)BEM | where M1 is the predicted values by M1 Concat and 
+
+y(i)BEM is the BEM reference results. The values in Table 2 are the mean and standard deviation of these errors within each force-MSE quartile. 
+
+Table 2: Prediction errors by test-set quartile. Samples are ranked by per-sample force MSE and divided into four equal groups, from Q1 (lowest-error quartile) to Q4 (highest-error quartile). Entries are reported as mean ±
+
+standard deviation. 
+
+Quartile Force MSE (×10 −3)Pull-off Error (%) Hysteresis Error (%) Pull-off Time Error (%) Q1 0.0853 ± 0.0229 2.4 ± 2.5 1.7 ± 2.7 0.6 ± 1.5
+
+Q2 0.1587 ± 0.0246 3.2 ± 3.7 2.0 ± 4.7 0.6 ± 1.4
+
+Q3 0.2939 ± 0.0630 4.0 ± 5.1 2.3 ± 4.0 0.6 ± 2.0
+
+Q4 1.5134 ± 1.6845 6.1 ± 8.9 3.1 ± 6.0 0.4 ± 1.1
+
+Pull-off value, pull-off time, and hysteresis entries are relative errors in percent, while force MSE is not a relative error. The force-MSE column reports 10 3MSE . Mean ± standard deviation is computed across the per-sample errors within each force-MSE quartile. 
+
+Table 2 summarizes how the prediction errors evolve from the lowest- to the highest-error trajectories in the test set. In the highest-error quartile, the mean pull-off error remains at 
+
+6.1% , while the mean hysteresis error is 3.1% and the mean pull-off-time error remains below 16 1% . This indicates that even in the Q4 quartile, deviations from the numerical simulations are concentrated mainly in the detailed waveform reconstruction, whereas the physically central detachment quantities remain comparatively well captured over most of the test set. A more detailed analysis is shown in Figure 7 where the relative-frequency distributions of pull-off force error (panel (a)) and hysteresis error (panel (b)) are shown. The colors within the bars in Figure 7 refer to the four different MSE quartiles. Notice that both distributions are right-skewed, with most samples concentrated at low error values where one finds samples belonging to all the quartiles from Q1 to Q4, confirming that pull-off and hysteresis are generally predicted accurately even for test cases belonging to the Q4 quartile. From the error distribution, over the whole test dataset, the median error for the pull-off force is ≈ 2.2% while for the hysteresis it reads ≈ 1.1% . Figure 7 suggests the most severe inaccuracies remain confined to a relatively small subset of the test trajectories. Panels 7(c,d) further clarify that the different error measures probe distinct aspects of the predicted trajectory. Panel (c) compares the relative pull-off force error with the relative hysteresis-loop error for each held-out trajectory and shows no simple one-to-one correspondence between them, which means trajectories with small pull-off error may still exhibit a non-negligible hysteresis error, and conversely. This could be attributed to the fact that the pull-off force is a local detachment quantity whereas the hysteresis area integrates the full loading–unloading loop. Panel (d) relates the pull-off force error to the global force NMAE, with colors indicating the force-MSE quartiles used in Table 2. As expected, the quartiles are more clearly ordered along the force-NMAE axis, since both NMAE and MSE quantify global point-wise waveform accuracy. However, the pull-off errors remain broadly distributed within each NMAE range, indicating that global waveform metrics alone do not uniquely determine the accuracy of physically relevant scalar quantities. 
+
+4. Discussion 
+
+Within the viscoelastic contact setting and parameter ranges considered here, the results show that the full adhesive force trajectory can be predicted with low and controlled error and identify the most influential modeling choices among those examined. First, the model comparison shows that performance gains did not require the most elaborate architecture. The baseline LSTM with concatenated Tabor conditioning (M1-concat) provided the best overall compromise between waveform fidelity and physically meaningful scalar errors, which indicates that most of the problem difficulty lies in representing the loading history and the adhesion-regime parameter consistently rather than in increasing architectural complexity. Second, the best-performing errors are not uniformly distributed across the test set. The canonical trajectories and quartile analysis show that the network reproduces smooth loading, dwell, and pull-off behavior reliably for most histories, while the largest deviations cluster in trajectories with sharper transitions and more localized force variations. . Such errors are physi-cally plausible because abrupt changes in unloading rate and behavior near pull-off can increase sensitivity to constitutive relaxation and adhesion-range effects. The concentration of error in these cases suggests that the remaining limitations primarily concern histories with rapid transi-tions and localized force variations not captured properly with the defined FMS, rather than the learned mapping as a whole. The finding that physics-guided input features reduce the learning burden rather than impose hard constitutive constraints on the network output matters for the scope of the paper (see Ap-pendix Appendix G for the supporting ablation). The model is not presented as a replacement for contact mechanics, nor as evidence that constitutive structure can be ignored. Rather, the network acts as a surrogate for a well-defined class of viscoelastic contact simulations parame-terized by loading history and adhesion regime. Within the chosen constitutive family, sequence 17 Figure 7: Distribution and cross-correlation of physically interpretable prediction errors over the held-out test set, stratified by force-MSE quartile. Panels (a) and (b) show relative-frequency histograms of pull-off force error and hysteresis error, respectively, using logarithmically spaced bins; both quantities use the same relative-error definitions as Table 2. Histogram bars are color-coded by force-MSE quartile (Q1: lowest-error quartile, through Q4: highest-error quartile). Vertical dash-dotted and dashed lines indicate the empirical median and 90th percentile, respectively. Panel (c) compares pull-off force error with hysteresis error on logarithmic axes. Panel (d) compares pull-off force error with the global force normalized mean absolute error, NMAE = 100 P 
+
+> j
+
+| bP M1  
+
+> j
+
+−
+
+bP BEM  
+
+> j
+
+|/ P 
+
+> j
+
+| bP BEM  
+
+> j
+
+|.
+
+18 models can emulate the full force trajectory with controlled error, and they benefit materially from physically informed representations of the input history. The central objective of this work is therefore not to propose the most accurate possible numer-ical description of adhesive viscoelastic contact, but to provide a route to very rapid predictions with an accuracy that can be controlled and improved. Direct numerical methods remain indis-pensable as reference tools, but their computational cost depends strongly on the physical regime and on the spatial and temporal discretization choices; in practice, obtaining reliable solutions may require trial-and-error refinement, which is unfavorable for real-time or repeated-query ap-plications. The accuracy reported here should thus be interpreted as a first surrogate benchmark rather than a final limit for this problem. Larger and higher-quality datasets, a larger number of fixed measurement-step points, and a more systematic exploration of neural-network hyper-parameters are expected to further improve predictive performance. In closed-loop applications such as design and optimization, the surrogate can therefore be used for rapid exploration, while the final selected configuration should still be rechecked with high-fidelity simulation at the last designing stage. The computational advantage of the surrogate model should therefore be considered in an amortized sense rather than as a simple one-to-one runtime comparison between a single BEM simulation and a single neural-network inference. Generating the BEM database is the dominant upfront cost. For the present dataset, the recorded simulation times sum to approximately 478 CPU-hours on one core. However, once this database has been generated, it becomes a reusable resource for model selection, hyperparameter studies, and repeated prediction tasks. For compar-ison, the neural-network training run in the present architecture search required approximately 6 hours, so the original data-generation cost is comparable to roughly 80 such longest-case training runs. The practical benefit of the surrogate is therefore not that it eliminates the need for high-fidelity simulations, but that it amortizes their cost over many subsequent model-development and repeated-query evaluations. The same scope also defines the main limitation. Because the training data are generated from simulations of a specific viscoelastic constitutive model, the surrogate cannot be expected to extrapolate automatically to materially different rheologies or to regimes in which the chosen constitutive model becomes inadequate. Extending the approach to broader viscoelastic models would require retraining on simulations or experiments generated from those constitutive laws and reassessing which engineered features remain informative. Similarly, the difficult tail of the error distribution suggests that improved coverage of fast unloading events and near-instability trajectories should be a priority in future datasets. 
+
+5. Summary and conclusions 
+
+This work examined whether deep sequence models can predict the full force trajectory of unsteady adhesive viscoelastic contact directly from the loading history and the Tabor param-eter. Using BEM-generated simulations as reference data, we showed that a relatively simple LSTM-based architecture with concatenated Tabor conditioning is sufficient to reproduce the main loading, dwell, and unloading phases across a broad set of histories, while also achieving low errors in trajectory-level and physics-based summary metrics. Two conclusions follow from the results. First, the main challenge is not architectural depth alone, but representation. Models that encode the loading history clearly and receive an explicit adhesion-regime descriptor perform best. Second, physics-guided feature remains valuable even in a data-driven surrogate setting. Augmenting the input with velocity and edge-related features reduced validation error substantially relative to a purely time-indentation representation, which 19 indicates that carefully chosen physically meaningful inputs can improve both optimization and generalization. The manuscript therefore supports a focused claim. For adhesive viscoelastic contact, neural sequence surrogates can predict the complete time-resolved force response rather than only iso-lated events such as pull-off. The remaining errors are concentrated in a limited subset of sharply varying trajectories, which points to a concrete path forward of enriching the training set in those challenging regimes as well as increasing the FMS. Specifically, the main findings are: (i) a BEM-generated dataset of 12,450 adhesive Hertzian contact trajectories covering loading rates from 10 −1 to 10 3, dwell times from 10 −3 to 5, and Tabor parameters from 0.2 to 3 provides sufficient coverage for reliable sequence-model training; (ii) among the 18 compared models, the baseline LSTM with concatenated Tabor conditioning (M1-concat) achieves the best overall performance, confirming that architectural simplicity is preferable at this problem scale; (iii) physics-guided input features (causal velocity and edge detection) reduce the validation MSE by a factor of approximately 7 relative to a minimal time– indentation input, establishing feature engineering as the dominant accuracy lever; and (iv) the model correctly reproduces low- and high-Tabor adhesion behaviors in both the relaxed and instantaneous limits, with median pull-off force error ≈ 2.2% and median hysteresis error ≈ 1.1% 
+
+with accurate results provided also for the highest force MSE quartile. Overall this work suggests that time-consuming numerical simulations of viscoelastic, soft, ad-hesive contacts may be effectively replaced by fast deep sequence networks, as the one proposed here. The advantage must not be reduced to the ≈ 3 orders of magnitude “speed-up” of the numerical analysis. The gain in terms of inference time may potentially open to unforeseen appli-cations. For example, simulating the gripper-object contact “while-grasping” or the manipulation task in “real-time”, may allow finer optimization in soft robotics and human-robot interactions, unfeasible with traditional numerical techniques. This work aimed to pave the way towards a family of surrogate contact models capable of rapid real-time prediction of the contact state in soft viscoelastic adhesive interfaces. Future work should address: augmenting the dataset in fast-unloading and near-instability regimes to improve the prediction accuracy in challenging scenarios; extending the framework to broader viscoelastic constitutive models; and validating the surrogate against experimental adhesion measurements for soft-contact applications. 
+
+6. Data and Code Availability 
+
+A live, browser-based demonstrator implementing the trained surrogate model, enabling users to define loading–dwell–unloading protocols and interactively inspect the corresponding predicted adhesive force response, is available at https://alimaghamii.github.io/DL4Adhesion-demo 
+
+Acknowledgments 
+
+This work was carried out as part of the Postdoctoral Fellowship of the first author, Ali Maghami, and received funding from the European Union’s Horizon Europe research and inno-vation programme under the Marie Skłodowska-Curie Actions, Grant Agreement No. 101285102, “Real-time Adhesion Trajectories & Inverse Design via Physics-Enhanced Machine Learning” (REAL-ADHERE). A.P. was supported by the European Union (ERC-2021-STG, “Towards Fu-ture Interfaces With Tuneable Adhesion By Dynamic Excitation” - SURFACE, Project ID: 101039198, CUP: D95F22000430006). Views and opinions expressed are however those of the 20 authors only and do not necessarily reflect those of the European Union or the European Re-search Council. Neither the European Union nor the granting authority can be held responsible for them. 
+
+References 
+
+[1] W. Ji, Z. Qian, B. Xu, G. Chen, D. Zhao, Apple viscoelastic complex model for bruise damage analysis in constant velocity grasping by gripper, Computers and Electronics in Agriculture 162 (2019) 907–920. doi:10.1016/j.compag.2019.05.022. [2] Z. Liu, F. Yan, Switchable adhesion: on-demand bonding and debonding, Advanced Science 9 (12) (2022) 2200264. doi:10.1002/advs.202200264. [3] X. Liang, Y. Zhang, F. Liu, F. Richter, M. Yip, Autopeel: Adhesion-aware safe peeling trajectory optimization for robotic wound care, arXiv preprint arXiv:2409.14282 (2024). doi:10.48550/arXiv.2409.14282. [4] L. Ziemer, M. Garzke, A. Hand, M. Ben-Larbi, E. Stoll, A. Tighe, Impact of single and combined space environment factors on the performance of elastomer micropatterned dry adhesives, Polymer Testing 149 (2025) 108866. [5] G. Giordano, R. B. N. Scharff, M. Carlotti, M. Gagliardi, C. Filippeschi, A. Mondini, A. Pa-pangelo, B. Mazzolai, Mechanochromic suction cups for local stress detection in soft robotics, Advanced Intelligent Systems (2024) 2400254doi:10.1002/aisy.202400254. [6] B. Tao, Z. Gong, H. Ding, Climbing robots for manufacturing, National Science Review 10 (5) (2023) nwad042. doi:10.1093/nsr/nwad042. [7] K. D. Humfeld, D. Gu, G. A. Butler, K. Nelson, N. Zobeiry, A machine learning frame-work for real-time inverse modeling and multi-objective process optimization of compos-ites for active manufacturing control, Composites Part B: Engineering 223 (2021) 109150. doi:10.1016/j.compositesb.2021.109150. [8] H. Guo, Y. Lan, Z. Gao, C. Zhang, L. Zhang, X. Li, J. Lin, A. Elsheikh, W. Chen, Interaction between eye movements and adhesion of extraocular muscles, Acta Biomaterialia 176 (2024) 304–320. doi:10.1016/j.actbio.2024.01.028. [9] K. L. Johnson, K. Kendall, A. Roberts, Surface energy and the contact of elastic solids, Proceedings of the royal society of London. A. mathematical and physical sciences 324 (1558) (1971) 301–313. doi:10.1098/rspa.1971.0141. [10] B. V. Derjaguin, V. M. Muller, Y. P. Toporov, Effect of contact deformations on the adhesion of particles, Journal of Colloid and interface science 53 (2) (1975) 314–326. doi:10.1016/0021-9797(75)90018-1. [11] A. Papangelo, M. Tricarico, A. Maghami, Adhesive single and multi-asperity contacts, in: Reference Module in Materials Science and Materials Engineering, Elsevier, 2026. doi:10.1016/B978-0-443-30138-4.00009-1. [12] D. Tabor, Surface forces and surface interactions, Journal of Colloid and Interface Science 58 (1) (1977) 2–13. doi:10.1016/0021-9797(77)90366-6. 21 [13] D. Maugis, Adhesion of spheres: the jkr-dmt transition using a dugdale model, Journal of colloid and interface science 150 (1) (1992) 243–269. doi:10.1016/0021-9797(92)90285-t. [14] G. Violano, A. Chateauminois, L. Afferrante, A jkr-like solution for viscoelastic adhesive con-tacts, Frontiers in Mechanical Engineering 7 (2021) 664486. doi:10.3389/fmech.2021.664486. [15] M. Tricarico, M. Ciavarella, A. Papangelo, Enhancement of adhesion strength through mi-crovibrations: Modeling and experiments, Journal of the Mechanics and Physics of Solids 196 (2025) 106020. doi:10.1016/j.jmps.2024.106020. [16] M. Tricarico, A. Shiferaw, A. Papangelo, Influence of material and geometrical parame-ters on the adhesive performance of vibration-modulated soft contacts, European Journal of Mechanics-A/Solids (2026) 106130doi:10.1016/j.euromechsol.2026.106130. [17] M. Ciavarella, M. Tricarico, A. Papangelo, On the dynamic jkr adhesion problem, Mechanics of Materials 202 (2025) 105252. doi:10.1016/j.mechmat.2025.105252. [18] A. Maghami, M. Tricarico, M. Ciavarella, A. Papangelo, Viscoelastic amplification of the pull-off stress in the detachment of a rigid flat punch from an adhesive soft viscoelastic layer, Engineering Fracture Mechanics 298 (2024) 109898. doi:10.1016/j.engfracmech.2024.109898. [19] A. Maghami, Q. Wang, M. Tricarico, M. Ciavarella, Q. Li, A. Papangelo, Bulk and frac-ture process zone contribution to the rate-dependent adhesion amplification in viscoelastic broad-band materials, Journal of the Mechanics and Physics of Solids 193 (2024) 105844. doi:10.1016/j.jmps.2024.105844. [20] L. Afferrante, G. Violano, On the effective surface energy in viscoelastic hertzian contacts, Journal of the Mechanics and Physics of Solids 158 (2022) 104669. doi:10.1016/j.jmps.2021.104669. [21] G. Carbone, C. Mandriota, N. Menga, Theory of viscoelastic adhesion and friction, Extreme Mechanics Letters 56 (2022) 101877. doi:10.1016/j.eml.2022.101877. [22] C. Mandriota, N. Menga, G. Carbone, Adhesive contact mechanics of viscoelas-tic materials, International Journal of Solids and Structures 290 (2024) 112685. doi:10.1016/j.ijsolstr.2024.112685. [23] L. Shui, L. Jia, H. Li, J. Guo, Z. Guo, Y. Liu, Z. Liu, X. Chen, Rapid and continuous regulating adhesion strength by mechanical micro-vibration, Nature communications 11 (1) (2020) 1583. doi:10.1038/s41467-020-15447-x. [24] R. A. Schapery, A theory of crack initiation and growth in viscoelastic media: I. theoretical development, International Journal of fracture 11 (1975) 141–159. doi:10.1007/BF00034721. [25] J. Greenwood, K. Johnson, The mechanics of adhesion of viscoelastic solids, Philosophical Magazine A 43 (3) (1981) 697–711. doi:10.1080/01418618108240402. [26] B. Persson, E. Brener, Crack propagation in viscoelastic solids, Physical Review E 71 (3) (2005) 036123. doi:10.1103/physreve.71.036123. [27] J. Greenwood, The theory of viscoelastic crack propagation and healing, Journal of Physics D: Applied Physics 37 (18) (2004) 2557. doi:10.1088/0022-3727/37/18/011. 22 [28] V. L. Popov, A note by kl johnson on the history of the jkr theory, Tribology Letters 69 (4) (2021) 132. doi:10.1007/s11249-021-01511-0. [29] A. Papangelo, M. Ciavarella, Detachment of a rigid flat punch from a viscoelastic material, Tribology letters 71 (2) (2023) 48. doi:10.1007/s11249-023-01720-9. [30] M. S. Ahmad-Abad, A. Maghami, M. Ghalishooyan, A. Shooshtari, A family of min-imum residual displacement methods as nonlinear solution schemes for equilibrium path-following in structural mechanics, Computers & Structures 300 (2024) 107407. doi:10.1016/j.compstruc.2024.107407. [31] A. Papangelo, M. Ciavarella, A numerical study on roughness-induced adhesion enhancement in a sphere with an axisymmetric sinusoidal waviness using lennard–jones interaction law, Lubricants 8 (9) (2020) 90. doi:10.3390/lubricants8090090. [32] F. V. Souza, D. H. Allen, Multiscale modeling of impact on heterogeneous viscoelastic solids containing evolving microcracks, International Journal for Numerical Methods in Engineering 82 (4) (2010) 464–504. doi:10.1002/nme.2773. [33] K. Guo, Z. Yang, C.-H. Yu, M. J. Buehler, Artificial intelligence and machine learn-ing in design of mechanical materials, Materials Horizons 8 (4) (2021) 1153–1172. doi:10.1039/d0mh01451f. [34] C. T. Mackay, D. Nowell, Informed machine learning methods for application in engineer-ing: A review, Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science 237 (24) (2023) 5801–5818. doi:10.1177/09544062231164575. [35] Y. Lu, X. Hu, Y. Pu, Z. Yu, N. An, S. Tang, X. Guo, A llm-inspired experimental-data-driven framework for viscoelastic soft structures, International Journal of Mechanical Sciences (2026) 111696doi:10.1016/j.ijmecsci.2026.111696. [36] S. Javadi, A. Maghami, S. M. Hosseini, A deep learning approach based on a data-driven tool for classification and prediction of thermoelastic wave’s band structures for phononic crystals, Mechanics of Advanced Materials and Structures 29 (27) (2022) 6612– 6625. doi:10.1080/15376494.2021.1983088. [37] L. Kellner, M. Stender, H. Herrnring, S. Ehlers, N. Hoffmann, K. V. Høyland, et al., Es-tablishing a common database of ice experiments and using machine learning to under-stand and predict ice behavior, Cold regions science and technology 162 (2019) 56–73. doi:10.1016/j.coldregions.2019.02.007. [38] K. Eshkofti, S. M. Hosseini, The modified physics-informed neural network (pinn) method for the thermoelastic wave propagation analysis based on the moore-gibson-thompson theory in porous materials, Composite Structures 348 (2024) 118485. doi:10.1016/j.compstruct.2024.118485. [39] C. Yan, X. Feng, C. Wick, A. Peters, G. Li, Machine learning assisted discovery of new thermoset shape memory polymers based on a small training dataset, Polymer 214 (2021) 123351. doi:10.1016/j.polymer.2020.123351. [40] Y.-T. Wang, X. Zhang, X.-S. Liu, Machine learning approaches to rock fracture mechanics problems: Mode-i fracture toughness determination, Engineering Fracture Mechanics 253 (2021) 107890. doi:10.1016/j.engfracmech.2021.107890. 23 [41] C. E. Athanasiou, X. Liu, B. Zhang, T. Cai, C. Ramirez, N. P. Padture, J. Lou, B. W. Sheldon, H. Gao, Integrated simulation, machine learning, and experimental approach to characterizing fracture instability in indentation pillar-splitting of materials, Journal of the Mechanics and Physics of Solids 170 (2023) 105092. doi:10.1016/j.jmps.2022.105092. [42] R. Yi, D. Georgiou, X. Liu, C. E. Athanasiou, Mechanics-informed, model-free symbolic regression framework for solving fracture problems, Journal of the Mechanics and Physics of Solids (2024) 105916doi:10.1016/j.jmps.2024.105916. [43] R. Perera, V. Agrawal, A generalized machine learning framework for brittle crack problems using transfer learning and graph neural networks, Mechanics of Materials 181 (2023) 104639. doi:10.1016/j.mechmat.2023.104639. [44] X. Li, X. Zhang, W. Feng, Q. Wang, Machine learning-based prediction of fracture toughness and path in the presence of micro-defects, Engineering Fracture Mechanics 276 (2022) 108900. doi:10.1016/j.engfracmech.2022.108900. [45] A. Maghami, M. Stender, A. Papangelo, Pull-off force prediction in viscoelastic adhesive hertzian contact by physics augmented machine learning, International Journal of Solids and Structures 322 (2025) 113584. doi:10.1016/j.ijsolstr.2025.113584. [46] C. Goodbrake, S. Motiwale, M. S. Sacks, A neural network finite element method for contact mechanics, Computer Methods in Applied Mechanics and Engineering 419 (2024) 116671. doi:10.1016/j.cma.2023.116671. [47] S. Motiwale, W. Zhang, R. Feldmeier, M. S. Sacks, A neural network finite element approach for high speed cardiac mechanics simulations, Computer Methods in Applied Mechanics and Engineering 427 (2024) 117060. doi:10.1016/j.cma.2024.117060. [48] K. Kalliorinne, R. Larsson, F. Pérez-Ràfols, M. Liwicki, A. Almqvist, Artificial neural net-work architecture for prediction of contact mechanical response, Frontiers in Mechanical Engineering 6 (2021) 579825. doi:10.3389/fmech.2020.579825. [49] T. Sahin, M. von Danwitz, A. Popp, Solving forward and inverse problems of contact me-chanics using physics-informed neural networks, Advanced Modeling and Simulation in En-gineering Sciences 11 (1) (2024) 11. doi:10.1186/s40323-024-00265-3. [50] T. Sahin, D. Wolff, A. Popp, Physics-informed neural networks for solving contact problems in three dimensions, in: Advances and Challenges in Computational Mechanics, Springer, 2026, pp. 419–431. doi:10.1007/978-3-031-93213-7_33. [51] M. Stender, M. Tiedemann, D. Spieler, D. Schoepflin, N. Hoffmann, S. Oberst, Deep learning for brake squeal: Brake noise detection, characterization and prediction, Mechanical Systems and Signal Processing 149 (2021) 107181. doi:10.1016/j.ymssp.2020.107181. [52] C. Geier, S. Hamdi, T. Chancelier, P. Dufrénoy, N. Hoffmann, M. Stender, Machine learning-based state maps for complex dynamical systems: applications to friction-excited brake system vibrations, Nonlinear dynamics 111 (24) (2023) 22137–22151. doi:10.1007/s11071-023-08739-6. [53] B. Sattari Baboukani, Z. Ye, K. G Reyes, P. C. Nalam, Prediction of nanoscale friction for two-dimensional materials using a machine learning approach, Tribology Letters 68 (2020) 1–14. doi:10.1007/s11249-020-01294-w. 24 [54] Y. Kim, C. Yang, Y. Kim, G. X. Gu, S. Ryu, Designing an adhesive pillar shape with deep learning-based optimization, ACS applied materials & interfaces 12 (21) (2020) 24458–24465. doi:10.1021/acsami.0c04123. [55] D. Son, V. Liimatainen, M. Sitti, Machine learning-based and experimentally validated op-timal adhesive fibril designs, Small 17 (39) (2021) 2102867. doi:10.1002/smll.202102867. [56] A. Luo, H. Zhang, K. T. Turner, Machine learning-based optimization of the design of composite pillars for dry adhesives, Extreme Mechanics Letters 54 (2022) 101695. doi:10.1016/j.eml.2022.101695. [57] Y. Kim, J. Yeo, K. Park, A. Destrée, Z. Qin, S. Ryu, Designing directional adhesive pillars using deep learning-based optimization, 3d printing, and testing, Mechanics of Materials 185 (2023) 104778. doi:10.1016/j.mechmat.2023.104778. [58] C. B. Dayan, D. Son, A. Aghakhani, Y. Wu, S. O. Demir, M. Sitti, Machine learning-based shear optimal adhesive microstructures with experimental validation, Small 20 (2) (2024) 2304437. doi:10.1002/smll.202304437. [59] M. Shojaeifard, M. Ferraresso, A. Lucantonio, M. Bacca, Machine learning-based optimal design of fibrillar adhesives, Journal of the Royal Society Interface 22 (223) (2025) 20240636. doi:10.1098/rsif.2024.0636. [60] D. N. Nguyen, D. Kaminski, P. Subramanian, S. Bateman, T. C. Le, Machine learning for adhesion assessment and prediction, Journal of Adhesion Science and Technology (2026) 1–31doi:10.1080/01694243.2026.2687662. [61] S. Hochreiter, J. Schmidhuber, Long short-term memory, Neural computation 9 (8) (1997) 1735–1780. doi:10.1162/neco.1997.9.8.1735. [62] G. Chen, Recurrent neural networks (rnns) learn the constitutive law of viscoelasticity, Com-putational Mechanics 67 (3) (2021) 1009–1019. doi:10.1007/s00466-021-01981-y. [63] A. Koeppe, F. Bamer, M. Selzer, B. Nestler, B. Markert, Explainable artificial intelligence for mechanics: physics-explaining neural networks for constitutive models, Frontiers in Materials 8 (2022) 824958. doi:10.3389/fmats.2021.824958. [64] T. George Thuruthel, P. Gardner, F. Iida, Closing the control loop with time-variant em-bedded soft sensors and recurrent neural networks, Soft Robotics 9 (6) (2022) 1167–1176. doi:10.1089/soro.2021.0012. [65] J. Wang, J. Shu, M. M. Alam, Z. Gao, Z. Li, R. K.-Y. Tong, Drift-aware feature learning based on autoencoder preprocessing for soft sensors, Advanced Intelligent Systems 6 (3) (2024) 2300486. doi:10.1002/aisy.202300486. [66] J. Li, J. Luo, F. Zhang, W. Zhou, X. Wei, C. Liao, M. Shou, Modeling of magnetorheo-logical dampers based on a dual-flow neural network with efficient channel attention, Smart Materials and Structures 32 (10) (2023) 105006. doi:10.1088/1361-665x/acf016. [67] M. Karami, H. Lombaert, D. Rivest-Hénault, Real-time simulation of viscoelastic tissue behavior with physics-guided deep learning, Computerized Medical Imaging and Graphics 104 (2023) 102165. doi:10.1016/j.compmedimag.2022.102165. 25 [68] J. Hinrichsen, C. Ferlay, N. Reiter, S. Budday, Using dropout based active learning and surrogate models in the inverse viscoelastic parameter identification of human brain tissue, Frontiers in Physiology 15 (2024) 1321298. doi:10.3389/fphys.2024.1321298. [69] M. L. Williams, Structural analysis of viscoelastic materials, AIAA journal 2 (5) (1964) 785–808. doi:10.2514/3.2447. [70] F. Mainardi, G. Spada, Creep, relaxation and viscosity properties for basic fractional mod-els in rheology, The European Physical Journal Special Topics 193 (1) (2011) 133–160. doi:10.1140/epjst/e2011-01387-1. [71] M. Ciavarella, J. Joe, A. Papangelo, J. Barber, The role of adhesion in contact mechanics, Journal of the Royal Society Interface 16 (151) (2019) 20180738. doi:10.1098/rsif.2018.0738. [72] K. Johnson, J. Greenwood, An adhesion map for the contact of elastic spheres, Journal of colloid and interface science 192 (2) (1997) 326–333. doi:10.1006/jcis.1997.4984. [73] J. Greenwood, Adhesion of elastic spheres, Proceedings of the Royal Society of London. Series A: Mathematical, Physical and Engineering Sciences 453 (1961) (1997) 1277–1297. doi:10.1098/rspa.1997.0070. [74] R. Christensen, Theory of viscoelasticity: an introduction, Elsevier, 2012. [75] J. Q. Feng, Contact behavior of spherical elastic particles: a computational study of parti-cle adhesion and deformations, Colloids and Surfaces A: Physicochemical and Engineering Aspects 172 (1-3) (2000) 175–198. doi:10.1016/s0927-7757(00)00580-x. [76] K. L. Johnson, Contact Mechanics, Cambridge University Press, Cambridge, 1987. doi:10.1017/cbo9781139171731. [77] J. Lin, E. Keogh, S. Lonardi, B. Chiu, A symbolic representation of time series, with implications for streaming algorithms, in: Proceedings of the 8th ACM SIGMOD work-shop on Research issues in data mining and knowledge discovery, 2003, pp. 2–11. doi:10.1145/882082.882086. [78] S. Bai, J. Z. Kolter, V. Koltun, An empirical evaluation of generic convolutional and recurrent networks for sequence modeling, arXiv preprint arXiv:1803.01271 (2018). doi:10.48550/arXiv.1803.01271. [79] D. P. Kingma, J. Ba, Adam: A method for stochastic optimization, arXiv preprint arXiv:1412.6980 (2014). doi:10.48550/arXiv.1412.6980. [80] A. Papangelo, Data for “bulk and fracture process zone contribution to the rate-dependent adhesion amplification in viscoelastic broad-band materials” (2024). doi:10.5281/zenodo.13358696. URL https://doi.org/10.5281/zenodo.13358696 
+
+[81] T. Giorgino, Computing and visualizing dynamic time warping alignments in r: the dtw package, Journal of statistical Software 31 (2009) 1–24. doi:10.18637/jss.v031.i07. [82] M. Cuturi, M. Blondel, Soft-dtw: a differentiable loss function for time-series, in: Interna-tional conference on machine learning, PMLR, 2017, pp. 894–903. 26 [83] M. Ciavarella, G. Cricrì, R. McMeeking, A comparison of crack propagation theories in viscoelastic materials, Theoretical and applied fracture mechanics 116 (2021) 103113. doi:10.1016/j.tafmec.2021.103113. [84] V. Dumoulin, E. Perez, N. Schucher, F. Strub, H. de Vries, A. Courville, Y. Bengio, Feature-wise transformations, Distill 3 (7) (2018) e11. doi:10.23915/distill.00011. [85] E. Perez, F. Strub, H. de Vries, V. Dumoulin, A. Courville, FiLM: Visual reasoning with a general conditioning layer, in: Proceedings of the AAAI Conference on Artificial Intelligence, Vol. 32, 2018, pp. 3942–3951. doi:10.1609/aaai.v32i1.11671. [86] J. Arevalo, T. Solorio, M. Montes-y Gómez, F. A. González, Gated multimodal units for information fusion, arXiv preprint arXiv:1702.01992 (2017). arXiv:1702.01992, doi:10.48550/arXiv.1702.01992. 
+
+Appendix A. Protocol definitions and BEM/Persson–Brener reference mapping 
+
+This appendix documents the protocols for the six representative trajectories in Figure 2 and the complete details and normalization of the relaxed short-range verification in Figure 5(c). Table A.3 lists the loading rate, dwell duration, unloading rate, Tabor parameter, and peak indentation used in Figure 2(a)–(f), with the common initial indentation bδ0 = −μπ 2/3.        
+
+> Table A.3: Loading-protocol parameters for the representative trajectories shown in Figure 2(a)–(f). The dimen-sionless loading and unloading velocities bvLand bvUare defined in Eq. 5; btDis the dwell-phase duration, and bδlis the peak normalized indentation at the onset of unloading (see Figure 1(e)).
+
+Figure 2 panel Loading rate bvL
+
+Dwell time 
+
+btD
+
+Unloading rate bvU
+
+Tabor parameter μ
+
+Peak indentation 
+
+bδl
+
+(a) 1.00 × 10 3 8.88 × 10 −3 1.97 × 10 2 3.20 2.85 
+
+(b) 1.00 × 10 3 2.07 × 10 −3 3.87 × 10 1 0.20 34 .4
+
+(c) 3.38 × 10 2 1.00 × 10 −3 4.44 2.49 4.07 
+
+(d) 4.44 1.00 × 10 −3 1.15 × 10 2 0.20 2.85 
+
+(e) 0.508 3.81 × 10 −2 0.873 0.20 11 .8
+
+(f) 0.508 0.338 2.58 0.20 70 .1
+
+The reference data in Figure 5(c) are traced to two figures of Maghami et al. [19] and to their deposited dataset [80]. The red-square reference are the 14 out of 19-point blue-circle SLS series with modulus ratio k = 0 .1 in Figure 6 of Ref. [19], where normalized effective surface energy bΓeff 
+
+is plotted against the normalized crack velocity evc defined in Section 3.2. The black solid curve is the PB solution for the same SLS material. The rate–velocity correspondence needed for the M1-concat points is taken from the blue-circle SLS series in the inset of Figure 7 of Ref. [19]; that inset plots evc against the PB-normalized unloading rate evU = vU τr/l 0. The same numerical cases and marker identities are used in the main panel of Ref. [19] Figure 7, and the deposited effective-surface-energy values for this SLS series are identical to those of the Ref. [19] Figure 6 SLS series, providing a direct check of the identification. According to [19, 26] l0 = E∗ 
+
+> 0
+
+∆γ0/[π(ασ 0)2] is the PB stress-based characteristic length, with 
+
+E∗ 
+
+> 0
+
+the rubbery plane-strain modulus, ∆γ0 the thermodynamic surface energy, σ0 the maximum tensile stress in the LJ interaction law and α an empirical parameter to relate the σ0 in the LJ potential to the critical tensile strength σc introduced by PB theory [19, 26]. Substitution of this 27 PB rate into the definition of bvU in Eq. 5 for the SLS, gives 
+
+bvU = l0
+
+h0
+
+evU ≈ 4.252 evU. (A.1) where from the definition of l0 and from the deposited data of Figure 7 in Ref. [19], one gets 
+
+l0/h 0 = β2(R/h 0)1/2 
+
+> μ3/2πα 2
+
+≈ 4.252 , using the parameters β = 9 √3/16 , α = π/ 9, μ = 3 .24 , and R/h 0 =100 .For each selected evU in Figure 7 of Ref. [19] inset rate, Eq. A.1 gives the unloading-velocity input bvU supplied to M1-concat, while the corresponding normalized crack velocity evc is read from the same deposited inset pair. Table A.4 lists the fourteen selected pairs. Across these protocols, only bvU varies; μ = 3 .24 , bδl = 80 , bvL = 1 .3895 , and btD = 3 .0 are held fixed to approach a highly preloaded, relaxed short-range state before unloading. Since the dataset was generated up to 
+
+μ = 3 .2, the M1-concat evaluation at μ = 3 .24 is a controlled 1.25% extrapolation. 
+
+Table A.4: Protocols used for the relaxed short-range verification in Figure 5(c). The unloading velocity bvU is the only varied surrogate input. Each value is obtained from a deposited SLS retraction rate in the inset of Ref. [19] Figure 7 through Eq. A.1, and the corresponding normalized crack velocity evc is taken from the same inset pair. Displayed values are rounded, whereas the calculations use the full deposited precision.                                                                                                                                    
+
+> Point Tabor parameter
+> μ
+> Peak indentation
+> bδl
+> Loading rate
+> bvL
+> Dwell time
+> btD
+> Unloading rate
+> bvU
+> Crack velocity from Ref. [19]
+> evc
+> 13.24 80 1.3895 3.01.00 ×10 −16.00 ×10 −2
+> 23.24 80 1.3895 3.01.78 ×10 −11.01 ×10 −1
+> 33.24 80 1.3895 3.03.16 ×10 −11.69 ×10 −1
+> 43.24 80 1.3895 3.05.62 ×10 −12.69 ×10 −1
+> 53.24 80 1.3895 3.01.00 4.21 ×10 −1
+> 63.24 80 1.3895 3.05.62 2.31
+> 73.24 80 1.3895 3.01.00 ×10 13.86
+> 83.24 80 1.3895 3.01.78 ×10 16.58
+> 93.24 80 1.3895 3.03.16 ×10 11.12 ×10 1
+> 10 3.24 80 1.3895 3.05.62 ×10 11.98 ×10 1
+> 11 3.24 80 1.3895 3.01.00 ×10 29.74 ×10 1
+> 12 3.24 80 1.3895 3.01.78 ×10 23.23 ×10 2
+> 13 3.24 80 1.3895 3.03.16 ×10 27.58 ×10 2
+> 14 3.24 80 1.3895 3.05.62 ×10 21.51 ×10 3
+
+Appendix A.1. Exact Persson & Brener relation for the SLS 
+
+For the SLS creep compliance in Eq. 4, let C0 = 1 /E 0 and C∞ = 1 /E ∞ = kC 0. With the retardation-spectrum convention C(t) = C∞ + R ∞ 
+
+> 0
+
+τ −1L(τ )[1 − exp( −t/τ )] dτ . Consequently, the PB spectrum integral for the normalized effective surface energy bΓeff = ∆ γeff /∆γ0 reduces to the exact implicit SLS relation [26, 83, 19] 
+
+bΓeff =
+
+1 − (1 − k)
+
+vuut1 + bΓeff 
+
+2πevc
+
+!2
+
+− bΓeff 
+
+2πevc
+
+
+
+> −1
+
+, (A.2) where evc = vcτr/l 0 is defined in Section 3.2. Equation A.2 is equivalent to the standard-material PB relation of Ref. [83] after identifying its modulus-contrast parameter as 1−k and its normalized velocity as 2π bV = evc. An equivalent polynomial condition for the physical branch is 
+
+(1 − k)bΓ3eff + [ πevck(2 − k) − (1 − k)] bΓ2eff 
+
+− 2πevc bΓeff + πevc = 0 , (A.3) 28 Concat           
+
+> FiLM
+> Gated
+> Concat
+> FiLM
+> Gate d
+> Concat
+> FiLM
+> Gate d
+> Conca t
+> FiLM
+> Gated
+> Time Distributed Dense
+> Time Distributed Dense
+> Time Distributed Dense
+> Time Distributed Dense
+> Tabor parameter
+> Tabor parameter
+> Sequence Input
+> Sequence Input
+> Sequence Input
+> Sequence Input
+> Sequence Input Sequence Input LSTM 256
+> Sequence Input
+> Tabor parameter
+> Tabor parameter
+> Tabor parameter
+> Tabor parameter
+> LSTM 256 LSTM 256 LSTM 128
+> LSTM 128
+> LSTM 128
+> LSTM 128
+> LSTM 128
+> LSTM 64
+> LSTM 256
+> Time Distributed Dense
+> Time Distributed Dense
+> Conca tConcat
+> FiLM
+> FiLM Gated
+> Gated
+> Concat
+> FiLM
+> Gated
+> Output
+> Output
+> Output
+> Output
+> Output
+> Output
+> Layer Norm Layer Norm
+> Layer Norm
+> Layer Norm
+> Dropout
+> Dropout
+> Conv1D 64 TCN Block 64 Encoder Block Encoder Block TCN Block 64 TCN Block 128 TCN Block 128 Conv1D 64
+> Dense 128
+> lOSgs
+> Arrow legend
+> Main sequence flow Concat conditioning FiLM conditioning Gated conditioning
+> Add
+> Layer Norm/ Add/ Dropout
+
+Figure B.8: Neural network architectures for sequence modeling with Tabor parameter conditioning, ordered according to the paper labels and saved model indices. Solid arrows denote the main sequence/data flow, while dotted arrows denote Tabor-conditioning paths; the inset legend identifies the three conditioning mechanisms as [Concat], [FiLM], and [Gated]. (a) M1: LSTM base with LSTM(256) → LSTM(128) → TimeDistributed Dense. (b) M2: LSTM with LayerNorm regularization. (c) M3: Conv1D feature extraction followed by LSTM temporal modeling. (d) M4: TCN family with four dilated TCN blocks. (e) M5: Transformer encoder with Dense projection and two encoder blocks. (f) M6: residual LSTM with Add and LayerNorm before the final LSTM and TimeDistributed Dense layers. 
+
+The physical root satisfies 1 ≤ bΓeff ≤ 1/k , with bΓeff = 1 at evc = 0 and bΓeff → 1/k as evc → ∞ .The same branch can be inverted exactly as 
+
+evc = (1 − k)bΓ2eff (bΓeff − 1) 
+
+π
+
+h
+
+(1 − k)2 bΓ2eff − (bΓeff − 1) 2
+
+i. (A.4) 
+
+Appendix B. Supplementary Architecture Figures 
+
+The six family architectures M1 to M6 and the three conditioning mechanisms (concat, film, gated) that constitute the 18-model comparison are described in Section 2.5; Figure 4 therein provides a component-level schematic of the main building blocks. Here, Figure B.8 shows all eighteen variants arranged by family architecture and conditioning mechanism. 29 Appendix C. Tabor-Conditioning Mechanisms 
+
+This appendix defines the three mechanisms used to inject the static Tabor parameter into the sequence-to-sequence models. Let X ∈ RN ×d denote the FMS-resampled input sequence, with N = 120 measurement steps and d sequential channels. In the main comparison d = 4 ,corresponding to time, indentation, causal velocity, and the edge indicator. The physical Tabor parameter μ is first transformed and standardized using the same preprocessing pipeline as the other model inputs. We denote the resulting scalar network input by zμ ∈ R. The surrogate therefore learns 
+
+fθ : ( X, z μ) 7 → by, by ∈ RN ×1. (C.1) The three mechanisms differ only in where and how zμ enters the neural architecture.  
+
+> Figure C.9: Held-out MSE versus MAE for the eighteen combinations of model family and Tabor-conditioning mechanism. Marker shapes identify concatenation, FiLM, and gated conditioning, while colors identify model families M1–M6.
+
+The comparison does not indicate a universal superiority of one conditioning. Based on the held-out MSE, concatenation performs best within M1 and M2, FiLM within M3–M5, and gated conditioning within M6. Thus, M1-concat is the best individual configuration, while the relative effectiveness of each conditioning mechanism depends on the temporal family and injection point. 
+
+Appendix C.1. Concatenation conditioning 
+
+Concatenation conditioning supplies the static scalar as an additional sequence channel. The scalar zμ is repeated over the temporal dimension, 
+
+zμ = [ zμ, ..., z μ]⊤ ∈ RN ×1, (C.2) and appended to the sequence representation: 
+
+eX = [ X, zμ] ∈ RN ×(d+1) . (C.3) The first temporal layer then receives eX rather than X. This is an early-conditioning strategy: the recurrent, convolutional, or attention layer has access to the adhesion-regime parameter from 30 the beginning of its sequence processing. This use of auxiliary variables through concatenated conditioning is part of the broader family of feature-wise conditioning operations discussed in [84]. 
+
+Appendix C.2. Feature-wise linear modulation conditioning 
+
+Feature-wise Linear Modulation (FiLM) applies an affine transformation to hidden feature channels using coefficients generated from the conditioning variable [85, 84]. Let 
+
+H = [ h1, ..., hN ] ∈ RN ×h (C.4) be the hidden sequence to be modulated. In the implementation, the conditioning path first maps 
+
+zμ through a dense layer with ReLU activation, 
+
+cμ = ReLU( Wczμ + bc) ∈ R64 , (C.5) and then produces a feature-wise scale vector and shift vector, 
+
+γμ = Wγ cμ + bγ , βμ = Wβ cμ + bβ , γμ, βμ ∈ Rh. (C.6) The vectors are reshaped to 1 × h and broadcast over all measurement steps: 
+
+ehj = γμ ⊙ hj + βμ, j = 1 , . . . , N, (C.7) or equivalently eH = γμ ⊙ H + βμ with temporal broadcasting. Because zμ is constant for the whole trajectory, the same modulation is applied at every measurement step. 
+
+Appendix C.3. Gated conditioning 
+
+The gated variant uses the Tabor input to form a two-branch mixture. Let 
+
+A, B ∈ RN ×h (C.8) be two compatible temporal representations produced by parallel branches or by a representation and its normalized counterpart, depending on the family. The conditioning path maps zμ to a hidden vector and then to two softmax weights: 
+
+qμ = ReLU( Wgzμ + bg) , ωμ = softmax( Wωqμ + bω) , (C.9) with ωμ, 1 + ωμ, 2 = 1 . The fused hidden sequence is 
+
+eH = ωμ, 1A + ωμ, 2B. (C.10) The two scalar weights are broadcast over the temporal and feature dimensions. This mechanism is related to gated fusion models, where learned gates control the relative contribution of different representations [86]. In the present architecture, the gate is conditioned explicitly on the static Tabor input, so the mixture weights depend on the adhesion regime encoded by μ.
+
+Appendix D. Validation Learning Curves 
+
+This section reports the validation-loss histories for the FiLM and gated conditioning mech-anisms. Together with the concatenation curves in Figure 5a, Figure D.10 complements the summary metrics in the main text by showing the relative convergence rate, stability, and early-stopping behavior of each model during training. 31 Figure D.10: Validation-loss learning curves for the remaining conditioning mechanisms after moving the concate-nation panel to Figure 5a: (a) FiLM and (b) gated conditioning. Both panels use a shared epoch axis from 0 to 350 with matching tick locations, so convergence rates can be compared directly across conditioning mechanisms. The epoch axis is truncated at 350 for clarity; no model required more than 350 epochs before early stopping, although training was permitted for up to 2000 epochs. 
+
+Appendix E. BEM Discretisation Details 
+
+Appendix E.1. Kernel function 
+
+The elastic Kernel function G(r, s ) appearing in Eq. (3) is: 
+
+G(r, s ) = 
+
+
+
+4
+
+πr K
+
+ sr
+
+
+
+, s < r, 
+
+4
+
+πs K
+
+rs
+
+
+
+, s > r, 
+
+(E.1) where K( ·) is the complete elliptic integral of the first kind. Once the spatial grid is fixed, the influence matrix is assembled as Gij = G(ri, r j ) rj , so that the elastic half-space deflection at node 
+
+i due to a traction field {σj } is: 
+
+uz [i] = 1
+
+E∗
+
+> 0
+> Ns
+
+X
+
+> j=1
+
+Gij σj . (E.2) The spatial distribution of traction on each element is approximated as piecewise linear using the 
+
+method of overlapping triangles [76, 31, 29]. 
+
+Appendix E.2. Dimensionless governing equations in discrete form 
+
+The following dimensionless groups are introduced: 
+
+bh = h − h0
+
+h0
+
+, bδ = δh0
+
+, br = rβ , bσ = σ μ h 0
+
+∆γ0
+
+, bt = tτr
+
+, (E.3) 32 where β3 = R2∆γ0/E ∗ 
+
+> 0
+
+is the characteristic contact half-width. With spatial index i ∈ { 1, . . . , N s}
+
+and temporal index q ∈ { 0, 1, . . . }, the discretised Lennard-Jones law, gap equation, and displace-ment equation are: 
+
+bσ[i, q ] = −83μ
+
+"
+
+1
+
+ bh[i, q ] + 1 3 − 1
+
+ bh[i, q ] + 1 9
+
+#
+
+, (E.4) 
+
+bh[i, q ] = −bδ[q] + 12 μ br[i]2 + buz [i, q ], (E.5) 
+
+buz [i, q ] ≈ μ
+
+> Ns
+
+X
+
+> j=1
+
+bGij q
+
+X
+
+> m=0
+
+bC[q − m]  bσ[j, m + 1] − bσ[j, m ], (E.6) where bGij = Gij /(E∗ 
+
+> 0
+
+μ) is the dimensionless influence matrix, and the dimensionless SLS creep compliance is: bC(bt) = 1 + ( k − 1) exp( −bt). (E.7) Equations (E.4)–(E.7) constitute a closed nonlinear system for bh[i, q ] at each time step, solved by Newton-Raphson iteration at fixed bδ[q].
+
+Appendix F. Neural Network Layer Definitions 
+
+This appendix provides the complete mathematical definitions of the three building blocks used in the sequence-to-sequence architectures of Section 2.5. 
+
+Appendix F.1. Long Short-Term Memory (LSTM) cell 
+
+Let xj ∈ Rd be the input at step j, hj−1 ∈ RH the previous hidden state, and cj−1 ∈ RH the previous cell state. The LSTM cell update is [61]: 
+
+fj = σg
+
+ Wf [hj−1; xj ] + bf
+
+, ij = σg
+
+ Wi[hj−1; xj ] + bi
+
+,
+
+oj = σg
+
+ Wo[hj−1; xj ] + bo
+
+, ˜cj = tanh  Wc[hj−1; xj ] + bc
+
+, (F.1) 
+
+cj = fj ⊙ cj−1 + ij ⊙ ˜cj , hj = oj ⊙ tanh( cj ),
+
+where σg is the sigmoid activation, ⊙ is the Hadamard product, and [·; ·] denotes concatenation. Matrices W· ∈ RH×(H+d) and biases b· ∈ RH are learnable. The forget gate fj regulates how much prior cell information is retained, while the full recurrent update enables the LSTM to represent the fading-memory behavior associated with the Boltzmann convolution of Eq. (3). In the M1 concatenation and FiLM variants, two LSTM layers are chained: H1 = 256 hidden units in the first layer and H2 = 128 in the second, so that the recurrent family has 4H1(H1+din +1)+4 H2(H2+H1+1) parameters, where din is the feature dimension seen by the first recurrent layer. For the physics-guided representation, din = 4 for the FiLM variant and din = 5 for the concatenation variant, yielding 464,384 and 465,408 recurrent parameters, respectively, before the readout. These counts do not apply to M1-gated, because that implementation uses two parallel LSTM(128) expert branches and a softmax fusion gate rather than the same 256 →128 recurrent family. With the shared readout of Eq. (F.4), the M1-concat total is therefore 465 ,408 + 8 ,321 = 473 ,729 trainable parameters. The M1-FiLM total is 464 ,384 + 16 ,768 + 8 ,321 = 489 ,473 , where 16,768 parameters come from the FiLM conditioning network, and the two-expert M1-gated implementation contains 144,899 trainable parameters. These are the corresponding M1 values used in Figure 5(b). 33 Appendix F.2. Temporal Convolutional Network (TCN) block 
+
+A residual TCN block at layer l with dilation dl = 2 l−1, kernel size K, and Cl output channels applies two causal convolutions before adding the skip path [78]: 
+
+˜z(l, 1)  
+
+> j
+
+= ReLU LayerNorm 
+
+> K−1
+
+X
+
+> s=0
+
+W(l)1,s z(l−1)  
+
+> j−dls
+
++ b(l)1
+
+!! 
+
+,
+
+˜z(l, 2)  
+
+> j
+
+= ReLU LayerNorm 
+
+> K−1
+
+X
+
+> s=0
+
+W(l)2,s ˜z(l, 1)  
+
+> j−dls
+
++ b(l)2
+
+!! 
+
+,
+
+z(l) 
+
+> j
+
+= ˜ z(l, 2)  
+
+> j
+
++ P(l)z(l−1)  
+
+> j
+
+, (F.2) where left padding enforces causality by treating indices q < 1 as zero, dropout (rate 0.1, omitted from the notation) is applied after each activation in the implemented block, and P(l) is the identity when the channel width is unchanged and a learned pointwise projection otherwise. With L = 4 blocks, K = 3 , and dilations dl = 1 , 2, 4, 8, the receptive field of the M4 architecture is: 
+
+R = 1 + 2( K − 1) 
+
+> L
+
+X
+
+> l=1
+
+dl = 1 + 2( K − 1)(2 L − 1) = 1 + 4 · 15 = 61 steps , (F.3) covering approximately one-half of the 120-step sequence without any recurrent state. For a constant-width TCN with C channels, the family scales as O(2 L · K · C2) because each residual block contains two causal convolutions. For the implemented M4 widths 4 → 64 → 64 →
+
+128 → 128 , the four TCN blocks contain 13 ,760 + 24 ,960 + 82 ,816 + 99 ,072 = 220 ,608 trainable parameters, including convolution biases, LayerNorm scale and shift parameters, and the learned pointwise residual projections when the channel width changes. After Tabor conditioning and the TimeDistributed readout, the trainable-parameter totals used in Figure 5(b) are 228,993 (M4-concat), 245,697 (M4-FiLM), and 229,315 (M4-gated). 
+
+Appendix F.3. TimeDistributed Dense layer 
+
+The implemented readout maps the stepwise latent representation zj ∈ RH to a scalar force prediction through two shared time-distributed dense transformations. First, a 64-unit ReLU layer is applied independently at each measurement step, followed by a shared scalar affine projection [78]: 
+
+rj = ReLU( Wrzj + br) , bPj = w⊤ 
+
+> o
+
+rj + bo, j = 1 , . . . , N, (F.4) where Wr ∈ R64 ×H , br ∈ R64 , wo ∈ R64 , and bo ∈ R are shared across all time steps. The readout therefore adds 64( H + 1) + 65 trainable parameters independent of the sequence length N . For M1 with H2 = 128 , this corresponds to 8,321 readout parameters. 
+
+Appendix G. Effects of Training-Set Size and Physics-Guided Input Representation 
+
+Four input configurations were evaluated on the M1-concat architecture to determine the most effective feature set: Config A uses only time and indentation (bt, bδ); Config B adds the causal FDM velocity (bt, bδ, ˙bδ); Config C has EMA-smoothed acceleration (bt, bδ, ˙bδ, ¨bδ); and Config D substitutes the acceleration channel with the binary edge-detection indicator (bt, bδ, ˙bδ, e ). Among the four, Config D achieved the lowest validation MSE, confirming that the edge indicator provides more useful information to the network than the smoothed acceleration. Configs B, C, and D all improved over Config A, but the gain from edge detection over acceleration (Config D vs. 34 Config C) suggests that explicitly marking protocol transitions is more informative than providing a second-order velocity derivative at the available sequence resolution of N = 120 steps. In Figure G.11, Configs A and D are therefore compared as the two extremes (purely data-driven versus physics-guided) to give the clearest illustration of the benefit of feature engineering.     
+
+> Figure G.11: Effects of input representation and training-set size on M1-concat optimization. (a) Validation-MSE learning curves for the data-driven representation (time and indentation only) and the physics-guided representa-tion (augmented with causal velocity and edge detection), trained with identical hyperparameters and the same 80/10/10 split. (b) Validation-loss histories for the paper M1-concat model trained on the full partition and for models trained on nested fractions of that partition; circles mark the minimum validation loss of each run. Both panels use logarithmic loss axes.
+
+Figure G.11(a) isolates the role of feature design by comparing two versions of the same M1-concat model. The data-driven representation receives only time and indentation, whereas the physics-guided representation augments those inputs with causal velocity and an edge-detection feature that highlights loading-history transitions. Under identical training, validation, and test splits, the physics-guided representation converges more quickly and reaches a best validation MSE approximately seven times lower than the data-driven alternative. This confirms that the main benefit of physics guidance in the present setting is not the imposition of a hard constitutive constraint on the network output, but the reduction of the learning burden through input variables that better expose the causal structure of the contact process. To separately quantify the effect of data availability, the manuscript M1-concat architecture was trained on nested subsets containing 75%, 50%, 25%, 12.5%, 6.25%, 3.125%, and 1.55125% of the original training partition. For each fraction, preprocessing statistics were fitted using only the available training subset, whereas the validation and test indices were held fixed. This con-struction prevents information leakage and ensures that the comparison probes reduced training coverage rather than a changing evaluation set. Figure G.11(b) shows that reducing the num-ber of trajectories raises the validation-loss floor and generally increases optimization variability. Moderate reductions retain the overall convergence pattern of the full-data model, whereas the smallest subsets plateau at substantially larger losses. 35 Appendix H. FMS-resolution transferability of the M1-concat surrogate 
+
+Recurrent neural-network layers such as LSTMs are not tied, at the level of their recurrent weights, to one fixed number of sequence steps. The same recurrent cell is applied successively along the sequence dimension, as schematically shown in Figure 4(a). In the present surrogate, however, physical time is itself one of the input channels. Therefore, the model should not be interpreted as being agnostic to physical time. Rather, the relevant architectural property is flexibility with respect to the number of fixed-measurement-step (FMS) points used to represent a given loading history. To examine this point, the trained M1-concat model, selected using the reference resolution 
+
+N = 120 , was evaluated on the same representative BEM trajectory using nearby FMS resolutions 
+
+N = 100 and N = 140 , without retraining. Figure H.12 shows that the best agreement is obtained at the training resolution N = 120 , as expected. The predictions obtained with N = 100 and 
+
+N = 140 still follow the overall force–indentation trend, but with visible deviations, indicating that modest changes in FMS resolution can be processed by the trained recurrent model while the accuracy remains resolution-dependent. This provides a practical advantage of the selected recurrent surrogate: it is not hard-restricted to the exact FMS grid used during training, so nearby resolutions can be exploited without changing the network architecture or retraining the weights.           
+
+> Figure H.12: Effect of nearby FMS resolutions on the trained M1-concat surrogate for representative sample (8). The black curve shows the BEM response. Colored markers show predictions obtained with the same trained M1-concat weights using N= 100 ,N= 120 , and N= 140 FMS points. The model performs best at the training resolution N= 120 , while nearby resolutions preserve the main trend with increased error.
+
+36
