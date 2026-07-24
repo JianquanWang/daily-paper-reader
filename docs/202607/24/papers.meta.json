@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-24",
+  "date": "2026-07-24",
+  "generated_at": "2026-07-24T19:43:06",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/24/2607.20683v1-felt-generating-tactile-signals-from-vision-for-visuo-tactile-manipulation",
+      "section": "quick",
+      "title_en": "FELT: Generating Tactile Signals from Vision for Visuo-Tactile Manipulation",
+      "authors": "Zinan Li, Yiyang Ling, Yuming Gu, Binghao Huang, Chenhao Liang, Sharfin Islam, Hisham Bedri, John Chirikjian, Yunzhu Li, Stefanos Nikolaidis, Daniel Seita",
+      "date": "2026-07-22",
+      "pdf": "https://arxiv.org/pdf/2607.20683v1",
+      "score": "7.0",
+      "evidence": "从视觉合成触觉信号用于视觉-触觉操纵",
+      "tldr": "触觉对操作至关重要，但触觉数据稀缺。FELT提出从RGB观测生成每指压力触觉图像，使用大视觉编码器和轻量查询解码器，双分支解码左右触觉面板。实验在四个接触密集任务上表明，生成触觉图像或隐特征均提升策略成功率，且隐特征无需真实触觉传感器。该方法有效缓解触觉数据不足问题。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "The sense of touch is central to manipulation, especially when vision is occluded or ambiguous. Although combining vision and touch improves manipulation, learning robust visuo-tactile policies requires substantial tactile data. Such data remains scarcer than visual data, because tactile sensors are fragile, specialized, and hard to standardize. To address this, we present Feature-Extracted Latent Tactile (FELT), a learning-based framework that synthesizes per-finger pressure tactile images from RGB observations, reducing the need for tactile-equipped data collection. FELT uses a large frozen visual encoder and a lightweight query decoder to predict tactile signals in a single feed-forward pass. To respect the physical topology of dual-finger tactile sensors, FELT decodes the left and right tactile sensor panels through separate branches, capturing the asymmetric contact patterns during interactions such as wiping, insertion, and in-hand rotation. At inference time, FELT only requires RGB data, allowing us to augment existing vision-only data with tactile observations, either as generated tactile images or as latent tactile features. Experiments on four contact-rich manipulation tasks demonstrate that both generated tactile images and latent tactile features improve policy success over vision-only baselines, with latent feature requiring no real tactile sensor during policy training or deployment. Supplementary material is available on our anonymous website: https://felt-tactile.github.io/.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

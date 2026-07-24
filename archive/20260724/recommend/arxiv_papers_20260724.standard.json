@@ -1,0 +1,62 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-24T19:41:54.337789+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.20683v1",
+      "source": "arxiv",
+      "title": "FELT: Generating Tactile Signals from Vision for Visuo-Tactile Manipulation",
+      "abstract": "The sense of touch is central to manipulation, especially when vision is occluded or ambiguous. Although combining vision and touch improves manipulation, learning robust visuo-tactile policies requires substantial tactile data. Such data remains scarcer than visual data, because tactile sensors are fragile, specialized, and hard to standardize. To address this, we present Feature-Extracted Latent Tactile (FELT), a learning-based framework that synthesizes per-finger pressure tactile images from RGB observations, reducing the need for tactile-equipped data collection. FELT uses a large frozen visual encoder and a lightweight query decoder to predict tactile signals in a single feed-forward pass. To respect the physical topology of dual-finger tactile sensors, FELT decodes the left and right tactile sensor panels through separate branches, capturing the asymmetric contact patterns during interactions such as wiping, insertion, and in-hand rotation. At inference time, FELT only requires RGB data, allowing us to augment existing vision-only data with tactile observations, either as generated tactile images or as latent tactile features. Experiments on four contact-rich manipulation tasks demonstrate that both generated tactile images and latent tactile features improve policy success over vision-only baselines, with latent feature requiring no real tactile sensor during policy training or deployment. Supplementary material is available on our anonymous website: https://felt-tactile.github.io/.",
+      "authors": [
+        "Zinan Li",
+        "Yiyang Ling",
+        "Yuming Gu",
+        "Binghao Huang",
+        "Chenhao Liang",
+        "Sharfin Islam",
+        "Hisham Bedri",
+        "John Chirikjian",
+        "Yunzhu Li",
+        "Stefanos Nikolaidis",
+        "Daniel Seita"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-22T19:32:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.20683v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "synthesizes tactile signals from vision for visuo-tactile manipulation",
+      "llm_evidence_cn": "从视觉合成触觉信号用于视觉-触觉操纵",
+      "llm_evidence": "从视觉合成触觉信号用于视觉-触觉操纵",
+      "canonical_evidence": "从视觉合成触觉信号用于视觉-触觉操纵",
+      "llm_tldr_en": "FELT generates per-finger pressure tactile images from RGB using a large frozen visual encoder and lightweight query decoder, reducing need for tactile data collection.",
+      "llm_tldr_cn": "触觉数据稀缺且难以获取，FELT框架通过冻结的视觉编码器和轻量查询解码器，从RGB图像预测每根手指的压力触觉图像，以单次前馈方式生成触觉信号，减少了对触觉传感器数据采集的依赖。实验表明该方法能有效合成逼真的触觉信号并提升视觉-触觉操纵性能，为多模态触觉感知提供了一种数据高效的解决方案。",
+      "llm_tldr": "触觉数据稀缺且难以获取，FELT框架通过冻结的视觉编码器和轻量查询解码器，从RGB图像预测每根手指的压力触觉图像，以单次前馈方式生成触觉信号，减少了对触觉传感器数据采集的依赖。实验表明该方法能有效合成逼真的触觉信号并提升视觉-触觉操纵性能，为多模态触觉感知提供了一种数据高效的解决方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
