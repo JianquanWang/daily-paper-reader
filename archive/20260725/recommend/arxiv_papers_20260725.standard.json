@@ -1,0 +1,273 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-25T19:23:49.472272+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2607.20653v1",
+      "source": "arxiv",
+      "title": "PhysCoRe: Physics-Corrected Residual World Models for Material-Aware Deformable Dynamics",
+      "abstract": "Predicting how deformable objects evolve under robotic manipulation is a longstanding challenge. Existing approaches typically rely on per-object optimization to fit material parameters, which can be slow and cannot generalize, while end-to-end learned alternatives extrapolate poorly and often violate basic physical structure. We present PhysCoRe, a physics-corrected residual world model that couples a differentiable Material Point Method (MPM) simulator with two feed-forward neural networks. A material refinement module, Material from Motion (MfM), infers per-particle elasticity from visual observations, grounding the simulator in object-specific physics. A residual correction module, Residual from Dynamics (RfD), learns the discrepancy and predicts corrections to the simulator's internal dynamics, absorbing systematic biases that the analytical model cannot capture. This design also supports online material identification on novel objects. MfM adapts from limited interactions, and its predictive uncertainty steers further exploration toward the regions where its estimate is least confident. Experiments on real deformable-object manipulation sequences show that PhysCoRe outperforms state-of-the-art baselines in prediction accuracy, and that its predicted confidence forms a reliable distribution across the object's geometry, providing a natural signal for future confidence-guided exploration.",
+      "authors": [
+        "Haocheng Yin",
+        "Shuohan Tao",
+        "Yongsheng Chen",
+        "Lu Gan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-22T18:25:57+00:00",
+      "link": "https://arxiv.org/pdf/2607.20653v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "physics-corrected residual world model for deformable object manipulation",
+      "llm_evidence_cn": "物理校正残差世界模型用于可变形物体操作",
+      "llm_evidence": "物理校正残差世界模型用于可变形物体操作",
+      "canonical_evidence": "物理校正残差世界模型用于可变形物体操作",
+      "llm_tldr_en": "PhysCoRe couples a differentiable MPM simulator with neural networks to infer material properties and correct dynamics predictions for deformable objects.",
+      "llm_tldr_cn": "针对机器人操作中可变形物体动力学预测不准确的问题，本文提出PhysCoRe，一种物理校正残差世界模型。它结合可微MPM模拟器和两个前馈网络，从视觉观测推断每点弹性，并学习残差修正。实验证明该方法能准确预测多种材料的变形，适用于触觉世界模型中的物体建模。",
+      "llm_tldr": "针对机器人操作中可变形物体动力学预测不准确的问题，本文提出PhysCoRe，一种物理校正残差世界模型。它结合可微MPM模拟器和两个前馈网络，从视觉观测推断每点弹性，并学习残差修正。实验证明该方法能准确预测多种材料的变形，适用于触觉世界模型中的物体建模。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.18660v1",
+      "source": "arxiv",
+      "title": "MVP-Tac: A Miniaturized Dual-Modal Vision and Photoelastic Tactile Sensor for Robot-Assisted Minimally Invasive Surgery",
+      "abstract": "Robot-assisted minimally invasive surgery (RMIS) offers major benefits over open and conventional laparoscopic procedures, yet it still lacks tactile feedback for palpation while operating under strict requirements to preserve reliable vision for navigation and safety. In practice, visual feedback is indispensable, and tactile solutions that cannot coexist with vision are difficult to translate into RMIS tools. To address both needs, we introduce MVP-Tac, a compact, vision-based tactile sensor that provides co-located vision and tactile sensing. MVP-Tac uses reflective photoelastic imaging: a thin photoelastic elastomer produces stress-dependent interferograms under contact that are captured by an embedded camera through a miniaturized reflective polariscope. A semi-transparent membrane and controllable illumination enable switching between visual mode and tactile mode, enabling tactile perception without sacrificing vision. We validate MVP-Tac through force calibration in the 0 to 2 N range and demonstrate its potential for tumor palpation via video-based hardness classification on tissue phantoms, achieving 97% accuracy for exposed-tumor classification and 92% accuracy for subdermal-tumor classification. Finally, we conduct a simulated colonoscopy to validate both visual and tactile modalities in a constrained lumen, including vision-guided 3D photomapping of the luminal wall and in situ hardness classification of localized nodules. Overall, MVP-Tac provides a practical path toward restoring clinically useful palpation in RMIS while maintaining essential visual feedback. The design, fabrication, and firmware of MVP-Tac are open-sourced at https://mvp-tac.github.io/",
+      "authors": [
+        "Md Rakibul Islam Prince",
+        "Jaeeun Kim",
+        "Yuhao Zhou",
+        "Mason Vrshek",
+        "Shivani Reddy Sama",
+        "Adyaa Khera",
+        "Sheeraz Athar",
+        "Zijie Xu",
+        "Jiabin Liu",
+        "Shaoting Lin",
+        "Wei Li",
+        "Yu She"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-21T03:08:14+00:00",
+      "link": "https://arxiv.org/pdf/2607.18660v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "dual-modal vision and tactile sensor for surgery",
+      "llm_evidence_cn": "双模态视觉与触觉传感器用于手术",
+      "llm_evidence": "双模态视觉与触觉传感器用于手术",
+      "canonical_evidence": "双模态视觉与触觉传感器用于手术",
+      "llm_tldr_en": "MVP-Tac is a compact tactile sensor combining vision and photoelastic imaging for co-located tactile feedback in robot-assisted surgery.",
+      "llm_tldr_cn": "MVP-Tac是一种微型双模态触觉传感器，通过反射光弹性成像实现视觉与触觉共位感知，解决了机器人辅助微创手术中触觉反馈缺失的问题。该传感器结构紧凑，可兼容现有手术工具，并能在保持视觉导航的同时提供接触力信息。实验表明，其触觉感知能力可用于组织触诊，提高了手术安全性和操作精度。",
+      "llm_tldr": "MVP-Tac是一种微型双模态触觉传感器，通过反射光弹性成像实现视觉与触觉共位感知，解决了机器人辅助微创手术中触觉反馈缺失的问题。该传感器结构紧凑，可兼容现有手术工具，并能在保持视觉导航的同时提供接触力信息。实验表明，其触觉感知能力可用于组织触诊，提高了手术安全性和操作精度。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.19343v1",
+      "source": "arxiv",
+      "title": "Masked Visual Actions for Unified World Modeling",
+      "abstract": "Video models absorb rich priors over how the visual world moves, interacts, and responds to contact, making them promising substrates for robotic world modeling. The central challenge is how to communicate action to such models in a form aligned with the visual space in which they learned these interaction priors, yet still grounded in physical manipulation. We introduce Masked Visual Actions, a pixel-space control interface that expresses action as a partially revealed trajectory of an arbitrary entity in a video. Revealing robot motion makes the model act as a forward dynamics model that predicts the scene's response to low-level robot actions, while revealing desired object motion makes the same model recover robot behavior consistent with that outcome. Finetuned with only 15 hours of masked examples from real videos and simulation, a single checkpoint achieves strong visual fidelity and controllability across diverse scenes and multiple embodiments. In downstream manipulation settings, the model produces imagined rollouts whose outcomes correlate with real-world execution for policy evaluation, improves decision making by ranking candidate futures in model-based planning, and supports inverse modeling by synthesizing robot motion from desired object motion.",
+      "authors": [
+        "Hadi Alzayer",
+        "Wenlong Huang",
+        "Haonan Chen",
+        "Christopher Luey",
+        "Lvmin Zhang",
+        "Maneesh Agrawala",
+        "Gordon Wetzstein",
+        "Li Fei-Fei",
+        "Yilun Du",
+        "Jiajun Wu",
+        "Jia-Bin Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-21T17:59:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.19343v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified world model using masked visual actions that handles contact dynamics",
+      "llm_evidence_cn": "使用掩码视觉动作的统一世界模型处理接触动力学",
+      "llm_evidence": "使用掩码视觉动作的统一世界模型处理接触动力学",
+      "canonical_evidence": "使用掩码视觉动作的统一世界模型处理接触动力学",
+      "llm_tldr_en": "Masked Visual Actions is a pixel-space control interface for world models that reveals robot or object motion to predict scene response, enabling forward dynamics and behavior recovery with contact handling.",
+      "llm_tldr_cn": "针对机器人世界模型中动作表达与视觉空间对齐的挑战，提出掩码视觉动作接口，将动作表示为视频中部分揭示的轨迹。揭示机器人运动使模型作为前向动力学模型预测场景对低级动作的响应；揭示目标运动则可恢复一致机器人行为。微调后可用于操作任务，展示了对接触动力学的建模能力。",
+      "llm_tldr": "针对机器人世界模型中动作表达与视觉空间对齐的挑战，提出掩码视觉动作接口，将动作表示为视频中部分揭示的轨迹。揭示机器人运动使模型作为前向动力学模型预测场景对低级动作的响应；揭示目标运动则可恢复一致机器人行为。微调后可用于操作任务，展示了对接触动力学的建模能力。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.20912v1",
+      "source": "arxiv",
+      "title": "URF: A Unified Robot Control-Policy Framework for Stable Contact Aware Manipulation",
+      "abstract": "Learning-based manipulation policies usually predict robot actions from sensory observations and leave their execution to a separate low-level controller. In rigid contact, this separation can be problematic: the same motion to a virtual target or compliant motion command can lead to unstable contact, tracking error, excessive loading, or tool damage, depending on the low-level controller. In this paper, we propose a \\textit{Unified Robot Control-Policy Framework} (URF), which connects compliant action prediction with unified impedance-admittance control. Given multimodal observations, URF predicts a virtual target, a stiffness matrix, and an impedance-admittance switch ratio. The switch ratio determines when the controller should behave more like admittance control for accurate motion tracking and when it should move toward impedance control for safer rigid contact. Because demonstration data do not provide ground-truth environment stiffness, we construct switch-ratio labels from measured contact forces and use them to supervise controller-mode prediction. Across box-flipping and line-pressing tasks, URF achieves higher task success rates while reducing failure modes observed with admittance-only execution, including rapid force buildup, large force oscillations, tool breakage, and robot safety stops. These results suggest that contact-aware policies benefit from predicting not only compliant actions but also the controller behavior used to execute them. Project page: https://jiyou384.github.io/urf_project_page/",
+      "authors": [
+        "Jiyou Shin",
+        "Youngjin Seo",
+        "Jaeseog Won",
+        "Sungwon Seo",
+        "Hyunjun Kim",
+        "Seokmin Yoon",
+        "Tuan Luong",
+        "Hyungpil Moon"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-23T04:46:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.20912v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "unified impedance-admittance control for contact-aware manipulation",
+      "llm_evidence_cn": "统一阻抗-导纳控制用于接触感知操作",
+      "llm_evidence": "统一阻抗-导纳控制用于接触感知操作",
+      "canonical_evidence": "统一阻抗-导纳控制用于接触感知操作",
+      "llm_tldr_en": "URF connects compliant action prediction with unified impedance-admittance control for stable contact-aware manipulation, predicting virtual target, stiffness matrix, and switch ratio.",
+      "llm_tldr_cn": "针对刚性接触中策略与控制分离导致不稳定的问题，本文提出URF框架，将柔性动作预测与统一阻抗-导纳控制相结合。通过预测虚拟目标、刚度矩阵和切换比率，实现稳定接触操作。实验表明该方法能有效减少跟踪误差和过载，适用于接触丰富的机器人操作任务。",
+      "llm_tldr": "针对刚性接触中策略与控制分离导致不稳定的问题，本文提出URF框架，将柔性动作预测与统一阻抗-导纳控制相结合。通过预测虚拟目标、刚度矩阵和切换比率，实现稳定接触操作。实验表明该方法能有效减少跟踪误差和过载，适用于接触丰富的机器人操作任务。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.19719v1",
+      "source": "arxiv",
+      "title": "Koopman Dreamer: Spectrally Constrained Latent Dynamics for Stable World-Model Imagination",
+      "abstract": "Latent world models improve sample efficiency in continuous control by optimizing policies over imagined latent trajectories, but common neural transitions offer limited direct control over modal persistence and error accumulation in long rollouts. We propose Koopman Dreamer, a Dreamer-style world model with a spectrally constrained deterministic latent dynamics core. Its Koopman-inspired backbone uses two-dimensional rotation--scaling blocks with bounded radii to represent damping, rotation, and near-periodic modes. Linear and low-rank bilinear action terms capture global and state-dependent control effects, while stochastic-state modulation supplies local correction information. To reduce the mismatch between posterior-conditioned training and prior-only imagination, the model combines posterior-conditioned EMA teacher targets with one-step consistency, multi-step rollout, and open-loop observation-prediction objectives. We further derive a multi-step rollout-error bound that separates amplification by the spectral backbone and bilinear interaction from the additive effects of stochastic-state mismatch and modeling residuals, clarifying the trade-off between error attenuation and long-term information retention. Experimental results on proprioceptive continuous-control tasks from the DeepMind Control Suite and UAV-LiDAR autonomous navigation demonstrate that Koopman Dreamer improves the stability of long-horizon latent rollouts and achieves stronger closed-loop control performance on tasks that rely on high-quality multi-step imagination.",
+      "authors": [
+        "Jiaqi Li",
+        "Xinglong Zhang",
+        "Haibin Xie",
+        "Yixing Lan",
+        "Wei Pan",
+        "Xin Xu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-07-22T03:38:15+00:00",
+      "link": "https://arxiv.org/pdf/2607.19719v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "world model with spectral constraints for stable latent dynamics",
+      "llm_evidence_cn": "使用频谱约束的世界模型，用于稳定潜在动力学",
+      "llm_evidence": "使用频谱约束的世界模型，用于稳定潜在动力学",
+      "canonical_evidence": "使用频谱约束的世界模型，用于稳定潜在动力学",
+      "llm_tldr_en": "Koopman Dreamer enhances Dreamer-style world models with spectrally constrained latent dynamics using rotation-scaling blocks, improving long-horizon stability.",
+      "llm_tldr_cn": "针对神经世界模型在长轨迹中误差累积的问题，提出Koopman Dreamer，采用Koopman理论的频谱约束核心，通过二维旋转-缩放块表示阻尼和周期模式，并引入线性和双线性动作项。该方法在连续控制任务中实现了更稳定的想象轨迹，减少了模式衰减，提升了策略优化效果。",
+      "llm_tldr": "针对神经世界模型在长轨迹中误差累积的问题，提出Koopman Dreamer，采用Koopman理论的频谱约束核心，通过二维旋转-缩放块表示阻尼和周期模式，并引入线性和双线性动作项。该方法在连续控制任务中实现了更稳定的想象轨迹，减少了模式衰减，提升了策略优化效果。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.19876v1",
+      "source": "arxiv",
+      "title": "KineBench: Benchmarking Embodied World Models via IDM-Free Kinematic Grounding",
+      "abstract": "Evaluating the physical consistency of embodied world models(EWMs) is a critical open challenge. While closed-loop evaluation via simulator rollouts offers a more faithful assessment of physical plausibility than open-loop alternatives, existing frameworks almost exclusively rely on Inverse Dynamics Models(IDMs) for action extraction. Due to the intricate mapping from 2D pixel space to 3D kinematic space, the learned IDMs can be brittle to data outside their training distribution, resulting in unreliable action extraction from the generated videos with novel objects and scenarios. This creates an unavoidable attribution ambiguity between world model inaccuracies and extractor errors. To reduce this ambiguity, we present KineBench, an IDM-free closed-loop benchmark for EWMs, built upon an explicit kinematic grounding pipeline. Given a generated video, KineBench employs cascaded visual foundation models to directly extract 6D end-effector poses from individual frames, which are then executed in a physics simulator for closed-loop validation. Beyond execution-based task success, KineBench incorporates two classical 3D kinematic metrics--Spectral Arc Length (SPARC) and the Maruyama Manipulability Index--to characterize trajectory smoothness and kinematic feasibility from a robot-centric perspective. Built on 20 diverse manipulation tasks in ManiSkill3, KineBench evaluates EWMs across four progressive suites: basic execution, task transfer, visual out-of-distribution generalization, and complexity-conditioned scaling. Evaluation across frontier models reveals task-complexity-bounded nonlinear scaling in embodied video generation, providing empirical guidance for future data-scaling strategies.",
+      "authors": [
+        "Zeyu Liu",
+        "Zhangzhe Zhu",
+        "Yang Zhang",
+        "Chenyou Fan",
+        "Chenjia Bai",
+        "Xuelong Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-22T08:04:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.19876v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark for embodied world models, relevant to world model evaluation",
+      "llm_evidence_cn": "具身世界模型基准测试，与世界模型评估相关",
+      "llm_evidence": "具身世界模型基准测试，与世界模型评估相关",
+      "canonical_evidence": "具身世界模型基准测试，与世界模型评估相关",
+      "llm_tldr_en": "KineBench provides an IDM-free kinematic grounding method to evaluate embodied world models, reducing attribution ambiguity between model and extractor errors.",
+      "llm_tldr_cn": "针对现有具身世界模型评估依赖逆动力学模型（IDM）导致归因模糊的问题，提出KineBench，一种无IDM的评估基准。它通过直接从视频中提取运动学约束，避免IDM的分布外误差，从而更准确地评估世界模型的物理一致性。实验表明，KineBench能有效区分不同世界模型的质量，为世界模型研究提供了可靠评估工具。",
+      "llm_tldr": "针对现有具身世界模型评估依赖逆动力学模型（IDM）导致归因模糊的问题，提出KineBench，一种无IDM的评估基准。它通过直接从视频中提取运动学约束，避免IDM的分布外误差，从而更准确地评估世界模型的物理一致性。实验表明，KineBench能有效区分不同世界模型的质量，为世界模型研究提供了可靠评估工具。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
