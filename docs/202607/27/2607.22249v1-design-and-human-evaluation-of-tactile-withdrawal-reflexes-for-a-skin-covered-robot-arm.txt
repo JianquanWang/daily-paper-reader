@@ -1,0 +1,311 @@
+Title: Design and Human Evaluation of Tactile Withdrawal Reflexes for a Skin-Covered Robot Arm
+
+URL Source: https://arxiv.org/pdf/2607.22249v1
+
+Published Time: Mon, 27 Jul 2026 00:51:03 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible. 
+
+# Design and Human Evaluation of Tactile Withdrawal Reflexes for a Skin-Covered Robot Arm 
+
+Laura Babayeva, Lukas Rustler, and Matej Hoffmann 
+
+Abstract — Nociception is a protective biological mechanism that links harmful stimulation to a reaction, such as rapid withdrawal. This paper investigates artificial nociception for a collaborative robotic arm with whole-body tactile sensing. We present a complete pipeline that maps pressure changes from sensitive skin on a robot manipulator to bio-inspired withdrawal motions. The system first converts skin pressure into a scalar pain gain using a nonlinear continuous model. We compare three reflexes: (i) uniform reflex moves four robot joints by a fixed amount, whereby the withdrawal is approximated by a stereotypical movement of the arm ”toward the base”, independent of where the robot was touched; (ii) biologically motivated location-dependent joint-space withdrawal derived from human withdrawal reflex characteristics; (iii) Cartesian space withdrawal along the surface normal of the contacted skin pad. All behaviors are integrated in a finite-state reflex controller that interrupts the task, executes the withdrawal, and returns to a pre-contact pose. A user study with 15 par-ticipants compared the three strategies using Godspeed ques-tionnaire subscales, custom perceived-naturalness and safety items, forced-choice comparisons, and qualitative feedback. Interestingly, participants rated more highly the stereotypical uniform reflex behavior over one or both competitors on the an-thropomorphism, animacy, and likeability Godspeed subscales and on the Naturalness and Realism custom scale. When asked to compare the conditions, the uniform reflex was scored best in ”felt safest”, ”most human-like”, and ”most natural”. This suggests that predictability of the robot behavior is key for user acceptance. The Cartesian reflex was judged the most appropriate reaction to touch. The bio-inspired reflex did not lead any evaluated measure. This may be partly attributed to the embodiment gap between the robot arm and human arm and participants having different expectations from a robot manipulator. 
+
+I. I NTRODUCTION 
+
+More than a century ago, Karel ˇ Capek in his play R.U.R. (Rossum’s Universal Robots) imagined robots that, because they felt almost no bodily pain, failed to protect themselves from damage. Dr. Gall’s remedy was to add pain sensitivity as an automatic protective mechanism. The addition of pain and irritability could be interpreted as a step by which Rossum’s robots began to care about their bodies and, ultimately, themselves. Setting aside the play’s dystopian tra-
+
+Laura Babayeva, Lukas Rustler and Matej Hoffmann are with the Department of Cybernetics, Faculty of Electrical Engineering, Czech Technical University in Prague, lukas.rustler@fel.cvut.cz, matej.hoffmann@fel.cvut.cz. 
+
+This work was co-funded by the European Union under the project Robotics and Advanced Industrial Production (reg. no. CZ.02.01.01/00/22 008/0004590). L.R. was additionally supported by the Czech Science Foundation (GA ˇ CR) under project No. 26-22606S and Grant Agency of the Czech Technical University in Prague, grant No. SGS26/075/OHK3/1T/13. M.H. was additionally supported by the Czech Science Foundation (GA ˇ CR), project no. 25-18113S. 
+
+Fig. 1. Schematic operation of the pipeline. The robot performs a task. If touch is detected, a pain gain G(p) is estimated using the change in pressure 
+
+p. A reflex is executed based on the calculated pain gain—if the touch force is gradually increasing or there is a new contact during the reflex, the reflex can be adjusted. After the reflex is done, the robot returns to the position before contact and continues the task. 
+
+jectory, the underlying engineering insight remains strikingly current: robots that share physical space with people require distributed tactile sensitivity and rapid, intelligible protective responses. In contemporary terms, the relevant construct is artificial nociception—–the detection and encoding of potentially damaging stimulation—–rather than subjective pain. This paper investigates how such signals should be translated into withdrawal behavior on a skin-covered robot arm. Humanoid and human-centered robots increasingly oper-ate in cluttered environments and in close physical contact with people. In such settings, safety cannot rely only on distance separation or emergency stops on contact. The robot must also interpret collisions and react in a way that is safe for both humans and robots. Biological pain provides a useful design metaphor for this problem. In humans, nociception is a protective sensorimotor mechanism: potentially damaging stimulation can trigger rapid withdrawal before the stimulus causes tissue damage. Prior work already addresses several links in the tactile-to-reflex chain. Kuehn and Haddadin introduced an artificial robot nervous system that maps multimodal tactile input to nociceptive states and impedance-based reflex motion [1]. Vorndamme et al. developed a context-sensitive reflex engine that selects among task-preserving, task-relaxing, and task-abandoning post-contact maneuvers [2]. In parallel, Liu et al. reviewed neuromorphic hardware and processing architec-tures for large-area electronic skin [3], while Feng and Zeng arXiv:2607.22249v1 [cs.RO] 24 Jul 2026 proposed a spiking-network model of actual and anticipated robot injury and evaluated it in two real-robot tasks [4]. Thus, the missing element is not a complete tactile-to-reflex pipeline per se. The contribution of this work is the within-platform comparison of three withdrawal mappings using distributed tactile input, together with a human-centered evaluation of the resulting predictability, naturalness, and appropriateness. This paper is based on a tactile UR10e manipulator covered with AIRSKIN 1 pressure pads. We explore artificial nociception and ask: how should a robot arm withdraw when touched with different pressure levels at different body re-gions? This is important for Human-Robot Interaction (HRI) because the same movement can serve a functional safety role and a communicative role. A reflex that is mechanically protective but illegible may still feel unsafe; conversely, a reflex that is predictable and understandable may be preferred even when it is less faithful to biological joint recruitment. A schematic overview of our pipeline is available in Fig. 1. 
+
+Contributions. We make the following contributions. First, we provide a summary of human Nociceptive With-drawal Reflex (NWR) pathways and pain levels, map it to the robotic manipulator, and define a biologically inspired nonlinear continuous model that converts pressure readings from the robotic skin to a pain gain factor. Second, we implement and compare three withdrawal controllers with a different level of biological inspiration and complexity of movement. Third, we evaluate how humans perceive these behaviors in direct interaction with the robot. The results of the study suggest that the most biologically inspired methods may not be the best reflected by humans. We provide data (the study questionnaire and responses), code, and video at https://humanoids-ctu.github.io/ Nociceptive-Reflexes .II. R ELATED WORK 
+
+The human NWR is a rapid polysynaptic spinal mecha-nism that protects the limbs from noxious stimuli without re-quiring cortical involvement [9], [10]. The reflex coordinates motor responses by exciting flexor muscles and inhibiting extensors to mechanically distance the limb from harm [8]. Crucially, NWR is not a stereotyped motion; it is highly context-dependent, modulated by stimulus location, intensity, and ongoing posture [11], [12]. For example, proximal joints such as the elbow and shoulder are consistently recruited even when stimuli are applied distally to the hand [8], [13]. Table I summarizes this biological organization in the upper limb, detailing the mapping between stimulus regions, spinal segments, and the resulting reflexive movements. Biological pain encoding is continuous and nonlinear. Perceptual pain magnitude scales with stimulus intensity as a power function [14], [15]. Pain sensitivity also varies by body location due to differing densities of the noci-ceptors [16], [17]. While continuous scaling is essential for biologically faithful modeling, discrete classifications of 
+
+> 1https://www.airskin.io/
+
+pain severity offer a highly interpretable baseline to validate different threshold behaviors. To establish this, we draw on the experimental conditions used by Serrao et al. [8], who applied stimuli at 1 to 4 multiples of participant-specific pain thresholds. We use the responses observed as reference points for constructing an artificial nociceptive scale of pain level (PL) as follows:  
+
+> •
+
+PL 1 & 2 No measurable movement. Interpreted as a non-threatening stimulus below the reflex activation threshold.  
+
+> •
+
+PL 3: Mild reflex (Elbow flex: ∼2.3 ◦, Shoulder ante-flex: ∼1.9 ◦). Moderate intensity where the reflex begins to activate.  
+
+> •
+
+PL 4: Clear withdrawal (Wrist add: ∼5.2 ◦, Elbow flex: 
+
+∼6.5 ◦, Shoulder anteflex: ∼5.4 ◦). Strong stimulus that fully activates coordinated withdrawal. The resulting robotic levels are an engineering abstraction and are not intended to be a direct equivalence between AIRSKIN pressure and human pain threshold. In robotics, contacts can be perceived using intrinsic sensing relying for example on joint torque sensors (e.g., [18]) or using large-area electronic skins (e.g., [19]). Dis-tributed pressure sensors are highly capable when it comes to collision detection, isolation, and identification, which are necessary to choose and execute the appropriate reaction. Examples of using whole-body skins for pHRI span high-resolution skins to convert the touch signal into contact centers and estimating the corresponding wrench [20], hier-archical framework with three levels of granularity for robot safety while navigating the environment [21], or calculating external forces to create robot reflex actions [22]. Rozlivek et al. [23] integrated tactile, proximity, and visual perception of humans as constraints for a whole-body humanoid robot controller. AIRSKIN—the sensor used in this work—was studied in [24] to assess its contribution to reducing the impact forces after impact. In [25], it was used for collision detection and isolation, whereas the robot effective mass calculated online was used to estimate the impact forces and choose the appropriate reaction. Recent neuromorphic approaches have introduced artificial Robot Nervous Systems (aRNS) that emulate human noci-ceptors. Kuehn and Haddadin [1] developed a mechanical skin model where artificial neurons encode collision data into frequency-modulated spikes, triggering discrete heuristic reflex strategies based on the severity of the pain. Other works extend this bio-inspiration to the hardware level, using computational electronic skin (e-skin) with synaptic tran-sistors for localized edge-processing of tactile stimuli [26], [27], or deploying Spiking Neural Networks (SNNs) to allow robots to learn pain associations and predict injury [4], [28]. To safely integrate reflexive behaviors, specialized control architectures are required. Vorndamme et al. [2], [29] pro-posed a real-time reflex engine that overrides standard motion generators during collisions. By categorizing reactions into task-preserving, task-relaxing, and task-abandoning reflexes, the system provides a structured pipeline for managing contact severity. TABLE I OVERVIEW OF THE NWR PATHWAY IN THE UPPER LIMB , SHOWING THE RELATIONSHIP BETWEEN ARM REGIONS , SPINAL SEGMENTS , INVOLVED NERVES AND MUSCLES , AND RESULTING MOVEMENTS .                          
+
+> Body region Spinal segments [5] Nerves [6], [7] Dominant muscles [8] Resulting movement
+> Shoulder C5–C6 Auxiliary Activation of anterior deltoid; inhibition of posterior deltoid Shoulder anteflexion, shoulder abduction/adduction, internal rotation, and elbow flexion Upper arm C5–C7 Musculocutaneous Activation of biceps and brachioradialis; inhibition of triceps Elbow flexion and minor shoulder flexion C5–T1 Radial Elbow C5–C7 Musculocutaneous Biceps brachii and brachioradialis activation Elbow flexion Forearm C5–T1 Median and radial Pronators or supinators depending on stimulus location Forearm pronation/supination with elbow flexion C8–T1 Ulnar Wrist and hand C5–T1 Median and radial Wrist flexor activation; extensor inhibition Wrist adduction/abduction depending on stimulus location, with wrist and elbow flexion C8–T1 Ulnar
+
+III. M ATERIALS AND METHODS 
+
+A. Hardware and Software 
+
+We utilized the Universal Robots UR10e 6-axis ma-nipulator. Our robot is also equipped with the AIRSKIN whole-body sensitive skin. There are 10 pads that cover the whole surface of the robot. Robot links are covered by two semicylindrical pads; joints are covered with additional pads (Fig. 2, left). Each pad is a closed shell with a compressor and a pressure sensor inside, sending one pressure value. Therefore, it is possible to detect which pad is touched and what is the pressure change, but not exactly where on the given pad. We group pads into upper-limb analogues with one to three pads per body part. The pads are colored according to the body part in Fig. 2: shoulder (yellow), upper arm (green), elbow (blue), forearm (purple), and wrist (pink).  
+
+> Fig. 2. UR10e manipulator covered with ten AIRSKIN pressure pads compared to a human arm. Pads are grouped into shoulder (yellow), upper-arm (green), elbow (blue), forearm (purple), and wrist (pink) regions. The arrows correspond to the direction of movements in Uniform Reflex (UR) and Location-dependent Reflex (LR).
+
+The whole system is implemented using Robot Operating System (ROS) Noetic. Using a special AIRSKIN mainte-nance controller, the pressure values from individual pads can be retrieved at approximately 25 Hz . Unlike in the standard AIRSKIN deployment in the industry where any detected collision stops the robot, here we retrieve the pressure values and process them for our own collision detection, isolation, and identification. The values are further processed through a filtering node that provides changes in pressure with respect to a no-contact state. The robot is controlled in joint position or joint velocity mode, depending on the selected reflex. We provide the code at https://humanoids-ctu. github.io/Nociceptive-Reflexes . We performed all of our experiments in the real world, but as the AIRSKIN technology is not open-source, the code contains a simulator of the UR10e with AIRSKIN to test the reflexes. 
+
+B. Pressure-to-pain Gain 
+
+Let p denote the change (from a non-touch baseline) in pressure measured by the activated skin pad. The controller outputs a scalar gain G(p) ∈ [0 , 1] , where G(p) = 0 means no withdrawal, and G(p) = 1 means full withdrawal. 
+
+Discrete pain model. This model, Gd(p), is based on the findings of Serrao et al. [8]. At Pain Levels (PLs) 1 and 2, no measurable joint displacement is produced and, therefore, the assignment is Gd(p) = 0 . PL 4 represents the maximum reflex response and is assigned to Gd(p) = 1 . The gain in PL 3 was determined by computing the ratio of joint displacements observed in PLs 3 and 4, producing a value of Gd(p) = 0 .35 . The final discrete pain model is defined as 
+
+Gd(p) = 
+
+
+
+0, p < 2 hPa (PL 1 )0, 2 ≤ p < 6 hPa (PL 2 )0.35 , 6 ≤ p < 12 hPa (PL 3 )1, p ≥ 12 hPa (PL 4 )
+
+(1) In terms of pressure change p in the pad, the PLs are divided by the upper thresholds of 2, 6, and 12 hPa . The values were selected empirically during preliminary experiments and are tightly bounded to our specific robot and skin. 
+
+Continuous pain model. As biological pain intensity is graded, the implemented study used a continuous mapping defined as a sigmoid, σ centered about the value of 0.5 as 
+
+σ(x; k) = 11 + e−k(x−0.5) , (2) where x ∈ [0 , 1] is the normalized pressure value and k
+
+controls the steepness. We used k = 3 , as at this steepness, the sigmoid produces a gradual, monotonically increasing response consistent with the neural activation reported by Coghill et al. [14], while its nonlinearity captures the graded perceptual pain response described by Price et al. [15]. The sigmoid is further scaled to provide the normalized G(p)
+
+between 0 and 1 as 
+
+σs(x; k) = σ(x; k) − σ(0; k)
+
+σ(1; k) − σ(0; k) (3) With the continuous model (see Fig. 1, top right), we utilize the pressure thresholds and PLs from the discrete model—we added threshold of 20 hPa for PL 4 to allow for sigmoid computation. The gain is computed separately for each PL range. Below the upper bound of PL 2, no reflex is triggered and G(p) = 0 . At PL 3, the scaled sigmoid interpolates between G(p) = 0 and G(p) = 0 .35 . At PL 4, it interpolates between G(p) = 0.35 and G(p) = 1.Everything above the last threshold is counted as G(p) = 1 .This piecewise structure ensures continuity at the boundaries of individual PLs while retaining the biological foundation established in the discrete model. The continuous pain model with the given thresholds can be seen in the top right of Fig. 1 and is mathematically defined as 
+
+G(p) = 
+
+
+
+0, p < 6 hPa 0.35 · σs
+
+  p−66 ; k , 6 ≤ p < 12 hPa 0.35 + 0 .65 · σs
+
+  p−12 8 ; k , 12 ≤ p < 20 hPa 1, p ≥ 20 hPa 
+
+(4) 
+
+C. Reflexes 
+
+We map human upper-limb joints to the manipulator as follows: shoulder internal rotation and adduction correspond to the base and shoulder joints ( Jb, Js), respectively. Elbow flexion to the elbow joint ( Je) and wrist movements to the wrist joints ( Jwi ; i ∈ [1 , 2, 3] ). We only used the first joint of the wrist, which corresponds to wrist flexion. We extracted the maximum displacement vector (range of motion) qmax from the literature studying human range of motion [30]–[32]. The maximal joint ranges for the robot become: 
+
+qmax = [40 ◦, 70 ◦, 146 ◦, 73 ◦, 0◦, 0◦]T . (5) The behavior of two of the reflexes is then derived from these ranges. The direction of these movements corresponds to shoulder internal rotation (we assume the manipulator is a right arm), shoulder adduction, elbow flexion, and wrist flexion. Reflexes are triggered only for pad pressure level changes above 6 hPa (Eq. 4). Schematic illustration of their behavior is in Fig. 3. 
+
+UR. When triggered by above-threshold contact anywhere on the arm, this reflex applies a fixed increment to the current position of the first four joints of the manipulator. We selected the movement range to correspond to G(p) = 0 .5,i.e., to be a moderate response to a contact. Thus, the displacement vector is calculated as 
+
+qref = 12 qmax = 20 ◦, 35 ◦, 73 ◦, 36 .5◦, 0◦, 0◦T . (6) This displacement vector is added to the current pose of the robot, checked against individual joint limits and clipped if necessary. Joint position control was used. 
+
+Location-dependent Reflex (LR). The biologically in-spired joint-space behavior scales the maximum displace-ment by the pain gain G(p) and by a diagonal location-dependent weighting matrix W(p, ℓ ) as 
+
+qref = G(p) W(p, ℓ ) qmax , (7) where ℓ is the activated body region and W(p, ℓ ) ∈ R6×6
+
+contains weights for individual joints j ∈ { b, s, e, w } of the base, shoulder, elbow, and wrist (the same weight is used for all three joints of the wrist). The weights were selected from the upper-limb NWR literature and refined by manual testing for visually plausible UR10e motions. Table II provides an overview of the weights used in our implementation, together with the biological explanation of the movement. The reflex is dominated by shoulder adduction and elbow flexion, with involvement of the base of wrist flexion depending on the contact location. The displacement vector is then added to the current pose as in the case of UR, with the same control scheme. 
+
+Cartesian Reflex (CR). The Cartesian reflex used the manipulator Jacobian to withdraw the contacted skin pad in the operational space along the surface normal away from the contact. Let n be the activated pad normal transformed into the robot base frame. The desired translational velocity is 
+
+vc = −vmax G(p) n, (8) where vmax is a velocity scale. The negative sign moves the pad away from the contact—the normals of the pads are always pointing away from the surface and are pre-defined in local frames. Joint velocities are computed using resolved-rate con-trol [33] as 
+
+˙qref = J†(q)
+
+vc
+
+0
+
+
+
+, (9) where J† is the pseudoinverse of the Jacobian from the robot base to the contacted pad. The resulting joint velocities are streamed for a fixed reflex duration (0.5 s). 
+
+Comparison. The uniform reflex is stereotypical—the same joint increment independent of which robot part was touched—and hence predictable. The location-dependent re-flex is strongly biologically inspired and the behavior is modulated by the pain gain and the contact location. The Cartesian reflex constitutes an engineering solution: the contacted skin pad will be moved away in Cartesian space, employing all robot joints according to the mapping through the Jacobian. Visual comparison of reflexes can be seen in Fig. 3 and in the accompanying video. 
+
+D. State Machine 
+
+During the experiments, the robot was controlled using a state machine with three states: ( I) TASK; ( II ) REFLEX; (III ) and RETURNING. During TASK, the robot performs the pre-defined trajectory. At the same time, it senses and TABLE II SPATIAL ORGANIZATION OF THE HUMAN NWR AND CORRESPONDING JOINT -WEIGHT SELECTION FOR LOCATION -DEPENDENT REFLEX (LR). WEIGHTS wJj CORRESPOND TO WEIGHTS OF INDIVIDUAL JOINTS j ∈ { b, s, e, w } OF BASE , SHOULDER , ELBOW AND WRIST (ONLY ONE WEIGHT IS USED FOR ALL THREE WRIST JOINTS ). 
+
+Pain Stimulus location Description / Interpretation Weights 
+
+[wJb , w Js , w Je , w Jw ]
+
+1–2 Any Sensory nociceptive processing without mechanical withdrawal. No joint motion occurs, but awareness and compliance are maintained. [0 , 0, 0, 0] 
+
+3 Local protective adjustment without full withdrawal 
+
+Shoulder / upper arm Primarily excites shoulder anteflexion, supported by elbow flexion and occasional shoulder adduction. [0 .2, 0.8, 0.6, 0.0] 
+
+Elbow / forearm Elbow-dominated withdrawal with shoulder assistance and minor wrist response. [0 .0, 0.6, 0.8, 0.2] 
+
+Wrist Local wrist flexors are recruited, with dominant elbow flexion and supportive shoulder anteflexion to increase limb–stimulus distance. [0 .0, 0.3, 0.6, 0.8] 
+
+4 Whole-arm withdrawal with emphasis on flexion of the stimulated body part 
+
+Shoulder / upper arm Proximal withdrawal reflex characterized by strong shoulder anteflexion and supporting elbow flexion. Depending on the precise stimulus location, shoulder adduction may also occur. Wrist involvement is minimal or absent. 
+
+[0 .5, 1.0, 0.7, 0.1] 
+
+Elbow / forearm Elbow-dominant withdrawal reflex with significant shoulder participation and moderate wrist motion. [0 .0, 0.8, 1.0, 0.4] 
+
+Wrist Strong wrist flexion and adduction combined with pronounced elbow flexion and shoulder anteflexion to rapidly withdraw the hand. [0 .0, 0.6, 0.8, 1.0] 
+
+Fig. 3. Illustration of the three different reflex types. Pain gain G(p) = 1. The initial pose is shown in grey, while the colored circles represent the points of touch and colored robots the corresponding reflexes. See the accompanying video for full movements. 
+
+processes skin data. If nonzero pain gain is detected, the robot saves the current pose, pauses trajectory execution, and switches to REFLEX—if there is a new or stronger contact during REFLEX, the trajectory and duration can be updated. After execution, it switches to RETURNING and returns to the saved configuration and continues TASK. See Fig. 1 for a visual representation. IV. R ESULTS 
+
+We prepared the interaction with the robot as a small game for the participants. In each condition, the robot performed the same trajectory representing the boundaries of an ∞ sign—see the accompanying video. The task of the participants was to touch the skin pad that changed color from blue to red. Participants were asked to touch the center of the active pads with one finger using varying pressure levels and observe the robot reaction. We conducted a within-subject study with three conditions: Uniform Reflex (UR), Location-dependent Reflex (LR), Cartesian Reflex (CR). The order of the conditions was counterbalanced in three orders, with five participants per order. Each condition lasted approximately five minutes and involved at least ten touches. After each condition, participants completed per-condition questionnaires. After all conditions, they completed forced-choice comparative questions and open-ended questions. The entire session lasted approximately 25 minutes. The questionnaire was given in English for all participants. Participants provided written informed consent. The study was approved by the Committee for Research Ethics at the Czech Technical University in Prague (reference 0000-20/25/51902/EKCVUT). 
+
+Evaluation and Metrics. Per-condition ratings included four Godspeed subscales [34]: Anthropomorphism, Animacy, Likeability, and Perceived Safety. And eight custom 5-point Likert scale [35] items grouped into 3 categories asking users to score the following statements:  
+
+> •
+
+Naturalness and Realism: 
+
+– The robot’s reaction to my touch felt natural; 
+
+– The robot’s withdrawal movement made sense to me.  
+
+> •
+
+Safety & Comfort: 
+
+– The robot’s response speed felt appropriate; 
+
+– I felt in control of the interaction at all times; 
+
+– I would feel comfortable working near this robot.  
+
+> •
+
+Reflex Perception 
+
+– The robot’s movement felt proportional to how hard I pressed; 
+
+– The robot’s behavior reminded me of a human; 
+
+– The robot reacted as if it was avoiding discomfort or damage. The final comparative questions asked which condition felt the most natural, most human-like, safest, and most appro-priate as a touch reaction. The users also had the opportunity to fill the following open questions:  
+
+> •
+
+What did you like most about the robot’s behavior?  
+
+> •
+
+What felt unnatural or uncomfortable during the inter-action?  
+
+> •
+
+Please explain your preference (or lack of preference) between the conditions.  
+
+> •
+
+Do you have suggestions for improving the robot’s reactions? The complete questionnaire and answers are available at https://humanoids-ctu.github.io/ Nociceptive-Reflexes .We used descriptive statistics, Friedman tests to ana-lyze repeated-measures differences, and pairwise Wilcoxon signed-rank tests as post-hoc analyses when the Friedman test yielded significant results. 
+
+Participant characteristics. We evaluated the study with 15 participants (8 male, 7 female; ages 20–51, median 26, mean 27.9). The initial screening showed that 7% never interact with robotic systems, 53% rarely, 33% monthly, and 7% weekly or more. In the specific case of the robotic arm, 60% never had an experience with it, 20% had brief experience and 20% had extensive experience. On a five point scale from very negative to very positive, the average attitude towards robot was 4.4, with the lowest grade of 3. 
+
+A. Godspeed Subscales 
+
+The first evaluation was done using the Godspeed ques-tions. The boxplots results are shown in Fig. 4. The Uniform Reflex (UR) scored the best in Anthropomorphism, Animacy, and Likeability. The difference is significant w.r.t the Carte-sian Reflex (CR) in all three cases; in Anthropomorphism, the difference is also significant w.r.t Location-dependent Reflex (LR). In the last subscale—Perceived Safety—there is almost no difference in the appreciation of the three different reflexes. 
+
+B. Custom Subscales 
+
+We further designed custom subscales to assess whether the movement felt natural (Naturalness & Realism; Fig. 5 (a)), whether the speed was appropriate and whether they felt in control (Safety & Comfort Fig. 5 (b)), and whether the movement was proportional to their touch and reminiscent of human behavior (Perception; (Fig. 5 (c)). The results suggest several conclusions. Firstly, UR is perceived as more natural (with a statistically significant difference from LR) and safe, but its speed/trajectory is not perceived as proportional to the touch. Secondly, LR has the highest variance in all three subscales. 
+
+C. Comparative Questions 
+
+After completing all three conditions, we also asked the participants comparative questions. They could select one of the conditions or select the fourth option of no preference. The results are visualized in Fig. 6. Interestingly, UR that was meant as a baseline performed the best in human-like and natural movements with the difference of 1 and 2 votes from the second best LR. Note that the difference is small and with Uniform Location Cartesian               
+
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-]  **
+> (a) Anthropomorphism Uniform Location Cartesian
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-]
+> ** (b) Animacy Uniform Location Cartesian
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-]
+> **
+> (c) Likeability Uniform Location Cartesian
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-] (d) Perceived Safety
+> Fig. 4. Godspeed scores per condition for each of the four subscales. The red points represent mean and red lines median. Boxes are from 25th to 75th percentile with whiskers showing extreme non-outlier point and crosses showing outliers. Statistical significance was evaluated using the Wilcoxon signed-rank test, where *, **, *** denote p-values below 0.05, 0.01, and 0.001, respectively.
+
+our sample size it should be interpreted with caution. On the other hand, UR felt the safest with 7 more votes on the second best condition. This result suggests that this simple reflex may be the best for HRI. We believe that this is caused by the fact that this condition is the most predictable. As the most appropriate reflex, the participants selected CR—with a small margin of 1 vote. 
+
+D. Qualitative feedback 
+
+The answers to open-ended questions were consistent with the previous sections of the results. Comments about the uniform reflex were dominated by predictability and controllability. Participants reported that the robot’s action was easy to learn and that this made the interaction feel safer, even though some described the motion as repetitive or less expressive. The feedback on the bio-inspired location-dependent be-havior was polarized. Some participants interpreted the vari-ability as more lifelike because the robot did not always re-peat the same motion. Others interpreted the same variability as uncertainty. The most important criticism was directional: in certain postures, the selected joint combination could cause part of the robot to move toward the participant while another part withdrew. The Cartesian behavior was easier to explain after ob-servation. The participants recognized that the touched pad moved away from the contact, which likely explains why it received the highest number of votes for the most appropriate reaction to touch. Its main negative feedback was about abruptness. The avoidance movement was applied directly, without smoothing the trajectory in task space or joint space. Uniform Location Cartesian          
+
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-]
+> *(a) Naturalness & Realism Uniform Location Cartesian
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-] (b) Safety & Comfort Uniform Location Cartesian
+> 1
+> 2
+> 3
+> 4
+> 5
+> Score [-]
+> (c) Perception
+> Fig. 5. Custom scales Likert scores per condition. The red points represent mean and red lines median. Boxes are from 25th to 75th percentile with whiskers showing extreme non-outlier point and crosses showing outliers. Statistical significance was evaluated using the Wilcoxon signed-rank test, where *, **, *** denote p-values below 0.05, 0.01, and 0.001, respectively.
+
+V. D ISCUSSION , C ONCLUSION AND FUTURE WORK 
+
+In this work, we presented an artificial nociceptive reflex pipeline for a manipulator equipped with whole-body tactile sensing. By mapping extrinsic pressure changes to a scalar pain gain using a biologically-informed continuous model, we implemented and compared three distinct withdrawal strategies: a baseline Uniform Reflex (UR), a biologically-inspired Location-dependent Reflex (LR), and an engineered Cartesian Reflex (CR). The study was conducted as a game that required users to touch a part of the robot colored red. A within-subject human evaluation with 15 participants was conducted to assess the perceived naturalness, safety, and appropriateness of these reflexes during direct physical human-robot interaction. Data from experiments (the study questionnaire and responses), code, and video recordings are available at https://humanoids-ctu.github.io/ Nociceptive-Reflexes .Arguably, the most important finding is the trade-off between biological fidelity, geometric legibility, and pre-dictability. The LR strategy best reflects the upper-limb NWR literature—stimulus location and pain level determine which joints participate. However, this did not translate into the highest perceived naturalness or safety. The embodiment gap between the robot manipulator and a human arm is probably too large for participants to subconsciously relate the robot movements to humans. The behavior of UR provided a consistent response that partic-ipants could predict after a few touches. This is consistent with the literature on perceived-safety in physical HRI, where predictability, controllability, and transparency are central factors in how safe a robot feels [36], [37]. In both LR and 2 
+
+> 4
+> 6
+> 8
+> 10
+> Most natural
+> Most human-like
+> Felt safest
+> Most appropriate
+> Uniform
+> Location
+> Cartesian
+> No preference
+> Fig. 6. Radar plot of participant preferences across conditions for natu-ralness, human-likeness, safety, and reaction appropriateness. The numbers represent number of votes (out of 15 participants) for the given option.
+
+UR joint movements were “toward the body”, which is in line with the biological reflexes, but in some configurations could results in movement of the the touched pad toward and not away from the contact. Instead, the CR behavior always moves the contacted surface away. This should be considered in particular in physical HRI contexts, where safety is more important than perceived safety. The CR is also more transferable across morphologies than a manually chosen joint-weight table. It was ranked as the most appropriate reaction to touch. The feedback questions later revealed that the participants were mostly concerned about the motion and velocity profiles of this behavior. The behavior was perhaps too abrupt and brief in duration. A smoother and longer movement could be better perceived. In the future, we would like to repeat the experiments with different robot morphologies (e.g. with a humanoid robot) or introduce dif-ferent motions using, for example, recorded human motions or directly applying motion retargeting frameworks [38]. We evaluated a complete artificial nociceptive framework on a real robot with whole-body skin and performed a controlled within-subject study. However, the users pointed out some possible improvements. Firstly, even though the robot’s responsiveness was marked positively, the difference between light and firm touch was not always perceivable. This comes from the characteristics of the skin used. It is sending data with the frequency of about 25 Hz , which is enough for responsive behavior, but pressure-to-force mapping is difficult—it depends not only on the touch force, but also on contact area, robot velocity, or touch location. Therefore, the same touch could result in different pain gains. This is paired with another suggestion of making the intent of the robot better visible to the participants, e.g., by showing the touch intensity by colors of LED lights on the skin. This is unfortunately not possible with AIRSKIN as changing color actually increases latency. However, these problems could be solved with the use of different artificial skins or other sensing devices. REFERENCES [1] J. Kuehn and S. Haddadin, “An Artificial Robot Nervous System To Teach Robots How To Feel Pain And Reflexively React To Potentially Damaging Contacts,” IEEE Robotics and Automation Letters , vol. 2, no. 1, pp. 72–79, 2017. [2] J. Vorndamme, L. Figueredo, and S. Haddadin, “Robot Contact Reflexes: Adaptive Maneuvers in the Contact Reflex Space,” 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , pp. 6687–6694, 2022. [3] F. Liu, S. Deswal, A. Christou, Y. Sandamirskaya, M. Kaboli, and R. Dahiya, “Neuro-inspired electronic skin for robots,” Science Robotics , vol. 7, no. 67, p. eabl7344, 2022. [4] H. Feng and Y. Zeng, “A brain-inspired robot pain model based on a spiking neural network,” Frontiers in Neurorobotics , vol. 16, 2022. [5] L. Polcaro, M. Charlick, and D. T. Daly, “Anatomy, Head and Neck: Brachial Plexus,” in StatPearls . StatPearls Publishing, 2023. [6] J. T. Kaiser, V. Reddy, M. V. Launico, and J. G. Lugo-Pico, “Anatomy, Head and Neck: Cervical Vertebrae,” in StatPearls . StatPearls Publishing, 2023. [7] M. L. Bayot, A. Nassereddin, and M. A. Varacallo, “Anatomy, Shoulder and Upper Limb, Brachial Plexus,” in StatPearls . StatPearls Publishing, 2023. [8] M. Serrao, F. Pierelli, R. Don, A. Ranavolo, A. Cacchio, A. Curr` a, G. Sandrini, M. Frascarelli, and V. Santilli, “Kinematic and Elec-tromyographic Study of the Nociceptive Withdrawal Reflex in the Upper Limbs during Rest and Movement,” Journal of Neuroscience ,vol. 26, no. 13, pp. 3505–3513, 2006. [9] C. Derderian, K. R. Shumway, and P. Tadi, “Physiology, Withdrawal Response,” in StatPearls . StatPearls Publishing, 2019. [10] M. Bear, B. Connors, and M. Paradiso, Neuroscience: Exploring the Brain . Wolters Kluwer, 2015. [11] M. C. Henrich, K. S. Frahm, R. C. Coghill, and O. K. Andersen, “Spinal Nociception is Facilitated during Cognitive Distraction,” Neu-roscience , vol. 491, pp. 134–145, 2022. [12] H. Mass´ e-Alarie, G. V. Hamer, S. E. Salomoni, and P. W. Hodges, “Nociceptive withdrawal reflexes of the trunk muscles in chronic low back pain,” PLOS ONE , vol. 18, 2023. [13] C. L. Peterson, Z. A. Riley, E. T. Krepkovich, W. M. Murray, and E. J. Perreault, “Withdrawal reflexes in the upper limb adapt to arm posture and stimulus location,” Muscle & Nerve , vol. 49, no. 5, pp. 716–723, 2014. [14] R. C. Coghill, C. N. Sang, J. M. Maisog, and M. J. Iadarola, “Pain Intensity Processing Within the Human Brain: A Bilateral, Distributed Mechanism,” Journal of Neurophysiology , vol. 82, no. 4, pp. 1934– 1943, 1999. [15] D. D. Price, P. A. McGrath, A. Rafii, and B. Buckingham, “The Validation of Visual Analogue Scales as Ratio Scale Measures for Chronic and Experimental Pain,” Pain , vol. 17, no. 1, pp. 45–56, 1983. [16] F. Alburquerque-Send´ ın, P. Madeleine, C. Fern´ andez-de-las Pe˜ nas, P. R. Camargo, and T. F. Salvini, “Spotlight on topographical pressure pain sensitivity maps: a review,” Journal of Pain Research , vol. 11, pp. 215–225, 2018. [17] F. Mancini, A. Bauleo, J. Cole, F. Lui, C. A. Porro, P. Haggard, and G. D. Iannetti, “Whole-Body Mapping of Spatial Acuity for Pain and Touch,” Annals of Neurology , vol. 75, no. 6, pp. 917–924, 2014. [18] M. Iskandar, A. Albu-Sch¨ affer, and A. Dietrich, “Intrinsic sense of touch for intuitive physical human-robot interaction,” Science Robotics , vol. 9, no. 93, p. eadn4008, 2024. [19] G. Cheng, E. Dean-Leon, F. Bergner, J. R. G. Olvera, Q. Leboutet, and P. Mittendorfer, “A comprehensive realization of robot skin: Sensors, sensing, control, and applications,” Proceedings of the IEEE , vol. 107, no. 10, pp. 2034–2051, 2019. [20] Y. Sun, C. Xiao, L. Chen, L. Chen, H. Lu, Y. Wang, W.-W. Lee, Y. Zheng, Z. Zhang, and R. Xiong, “Beyond End-Effector: Utilizing High-Resolution Tactile Signals for Physical Human–Robot Interac-tion,” IEEE Transactions on Industrial Electronics , vol. 72, no. 5, pp. 5022–5031, 2025. [21] S. Jiang and L. L. Wong, “A Hierarchical Framework for Robot Safety using Whole-body Tactile Sensors,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) , 2024, pp. 8021– 8028. [22] L. V. Duong, “A tactile reflex arc for physical human–robot interac-tion,” Mechatronics , vol. 107, p. 103307, 2025. [23] J. Rozlivek, A. Roncone, U. Pattacini, and M. Hoffmann, “HARMONIOUS—Human-Like Reactive Motion Control and Mul-timodal Perception for Humanoid Robots,” IEEE Transactions on Robotics , vol. 41, pp. 378–393, 2025. [24] P. Svarny, J. Rozlivek, L. Rustler, M. Sramek, ¨O. Deli, M. Zillich, and M. Hoffmann, “Effect of active and passive protective soft skins on collision forces in human–robot collaboration,” Robotics and Computer-Integrated Manufacturing , vol. 78, p. 102363, 2022. [25] L. Rustler, M. Misar, and M. Hoffmann, “Adaptive collision sensitivity for efficient and safe human-robot collaboration,” Advanced Intelligent Systems , 2026. [26] F. Liu, S. Deswal, A. Christou, M. S. Baghini, R. Chirila, D. Shak-thivel, M. Chakraborty, and R. Dahiya, “Printed synaptic transis-tor–based electronic skin for robots to feel and learn,” Science Robotics , vol. 7, no. 67, p. eabl7286, 2022. [27] J. C. Yang, J. Mun, S. Y. Kwon, S. Park, Z. Bao, and S. Park, “Electronic Skin: Recent Progress and Future Prospects for Skin-Attachable Devices for Health Monitoring, Robotics, and Prosthetics,” 
+
+Advanced Materials , vol. 31, no. 48, p. 1904765, 2019. [28] Y. Zeng, D. Zhao, F. Zhao, G. Shen, Y. Dong, E. Lu, Q. Zhang, Y. Sun, Q. Liang, Y. Zhao, Z. Zhao, H. Fang, Y. Wang, Y. Li, X. Liu, C. Du, Q. Kong, Z. Ruan, and W. Bi, “Braincog: A spiking neural network based, brain-inspired cognitive intelligence engine for brain-inspired ai and brain simulation,” Patterns , vol. 4, no. 8, p. 100789, 2023. [29] J. Vorndamme, A. Melone, R. Kirschner, L. Figueredo, and S. Had-dadin, “Safe Robot Reflexes: A Taxonomy-Based Decision and Modu-lation Framework,” IEEE Transactions on Robotics , vol. 41, pp. 982– 1001, 2025. [30] T. K. Gill, E. M. Shanahan, G. R. Tucker, R. Buchbinder, and C. L. Hill, “Shoulder range of movement in the general population: age and gender stratified normative data using a community-based cohort,” 
+
+BMC musculoskeletal disorders , vol. 21, no. 1, p. 676, 2020. [31] E. L. Zwerus, N. W. Willigenburg, V. A. Scholtes, M. P. Somford, D. Eygendaal, and M. P. van den Bekerom, “Normative values and affecting factors for the elbow range of motion,” Shoulder & Elbow ,vol. 11, no. 3, pp. 215–224, 2019. [32] T. S. Kim, D. D. H. Park, Y. B. Lee, D. G. Han, J. S. Shim, Y. J. Lee, and P. C. W. Kim, “A Study on the Measurement of Wrist Motion Range Using the iPhone 4 Gyroscope Application,” Annals of Plastic Surgery , vol. 73, no. 2, pp. 215–218, August 2014. [33] D. E. Whitney, “Resolved Motion Rate Control of Manipulators and Human Prostheses,” IEEE Transactions on Man-Machine Systems ,vol. 10, no. 2, pp. 47–53, 1969. [34] C. Bartneck, D. Kuli´ c, E. Croft, and S. Zoghbi, “Measurement In-struments for the Anthropomorphism, Animacy, Likeability, Perceived Intelligence, and Perceived Safety of Robots,” International Journal of Social Robotics , vol. 1, no. 1, pp. 71–81, 2009. [35] G. M. Sullivan and A. R. Artino Jr, “Analyzing and Interpreting Data From Likert-Type Scales,” Journal of graduate medical education ,vol. 5, no. 4, pp. 541–542, 2013. [36] M. Rubagotti, I. Tusseyeva, S. Baltabayeva, D. Summers, and A. Sandygulova, “Perceived safety in physical human–robot inter-action—A survey,” Robotics and Autonomous Systems , vol. 151, p. 104047, 2022. [37] I. Tusseyeva, A. Oleinikov, A. Sandygulova, and M. Rubagotti, “Per-ceived safety in human–cobot interaction for fixed-path and real-time motion planning algorithms,” Scientific Reports , vol. 12, no. 1, p. 20438, 2022. [38] H. Klein, N. Jaquier, A. Meixner, and T. Asfour, “A Riemannian Take on Human Motion Analysis and Retargeting,” in 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) .IEEE, 2022, pp. 5210–5217.
