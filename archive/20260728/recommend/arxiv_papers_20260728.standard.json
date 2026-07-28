@@ -1,0 +1,205 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-28T19:46:24.427301+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 4,
+    "deep_cap": 6,
+    "deep_selected": 4,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.23782v1",
+      "source": "arxiv",
+      "title": "$N_0$-VTLA: Scaling Vision-Tactile-Language-Action Model with Latent Tactile Tokens",
+      "abstract": "We present $N_0$-VTLA, a vision-tactile-language-action (VTLA) foundation model capable of (1) fine-grained contact-rich manipulation with tactile perception and tactile-feedback control, and (2) offline policy improvement from stored deployment data. Building on current vision-based backbones, we propose a training recipe for tactile integration consisting of visuo-tactile pre-training, staged tactile-pathway integration, and advantage-conditioned offline policy improvement. During pre-training, the policy learns broad contact priors from NeoData, our large-scale visuo-tactile robot dataset; to our knowledge, $N_0$-VTLA is the first VTLA model pretrained on tactile data at scale. During post-training, we augment the policy with a predictive tactile pathway that distills the contact patterns learned at scale into the fine motion adjustments required by downstream tactile-centric manipulation. For offline policy improvement, we introduce ALTER, an advantage-conditioned offline reinforcement learning method that converts relative progress and trajectory-event comparisons into binary advantage labels for policy training on a fixed deployment corpus, further improving task-specific learning on contact-rich skills such as deformable object manipulation. Across contact-rich benchmarks, $N_0$-VTLA outperforms strong baselines by wide margins: it wins all nine real-robot NeoReal tasks and reaches 63.8% mean success on a twenty-task simulation suite, against 44.0% for the strongest baseline. $N_0$-VTLA policies trained with ALTER reach 75-95% success on three long-horizon real-robot tasks. These results lay a foundation for versatile tactile-driven manipulation policies.",
+      "authors": [
+        "NeoteAI Team",
+        "Fudan TEAI Team"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-26T17:58:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.23782v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "vision-tactile-language-action foundation model",
+      "llm_evidence_cn": "视觉-触觉-语言-动作基础模型",
+      "llm_evidence": "视觉-触觉-语言-动作基础模型",
+      "canonical_evidence": "视觉-触觉-语言-动作基础模型",
+      "llm_tldr_en": "N0-VTLA is the first VTLA foundation model pretrained on large-scale visuo-tactile data (NeoData), enabling fine-grained contact-rich manipulation with tactile feedback control and offline policy improvement.",
+      "llm_tldr_cn": "现有VLA模型缺乏触觉感知，难以处理接触密集操作。本文提出N0-VTLA，首个在触觉数据上大规模预训练的视觉-触觉-语言-动作基础模型。通过视触觉预训练、分阶段触觉通路集成和优势条件离线策略改进，模型能够执行精细接触操作并提供触觉反馈控制。实验表明，该模型在接触密集任务上性能优异，且可从部署数据中离线改进。这项工作为融合触觉的多模态机器人策略提供了新基准。",
+      "llm_tldr": "现有VLA模型缺乏触觉感知，难以处理接触密集操作。本文提出N0-VTLA，首个在触觉数据上大规模预训练的视觉-触觉-语言-动作基础模型。通过视触觉预训练、分阶段触觉通路集成和优势条件离线策略改进，模型能够执行精细接触操作并提供触觉反馈控制。实验表明，该模型在接触密集任务上性能优异，且可从部署数据中离线改进。这项工作为融合触觉的多模态机器人策略提供了新基准。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23783v1",
+      "source": "arxiv",
+      "title": "$N_0$-TWAM: Scaling Tactile-Native World-Action Model for Contact-Rich Manipulation",
+      "abstract": "We present $N_0$-TWAM, a tactile-native world-action model for contact-rich manipulation that predicts both future vision and future contact. To our knowledge, it is the first tactile world-action model trained at large scale, and it shows strong capability on contact-rich tasks. We pre-train $N_0$-TWAM at large scale with visuo-tactile joint training over tactile-rich demonstrations spanning six embodiments and 450 tasks. We use NeoForce, a unified force-based tactile representation, to form a physically grounded contact signal that conditions action generation. To improve long-horizon and multi-stage manipulation, we introduce tactile contact events for task staging and advance through them during execution. For real-time efficiency, we adopt an asymmetric Mixture-of-Transformers architecture that pairs a full-width expert for video prediction with slim experts for downstream action and tactile prediction. Evaluations on both real and simulated benchmarks justify the capabilities of $N_0$-TWAM across a range of contact-rich tasks, and demonstrate the benefit of data scaling for precise tactile and action prediction. In summary, $N_0$-TWAM endows a world-action model with predictive capabilities to foresee vision, touch and action, building a solid foundation for fine-grained manipulation on open contact-rich tasks. The codebase and model checkpoints will be made publicly available to foster further research and development in tactile-enabled robotic manipulation.",
+      "authors": [
+        "NeoteAI Team",
+        "Fudan TEAI Team"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-26T17:58:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.23783v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "tactile world-action model for contact-rich manipulation",
+      "llm_evidence_cn": "面向密集接触操作的触觉世界动作模型",
+      "llm_evidence": "面向密集接触操作的触觉世界动作模型",
+      "canonical_evidence": "面向密集接触操作的触觉世界动作模型",
+      "llm_tldr_en": "N0-TWAM is the first large-scale tactile-native world-action model, pretrained with visuo-tactile joint training across 450 tasks and 6 embodiments, using NeoForce representation for contact-rich manipulation and achieving strong performance.",
+      "llm_tldr_cn": "现有世界模型缺乏触觉感知，限制了密集接触操作。本文提出N0-TWAM，首个大规模训练的触觉原生世界动作模型，通过统一力触觉表示NeoForce和视触觉联合预训练，在450个任务和6种机器人平台上学习接触先验。模型能够预测未来视觉和接触信号，并利用触觉接触事件进行任务分阶段推进，显著提升了长时域和多阶段操作能力。该工作为触觉世界模型的大规模应用奠定了基础。",
+      "llm_tldr": "现有世界模型缺乏触觉感知，限制了密集接触操作。本文提出N0-TWAM，首个大规模训练的触觉原生世界动作模型，通过统一力触觉表示NeoForce和视触觉联合预训练，在450个任务和6种机器人平台上学习接触先验。模型能够预测未来视觉和接触信号，并利用触觉接触事件进行任务分阶段推进，显著提升了长时域和多阶段操作能力。该工作为触觉世界模型的大规模应用奠定了基础。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24267v1",
+      "source": "arxiv",
+      "title": "FeelWorld: Visuo-Tactile World Model for Hierarchical Contact Prediction and Planning",
+      "abstract": "Humans plan physical interactions by imagining the possible outcomes of candidate actions. However, existing visual world models primarily capture appearance dynamics while overlooking the tactile states that govern contact-rich interactions, potentially producing imagined futures that appear visually plausible but violate physical dynamics. We introduce FeelWorld, a hierarchical visuo-tactile world model that jointly predicts future visual latents and three tactile states. FeelWorld organizes these states hierarchically as contact state, a 3D tactile latent that encodes force-related information, and slip state. These states are jointly predicted by a shared latent dynamics model with explicit supervision. To prevent irrelevant tactile signals during free-space motion from degrading visual prediction, we introduce a contact-gated asymmetric attention mechanism that maintains a visual-only prediction pathway before contact and enables joint visuo-tactile dynamics prediction during contact. The model is further trained with autoregressive rollouts and context noise injection to improve robustness to compounding errors. The predicted contact and slip states also support contact-aware CEM planning. Experiments on chip grasping, fruit grasping, and USB insertion show that FeelWorld reduces 10-step LPIPS from 0.084 to 0.058 and maintains an LPIPS that is 61% lower than that of the visual baseline after an 80-step autoregressive rollout. FeelWorld also achieves an average zero-shot planning success rate of 81.7%, providing an effective approach for incorporating tactile sensing into world models.",
+      "authors": [
+        "Wenxuan Ma",
+        "Chaofan Zhang",
+        "Chao Xue",
+        "Yinghao Cai",
+        "Guocai Yao",
+        "Shaowei Cui",
+        "Shuo Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-27T11:00:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.24267v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "visuo-tactile world model for contact prediction",
+      "llm_evidence_cn": "视觉-触觉世界模型用于接触预测",
+      "llm_evidence": "视觉-触觉世界模型用于接触预测",
+      "canonical_evidence": "视觉-触觉世界模型用于接触预测",
+      "llm_tldr_en": "Introduces FeelWorld, a hierarchical visuo-tactile world model that jointly predicts visual latents and tactile states for contact-rich manipulation planning.",
+      "llm_tldr_cn": "该论文针对现有世界模型缺乏触觉状态导致接触交互预测不准确的问题，提出了FeelWorld分层视觉-触觉世界模型。模型联合预测未来视觉特征和三种触觉状态（接触、力、滑动），并通过显式监督训练共享潜动力学模型。实验表明，该模型能有效预测触觉状态，并提升机器人接触规划的效果。这项工作为机器人触觉感知和世界建模提供了新思路。",
+      "llm_tldr": "该论文针对现有世界模型缺乏触觉状态导致接触交互预测不准确的问题，提出了FeelWorld分层视觉-触觉世界模型。模型联合预测未来视觉特征和三种触觉状态（接触、力、滑动），并通过显式监督训练共享潜动力学模型。实验表明，该模型能有效预测触觉状态，并提升机器人接触规划的效果。这项工作为机器人触觉感知和世界建模提供了新思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.24485v1",
+      "source": "arxiv",
+      "title": "τ: Learning Touch-Augmented Vision-Language-Action Models from Future Visual Supervision",
+      "abstract": "Learning the informative tactile representation while effectively adapting it to pretrained Vision-Language-Action (VLA) models remains challenging at both the data and modeling levels. At the data level, limited task-specific demonstrations constrain representation quality, whereas large-scale pretraining incurs substantial costs. At the modeling level, existing methods either focus on instantaneous contact states or model temporal interaction dynamics using 6D wrench sequences, leaving high-dimensional tactile signals underexplored. To address these challenges, we present τ, a touch-augmented VLA framework that learns an action-conditioned spatiotemporal tactile representation from future visual supervision inspired by the Joint-Embedding Predictive Architecture (JEPA), and fuses it with vision-language features for action generation under limited data. This supervision operates in latent space and is used only during training, adding no deployment overhead. We also introduce TacAura, a dataset of synchronized vision, proprioception, and vision-based tactile signals across four representative contact-rich manipulation tasks. Experiments show that τ outperforms existing models and generalizes to unseen objects and scenes, delivering improved manipulation performance and robustness",
+      "authors": [
+        "Ning Cheng",
+        "Jinan Xu",
+        "Wanlin Li",
+        "Yangzhi Chen",
+        "Jing Gao",
+        "Yiqun Wang",
+        "Kelan Peng",
+        "Wenjuan Han"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-27T14:25:15+00:00",
+      "link": "https://arxiv.org/pdf/2607.24485v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "touch-augmented VLA model learning from future visual supervision",
+      "llm_evidence_cn": "触觉增强的视觉语言动作模型，利用未来视觉监督学习",
+      "llm_evidence": "触觉增强的视觉语言动作模型，利用未来视觉监督学习",
+      "canonical_evidence": "触觉增强的视觉语言动作模型，利用未来视觉监督学习",
+      "llm_tldr_en": "Proposes tau, a touch-augmented VLA framework that learns spatiotemporal tactile representations from future visual supervision, addressing limited demonstration data and high-dimensional tactile signals.",
+      "llm_tldr_cn": "现有触觉VLA模型面临数据稀缺和高维触觉信号难以利用的问题。本文提出τ框架，通过未来视觉监督学习动作条件化的时空触觉表示，有效将触觉信息融入预训练VLA模型。实验表明该方法在触觉增强的机器人操作任务上显著提升性能，为触觉VLA提供了一种高效的数据和建模方案。",
+      "llm_tldr": "现有触觉VLA模型面临数据稀缺和高维触觉信号难以利用的问题。本文提出τ框架，通过未来视觉监督学习动作条件化的时空触觉表示，有效将触觉信息融入预训练VLA模型。实验表明该方法在触觉增强的机器人操作任务上显著提升性能，为触觉VLA提供了一种高效的数据和建模方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.17541v1",
+      "source": "arxiv",
+      "title": "Predicting Grasping Compliance in Robotic Hands through Analytical-Model-Informed Neural Networks",
+      "abstract": "In robotic manipulation studies, grasping is often treated as a binary success or failure problem, usually defined by whether the object simply stays in the hand. For forceful tool use, however, this view is insufficient because grasp compliance becomes a critical factor governing how the hand and tool behave under load. Compliance arises from coupled kinematics, grasp configuration, passive mechanics, and contact conditions, producing nonlinear behavior in which deformation and interaction forces influence each other. Understanding this relationship is essential for predictive models of how a grasped tool and a compliant hand jointly respond to external loading. In underactuated hands, these effects are amplified: such designs offer low cost and adaptive grasping, but make compliance behavior more difficult to model and predict. Our goal is therefore to develop a predictive model for grasped tool behavior during forceful interactions. To address this challenge, we introduce an analytical model informed neural network (AMINN), a hybrid predictive model that combines an analytical mechanics layer with data driven learning to estimate grasp stability and in hand tool displacement under external loading. The model is evaluated on a three finger underactuated robotic hand and shows strong predictive capability with mechanically meaningful outputs across diverse loading conditions. Compared with a black box multilayer perceptron baseline, AMINN also achieves better energy based physical consistency. Beyond prediction accuracy alone, this framework advances physically interpretable learning for robotic manipulation and supports more reliable, safer, and more trustworthy autonomous tool use in safety critical settings during forceful interaction.",
+      "authors": [
+        "Qianwen Zhao",
+        "Long Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-20T04:35:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.17541v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "predicting grasping compliance under load using neural networks, relevant to tactile feedback for manipulation",
+      "llm_evidence_cn": "利用神经网络预测抓取下的抓取柔顺性，与机器人操作中的触觉反馈相关",
+      "llm_evidence": "利用神经网络预测抓取下的抓取柔顺性，与机器人操作中的触觉反馈相关",
+      "canonical_evidence": "利用神经网络预测抓取下的抓取柔顺性，与机器人操作中的触觉反馈相关",
+      "llm_tldr_en": "This paper predicts grasp compliance in robotic hands using analytical-model-informed neural networks, crucial for forceful tool use and relevant to tactile feedback in manipulation.",
+      "llm_tldr_cn": "当前机器人抓取研究常将抓取视为二元成功或失败问题，但在力工具使用中，抓取柔顺性成为关键因素。本文提出一种基于解析模型指导的神经网络方法来预测机器人手的抓取柔顺性，该方法结合了运动学、被动力学和接触条件。实验表明模型能有效预测非线性变形和相互作用力。该工作为触觉反馈在操作中的应用提供了理论基础。",
+      "llm_tldr": "当前机器人抓取研究常将抓取视为二元成功或失败问题，但在力工具使用中，抓取柔顺性成为关键因素。本文提出一种基于解析模型指导的神经网络方法来预测机器人手的抓取柔顺性，该方法结合了运动学、被动力学和接触条件。实验表明模型能有效预测非线性变形和相互作用力。该工作为触觉反馈在操作中的应用提供了理论基础。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
