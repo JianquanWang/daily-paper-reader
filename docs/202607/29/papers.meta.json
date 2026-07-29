@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-29",
+  "date": "2026-07-29",
+  "generated_at": "2026-07-29T19:27:32",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/29/2607.22964v1-pose-aware-modeling-to-mitigate-pose-related-artifacts-in-tactile-gloves",
+      "section": "quick",
+      "title_en": "Pose-Aware Modeling to Mitigate Pose-Related Artifacts in Tactile Gloves",
+      "authors": "Tianhong Catherine Yu, Ziyi Kou, Mia Huang, Taylor Niehues, Yiyue Luo, Li Guan, Dingtian Zhang",
+      "date": "2026-07-25",
+      "pdf": "https://arxiv.org/pdf/2607.22964v1",
+      "score": "7.0",
+      "evidence": "直接处理触觉手套伪影，提升机器人操作中的触觉感知",
+      "tldr": "触觉手套在低力范围存在姿态相关伪迹(PRA)，导致最小可检测力升高。本文提出一种与手套无关的算法框架，利用手部姿态信息通过残差预测分支显式补偿姿态引起的传感器形变。在3种手套设计和15名用户上验证，MDF降低10.4%-18.3%，所有指标一致改善。该方法无需修改硬件，为提升触觉手套在数据采集和机器人应用中的可用性提供了实用途径。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Tactile gloves digitize contact and force during hand-object interactions, enabling robotics applications in dexterous manipulation, teleoperation, and learning from demonstration. To preserve hand dexterity and capture the nuances of natural interactions, these gloves and the integrated tactile sensors are designed to be soft, flexible, and comfortable. However, such flexible sensors are sensitive not only to contact forces but also unavoidably to hand pose changes, resulting in pose-related artifacts (PRAs). PRAs are especially problematic in the low-force range, resulting in misdetections or late-onset detections of contact, which raises the minimum detectable force (MDF) of the glove. In this work, we characterize the PRAs in relation to pose and force. Building on these insights, we introduce a glove-agnostic algorithmic framework that leverages hand pose information, which is increasingly available, to mitigate PRAs without glove modifications. Our pose-aware force estimation model augments tactile-to-force pipelines with a residual prediction branch that explicitly accounts for pose-induced sensor deformations. We validate our approach across 3 glove designs and 15 users, reducing MDF by 10.4%, 12.2%, and 18.3%, with consistent improvements across all evaluated metrics. This method provides a practical path to improving the usability of tactile gloves in data collection and diverse robotic applications.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

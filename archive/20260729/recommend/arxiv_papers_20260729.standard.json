@@ -1,0 +1,59 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-29T19:26:55.898071+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.22964v1",
+      "source": "arxiv",
+      "title": "Pose-Aware Modeling to Mitigate Pose-Related Artifacts in Tactile Gloves",
+      "abstract": "Tactile gloves digitize contact and force during hand-object interactions, enabling robotics applications in dexterous manipulation, teleoperation, and learning from demonstration. To preserve hand dexterity and capture the nuances of natural interactions, these gloves and the integrated tactile sensors are designed to be soft, flexible, and comfortable. However, such flexible sensors are sensitive not only to contact forces but also unavoidably to hand pose changes, resulting in pose-related artifacts (PRAs). PRAs are especially problematic in the low-force range, resulting in misdetections or late-onset detections of contact, which raises the minimum detectable force (MDF) of the glove. In this work, we characterize the PRAs in relation to pose and force. Building on these insights, we introduce a glove-agnostic algorithmic framework that leverages hand pose information, which is increasingly available, to mitigate PRAs without glove modifications. Our pose-aware force estimation model augments tactile-to-force pipelines with a residual prediction branch that explicitly accounts for pose-induced sensor deformations. We validate our approach across 3 glove designs and 15 users, reducing MDF by 10.4%, 12.2%, and 18.3%, with consistent improvements across all evaluated metrics. This method provides a practical path to improving the usability of tactile gloves in data collection and diverse robotic applications.",
+      "authors": [
+        "Tianhong Catherine Yu",
+        "Ziyi Kou",
+        "Mia Huang",
+        "Taylor Niehues",
+        "Yiyue Luo",
+        "Li Guan",
+        "Dingtian Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.HC"
+      ],
+      "published": "2026-07-25T00:12:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.22964v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "directly addresses tactile glove artifacts, improving tactile perception for robot manipulation",
+      "llm_evidence_cn": "直接处理触觉手套伪影，提升机器人操作中的触觉感知",
+      "llm_evidence": "直接处理触觉手套伪影，提升机器人操作中的触觉感知",
+      "canonical_evidence": "直接处理触觉手套伪影，提升机器人操作中的触觉感知",
+      "llm_tldr_en": "Pose-Aware Modeling mitigates pose-related artifacts in tactile gloves, lowering the minimum detectable force and improving contact detection reliability for dexterous manipulation and learning from demonstration.",
+      "llm_tldr_cn": "触觉手套在低力范围存在由手部姿态变化引起的伪影，导致接触误检或延迟。本文提出姿态感知建模方法，通过显式建模姿态与力信号的关系来补偿这些伪影。实验表明该方法有效降低了最小可检测力，提升了触觉感知的准确性和可靠性。该工作为机器人灵巧操作、遥操作和示教学习提供了更高质量的触觉数据。",
+      "llm_tldr": "触觉手套在低力范围存在由手部姿态变化引起的伪影，导致接触误检或延迟。本文提出姿态感知建模方法，通过显式建模姿态与力信号的关系来补偿这些伪影。实验表明该方法有效降低了最小可检测力，提升了触觉感知的准确性和可靠性。该工作为机器人灵巧操作、遥操作和示教学习提供了更高质量的触觉数据。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
