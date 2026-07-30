@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-30",
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T19:17:48",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/30/2607.26579v1-contactflow-a-video-action-conditioning-that-transfers-across-embodiments",
+      "section": "deep",
+      "title_en": "ContactFlow: A video action conditioning that transfers across embodiments",
+      "authors": "Sami Azirar, Enrico Pallotta, Jan Nogga, Jürgen Gall, Sven Behnke, Hermann Blum",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.26579v1",
+      "score": "8.0",
+      "evidence": "接触流表示用于世界模型动作条件化",
+      "tldr": "机器人规划面临物理约束建模难的问题，现有视频世界模型受限于特定具身。本文提出Contact Flow，一种基于3D接触点轨迹的无具身动作表示，用于训练视频生成模型。在DROID数据集和真实桌面操作任务上，Contact Flow实现了人类演示到不同机器人的迁移，生成物理合理的结果。该方法为跨具身机器人学习提供了新思路。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "World models offer a promising route toward robot planning by enabling agents to imagine and verify the consequences of actions before execution. However, current video-based world models often struggle to capture the physical constraints that govern manipulation, particularly contact. Further, their action conditioning is often constrained to specific embodiments such as parallel grippers. We propose \\emph{Contact Flow}, an embodiment-agnostic action representation that encodes manipulation through the trajectory of 3D contact points between an actor and a target object. By discarding actor-specific appearance and kinematics, Contact Flow provides a shared conditioning signal for both human demonstrations and robotic execution. Therefore, we can train a large-scale video generative model on both human and robotic object interaction videos conditioned on Contact Flow, yielding a world model that predicts physically plausible manipulation outcomes. We integrate this model into a propose-imagine-verify-act pipeline, where generated rollouts are assessed by a vision-language model before execution. Experiments on the DROID dataset and real-world tabletop manipulation tasks demonstrate that Contact Flow enables transfer between human demonstrations and different robotic embodiments.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/30/2607.25053v1-motion-generation-with-environmental-constraints",
+      "section": "quick",
+      "title_en": "Motion Generation With Environmental Constraints",
+      "authors": "Előd Páll, Oliver Brock",
+      "date": "2026-07-27",
+      "pdf": "https://arxiv.org/pdf/2607.25053v1",
+      "score": "6.0",
+      "evidence": "通过环境约束利用有意识地使用接触进行运动规划",
+      "tldr": "机器人运动规划在高维空间与不确定环境中面临严峻挑战，传统方法强调完全无碰撞，严重限制效率与鲁棒性。本文提出环境约束利用（ECE）方法，通过与环境有意接触来简化规划，有效降低问题维度与计算复杂度。将ECE集成到基于RRT的规划器中，能偏置探索至任务相关区域，并利用接触反馈减少执行不确定性。实际应用结果表明，该方法相比传统方法显著提升规划效率与执行鲁棒性，为复杂环境下的运动生成提供了有效解决方案，并整合扩展了前期研究。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Robot motion planning faces challenges in high-dimensional spaces and uncertain environments, often constrained by the need for collision-free motions. We advocate an alternative approach, Environmental Constraint Exploitation (ECE), where deliberate contact with the environment simplifies planning by reducing dimensionality and computational complexity. By integrating ECE into motion planning algorithms, we bias exploration to task-relevant regions and leverage contact for uncertainty reduction to improve robustness during execution. We evaluate ECE benefits with RRT-based planners and demonstrate their practical benefits in a real-world application. This work consolidates and extends prior research, showcasing how ECE simplifies motion planning while enhancing adaptability and performance in complex environments.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
