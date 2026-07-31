@@ -1,0 +1,864 @@
+Title: FasTac: A Curved Multispectral Vision-Based Tactile Sensor for High-Speed High-Precision 3D Shape and Force Perception
+
+URL Source: https://arxiv.org/pdf/2607.28416v1
+
+Published Time: Fri, 31 Jul 2026 01:16:36 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+> 1
+
+# FasTac: A Curved Multispectral Vision-Based Tactile Sensor for High-Speed High-Precision 3D Shape and Force Perception 
+
+Xiaofan Lu, Kaiji Huang, Jiahui Chen, Yuankai Lin, Hua Yang, and Zhouping Yin 
+
+This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible. 
+
+Abstract —Curved tactile fingertips for dexterous manipula-tion must resolve fine contact geometry, distinguish normal and tangential loads, and capture transient signals. Existing curved vision-based tactile sensors struggle to combine accurate 3D reconstruction, three-axis force estimation, and high-speed processing in a compact form. This article presents FasTac, a curved vision-based tactile sensor integrating multispectral photometric stereo, dynamic-convolution force estimation, and hardware acceleration on a field-programmable gate array (FPGA). Single-image-sensor simultaneous multispectral imaging provides spatially aligned observations for robust surface normal estimation, followed by boundary-prior fast Poisson depth recon-struction. HyperForce uses position-aware dynamic convolution to model the spatially nonuniform mechanical response of curved elastomers and estimate three-axis forces. The complete image-to-Fz pipeline is deployed on an FPGA. Experiments show that near-infrared (NIR) illumination and the boundary prior decrease depth mean absolute error (MAE) from 0.2730 mm to 0.0415 mm; HyperForce achieves normalized mean absolute error (NMAE) values of 2.74% and 2.39% for normal and shear forces, respectively; and FPGA deployment shortens processing latency from 3.26 ms on the GPU to 1.09 ms. Multi-object reconstruction, feedback grasping, and vibration measurement validate fine geometric perception, stable force feedback, and dynamic contact sensing. 
+
+Index Terms —Vision-Based Tactile Sensing, 3D Reconstruc-tion, Three-Axis Force Sensing, FPGA Acceleration. 
+
+I. I NTRODUCTION 
+
+# IN dexterous robotic manipulation, curved fingertips are often involved in fine manipulation, stable grasping, and dynamic contact interaction, where contacts occur over small, non-planar regions, and the contact state changes rapidly [1]. In fine manipulation [2], [3], local contact imprints contain subtle geometric features, such as small protrusions, pits, and edges, which robots must perceive with high spatial resolution. In stable grasping, external disturbances change the balance between normal loading and tangential loading, so grasp stability depends on whether the available friction can resist the tangential load, rather than on the normal force alone [4], [5]. In dynamic interactions, such as vibrations or collisions, transient tactile cues may not be captured in time if the sensing and computation pipeline is too slow [6]. These contact 
+
+This work was supported by the Joint Funds of National Natural Science Foundation of China under Grant U22A20208. (Corresponding author: Hua Yang.) The authors are with the State Key Laboratory of Intelligent Manufacturing Equipment and Technology, School of Mechanical Science and Engineering, Huazhong University of Science and Technology, Wuhan 430074, China. Hua Yang is also with the National Innovation Institute of Digital Design and Manufacturing, Wuhan 430206, China (e-mail: huayang@hust.edu.cn). (a) 
+
+(c)  (e) 
+
+(f) 
+
+(a) 
+
+(b) 
+
+(c) 
+
+(d) 
+
+(e) 
+
+(f) 
+
+Fig. 1. High-precision 3D perception of delicate objects using the FasTac sensor. (a) A three-fingered dexterous hand equipped with FasTac sensors grasping a strawberry. (b-c) RGB and NIR images captured by FasTac. (d) Reconstructed surface normal map of the strawberry contact region. (e) Corresponding depth map. (f) Three-axis contact force distribution estimation results visualized on the curved surface. 
+
+characteristics motivate compact curved tactile fingertips that can preserve fine 3D contact geometry, distinguish normal and tangential loading, and process dynamic tactile signals with low latency. Existing tactile sensors can be broadly organized by their transduction mechanisms, including resistive, capacitive, and magnetic approaches, which respectively convert deformation into changes in resistance, capacitance, and magnetic-field distribution. Resistive tactile arrays [7] and capacitive tactile arrays [8] are effective for large-area pressure mapping, while magnetic sensors [9], [10] provide stronger potential for three-axis force estimation. However, achieving high spatial res-olution with taxel-based arrays requires smaller and denser sensing units, which can reduce signal levels while increasing wiring complexity, parasitic effects, and inter-taxel crosstalk; their discrete outputs also provide insufficient geometric in-formation for fine 3D reconstruction [10], [11]. Although conventional transduction mechanisms can support three-axis force sensing, coupled mechanical and electrical or magnetic responses generally require specialized structures or calibra-tion models to decouple normal and shear forces [9]. Curved fingertips further complicate both 3D reconstruction and three-axis force estimation because local curvature changes base-line deformation, contact orientation, boundary constraints, and effective sensitivity [12], [13]. Therefore, simultaneously arXiv:2607.28416v1 [cs.RO] 30 Jul 2026 2
+
+achieving high-precision 3D reconstruction and reliable three-axis force estimation on a compact curved fingertip remains challenging. Vision-based tactile sensing provides a promising approach to addressing this challenge by imaging elastomer deformation and converting images into geometry and force [14]. Planar and near-planar sensors have demonstrated high-resolution 3D reconstruction [15] and dense force estimation [16]. Curved designs [17], [18] improve contact adaptability and sensing coverage, but their non-planar geometry makes it difficult to achieve sufficient and uniform illumination across the sensing surface. In addition, force estimation on curved elastomers is a mechanically coupled inverse problem: local curvature or boundary constraints can change the deformation–force relationship across the surface [13]. Moreover, perceiving rapid load variation like vibrations and collisions requires low-latency tactile processing, while streaming high-resolution tac-tile images to external processors requires image transmission, buffering, and host-side scheduling, increasing the end-to-end latency of tactile feedback [6]. To address these challenges, this paper presents FasTac, a compact curved vision-based tactile sensor for high-speed high-precision 3D shape and force perception, as shown in Fig. 1. FasTac uses RGB-NIR multispectral illumination with a single RGB-NIR image sensor to provide synchronized multispectral inputs for surface normal estimation on curved surfaces, followed by boundary-prior fast Poisson depth recon-struction. It further introduces HyperForce, a position-aware dynamic-convolutional model that maps depth-derived normal displacement and marker-derived tangential displacement to three-axis contact force. Finally, the image-to-Fz estimation pipeline is implemented on a field-programmable gate array (FPGA) for low-latency hardware acceleration. Experiments on curved-surface shape reconstruction, friction-aware feed-back grasping, and high-frequency normal-force sensing val-idate the sensor’s capabilities for fine geometric perception, stable grasp feedback, and dynamic contact sensing. In summary, our contributions are summarized as follows: 1) A compact curved vision-based tactile fingertip is devel-oped by combining RGB-NIR multispectral illumination with a single RGB-NIR CMOS image sensor, providing synchronized multispectral imaging for robust 3D recon-struction in high-curvature regions. 2) A spatially adaptive three-axis force estimation method, HyperForce, is proposed to model the spatially non-uniform response of curved elastomers and estimate nor-mal and tangential forces. 3) An FPGA image-to-Fz estimation pipeline is constructed for edge deployment, enabling high-speed tactile process-ing. Table I compares representative curved vision-based tactile sensors. Abbreviations are as follows: MAE, mean absolute error; NMAE, normalized mean absolute error; FEM, finite element method; Result., resultant force; Dist., distributed force; and Fn, Fs, and F , normal, shear, and total force, respectively. Regular and bionic identify geometric categories, and speed is the image-to-output computation rate. Because evaluation settings differ across studies, the reported values provide a capability-level comparison. II. R ELATED WORK 
+
+A. Vision-Based Tactile 3D Reconstruction 
+
+Existing reconstruction methods mainly include photometric stereo [14], [24], stereo vision [25] and optical flow [26], [27]. Among them, GelSight-like photometric-stereo sensors recover surface normals from multi-directional illumination and then integrate them into depth maps, which is effective for fine texture reconstruction [28]–[30]. However, extending photometric stereo from planar pads to curved fingertips in-troduces self-shadowing and non-uniform illumination, which can cause illumination-variation-based 3D reconstruction to fail locally. Previous studies have explored optimized illu-mination designs and multimodal imaging to mitigate these issues. GelSight360 [18] uses a cross-LED structure to pro-vide sufficient illumination over an all-around curved sur-face, but the structure occludes part of the camera field of view. RainbowSight uses a colored LED ring to generate smooth color gradients on a semi-specular reflective layer, but it requires precise control of LED RGB intensities [31]. GelSplitter3D demonstrates that NIR information can improve curved-surface reconstruction, while beam-splitting and multi-camera layouts increase the system volume and require careful spatial registration across spectral images [23]. To achieve more robust photometric stereo reconstruction over the entire curved surface, this article presents a compact single-image-sensor RGB-NIR imaging design that provides an independent observation channel without introducing multi-camera registration or increasing the sensor volume. 
+
+B. Vision-Based Tactile Force Estimation 
+
+Vision-based tactile force estimation methods can be broadly divided into physics-based and data-driven ap-proaches. Physics-based methods infer force by explicitly modeling load-induced elastomer deformation. Yang et al. [5] established linear fitting models between the shadow area of the loaded dome and the normal force, and between the dis-placement of the shadow center and the tangential force. Zhao et al. [32] discretize the gel into finite elements and use offline calibration to obtain a stiffness matrix that maps the global displacement field to the global force field. These physics-based methods provide useful interpretability, but material nonlinearity, hysteresis, boundary constraints, and complex curved contact states make accurate modeling difficult for soft fingertip sensors. Data-driven methods directly learn nonlinear force mappings using neural networks. DenseTact 2.0 [19] feeds tactile images into an encoder based on either a Swin Transformer or DenseNet, followed by two fully connected layers to regress a six-dimensional wrench. AllSight [33] feeds the concatenated contact image and reference image into a modified ResNet-18, directly outputting the contact position, three-axis force, and torque around the z-axis. Nevertheless, these methods do not explicitly encode the position-dependent stiffness, thickness, curvature, and boundary constraints of curved elastomers. 3                                                                                  
+
+> TABLE I COMPARISON WITH REPRESENTATIVE CURVED VISION -B ASED TACTILE SENSORS
+> Sensor Geometry Shape Reconstruction Force Estimation Notes Method Output MAE (mm) ↓
+> Speed (Hz) ↑Method Format Output NMAE (%) ↓
+> Speed (Hz) ↑
+> DenseTact 2.0 [19] Regular curved DenseNet Depth map 0.3633 25 DenseNet Result. Fx, F y, F z
+> Tx, T y, T zF: 2.93 –6D force sensing; large depth error. Insight [20] Bionic curved ––––ResNet Dist. Fx, F y, F zF: 4.00 10 Three-axis force map; no depth reconstruction. GelStereo BioTip [21] Regular curved Stereo vision 3D coordinates 0.2730 30 –––––Direct 3D acquisition; no force estimation. SoftBubble [22] Regular curved RGB-D + optical flow 3D coordinates ––FEM Dist. Fx, F y, F zF: 7.75 1–2 Data-efficient; low force speed. GelSplitter3D [23] Bionic curved Photometric stereo Depth map 0.0406 30 –––––High depth accuracy; no force estimation. FasTac Bionic curved Photometric stereo Depth map 0.0415 1022 Dynamic convolution Dist. Fx, F y, F z
+> Fn: 2.74
+> Fs: 2.39 918 Shape and three-axis force; high-speed perception.
+
+To explicitly model the position-dependent stiffness of curved elastomers, this article presents HyperForce, which combines depth-derived normal displacement and marker-derived tangential displacement and uses position-aware dy-namic convolution to estimate three-axis contact force. 
+
+C. Vision-Based Tactile Computing Acceleration 
+
+Vision-based tactile perception provides rich image, geom-etry, force, and slip cues, but its complete processing pipeline is computationally demanding [34]. HiVTac [35] establishes a simplified thin-elastic-layer deformation model to reduce the number of markers that need to be tracked, thereby improving real-time force reconstruction capability. MinSight [6] shows that optimized camera transfer and lightweight networks can support real-time force-map estimation at 60 Hz. EveTac [36] uses an event camera to capture image changes, substantially reducing the amount of readout data and thereby greatly increasing the computation rate. However, these methods still depend on external CPU/GPU processing, leading to image-transfer overhead, communication latency, scheduling jitter, and higher power and integration costs, which limits deter-ministic low-latency feedback in compact multi-finger tactile systems. Moving tactile computation closer to the sensor is therefore important for practical dexterous-hand integration. FPGAs offer processing capability and deterministic timing, providing a suitable platform for such sensor-side computa-tion. Oballe-Peinado et al. [37] developed an FPGA-based electronics architecture for a tactile sensor suite, enabling local acquisition and preprocessing of tactile array signals. Hundhausen et al. [38] integrated five in-finger cameras with an in-hand FPGA-accelerated CNN to avoid streaming high-bandwidth raw images through the robot real-time bus, show-ing the benefit of decentralized image processing for reactive grasping. Nevertheless, existing edge tactile systems have not yet demonstrated an end-to-end deployment of the complete vision-based tactile processing pipeline. In contrast, our work implements the full pipeline, including image-stream process-ing, 3D reconstruction, and normal force estimation, on an FPGA-based edge platform, thereby reducing raw-data transfer and enabling deterministic low-latency feedback for compact dexterous-hand integration. (a) Exploded View 
+
+Gel 
+
+Acrylic 
+
+Skeleton 
+
+Camera 
+
+FPC 
+
+Cover 
+
+NIR 
+
+(b)  侧视图 (a)  结构分解图 
+
+凝胶 
+
+亚克力板 
+
+骨架 
+
+多光谱 
+
+相机 
+
+电路板 
+
+后盖  NIR 光源 
+
+(b) Sectional View 
+
+Gel 
+
+FPC 
+
+Skeleton 
+
+Acrylic 
+
+电路板 
+
+骨架 
+
+亚克力 
+
+凝胶  
+
+> Fig. 2. Mechanical design and integration of FasTac.
+
+III. F AS TAC SENSOR DESIGN 
+
+A. Overall Structure 
+
+The mechanical design of FasTac prioritizes compactness and integration for dexterous manipulation. As shown in Fig. 2, the sensor mainly consists of three modules: a light-guiding fingertip skeleton that houses the camera, a multi-spectral LED FPC secured by the rear cover, and a sensing interface formed by the gel skin. 
+
+B. Imaging Module 
+
+FasTac adopts a custom-designed miniature camera module. The camera module is controlled by an onboard FPGA, which receives raw data through the MIPI interface. The image sensor is an OmniVision OV2736 RGB-IR CMOS sensor, which uses a unique 4x4 RGB-IR color filter array (CFA) to simultaneously capture visible and near-infrared information in a single exposure. Compared with prism-based multispectral schemes [23], the RGB and NIR signals of this module originate from the same optical center, enabling intrinsic pixel-level alignment and smaller volume. 
+
+C. Illumination System 
+
+Building on the conventional RGB configuration, this work introduces an NIR light source as a fourth independent chan-nel. This design aims to satisfy the three-source simultaneous illumination assumption of photometric stereo on curved ge-ometries using a simple illumination structure, thereby ensur-ing the robustness of curved-surface 3D reconstruction. 4
+
+To improve maintainability and integration, we designed a Flexible Printed Circuit (FPC) that conforms to the dorsal curvature of the fingertip skeleton. LED arrays in four colors (R, G, B, and NIR) are placed at the four corners of the FPC, with the illumination directions of the red/green sources per-pendicular to those of the blue/NIR sources. This arrangement increases the angular diversity and spatial distinctiveness of the illumination vectors, ensuring the numerical stability of the photometric solution. Furthermore, placing the light sources behind the skeleton exploits the translucency and scattering properties of the photosensitive-resin skeleton, transforming discrete LED point sources into a soft and uniform diffuse light field. This reduces specular highlights and improves illumination uniformity. 
+
+D. Tactile Skin 
+
+We use platinum-catalyzed silicone rubber (Smooth-On So-laris) as the matrix material and mix Solaris A, Solaris B, and Slacker softener at a weight ratio of 1:1:3. The high proportion of Slacker gives the elastomer excellent compliance, enabling it to sensitively capture minute contact deformations. After vacuum degassing, the mixture is poured into a mold pre-assembled with the fingertip skeleton. To eliminate surface artifacts caused by 3D-printing layer striations, the bottom mold is made from precision-machined optical-grade acrylic (PMMA). After curing at room temperature for 24 hours, the elastomer forms a robust integrated structure with the skeleton. To form an ideal optical reflective layer on the elastomer surface, we formulated a specialized reflective paint. The coating consists of 800-mesh silver powder, silicone solvent, and thinner, and is uniformly applied to the elastomer surface using an airbrush. The silicone solvent ensures strong adhesion between the coating and the substrate; the silver powder particles block external light while improving image contrast; and the thinner controls the flowability and smoothness of the paint, ensuring the uniformity and integrity of the coating. After the reflective layer is coated and cured, a laser marking process is used to ablate a marker-dot array in the sensing region on the gel surface. Black silicone ink is then applied to the marker-dot regions, so that the markers appear black in the captured images. IV. F AS TAC 3D S HAPE RECONSTRUCTION AND FORCE 
+
+ESTIMATION PIPELINE 
+
+The overall perception pipeline is illustrated in Fig. 4, including multispectral 3D reconstruction, marker-based tan-gential displacement extraction, 3D displacement fusion, and HyperForce-based three-axis force estimation. 
+
+A. Multispectral Photometric Stereo for 3D Shape Recon-struction 1) Four-Source Photometric Stereo: The geometric percep-tion of FasTac is based on photometric stereo [24]. For a Lambertian surface with normal n and albedo ρ, the observed intensity under illumination direction l is I = ρlTn. A standard RGB three-source configuration usually estimates the NIR Subtraction                     
+
+> RGB-NIR to
+> BGGR Bayer Demosaic Gamma
+> Correction
+> RGB Stream
+> Formatter
+> VDMA 0
+> RGB Image
+> RGB Stream
+> NIR Extractor NIR Upsample NIR Stream
+> Formatter
+> VDMA 1
+> NIR Image
+> NIR Stream
+> MIPI CSI-2
+> RAW10 Input
+> RAW10
+> Unpack
+> 𝟒𝟒 ×𝟒𝟒 RGB-NIR
+> Pattern Decoder
+> BGRG
+> GIR G
+> RGBG
+> GGIR IR
+> IR DPC BLC
+> Fig. 3. RGB-NIR spectral demultiplexing and preprocessing pipeline. The single-channel RAW10 stream is decoded from the RGB-IR CFA into pixel-aligned RGB and NIR images.
+
+surface normal from Lobs = [ lR, lG, lB]T. However, in a com-pact curved fingertip structure, RGB light sources cannot cover the entire surface, which may lead to rank( Lobs ) < 3 and therefore cause underdetermined surface normals and blurred reconstruction. To achieve robust surface normal estimation with a simple illumination structure, FasTac introduces NIR as the fourth independent spectral channel and constructs 
+
+L = [ lR, lG, lB, lNIR ]T ∈ R4×3, forming an over-determined system I = ρLn. Thus, even if deformation occludes one channel, the remaining three channels can still form a valid basis, improving surface normal estimation stability on curved surfaces. 
+
+2) Spectral Demultiplexing and Pre-processing: As shown in Fig. 3, the RAW10 data produced by the OV2736 RGB-IR CMOS sensor are first unpacked from the MIPI CSI-2 stream, yielding Iraw (u, v ) ∈ [0 , 210 − 1] . The sensor adopts a 
+
+4 × 4 RGB-IR CFA pattern, in which R, G, B, and IR pixels are classified by the phase ϕ(u, v ) = ( v mod 4 , u mod 4) .The preprocessing flow sequentially performs dead-pixel cor-rection (DPC), black-level correction (BLC), NIR sampling and upsampling, IR crosstalk subtraction, standard BGGR Bayer reconstruction, demosaicing, and output mapping. The NIR channel is sampled from odd rows and odd columns as 
+
+Is
+
+> NIR
+
+(m, n ) = Iblc (2 m + 1 , 2n + 1) and then interpolated into a dense image INIR . This NIR estimate is subsequently used for IR subtraction of the visible pixels: 
+
+˜I(u, v ) = clip 
+
+
+
+Iblc (u, v )
+
+− α min {INIR (u, v ), I max /β } , 0, I max 
+
+
+
+.
+
+(1) where Iblc is the black-level-corrected raw image, ˜I(u, v )
+
+is the IR-corrected visible-channel intensity, and clip( ·, a, b )
+
+truncates its input to the interval [a, b ]. α controls the IR subtraction strength, β prevents overcorrection by limiting the NIR estimate, and Imax is the RAW10 saturation value. The corrected RGB-IR CFA is rearranged into a standard BGGR Bayer image and demosaiced to obtain an RGB image; the NIR image is mapped to an 8-bit grayscale image according to the RAW10 dynamic range. The final output is I(u, v ) = [IB, I G, I R, I NIR ]T. Since RGB and NIR are captured by the same sensor, under the same exposure, and through the same optical center, this flow avoids the registration errors of multi-5
+
+camera or beam-splitting multispectral structures [23], [30], providing synchronized and zero-parallax multispectral inputs for curved tactile reconstruction. 
+
+3) Position-Aware MLP for Surface Normal Estimation: To achieve pixel-wise surface normal estimation on the curved fingertip, we adopt a physics-prior guided lightweight MLP. Because the internal space of FasTac is compact, the LEDs ex-hibit near-field characteristics, and the sensing surface is non-planar, the illumination vector is no longer a global constant but varies with pixel position p = ( u, v ) as L(p). Therefore, the light intensity satisfies Iu,v = R(nu,v , L(p), ρ ), where 
+
+R(·) denotes the local image-formation function. If only intensity is used as input, the network struggles to distinguish shadows caused by surface inclination from brightness varia-tions caused by distance to the light sources. We concatenate normalized coordinates as positional encoding with the four-channel spectral intensity and learn ˆnu,v ≈ F (Iu,v ⊕ pu,v ),where ⊕ denotes feature concatenation. Since this mapping is mainly determined by the single-point intensity and posi-tion rather than neighborhood texture, we use a pixel-wise MLP with a 6-dimensional input vector, and a final output 
+
+ˆn = [ nx, n y , n z ]. Before computing the training loss, both the predicted and ground-truth surface normals are normalized to unit length. The surface normal estimation network is optimized using an equally weighted component-wise L1 loss: 
+
+Ln = 1
+
+|Ω|
+
+X
+
+> p∈Ω
+
+X
+
+> α∈{ x,y,z }
+
+|ˆnα(p) − n∗
+
+> α
+
+(p)| , (2) where Ω is the pixel domain, α ∈ { x, y, z } indexes the surface normal component, and ˆn and n∗ are the unit-normalized predicted and ground-truth surface normals, respectively. 
+
+4) Fast Poisson Depth Reconstruction with Boundary Prior: 
+
+After surface normal estimation, FasTac reconstructs contact depth by integrating the estimated surface normals. Standard fast Poisson solvers usually imply the zero-boundary con-dition, but the boundary of a curved fingertip has non-zero depth related to the geometry. We therefore use a Dirichlet-constrained fast Poisson solver and embed the boundary prior 
+
+Dprior derived from the sensor CAD model into the source term: 
+
+˜fi,j = fi,j − X 
+
+> (m,n )∈N (i,j )∩∂Ω
+
+Dprior (m, n ). (3) Here, fi,j is the original Poisson source term at pixel (i, j ),
+
+˜fi,j is the boundary-corrected source term, N (i, j ) denotes the four-connected neighborhood, and ∂Ω denotes the boundary of the valid reconstruction domain. This operation moves the known boundary values to the right-hand side of the discrete Laplacian system, so the standard type-I discrete sine transform (DST-I) can still be used to solve the curved-surface depth efficiently while avoiding the depth drift caused by the zero-boundary assumption. 
+
+B. FEM-inspired Dynamic Convolution for Three-Axis Force Estimation 
+
+Variations in thickness, curvature, and boundary constraints induce position-dependent effective stiffness in a curved elas-tomer, so the same displacement may correspond to different mechanical mappings in different regions. To describe this spatial nonuniformity, we construct a 3D displacement field from reconstructed depth and marker motion, and then map it to three-axis contact force using HyperForce, an FEM-inspired dynamic convolution network. 
+
+1) 3D Displacement Field Extraction via Depth Recon-struction and Marker Tracking: The 3D displacement field is defined as u(p) = [ dx(p), d y (p), d z (p)] T. Tangential dis-placement is obtained by tracking embedded markers: sparse marker displacements dk are first extracted from M markers using thresholding and blob detection, and a radial basis function (RBF) interpolator is then used to recover the dense tangential field utan (p) = [ dx(p), d y (p)] T. We use the inverse multiquadric (IMQ) kernel 
+
+utan (p) = 
+
+> M
+
+X
+
+> k=1
+
+wkϕ(|p − ck|), ϕ(r) = 1
+
+√r2 + ε2 , (4) where ck is the detected marker center, wk is the RBF weight solved from sparse marker constraints, r = |p − ck| is the pixel-domain distance, and ε is the kernel shape parameter. The kernel decay form is consistent with the deformation response of a semi-infinite elastic body under point loading. The normal displacement dz (p) is obtained from the differ-ence between the background depth D0(p) and the current reconstructed depth Dt(p):
+
+dz (p) = D0(p) − Dt(p). (5) 
+
+2) FEM-inspired Dynamic Convolution Network: Hyper-Force is motivated by finite element analysis (FEM) for vision-based tactile force reconstruction [16], [32]. In FEM, the elastomer is discretized into finite elements whose vertices are referred to as nodes. Given the displacements of all nodes, assembled into the global displacement vector U , the corresponding nodal contact force vector F can be estimated using the global stiffness matrix K:
+
+F = KU . (6) Since K is sparse, the force at a node is mainly determined by the displacements in its local neighborhood. Therefore, by treating each pixel as a node, the local multiplication in FEM can be approximated by a convolution-like operation: 
+
+f (p) ≈ X
+
+> q∈N
+
+Gp,q u(p + q), (7) where p is the current pixel or node, q is a relative offset in the neighborhood N , u(p + q) = [ dx, d y , d z ]T is the local 3D displacement, f (p) = [ fx, f y , f z ]T is the local 3D force response, and Gp,q is the local stiffness-like coupling weight. For a homogeneous planar elastomer with a regular mesh, this coupling weight can be approximated as Gq because the local stiffness pattern is nearly translation invariant, so FEM can be represented by a globally shared convolution kernel. In contrast, for the curved FasTac elastomer, Gp,q
+
+must depend on p because local normal directions, curvature, effective thickness, and boundary constraints vary across the surface. HyperForce therefore approximates the curved-surface FEM operator using position-dependent dynamic convolution. 6MLP  
+
+> Renderer
+> Normal
+> Integration
+> Perspective
+> Transformation
+> U
+> V
+> Loss
+> Marker
+> Detection
+> Match
+> &Interpolation
+> (a) 3D Reconstruction (c) Three-axis Force Estimation
+> (b) Tangential Displacement Extraction
+> Weight Generator
+
+𝜔𝜔 𝐹𝐹 𝑥𝑥 
+
+> Displacement
+> Patch
+
+𝜔𝜔 𝐹𝐹 𝑦𝑦 
+
+𝜔𝜔 𝐹𝐹 𝑧𝑧  
+
+> Fx Map
+> Σ
+
+𝐹𝐹 𝑥𝑥  
+
+> Fy Map
+> Σ
+
+𝐹𝐹 𝑦𝑦  
+
+> Fz Map
+> Σ
+
+𝐹𝐹 𝑧𝑧   
+
+> U
+> 3D Pos Encoding
+> Σ
+> Subtraction
+> Summation
+> Convolution
+> VW
+> Fig. 4. 3D reconstruction, Tangential displacement extraction, and three-axis force estimation pipeline.
+
+For each p, the K × K displacement patch is vectorized as 
+
+v(p) ∈ R3K2
+
+. A lightweight hypernetwork implemented by 
+
+1 × 1 convolutional layers generates the dynamic kernel from the normalized 3D coordinate encoding c(p):
+
+wα(p) = Hα(c(p)) , wα(p) ∈ R3K2
+
+, α ∈ { x, y, z }. (8) Here, Hα is the coordinate-conditioned weight generator for force component α, and wα(p) is the dynamic kernel applied at p. The pixel-wise force component is computed as 
+
+ˆfα(p) = wα(p)Tv(p). (9) Finally, the resultant three-axis force is obtained over the valid tactile region Ω:
+
+ˆF = X
+
+> p∈Ω
+
+ˆf (p). (10) HyperForce is trained using global three-axis force super-vision. After spatially integrating the pixel-wise intermediate responses, the predicted force is compared with the force-sensor reference using an equally weighted L1 loss: 
+
+LF = X
+
+> α∈{ x,y,z }
+
+ˆFα − F ∗ 
+
+> α
+
+, (11) where ˆFα and F ∗ 
+
+> α
+
+are the predicted and reference forces along axis α, respectively. 
+
+C. FPGA-Based Edge Deployment of the Image-to-Fz Esti-mation Pipeline 
+
+To meet dynamic-feedback requirements, we deploy the normal-force branch of FasTac on an FPGA edge platform. The system adopts a heterogeneous architecture with a pro-cessing system (PS) and programmable logic (PL) to execute the image-to-Fz pipeline from surface normal estimation to boundary-prior depth reconstruction and position-aware Fz
+
+estimation. The PS handles frame-level orchestration, includ-ing image synchronization, background and metadata manage-ment, Advanced eXtensible Interface Lite (AXI-Lite) control, and result readout, while the PL implements the latency-critical streaming datapath with internal FIFOs between the three computation modules. Inputs are cropped and down-sampled to accommodate the limited FPGA buffering and computation resources and to increase the camera frame rate through a smaller sensor readout window. 
+
+1) Surface Normal Estimation Module: The surface nor-mal estimation module maps the input feature x(p) =[∆ IR, ∆IG, ∆IB, ∆INIR , p x, p y ]T to the pixel-wise normal 
+
+ˆn(p) = [ˆ nx, ˆny , ˆnz ]T. Here, p is the pixel coordinate, the 
+
+∆I terms are intensity differences, and px, p y are normalized coordinates. The deployed model remains a lightweight MLP, as shown in Fig. 5(a). Each FC layer is a fully unrolled 16 ×16 
+
+matrix-vector multiplication (MVM) tile: 16 input lanes and 16 output-neuron lanes form up to 16 output dot products concurrently. Products are reduced as grouped partial sums and then accumulated, shortening adder chains for timing closure. For FC0–FC2, the biased MVM output a(l) 
+
+> i
+
+passes through ReLU and requantization, 
+
+q(l+1)  
+
+> i
+
+= clip [0 ,127] 
+
+ Ml
+
+2rl
+
+max(0 , a (l) 
+
+> i
+
+)
+
+ 
+
+, l = 0 , 1, 2,
+
+(12) where q(l+1)  
+
+> i
+
+is the next-layer activation of neuron i, a(l) 
+
+> i
+
+is the biased MVM output of layer l, Ml and rl are the integer multiplier and shift, ⌊·⌋ denotes the floor operation, while 
+
+clip [0 ,127] (·) saturates to the unsigned activation range. FC3 adds bias only, without ReLU or requantization. Unlike the hidden-layer activations, its three signed outputs are not con-sumed by another quantized MVM; instead, they are retained in the wider accumulator format and passed directly to the gradient ratios p = −ˆnx/ˆnz and q = −ˆny /ˆnz . The module processes the pixels as a continuous stream: it neither waits for a full frame nor restarts a full control sequence per pixel. 7FC0                       
+
+> 𝒙𝒙
+> 𝒏𝒏
+> 6→16 16 →16 16 →316 →16
+> FC1 FC2 FC3
+> +𝑏𝑏 : Bias add; 𝜎𝜎 : ReLU; Q: Requant
+> (a) Normal Inference (b) Depth Reconstruction
+> RHS Generation
+> Forward
+> 2D DST
+> Spectral
+> Solve
+> Inverse
+> 2D DST Depth Prior
+> inner 𝒏𝒏 Depth Map
+> strip 0
+> strip 1
+> strip 2 Input Pong
+> Input Ping
+> 1D DST Output Pong
+> Output Ping
+> T
+> strip 0
+> strip 1
+> strip 2 Input Pong
+> Input Ping
+> 1D DST Output Pong
+> Output Ping
+> in
+> out
+> T: Transpose
+> Patch
+> Generator
+> Kernel
+> Reader
+> Conv Core
+> (c) Fz Estimation
+> …dz stream
+> u,v
+> Accumulator
+> patch vector kernel vector
+> ROM
+> 𝑓𝑓 𝑧𝑧 map
+> 𝐹𝐹 𝑧𝑧
+> Row Buffer
+> …
+> dz stream
+> old column
+> Sliding
+> Window
+> new
+> column
+> flatten
+> Patch
+> Vector
+> new
+> arrival 16 ×16 MVM
+> Post Process
+> Post Process
+> Post Process
+> Post Process
+> Post Process
+> Post Process
+> +𝑏𝑏 𝜎𝜎 Q
+> Fig. 5. FPGA architecture of the image-to-Fzpipeline. (a) Quantized surface normal estimation. (b) Boundary-prior depth reconstruction. (c) Streaming
+> Fzestimation.
+
+2) Depth Reconstruction Module: The depth-reconstruction module converts estimated surface normals to gradients p and 
+
+q, and solves the boundary-prior Poisson problem over the inner 126 × 126 region with a one-pixel boundary width. The right-hand side (RHS) generation module computes divergence and injects the Dirichlet boundary prior: 
+
+bi,j = ( pi,j − pi,j −1) + ( qi,j − qi−1,j )
+
+− X 
+
+> (m,n )∈N (i,j )∩∂Ω
+
+Dprior (m, n ), (13) where bi,j is the RHS value at inner pixel (i, j ), N (i, j ) is its discrete neighbor set, ∂Ω is the boundary, and Dprior (m, n )
+
+is the known boundary depth. The boundary-corrected RHS is then processed by an orthonormal DST-I Poisson solver consisting of a separable forward 2-D DST, element-wise division by the Poisson eigenvalues, and a separable inverse 2-D DST. As shown in the lower part of Fig. 5(b), each 2-D transform is executed as a row transform, a matrix transpose, and a second row transform. The matrix is partitioned into strips, and ping-pong buffers overlap the write, compute, and read phases of adjacent strips. This organization hides memory movement behind the 1-D DST engine and improves streaming throughput, while independent forward and inverse executors allow the two transform phases to be scheduled separately. 
+
+3) Normal-Force Estimation Module: We deploy only the normal-force branch because Fz is the most direct and highest-frequency feedback variable for contact detection, preload control and grasp stability. When contact is mainly normal, tangential displacement is small compared with normal dis-placement, so Fz can be inferred from normal displacement with a regular stream suitable for FPGA pipelining. The normal-force estimation module first computes 
+
+q∆z (p) = Qz
+
+
+
+max( Z0(p) − ˆZt(p), 0) 
+
+
+
+, (14) where q∆z is the quantized normal displacement, Qz (·) is displacement quantization, Z0 is the background depth, ˆZt is the current depth, and p is the pixel coordinate. The hardware preserves the position-aware mapping in HyperForce. For each pixel, the patch generator emits a K × K vector while the kernel reader simultaneously returns a coordinate-indexed vector from Read-Only Memory (ROM): 
+
+vp = {q∆z (p + δm)}K2
+
+> m=1
+
+, kp = ROM( u, v ), (15) where K is the side length of the local displacement window, 
+
+δm indexes the m-th window offset, vp is the displacement patch vector, kp is the position-aware kernel vector, and (u, v )
+
+is the pixel coordinate used for ROM addressing. The deployed force computation uses 
+
+ˆfz (p) = 
+
+> K2
+
+X
+
+> m=1
+
+kp,m vp,m ,Az = X
+
+> p∈Ω
+
+ˆfz (p),
+
+ˆFz = sF Az , sF = 1
+
+sksd
+
+.
+
+(16) Here, ˆfz (p) is the pixel-wise integer response, Az is the raw full-frame accumulator, and sk and sd are the quantization scales for the kernel and normal displacement, respectively. The FPGA first performs convolution and full-frame accu-mulation using the quantized kernel and displacement. Since the integer computation scales the corresponding floating-point result by sksd, sF = ( sksd)−1 converts the raw accumulator to the force estimate in Newtons. The patch generator stores only the recent K rows. Away from the first column, the window shifts left and fetches the new rightmost column; at a row start, the whole window is refreshed from row buffers. A patch is emitted when the last required sample arrives, avoiding full-frame caching. V. E XPERIMENTS 
+
+A. Data Collection and Training Protocol 
+
+Fig. 6 summarizes the automated acquisition pipeline. A force-sensor-mounted spherical indenter applied controlled normal and tangential contacts while tactile images, CNC poses, and force readings were recorded synchronously. Pixel-wise normal and depth ground truth was rendered from the pose, indenter geometry, and aligned sensor CAD model. Spatially disjoint datasets were used for training, validation, 8Normal Generation  Depth                                    
+
+> Ground Truth Normal Map
+> 5
+> Camera Parameter Calibration
+> Coordinate Alignment
+> Sphere Simulation
+> Normal Generation
+> (,,,)xyxyffcccam cam (,)RT
+> Depth
+> Rendering
+> Environment
+> Calibration Images 3D CAD Points Sensor CAD Model
+> Ground Truth Normal Map
+> 1
+> 2
+> 3
+> 4
+> 6
+> 相机参数标定
+> 坐标系对齐
+> 球面仿真
+> 法向生成
+> (,,,)xyxyffcccam cam (,)RT
+> 深度
+> 渲染
+> 环境
+> 标定图像 3D CAD 坐标 传感器 CAD 模型
+> 真值法向量图
+> 1
+> 2
+> 3
+> 4
+> 5
+> 5
+
+Fig. 6. Data acquisition and geometric ground-truth generation pipeline. Labels: 1, ATI Nano17 force/torque sensor; 2, spherical indenter; 3, FasTac; 4, ESP32 CNC controller; 5, FPGA Mezzanine Card (FMC)-to-MIPI adapter; and 6, FPGA development board. TABLE II GRADIENT -ERROR COMPARISON BETWEEN RGB-ONLY AND RGB-NIR 
+
+> ILLUMINATION
+
+.Component Gradient Error (mm/pixel) Improv. RGB-only RGB-NIR 
+
+Gx (MAE) 0.0047 0.0028 ↓ 40% 
+
+Gy (MAE) 0.0051 0.0040 ↓ 22% Total (MAE) 0.0098 0.0068 ↓ 31% 
+
+and testing. The complete acquisition protocol, dataset compo-sition, and training hyperparameters are provided in Section I of the supplementary material. 
+
+B. 3D Geometry Reconstruction Evaluation 
+
+To evaluate fine geometric perception required in dexterous manipulation, we first evaluate surface normal estimation and depth reconstruction on a spherical-indenter dataset with ra-dius r = 2 .5mm. As shown in Table II, RGB-NIR reduces the gradient MAE of Gx and Gy by 40% and 22% , respectively, and reduces the total gradient MAE from 0.0098 to 0.0068 mm/pixel. This confirms that the fourth NIR observation provides additional constraints for surface normal estimation on curved surfaces. Depth is evaluated by the MAE between the reconstructed depth map and the CAD-aligned ground truth. In Table III, RGB-NIR with the depth prior achieves 0.0415 mm MAE, compared with 0.0618 mm for RGB-only, corresponding to a 
+
+32 .8% reduction. Without the depth prior, both illumination schemes drift to about 0.27 mm MAE, showing that the boundary-prior constraint is essential for stable curved-surface reconstruction. We further evaluate real-object reconstruction on a straw-berry surface, a fingerprint, and an LED array. As shown in Fig. 7, compared with RGB-only reconstruction, RGB-NIR produces more complete surface pits, better preserves ridge-valley continuity, and resolves miniature LED pads more clearly. 
+
+C. Three-Axis Force Sensing Evaluation 
+
+We use a six-axis ATI sensor as the reference for three-axis force evaluation. Mean absolute error (MAE) and root-mean-square error (RMSE) are computed over the test set. Their normalized forms, normalized mean absolute error 
+
+TABLE III DEPTH MAE UNDER DIFFERENT ILLUMINATION AND BOUNDARY CONDITIONS .Metric (MAE / mm) RGB-only RGB-NIR w/ depth prior w/o depth prior w/ depth prior w/o depth prior Depth error 0.0618 0.2730 0.0415 0.2686 TABLE IV ABLATION OF HYPER FORCE FORCE ESTIMATION MODES .Kernel Input Component MAE (N) 
+
+Fx Fy Fz
+
+Dynamic 
+
+dx + dy 0.0386 0.0279 0.1570 
+
+dz 0.0235 0.0325 0.0589 
+
+dx + dy + dz 0.0235 0.0246 0.0545 
+
+Fixed 
+
+dx + dy 0.0545 0.0318 0.5123 
+
+dz 0.1028 0.0637 0.4980 
+
+dx + dy + dz 0.0516 0.0344 0.4905 
+
+(NMAE) and normalized root-mean-square error (NRMSE), are obtained by normalization with the maximum ground-truth load of each force component. Fig. 8 shows strong linear agreement between predicted and reference forces. The MAE values are 0.0235, 0.0246, and 0.0545 N for Fx, Fy , and Fz ,corresponding to NMAE values of 2.37%, 2.41%, and 2.74%; the NRMSE values are 3.15%, 3.33%, and 3.72%, with R2
+
+values of 0.9921, 0.9873, and 0.9690. Table IV verifies the effect of the dynamic kernel and 3D displacement input. For the same input, the position-aware dynamic kernel consistently outperforms the fixed CNN, espe-cially in Fz : with full dx + dy + dz input, Fz MAE decreases from 0.4905 N to 0.0545 N. Under the dynamic setting, full 3D displacement gives the best overall accuracy, indicating that normal indentation and tangential marker displacement provide complementary force cues. To validate stable grasp feedback under external distur-bances, we conduct a friction-coefficient-based grasping task. As shown in Fig. 9, a dexterous hand grasps a plastic bottle with two FasTac fingertips while repeated downward distur-bances are applied to the bottle cap. The controller computes 
+
+Fs =
+
+q
+
+F 2 
+
+> x
+
++ F 2 
+
+> y
+
+, Fn = Fz , μ = Fs
+
+Fn
+
+. (17) Here, μs and d are the experimentally determined stable friction coefficient and safety margin, respectively. When μ > μs +d, the inter-finger angle of the two distal joints is reduced to increase grasp stability. Fig. 9 compares the contact-force, friction-coefficient, and motor-angle responses without and with feedback. Without feedback, repeated disturbances drive 
+
+Fs and μ upward while the motor angle remains unchanged, and the subsequent force drop indicates slip, as shown at point 
+
+a3. With feedback enabled, each threshold crossing triggers grasp tightening, increasing Fn and returning μ to the stable region. This demonstrates real-time closed-loop use of FasTac three-axis force estimation. 9LED array                
+
+> Fingerprint
+> RGB NIR Normal
+> (RGB+NIR)
+> Normal
+> (RGB only)
+> Strawberry
+> Point cloud
+> (RGB+NIR)
+> Point cloud
+> (RGB only)
+> 2mm
+> Fig. 7. 3D reconstruction results on three representative objects. The RGB/NIR inputs, predicted normal maps, and reconstructed point clouds under RGB-only and RGB-NIR illumination are compared. GT Fx (N)
+> Pred Fx (N)
+> GT Fy (N) GT Fz (N)
+> Pred Fy (N)
+> Pred Fz (N) R2=0.9920 R2=0.9873 R2=0.9690
+> Fig. 8. Regression between predicted three-axis contact forces and ATI ground truth.
+> TABLE V END -TO -END IMAGE -TO -NORMAL -FORCE PERFORMANCE OF CPU, GPU,
+> AND FPGA IMPLEMENTATIONS .
+
+Platform Latency (ms) Force MAE (N) Energy (mJ/frame) 
+
+CPU 6.82 0.0669 238.05 GPU 3.26 0.0667 33.60 FPGA 1.09 0.0679 8.41 
+
+D. Edge Deployment and High-Speed Tactile Processing Evaluation 
+
+We compare CPU, GPU, and FPGA implementations of the complete image-to-Fz pipeline. The software baselines run on an AMD Ryzen 7 8845H CPU and an NVIDIA RTX 4060 Laptop GPU, while the hardware implementation targets a Xilinx Zynq UltraScale+ MPSoC (XCZU19EG-2FFVC1760I). As shown in Table V, the FPGA completes the pipeline in 1.09 ms with an energy cost of 8.41 mJ/frame, compared with 6.82 ms and 238.05 mJ/frame on the CPU and 3.26 ms and 33.60 mJ/frame on the GPU, while maintaining comparable force accuracy. Dynamic performance was evaluated using the vibration platform shown in Fig. S1 of the supplementary material. As shown in Fig. 10, all platforms recover the 50-Hz excitation. At 70 Hz, the CPU exhibits aliasing, whereas the GPU and FPGA retain the correct response. At 100 Hz, only the FPGA pre-serves both the spectral peak and temporal periodicity. These results demonstrate the advantage of FPGA deployment for F (N) 
+
+μ
+
+Δθ (rad) 
+
+F (N) 
+
+μ
+
+Δθ (rad) 
+
+T (s) 
+
+T (s) 
+
+T (s) 
+
+T (s) 
+
+T (s) 
+
+T (s) 
+
+Fs
+
+Fn
+
+μs
+
+μ
+
+M1 
+
+M2 
+
+(a)  (b) 
+
+a 1 a 2 a 3 b 1 b 2 b 3
+
+a 1 a 2 a 3
+
+b 1 b 2 b 3      
+
+> Fig. 9. Contact force F, friction coefficient μ, and motor angle variation
+> ∆θwithout and with friction-coefficient feedback. Panel (a) shows the case without feedback, while panel (b) shows the case with feedback. The green dashed lines indicate representative time points during the experiment.
+
+deterministic high-bandwidth tactile processing. Detailed per-stage benchmarks, energy measurements, output rates, band-width estimates, discrete Fourier transform (DFT) processing, and measured aliasing frequencies are provided in Section III of the supplementary material. Additional demonstrations of 3D reconstruction, force feedback grasping, and vibration measurement are provided in Supplementary Video S1. 10 25 50 75 100 
+
+Frequency (Hz) 
+
+0
+
+1
+
+0
+
+(a) 50 Hz 
+
+−1 
+
+0
+
+1
+
+−1 
+
+0
+
+1
+
+0.05 0.10 0.15 
+
+Time (s) 
+
+−1 
+
+0
+
+1
+
+0
+
+0 25 50 75 100 
+
+Frequency (Hz) 
+
+0
+
+1
+
+(b) 70 Hz 
+
+−1 
+
+0
+
+1
+
+−1 
+
+0
+
+1
+
+0.000 0.025 0.050 0.075 0.100 
+
+Time (s) 
+
+−1 
+
+0
+
+1
+
+0 25 50 75 100 
+
+Frequency (Hz) 
+
+0
+
+1
+
+(c) 100 Hz 
+
+−1 
+
+0
+
+1
+
+−1 
+
+0
+
+1
+
+0.00 0.02 0.04 0.06 0.08 
+
+Time (s) 
+
+−1 
+
+0
+
+1
+
+> Normalized
+> magnitude
+> Normalized
+> amplitude
+
+CPU GPU FPGA True frequency / ideal waveform 
+
+Fig. 10. Frequency spectra (top row) and time-domain normal-force responses (bottom row) of CPU, GPU, and FPGA under 50 Hz, 70 Hz, and 100 Hz inputs. 
+
+VI. C ONCLUSION 
+
+FasTac is a compact curved tactile sensor integrating RGB-NIR imaging, boundary-prior 3D reconstruction, three-axis force estimation, and FPGA acceleration. It achieves a depth MAE of 0.0415 mm, while HyperForce obtains NMAE values of 2.74% and 2.39% for normal and shear forces, respectively. The FPGA image-to-Fz pipeline runs in 1.09 ms per frame. Multi-object reconstruction, feedback grasping, and vibration measurements validate high-precision geometry perception, stable force feedback, and high-speed dynamic sensing. REFERENCES [1] Z. Kappassov, J.-A. Corrales, and V. Perdereau, “Tactile sensing in dexterous robot hands: Review,” Robotics and Autonomous Systems ,vol. 74, pp. 195–220, 2015. [2] M. Lambeta, P.-W. Chou, S. Tian, B. Yang, B. Maloon, V. R. Most, D. Stroud, R. Santos, A. Byagowi, G. Kammerer et al. , “DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation,” IEEE Robotics and Automation Letters , vol. 5, no. 3, pp. 3838–3845, 2020. [3] B. Romero, F. Veiga, and E. Adelson, “Soft, round, high resolution tactile fingertip sensors for dexterous robotic manipulation,” in 2020 IEEE International Conference on Robotics and Automation (ICRA) .IEEE, 2020, pp. 4796–4802. [4] G. Kim and D. Hwang, “BaroTac: Barometric three-axis tactile sensor with slip detection capability,” Sensors , vol. 23, no. 1, p. 428, 2023. [5] Y. Yang, M. Zhao, Y. Jia, L. Zhao, D. Piao, Y. Zheng, and L. Song, “A tactile sensor with slippage prediction by unequal-height dome array,” 
+
+IEEE Sensors Journal , vol. 23, no. 16, pp. 17 958–17 967, 2023. [6] I. Andrussow, H. Sun, K. J. Kuchenbecker, and G. Martius, “MinSight: A fingertip-sized vision-based tactile sensor for robotic manipulation,” 
+
+Advanced Intelligent Systems , vol. 5, no. 8, p. 2300042, 2023. [7] W. Zheng, D. Guo, W. Yang, and H. Liu, “A large-area robotic skin for intelligent tactile interaction of collaborative robots,” IEEE/ASME Transactions on Mechatronics , pp. 1–11, 2025, early Access, Jan. 10, 2025, doi: 10.1109/TMECH.2024.3520953. [8] J. Yu, S. Yao, X. Jiang, and Z. Yao, “Stretchable capacitive tactile sensor array for accurate distributed pressure recognition,” IEEE Sensors Journal , vol. 24, no. 22, pp. 37 836–37 845, 2024. [9] M. Rehan, M. M. Saleem, M. I. Tiwana, R. I. Shakoor, and R. Cheung, “A soft multi-axis high force range magnetic tactile sensor for force feedback in robotic surgical systems,” Sensors , vol. 22, no. 9, p. 3500, 2022. [10] H. Hu, C. Zhang, X. Lai, H. Dai, C. Pan, H. Sun, D. Tang, Z. Hu, J. Fu, T. Li et al. , “Large-area magnetic skin for multi-point and multi-scale tactile sensing with super-resolution,” npj Flexible Electronics , vol. 8, no. 1, p. 42, 2024. [11] R. Wang, S. Hu, W. Zhu, Y. Huang, W. Wang, Y. Li, Y. Yang, J. Yu, and Y. Deng, “Recent progress in high-resolution tactile sensor array: From sensor fabrication to advanced applications,” Progress in Natural Science: Materials International , vol. 33, no. 1, pp. 55–66, 2023. [12] Y. Wang, G. Liang, D. Mei, and Z. Chen, “Flexible tactile sensor array mounted on the curved surface: Analytical modeling and experimental validation,” Journal of Microelectromechanical Systems , vol. 26, no. 5, pp. 1002–1011, 2017. [13] L. Zhong, H. J. H. Kim, D. P. Losey, and C. M. Nunez, “Curvature-aware calibration of tactile sensors for accurate force estimation on non-planar surfaces,” arXiv preprint arXiv:2510.25965 , 2025. [14] W. Yuan, S. Dong, and E. H. Adelson, “GelSight: High-resolution robot tactile sensors for estimating geometry and force,” Sensors , vol. 17, no. 12, p. 2762, 2017. [15] C. Lin, H. Zhang, J. Xu, L. Wu, and H. Xu, “9DTact: A compact vision-based tactile sensor for accurate 3D shape reconstruction and generalizable 6D force estimation,” IEEE Robotics and Automation Letters , vol. 9, no. 2, pp. 923–930, 2024. [16] D. Ma, E. Donlon, S. Dong, and A. Rodriguez, “Dense tactile force estimation using GelSlim and inverse FEM,” in 2019 International Conference on Robotics and Automation (ICRA) . IEEE, 2019, pp. 5418–5424. [17] D. F. Gomes, Z. Lin, and S. Luo, “GelTip: A finger-shaped optical tactile sensor for robotic manipulation,” in 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2020, pp. 9903–9909. [18] M. H. Tippur and E. H. Adelson, “GelSight360: An omnidirectional camera-based tactile sensor for dexterous robotic manipulation,” in 2023 IEEE International Conference on Soft Robotics (RoboSoft) . IEEE, 2023, pp. 1–8. [19] W. K. Do, B. Jurewicz, and M. Kennedy, “DenseTact 2.0: Optical tactile sensor for shape and force reconstruction,” in 2023 IEEE International Conference on Robotics and Automation (ICRA) , 2023, pp. 12 549– 12 555. [20] H. Sun, K. J. Kuchenbecker, and G. Martius, “A soft thumb-sized vision-based sensor with accurate all-round force perception,” Nature Machine Intelligence , vol. 4, no. 2, pp. 135–145, 2022. [21] S. Cui, S. Wang, C. Zhang, R. Wang, B. Zhang, S. Zhang, and Y. Wang, “GelStereo BioTip: Self-calibrating bionic fingertip visuotactile sensor for robotic manipulation,” IEEE/ASME Transactions on Mechatronics ,vol. 29, no. 4, pp. 2451–2462, 2024. [22] J.-C. Peng, S. Yao, and K. Hauser, “3D force and contact estimation for a SoftBubble visuotactile sensor using FEM,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2024, pp. 5666–5672. 11 
+
+[23] Y. Lin, X. Lu, J. Chen, and H. Yang, “3D vision-tactile reconstruction from infrared and visible images for robotic fine-grained tactile percep-tion,” in 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2025, pp. 16 023–16 029. [24] R. J. Woodham, “Photometric stereo: A reflectance map technique for determining surface orientation from image intensity,” in Image understanding systems and industrial applications I , vol. 155. SPIE, 1979, pp. 136–143. [25] C. Lu, K. Tang, X. Hui, H. Li, S. Nam, and N. F. Lepora, “StereoTacTip: Vision-based tactile sensing with biomimetic skin-marker arrangements,” 
+
+IEEE/ASME Transactions on Mechatronics , vol. 30, no. 6, pp. 7558– 7570, 2025. [26] G. Zhang, Y. Du, H. Yu, and M. Y. Wang, “DelTact: A vision-based tactile sensor using a dense color pattern,” IEEE Robotics and Automation Letters , vol. 7, no. 4, pp. 10 778–10 785, 2022. [27] Z. Zhang, H. Yang, and Z. Yin, “GelFlow: Self-supervised learning of optical flow for vision-based tactile sensor displacement measurement,” in International Conference on Intelligent Robotics and Applications .Springer, 2023, pp. 26–37. [28] M. K. Johnson and E. H. Adelson, “Retrographic sensing for the measurement of surface texture and shape,” in 2009 IEEE Conference on Computer Vision and Pattern Recognition . IEEE, 2009, pp. 1070–1077. [29] J. Zhao and E. H. Adelson, “GelSight Svelte: A human finger-shaped single-camera tactile robot finger with large sensing coverage and proprioceptive sensing,” in 2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2023, pp. 8979–8984. [30] Y. Lin, Y. Zhou, K. Huang, Q. Zhong, T. Cheng, H. Yang, and Z. Yin, “GelSplitter: Tactile reconstruction from near infrared and visible images,” in International Conference on Intelligent Robotics and Applications . Springer, 2023, pp. 14–25. [31] M. H. Tippur and E. H. Adelson, “RainbowSight: A family of gener-alizable, curved, camera-based tactile sensors for shape reconstruction,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) , 2024, pp. 1114–1120. [32] C. Zhao, J. Liu, and D. Ma, “iFEM2.0: Dense 3-D contact force field reconstruction and assessment for vision-based tactile sensors,” IEEE Transactions on Robotics , vol. 41, pp. 289–305, 2025. [33] O. Azulay, N. Curtis, R. Sokolovsky, G. Levitski, D. Slomovik, G. Lilling, and A. Sintov, “AllSight: A low-cost and high-resolution round tactile sensor with zero-shot learning capability,” IEEE Robotics and Automation Letters , vol. 9, no. 1, pp. 483–490, 2024. [34] N. Yao and S.-P. Wang, “Recent progress of optical tactile sensors: A review,” Optics and Laser Technology , vol. 176, p. 111040, 2024. [35] S. Quan, X. Liang, H. Zhu, M. Hirano, and Y. Yamakawa, “HiVTac: A high-speed vision-based tactile sensor for precise and real-time force reconstruction with fewer markers,” Sensors , vol. 22, no. 11, p. 4196, 2022. [36] N. Funk, E. Helmut, G. Chalvatzaki, R. Calandra, and J. Peters, “EveTac: An event-based optical tactile sensor for robotic manipulation,” IEEE Transactions on Robotics , vol. 40, pp. 3812–3832, 2024. [37] O. Oballe-Peinado, J. A. Hidalgo-Lopez, J. Castellanos-Ramos, J. A. Sanchez-Duran, R. Navas-Gonzalez, J. Herran, and F. Vidal-Verd´ u, “FPGA-based tactile sensor suite electronics for real-time embedded processing,” IEEE Transactions on Industrial Electronics , vol. 64, no. 12, pp. 9657–9665, 2017. [38] F. Hundhausen, R. Grimm, L. Stieber, and T. Asfour, “Fast reactive grasping with in-finger vision and in-hand FPGA-accelerated CNNs,” in 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2021, pp. 6825–6832. 1
+
+# Supplementary Material for “FasTac: A Curved Multispectral Vision-Based Tactile Sensor for High-Speed High-Precision 3D Shape and Force Perception” 
+
+Xiaofan Lu, Kaiji Huang, Jiahui Chen, Yuankai Lin, Hua Yang, and Zhouping Yin 
+
+I. D ATA COLLECTION AND TRAINING PROTOCOL 
+
+In the setup shown in Fig. 6 of the main paper, FasTac was fixed on a CNC platform, and a spherical indenter mounted on an ATI Nano17 force/torque sensor applied controlled contacts. Tactile images, CNC poses, and force readings were recorded synchronously. Four corner points defined the valid sensing region, within which calibration grids were generated by bilinear interpolation. At each grid point, vertical contacts were recorded under normal loads of 0.5, 1.0, and 1.5 N. Under each normal preload, tangential loads of Fh = 0 .3Fz and Fh = 0 .6Fz were applied in four in-plane directions. Real-time Fz feedback adjusted the CNC Z-axis position to maintain stable contact. Vertical samples were used to supervise surface-normal and depth estimation, whereas all valid normal and tangential samples were used for force and displacement estimation. Pixel-wise normal and depth ground truth was rendered from the CNC pose, indenter radius, and aligned sensor CAD model. Spatially disjoint grids were used to prevent neighboring contact locations from appearing in different subsets. The training, validation, and test grids had sizes of 8 × 8, 5 × 5,and 8 × 8, yielding 192, 75, and 192 geometry samples and 1504, 569, and 1497 force samples, respectively. The normal-estimation MLP was trained using Adam with an initial learning rate of 10 −3 and a batch size of 32 for up to 300 epochs. HyperForce was trained using AdamW with an initial learning rate of 10 −4, a weight decay of 10 −3, and a batch size of 8 for up to 900 epochs. II. H IGH -F REQUENCY VIBRATION MEASUREMENT 
+
+PLATFORM 
+
+As shown in Fig. S1, the frequency controller drives the platform in sinusoidal vertical motion, causing the probe to periodically indent the FasTac surface and produce a dynamic normal-force response. III. E DGE DEPLOYMENT AND DYNAMIC EVALUATION 
+
+DETAILS 
+
+The CPU and GPU baselines were evaluated on an AMD Ryzen 7 8845H CPU and an NVIDIA RTX 4060 Laptop GPU, respectively, while the FPGA implementation targeted a Xilinx Zynq UltraScale+ MPSoC (XCZU19EG-2FFVC1760I). FasTac was connected through an FPC cable to an FMC-to-MIPI adapter mounted on the FPGA board. (a)  (b) 
+
+Fig. S1. High-frequency vibration measurement platform. (a) Frequency controller and top view of the platform. (b) Side view of the platform. TABLE S1 DETAILED PERFORMANCE OF CPU, GPU, AND FPGA IMPLEMENTATIONS ON 128 × 128 INPUTS                                              
+
+> Scope Platform Latency (ms) Accuracy (MAE) Energy (mJ/frame)
+> Surface normal estimation CPU 2.40 0.0456 mm/pixel 74.83 GPU 0.30 0.0456 mm/pixel 3.00 FPGA 0.11 0.0508 mm/pixel 0.29
+> Depth reconstruction CPU 1.17 0.0496 mm 21.51 GPU 1.34 0.0496 mm 17.28 FPGA 0.87 0.0741 mm 8.23
+> Normal-force estimation CPU 2.30 0.0668 N74.15 GPU 0.36 0.0668 N11.01 FPGA 0.11 0.0668 N0.18
+> Image-to-normal-force CPU 6.82 0.0669 N 238.05 GPU 3.26 0.0667 N33.60 FPGA 1.09 0.0679 N 8.41
+
+For edge deployment, the original 1920 ×1080 images used in the offline experiments of the main paper were cropped and downsampled to 128 ×128 . This preprocessing accommodates the limited FPGA buffering and computation resources, while the smaller sensor readout window increases the camera frame rate. Therefore, the accuracy values reported here differ from the full-resolution offline results because of the different input resolution and preprocessing. Table S1 reports the latency, accuracy, and energy of each processing stage and of the complete image-to-Fz pipeline. The energy values are reported per frame. CPU and GPU en-ergy was obtained from platform power counters and divided by the number of processed frames, whereas FPGA energy was measured during the full-stream board run. For dynamic evaluation, FasTac captured images at fs =240 Hz , while the CPU, GPU, and FPGA pipelines produced 2
+
+Fz (t) outputs at approximately 104, 156, and 240 Hz, re-spectively. The aliasing-free bandwidth was approximated as 
+
+fmax ≈ min( fs, f out )/2, giving limits of about 52, 78, and 120 Hz. The DC component of each Fz (t) sequence was removed, and the dominant nonzero DFT peak was selected as the measured vibration frequency. At 50 Hz, all platforms recovered the correct spectral peak and excitation periodicity. At 70 Hz, the CPU aliased to 31.58 Hz, whereas the GPU and FPGA measured 69.98 and 70.03 Hz, respectively. At 100 Hz, the CPU and GPU peaks shifted to 1.10 and 49.39 Hz and no longer followed the excitation cycles, whereas the FPGA measured 100.04 Hz and retained the correct temporal periodicity.
