@@ -1,0 +1,308 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-01T19:49:00.139326+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 6,
+    "quick_skim_target": 11,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2607.28625v1",
+      "source": "arxiv",
+      "title": "ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine",
+      "abstract": "Embodied intelligence faces a fundamental data bottleneck. Models must capture how first-person perception, whole-body motion, dexterous manipulation, object state, sound, and touch evolve together as humans pursue goals over time. Existing datasets fragment this experience across viewpoints, modalities, or spatial scales, leaving the full perception-action loop only partially observed. We introduce the Ambient Capture Engine (ACE), a human-centric data engine that transforms real home environments into spatially calibrated, temporally synchronized recording studios. ACE operates at two complementary scales: a table-scale configuration resolves hand-object manipulation, while a room-scale configuration captures whole-body motion, locomotion, and interactions across a furnished home. ACE records egocentric and multi-view exocentric video, full-body and articulated hand motion, object geometry and 6-DoF trajectories, audio, and tactile signals as a unified multisensory stream. Using ACE, we build ACE-Data-0, comprising 150 hours and 17M video frames across 200 task categories, performed by 50 participants in 2 environments, for a total of 75,000 interaction episodes. The dataset spans atomic manipulation, long-horizon chains of household activities, and human-scene interaction, while preserving natural behavioral variation through goal-level rather than step-by-step instructions. We further introduce a hierarchical benchmark that progresses from signals to scene components and then to interactions. Evaluations of state-of-the-art methods expose substantial gaps under contact, occlusion, egomotion, and long temporal horizons. ACE-Data-0 provides synchronized human demonstrations with aligned perceptual, kinematic, and contact supervision, offering a scalable foundation for imitation learning, world models, vision-language-action systems, and embodied AI.",
+      "authors": [
+        "Yukang Cao",
+        "Haozhe Xie",
+        "Beichen Wen",
+        "Runmao Yao",
+        "Yinghao Liu",
+        "Yue Huang",
+        "Zhichao Liao",
+        "Yunxiang Wang",
+        "Haiheng Liu",
+        "Xingshun Tian",
+        "Dawei Su",
+        "Long Zhuo",
+        "Dacheng Tao",
+        "Xiaogang Wang",
+        "Liang Pan",
+        "Ziwei Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T17:59:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.28625v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Multi-modal capture including touch for embodied data",
+      "llm_evidence_cn": "包含触觉的多模态具身数据采集",
+      "llm_evidence": "包含触觉的多模态具身数据采集",
+      "canonical_evidence": "包含触觉的多模态具身数据采集",
+      "llm_tldr_en": "Embodied AI lacks synchronized multi-modal data. ACE transforms real homes into calibrated recording studios capturing first-person perception, whole-body motion, dexterous manipulation, sound, and touch at table and room scales. This provides complete perception-action loop data for training multimodal tactile models.",
+      "llm_tldr_cn": "具身智能面临数据瓶颈，现有数据集难以同步捕捉触觉、运动与物体状态等多模态信息。ACE将真实家庭环境改造为空间标定、时间同步的采集工作室，在桌面尺度覆盖手物操作、在房间尺度覆盖全身运动。通过该数据引擎可获取完整的感知-动作闭环数据，为多模态触觉感知与机器人操作学习提供重要资源。",
+      "llm_tldr": "具身智能面临数据瓶颈，现有数据集难以同步捕捉触觉、运动与物体状态等多模态信息。ACE将真实家庭环境改造为空间标定、时间同步的采集工作室，在桌面尺度覆盖手物操作、在房间尺度覆盖全身运动。通过该数据引擎可获取完整的感知-动作闭环数据，为多模态触觉感知与机器人操作学习提供重要资源。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.24148v1",
+      "source": "arxiv",
+      "title": "A Motion-Aware Vector Quantization Framework with Centroid Reuse for Efficient VLA Inference",
+      "abstract": "Vision-Language-Action (VLA) models have demonstrated strong potential for embodied AI, yet their high inference latency on GPUs limits real-time deployment. Existing accelerators, such as Dadu-Corki, improve efficiency but treat VLA models as full-precision workloads, leaving substantial redundancy in both memory and computation underexploited.   In this paper, we propose VQVLA, an algorithm-hardware co-design framework that accelerates VLA inference by exploiting weight similarity and execution dynamics. We first introduce MotionVQ, a motion-aware vector quantization scheme that dynamically adjusts quantization precision based on the robot's execution state, reducing memory access while preserving task success rate. We then propose a merged-centroid vectorized GEMM paradigm that operates on the codebook-index representation, eliminating redundant multiplications through spatial aggregation and temporal reuse of centroids. To realize these optimizations, we design an accelerator that efficiently supports dynamic precision selection and centroid-reuse computation. Experimental results show that VQVLA achieves 6.5x, 2.8x, 1.9x, 3.3x, and 4.3x speedup over the A100 GPU, Dadu-Corki, LUT-DLA, CodeGEMM, and ShiftAddLLM, respectively, with negligible accuracy degradation.",
+      "authors": [
+        "Zhuoran Song",
+        "Haozhe Jiang",
+        "Chunyu Qi",
+        "Minnan Pei",
+        "Gang Li",
+        "Xiaoyao Liang",
+        "Haibing Guan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-27T08:29:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.24148v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Efficient VLA inference via motion-aware quantization",
+      "llm_evidence_cn": "通过运动感知量化加速VLA推理",
+      "llm_evidence": "通过运动感知量化加速VLA推理",
+      "canonical_evidence": "通过运动感知量化加速VLA推理",
+      "llm_tldr_en": "VLA models are too slow for real-time robot control. VQVLA is an algorithm-hardware co-design with MotionVQ, a motion-aware vector quantization that adapts precision based on execution state, reducing memory and computation without sacrificing task success.",
+      "llm_tldr_cn": "VLA模型在机器人实时控制中推理延迟过高，严重影响部署。本文提出VQVLA算法-硬件协同设计框架，采用MotionVQ运动感知向量量化，根据机器人执行状态动态调整量化精度，并复用质心以减少内存访问与计算开销。实验表明，在保持任务成功率的前提下显著加速VLA推理，为嵌入式机器人部署提供可行方案。",
+      "llm_tldr": "VLA模型在机器人实时控制中推理延迟过高，严重影响部署。本文提出VQVLA算法-硬件协同设计框架，采用MotionVQ运动感知向量量化，根据机器人执行状态动态调整量化精度，并复用质心以减少内存访问与计算开销。实验表明，在保持任务成功率的前提下显著加速VLA推理，为嵌入式机器人部署提供可行方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.23909v1",
+      "source": "arxiv",
+      "title": "WorldDiT: A Unified Diffusion Architecture for World and Action Modeling",
+      "abstract": "Many recent robot policies pursue stronger control by using large pretrained vision-language models (VLMs) as the action backbone. We introduce WorldDiT, a unified diffusion transformer architecture that couples action generation with visual world modeling and achieves strong performance without a large pretrained VLM action backbone. During training, a single diffusion transformer generates continuous action chunks and predicts normalized RGB patch targets from future camera frames. Across four LIBERO simulation suites, WorldDiT lies on the reported Pareto frontier for total model parameters and mean success among methods reporting all four suites. These results provide a strong sub-billion-parameter baseline for future scaling studies.",
+      "authors": [
+        "Sen Wang",
+        "R. Gnana Praveen",
+        "Bidhan Roy",
+        "Marcos Villagra"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-07-27T00:55:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.23909v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified diffusion world and action model for robot manipulation without large VLM backbone",
+      "llm_evidence_cn": "无需大型VLM主干的统一扩散世界与动作模型，面向机器人操作",
+      "llm_evidence": "无需大型VLM主干的统一扩散世界与动作模型，面向机器人操作",
+      "canonical_evidence": "无需大型VLM主干的统一扩散世界与动作模型，面向机器人操作",
+      "llm_tldr_en": "WorldDiT couples continuous action chunk generation with future-frame RGB patch prediction in a single diffusion transformer, reaching strong LIBERO performance without a large pretrained VLM action backbone.",
+      "llm_tldr_cn": "现有机器人策略常以大型预训练视觉语言模型为动作主干，追求更强控制力。WorldDiT提出单一扩散Transformer，同时生成连续动作块并预测未来相机帧的RGB patch目标，将世界建模与动作生成统一。在四项LIBERO仿真套件上，其总参数量和平均成功率处于帕累托前沿，提供亚十亿参数的强基线。",
+      "llm_tldr": "现有机器人策略常以大型预训练视觉语言模型为动作主干，追求更强控制力。WorldDiT提出单一扩散Transformer，同时生成连续动作块并预测未来相机帧的RGB patch目标，将世界建模与动作生成统一。在四项LIBERO仿真套件上，其总参数量和平均成功率处于帕累托前沿，提供亚十亿参数的强基线。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.27599v1",
+      "source": "arxiv",
+      "title": "World Action Planner: Generalizable Decision-Making with Action-Conditioned World Models",
+      "abstract": "Building generalizable agents for diverse applications remains a fundamental challenge. While imitation learning-based policies succeed in specific training environments, they often fail to generalize to novel scenes and tasks. In this work, we propose World Action Planner, a robot planning system that leverages the reasoning capabilities of Vision-Language Models (VLMs) and the physical grounding of a multi-task pose-image conditioned world model. Our system enables an agent to propose initial action plans and iteratively refine them via optimization and search, reasoning over imagined world model rollouts. We demonstrate that our approach achieves superior performance across compositional tasks, new layouts, and zero-shot generalization scenarios, significantly outperforming state-of-the-art end-to-end policy models such as VLAs and WAMs. Project website at worldactionplanner.github.io",
+      "authors": [
+        "Xiangcheng Zhang",
+        "Yilun Du"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-07-30T02:41:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.27599v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "VLM reasoning with action-conditioned world models for planning, relevant to world model based robot manipulation",
+      "llm_evidence_cn": "结合VLM推理与动作条件世界模型进行规划，与基于世界模型的机器人操作相关",
+      "llm_evidence": "结合VLM推理与动作条件世界模型进行规划，与基于世界模型的机器人操作相关",
+      "canonical_evidence": "结合VLM推理与动作条件世界模型进行规划，与基于世界模型的机器人操作相关",
+      "llm_tldr_en": "Proposes World Action Planner, combining Vision-Language Models with a multi-task pose-image conditioned world model to iteratively refine robot action plans, achieving strong generalization to new layouts and zero-shot tasks.",
+      "llm_tldr_cn": "模仿学习策略在具体训练环境中表现良好，但难以泛化到新场景。本文提出World Action Planner，利用视觉-语言模型的推理能力和多任务姿态-图像条件世界模型的物理基础，通过想象的世界模型回滚来不断优化动作计划。在组合任务、新布局和零样本泛化上均取得优结果。该规划框架展示了世界模型与VLM结合用于决策的有效性，对触觉世界模型驱动的规划具有参考意义。",
+      "llm_tldr": "模仿学习策略在具体训练环境中表现良好，但难以泛化到新场景。本文提出World Action Planner，利用视觉-语言模型的推理能力和多任务姿态-图像条件世界模型的物理基础，通过想象的世界模型回滚来不断优化动作计划。在组合任务、新布局和零样本泛化上均取得优结果。该规划框架展示了世界模型与VLM结合用于决策的有效性，对触觉世界模型驱动的规划具有参考意义。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.26047v1",
+      "source": "arxiv",
+      "title": "S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information",
+      "abstract": "Acoustic information provides rich cues about object location, material properties, and changes caused by contact or motion. This paper introduces a new set of acoustic-aware manipulation tasks for imitation learning, in which robots must use auditory cues to determine manipulation targets. These tasks require sound source localization and identification for active exploration in robotic manipulation. Also, we propose a multimodal imitation learning framework, Spatial-Spectral Audio Action (S2A2), that integrates visual features with acoustic spatial and acoustic signal information for the acoustic-aware manipulation tasks. We implemented S2A2 models that integrates policies such as ACT, Diffusion Policy, VQ-BeT, and $π_0$, into our framework. Simulation experiments showed that the proposed method is the most effective for tasks requiring both position and timbre. Furthermore, real-robot experiments confirm the applicability of the proposed tasks and framework to real-world manipulation.",
+      "authors": [
+        "Kaneyoshi Hiratsuka",
+        "Benjamin Yen",
+        "Ryosuke Kojima"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-28T17:56:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.26047v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multimodal audio-visual imitation learning, analogous to tactile-visual integration",
+      "llm_evidence_cn": "音频-视觉多模态模仿学习，与触觉-视觉融合类似",
+      "llm_evidence": "音频-视觉多模态模仿学习，与触觉-视觉融合类似",
+      "canonical_evidence": "音频-视觉多模态模仿学习，与触觉-视觉融合类似",
+      "llm_tldr_en": "Introduces acoustic-aware manipulation tasks and S2A2, a multimodal imitation learning framework integrating visual features with acoustic spatial and signal information for robotic manipulation.",
+      "llm_tldr_cn": "声学信息能提供物体位置、材质以及接触变化等丰富线索，但操作中往往被忽略。本文设计了一组声学感知操作任务，并提出了S2A2多模态模仿学习框架，将视觉特征与声学空间信息和声学信号信息融合，支持声源定位与目标识别。该框架可集成ACT、扩散策略等多种策略模型。实验验证了多模态融合的有效性，为触觉等新模态的引入提供了模仿学习路线。",
+      "llm_tldr": "声学信息能提供物体位置、材质以及接触变化等丰富线索，但操作中往往被忽略。本文设计了一组声学感知操作任务，并提出了S2A2多模态模仿学习框架，将视觉特征与声学空间信息和声学信号信息融合，支持声源定位与目标识别。该框架可集成ACT、扩散策略等多种策略模型。实验验证了多模态融合的有效性，为触觉等新模态的引入提供了模仿学习路线。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.26567v1",
+      "source": "arxiv",
+      "title": "Speech2Grasp: Data-Efficient Transfer of Text-Conditioned Grasp Detection to Speech in Humanoid Robots",
+      "abstract": "Humanoid robots increasingly require multi-modal understanding for natural interaction with humans. Despite the prominence of vision-language models, they generally assume textual rather than the more natural speech inputs. In this paper, we investigate whether a well-established text-conditioned model can be transferred to speech in a data-efficient manner. Using ALBEF as a case study, we conduct diagnostic analyses showing that a lightweight MLP-based projector effectively adapts it to speech, while preserving semantic discrimination and robustness. Motivated by these findings, we introduce Speech2Grasp, a framework for data-efficient transfer of text-conditioned grasp detection to speech. Real-world humanoid robot experiments show that Speech2Grasp outperforms cascaded ASR-based pipeline, while reducing inference latency. Our findings suggest a practical paradigm for extending established text-conditioned systems to speech.",
+      "authors": [
+        "Hung Nguyen",
+        "Kim Nhat Minh Nguyen",
+        "Van Duc Vu",
+        "Van-Danh Le",
+        "Hoang Huy Le",
+        "Dinh Tuan Nguyen",
+        "Pham Tuyen Le",
+        "Van-Truong Nguyen",
+        "Quan Nguyen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-29T07:40:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.26567v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal adaptation to new input modality, useful for adding tactile to VLA models",
+      "llm_evidence_cn": "将文本条件模型高效迁移到新输入模态，可用于向VLA模型加入触觉",
+      "llm_evidence": "将文本条件模型高效迁移到新输入模态，可用于向VLA模型加入触觉",
+      "canonical_evidence": "将文本条件模型高效迁移到新输入模态，可用于向VLA模型加入触觉",
+      "llm_tldr_en": "We propose Speech2Grasp, a data-efficient framework that adapts a text-conditioned grasp detection model to speech input using a lightweight MLP projector, preserving semantic discrimination and enabling natural multimodal interaction in humanoid robots.",
+      "llm_tldr_cn": "人形机器人需要多模态理解以与人类自然交互，但现有视觉-语言模型通常以文本而非语音为输入。针对这一问题，本文通过诊断分析发现，轻量级MLP投影仪可将文本条件模型有效适配到语音，并保留语义判别性和鲁棒性。基于此提出Speech2Grasp框架，实现文本条件抓取检测模型到语音输入的数据高效迁移。在真实人形机器人上的实验验证了该方法的有效性，为将触觉等新模态融入VLA模型提供了通用的跨模态适配思路。",
+      "llm_tldr": "人形机器人需要多模态理解以与人类自然交互，但现有视觉-语言模型通常以文本而非语音为输入。针对这一问题，本文通过诊断分析发现，轻量级MLP投影仪可将文本条件模型有效适配到语音，并保留语义判别性和鲁棒性。基于此提出Speech2Grasp框架，实现文本条件抓取检测模型到语音输入的数据高效迁移。在真实人形机器人上的实验验证了该方法的有效性，为将触觉等新模态融入VLA模型提供了通用的跨模态适配思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi modal tactile vision language action model for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.27549v1",
+      "source": "arxiv",
+      "title": "Cross-Embodiment Transfer via Behavior-Aligned Representations",
+      "abstract": "Recent progress in large-scale imitation learning for robot manipulation has been driven by leveraging datasets across a wide range of robot embodiments. However, achieving significant cross-embodiment transfer is often still challenging. In this work, we study the role of using behavior-aligned representations (e.g., object bounding boxes, language motions, end-effector traces of robot motion) in vision-language-action (VLA) models to promote cross-embodiment transfer. We hypothesize that by possessing invariances across embodiments while being predictive of robot actions, these representations can help unify large-scale cross-embodiment data to enhance transfer. To assess our hypothesis, we develop a simulation-based benchmark designed to assess transfer with diverse cross-embodiment data to new embodiments. Using this benchmark, we compare different representations and ways of incorporating them. We identify that end-effector traces can be particularly beneficial for transfer, representations are generally more useful with larger prior datasets, and can be used to benefit from action-free data. We also demonstrate that they can enhance sim-to-real cross-embodiment transfer, improving task completion progress of real robot policies pre-trained on simulation data by 28%. We provide videos of our evaluations at our website: https://ajaysridhar.com/barx/.",
+      "authors": [
+        "Ajay Sridhar",
+        "Jensen Gao",
+        "Jonathan Yang",
+        "Jean Mercat",
+        "Suneel Belkhale",
+        "Dorsa Sadigh"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-30T00:49:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.27549v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Behavior-aligned representations in VLA models, informing tactile VLA representation design",
+      "llm_evidence_cn": "研究VLA模型中的行为对齐表征，为触觉VLA的表征设计提供参考",
+      "llm_evidence": "研究VLA模型中的行为对齐表征，为触觉VLA的表征设计提供参考",
+      "canonical_evidence": "研究VLA模型中的行为对齐表征，为触觉VLA的表征设计提供参考",
+      "llm_tldr_en": "Studies behavior-aligned representations for cross-embodiment transfer in VLA models, including object bounding boxes and end-effector traces, showing improved transfer with a simulation benchmark.",
+      "llm_tldr_cn": "大规模模仿学习借助跨实体数据集推动机器人操作，但跨实体迁移仍具挑战。本文假设在VLA模型中使用行为对齐表征（如物体边界框、语言运动、末端执行器轨迹）可跨实体保持不变性并预测动作，从而统一数据并提升迁移。为此构建仿真基准评估该假设，结果表明行为对齐表征能增强跨实体迁移。该工作对设计触觉VLA中的多模态表征具有直接参考价值。",
+      "llm_tldr": "大规模模仿学习借助跨实体数据集推动机器人操作，但跨实体迁移仍具挑战。本文假设在VLA模型中使用行为对齐表征（如物体边界框、语言运动、末端执行器轨迹）可跨实体保持不变性并预测动作，从而统一数据并提升迁移。为此构建仿真基准评估该假设，结果表明行为对齐表征能增强跨实体迁移。该工作对设计触觉VLA中的多模态表征具有直接参考价值。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi modal tactile vision language action model for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

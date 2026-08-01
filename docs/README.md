@@ -6,52 +6,41 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-31
-- 运行时间：2026-07-31 19:37:22 UTC
+- 最新运行日期：2026-08-01
+- 运行时间：2026-08-01 19:53:20 UTC
 - 运行状态：成功
-- 本次总论文数：10
-- 精读区：2
-- 速读区：8
+- 本次总论文数：7
+- 精读区：1
+- 速读区：6
 
 ### 今日简报（AI）
-今日精读聚焦具身智能触觉感知，速读覆盖VLA模型轻量化与数据引擎；  
-最值得关注的是满分论文《TacWAM》的锚定引导世界模型与《FasTac》的高速三维形变力觉传感器；  
-建议普通读者延伸了解《CoTinyVLA》等子十亿参数模型，把握高效机器人学习趋势。
-- 详情：[/202607/31/README](/202607/31/README)
+今日共读7篇论文，聚焦具身智能与环境感知，其中精读1篇、速读6篇。最值得关注的是《ACE-Data-0》提出以人为中心的环境捕捉作为具身数据引擎（8.0/10），以及《Motion-Aware VQ》等世界模型与动作规划工作（7.0/10）。建议下一步关注“数据采集+世界模型”结合路线，可重点追踪ACE-Data-0的后续扩展。
+- 详情：[/202608/01/README](/202608/01/README)
 
 ### 精读区论文标签
-1. [TacWAM: Anchor-Guided World Action Model with Mechanics-Aware Tactile Prediction](/202607/31/2607.28391v1-tacwam-anchor-guided-world-action-model-with-mechanics-aware-tactile-prediction)  
-   标签：评分：10.0/10、query:tactile-vla
-   evidence：面向接触丰富操作、具备力学感知的触觉世界动作模型与触觉预测
-2. [FasTac: A Curved Multispectral Vision-Based Tactile Sensor for High-Speed High-Precision 3D Shape and Force Perception](/202607/31/2607.28416v1-fastac-a-curved-multispectral-vision-based-tactile-sensor-for-high-speed-high-precision-3d-shape-and-force-perception)  
+1. [ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine](/202608/01/2607.28625v1-ace-data-0-human-centric-ambient-capture-as-embodied-data-engine)  
    标签：评分：8.0/10、query:tactile-vla
-   evidence：曲面视觉触觉传感器，支持高速高精度三维形状与力感知
+   evidence：包含触觉的多模态具身数据采集
 
 ### 速读区论文标签
-1. [CoTinyVLA: Chain-of-Thought Distillation for a Sub-Billion-Parameter Vision-Language-Action Model](/202607/31/2607.25487v1-cotinyvla-chain-of-thought-distillation-for-a-sub-billion-parameter-vision-language-action-model)  
+1. [A Motion-Aware Vector Quantization Framework with Centroid Reuse for Efficient VLA Inference](/202608/01/2607.24148v1-a-motion-aware-vector-quantization-framework-with-centroid-reuse-for-efficient-vla-inference)  
    标签：评分：7.0/10、query:tactile-vla
-   evidence：紧凑VLA模型，核心方法与触觉VLA一致但未含触觉
-2. [A Causality-aware Infer-diagnose-refine Framework for Test-time Modality Adaptation in VLA Models](/202607/31/2607.25516v1-a-causality-aware-infer-diagnose-refine-framework-for-test-time-modality-adaptation-in-vla-models)  
+   evidence：通过运动感知量化加速VLA推理
+2. [World Action Planner: Generalizable Decision-Making with Action-Conditioned World Models](/202608/01/2607.27599v1-world-action-planner-generalizable-decision-making-with-action-conditioned-world-models)  
    标签：评分：7.0/10、query:tactile-vla
-   evidence：面向VLA动作细化的模型无关因果感知模态自适应
-3. [ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine](/202607/31/2607.28625v1-ace-data-0-human-centric-ambient-capture-as-embodied-data-engine)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：以人为中心的环境采集数据引擎，涵盖触觉模态，用于具身智能
-4. [PRISM: Polynomial Representations for Interaction-Structured Motor Control](/202607/31/2607.23473v1-prism-polynomial-representations-for-interaction-structured-motor-control)  
+   evidence：结合VLM推理与动作条件世界模型进行规划，与基于世界模型的机器人操作相关
+3. [WorldDiT: A Unified Diffusion Architecture for World and Action Modeling](/202608/01/2607.23909v1-worlddit-a-unified-diffusion-architecture-for-world-and-action-modeling)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向接触、滑移与柔顺等交互线索的机器人运动控制策略表示
-5. [LeapBot-WA: World-Anchor Action Models via Predictive Latent Alignments](/202607/31/2607.23969v2-leapbot-wa-world-anchor-action-models-via-predictive-latent-alignments)  
+   evidence：无需大型VLM主干的统一扩散世界与动作模型，面向机器人操作
+4. [S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information](/202608/01/2607.26047v1-s2a2-audio-visual-imitation-learning-for-manipulation-tasks-using-acoustic-spatial-information)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：潜空间世界动作模型，可迁移到触觉世界模型
-6. [DeVA: Decoupled Video-Action Model with physical guidance for robot policy learning](/202607/31/2607.24159v1-deva-decoupled-video-action-model-with-physical-guidance-for-robot-policy-learning)  
+   evidence：音频-视觉多模态模仿学习，与触觉-视觉融合类似
+5. [Speech2Grasp: Data-Efficient Transfer of Text-Conditioned Grasp Detection to Speech in Humanoid Robots](/202608/01/2607.26567v1-speech2grasp-data-efficient-transfer-of-text-conditioned-grasp-detection-to-speech-in-humanoid-robots)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：用于VLA策略学习的解耦视频-动作模型及物理引导
-7. [Hand-Object Interaction in the Age of Large Foundation Models:Reconstruction, Generation, and Embodied Transfer](/202607/31/2607.28394v1-hand-object-interaction-in-the-age-of-large-foundation-modelsreconstruction-generation-and-embodied-transfer)  
+   evidence：将文本条件模型高效迁移到新输入模态，可用于向VLA模型加入触觉
+6. [Cross-Embodiment Transfer via Behavior-Aligned Representations](/202608/01/2607.27549v1-cross-embodiment-transfer-via-behavior-aligned-representations)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：关于手物交互大模型的综述，涉及接触与具身迁移
-8. [FA-RDP: A Frequency-Adaptive Reactive Diffusion Policy for Contact-Rich Manipulation](/202607/31/2607.28596v1-fa-rdp-a-frequency-adaptive-reactive-diffusion-policy-for-contact-rich-manipulation)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：面向接触丰富操作、利用力反馈的自适应频率反应式扩散策略
+   evidence：研究VLA模型中的行为对齐表征，为触觉VLA的表征设计提供参考
 
 
 <div class="dpr-home-promo-card">
