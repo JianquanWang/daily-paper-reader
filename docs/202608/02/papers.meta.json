@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-02",
+  "date": "2026-08-02",
+  "generated_at": "2026-08-02T19:30:23",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/02/2607.22997v1-real2sim2real-for-vision-language-action-manipulation-an-amd-rocm-based-pipeline",
+      "section": "quick",
+      "title_en": "Real2Sim2Real for Vision-Language-Action Manipulation: An AMD ROCm-Based Pipeline",
+      "authors": "Qing Yang, Xun Wang, Ziguan Wang, Zhenjiang Li, Hongqiang Wang, Dongdong Weng",
+      "date": "2026-07-25",
+      "pdf": "https://arxiv.org/pdf/2607.22997v1",
+      "score": "6.0",
+      "evidence": "面向机器人操作的VLA模型训练与部署流水线，未含触觉但与触觉VLA直接相关",
+      "tldr": "物理AI将大规模VLA模型与具身智能体结合，是AI的下一个重大前沿，然而当前VLA训练与部署常被CUDA生态锁定。本文提出一套完全AMD加速的端到端技术栈，以开放ROCm软件栈统一数据中心训练芯片、Radeon PRO仿真GPU和Ryzen AI边缘设备。通过四个渐进演示：SmolVLA训练并部署到真实Franka机械臂完成操纵与语言选择任务，基于3DGS和Genesis的Real2Sim数据生成，以及四足和人形运动的大规模强化学习，全面验证跨硬件可移植性。实验在RDNA4和RDNA3.5上原生运行，表明VLA操纵可脱离CUDA依赖，并提供可复现的参考实现。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Physical AI -- the integration of large vision-language-action (VLA) models with embodied agents that act in the real world -- has emerged as the next major frontier for AI, echoed by industry leaders such as Jensen Huang (``the next big thing is Physical AI, AI with a body,'' GTC Paris, June 2025) and Dr. Lisa Su (`we're entering the world of Physical AI ... this is where AI enters the real world,' CES 2026). This paper presents an end-to-end, fully AMD-accelerated technology stack for embodied manipulation, spanning data-center training silicon, Radeon PRO simulation/rendering GPUs, and Ryzen AI edge compute, unified by the open ROCm software stack. We demonstrate that training and deploying VLA-based manipulation policies does not require a CUDA-locked ecosystem. Four progressive demonstrations are presented: (1) a Sim-to-Real manipulation pipeline trained with SmolVLA and deployed on a physical Franka arm; (2) a semantic, language-grounded object-selection task (`one-of-three'); (3) a Real2Sim synthetic-data generation pipeline that fuses 3D Gaussian Splatting (3DGS) reconstructions of real scenes with the Genesis physics engine; and (4) large-scale reinforcement learning for quadruped and humanoid locomotion benchmarked across multiple hardware platforms. All pipelines run natively on ROCm + PyTorch on RDNA4 (Radeon AI PRO R9700) and RDNA3.5 (Radeon PRO W7900) hardware and are reproducible on the free Radeon Cloud Platform.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/02/2607.25918v1-dc-wam-dynamic-centric-visual-supervision-and-reasoning-for-world-action-models",
+      "section": "quick",
+      "title_en": "DC-WAM: Dynamic-Centric Visual Supervision and Reasoning for World-Action Models",
+      "authors": "Haoyuan Ji, Lingxiang Fan, Shang Su, Yinqiao Lu, Mengkai Shi, Jun Gao, Shuo Feng",
+      "date": "2026-07-28",
+      "pdf": "https://arxiv.org/pdf/2607.25918v1",
+      "score": "6.0",
+      "evidence": "面向机器人控制的世界-动作模型，采用动态中心视觉监督，可迁移至触觉世界模型",
+      "tldr": "世界动作模型利用未来视觉预测提升机器人策略，但现有RGB重建过度关注纹理光照等弱相关外观信息。DC-WAM提出动态中心框架：监督端用时间差分流匹配与轨迹引导权重强化交互区域的视觉动态；推理端DynaRoute将token级动态相关性转为注意力偏置。实验表明在光照、物体外观和背景扰动下显著提升策略性能且无需额外在线输入。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "World-Action Models (WAMs) augment robot policies with future visual prediction, but it remains unclear what the visual modality should learn for control. While photorealistic future prediction provides dense supervision, it also incurs substantial computation and can allocate capacity to texture, illumination, and background variations that are only weakly related to action selection. Recent efficient WAM variants suggest that the main benefit of the video branch may not lie in the rendered future itself, but in the control-relevant visual representations induced during training. In this work, we revisit future video prediction from a dynamic-centric perspective and ask whether an existing RGB-based WAM can be redirected from appearance-dominated reconstruction toward interaction-induced visual dynamics without introducing additional modality-specific predictions or online inputs at deployment. We propose DC-WAM, a dynamic-centric WAM framework that redistributes supervision and computation in the RGB video branch. At the supervision level, DC-WAM combines temporal-difference flow matching with trajectory-guided weighting, emphasizing dense temporal changes and localized regions where the gripper, manipulated objects, and contact areas move. At the reasoning level, DynaRoute predicts token-wise dynamic relevance and converts it into an attention bias, guiding the model toward control-relevant future tokens. Experiments in simulation and on real-world manipulation tasks show that DC-WAM consistently improves policy performance, especially under out-of-distribution perturbations in lighting, object appearance, and background texture.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/02/2607.26991v2-rl2-vla-adaptive-rl-latent-compositional-steering-with-test-time-scaling-for-vision-language-action-models",
+      "section": "quick",
+      "title_en": "RL$^2$-VLA: Adaptive RL Latent Compositional Steering with Test-Time Scaling for Vision-Language-Action Models",
+      "authors": "Derek Ming Siang Tan, Shailesh Shailesh, Srikrishna Iyer, William Wei Jie Teo, Yuanliang Ju, Qiao Gu, Guillaume Sartoretti",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.26991v2",
+      "score": "6.0",
+      "evidence": "通过强化学习对VLA潜变量进行测试时自适应引导与扩展，方法可迁移到触觉VLA",
+      "tldr": "视觉-语言-动作模型在困难任务与域外场景中性能退化，现有测试时干预方法动作样本趋同且干预策略固定。本文提出RL²，基于离线强化学习对VLA潜在表示进行自适应组合引导，仅在预测失败时激活以平衡成功行为与动作多样性。在SIMPLER与PolaRiS基准上域外设置成功率最高提升17.3%，真实世界实验验证有效，为VLA部署提供模块化推理增强框架。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Despite the impressive visuomotor capabilities enabled by Vision-Language-Action (VLA) models, their performance often degrades on challenging and out-of-domain tasks. Recent test-time steering and scaling methods improve performance without extensive data collection and retraining, but action samples often remain concentrated around similar behaviors and therefore inherit correlated failure modes. Moreover, existing methods apply the same intervention strategy at every timestep, regardless of whether the base policy is already likely to succeed. To address these limitations, we introduce $RL^2$, an adaptive inference-time steering framework that leverages Reinforcement Learning on VLA Latents. First, we train a lightweight offline RL policy conditioned on expressive latents extracted from the VLA action expert and compose its flow velocity with that of the frozen VLA during inference. This compositional steering strategy combines the behavioral priors of large-scale imitation learning with the action diversity induced by offline RL beyond dominant demonstration modes. We further discover that inference-time steering follows fundamentally different scaling laws under success and failure states, revealing that action diversity is most beneficial when the base VLA is likely to fail, but can unnecessarily perturb already-accurate actions when success is likely. Building on this insight, $RL^2$ activates compositional steering only when failure is predicted. Across the SIMPLER and PolaRiS benchmarks, $RL^2$ improves success rates by up to +17.3% in out-of-domain settings, while ablations and scaling studies demonstrate the importance of latent representations and RL training. Finally, real-world experiments demonstrate that these gains transfer beyond simulation, establishing $RL^2$ as a practical and modular steering framework for VLA deployment.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
