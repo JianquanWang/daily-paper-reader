@@ -6,32 +6,38 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-02
-- 运行时间：2026-08-02 19:30:17 UTC
+- 最新运行日期：2026-08-03
+- 运行时间：2026-08-03 19:51:35 UTC
 - 运行状态：成功
-- 本次总论文数：3
+- 本次总论文数：5
 - 精读区：0
-- 速读区：3
+- 速读区：5
 
 ### 今日简报（AI）
-今日共速读3篇视觉-语言-动作（VLA）模型相关论文，均获6.0/10分，暂无精读。  
-值得关注的方向：基于AMD ROCm的Real2Sim2Real仿真管线，以及动态中心视觉监督与RL潜变量组合的测试时扩展方法。  
-若想入门VLA操作，建议优先了解仿真到真实迁移与动态推理结合的基础概念，后续再深入实现。
-- 详情：[/202608/02/README](/202608/02/README)
+今日速读5篇论文，聚焦机器人触觉与VLA模型。  
+最值得关注触觉再现方案TacPrint和世界模型增强的WCM强化学习。  
+下一步可精读这两篇，并留意TurboVLA的实时性优化。
+- 详情：[/202608/03/README](/202608/03/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Real2Sim2Real for Vision-Language-Action Manipulation: An AMD ROCm-Based Pipeline](/202608/02/2607.22997v1-real2sim2real-for-vision-language-action-manipulation-an-amd-rocm-based-pipeline)  
+1. [TacPrint: A Wearable Fingertip Tactile Sensor for Human-to-Robot Contact Reproduction](/202608/03/2607.29231v1-tacprint-a-wearable-fingertip-tactile-sensor-for-human-to-robot-contact-reproduction)  
+   标签：评分：7.0/10、query:tactile-vla
+   evidence：可穿戴指尖触觉传感器，通过真-仿-真管线估计接触深度，用于机器人触觉感知
+2. [WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning](/202608/03/2607.29613v1-wcm-a-world-critic-model-for-vision-language-action-reinforcement-learning)  
+   标签：评分：7.0/10、query:tactile-vla
+   evidence：面向VLA强化学习的世界评论家模型，未涉及触觉
+3. [TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM](/202608/03/2607.27205v1-turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向机器人操作的VLA模型训练与部署流水线，未含触觉但与触觉VLA直接相关
-2. [DC-WAM: Dynamic-Centric Visual Supervision and Reasoning for World-Action Models](/202608/02/2607.25918v1-dc-wam-dynamic-centric-visual-supervision-and-reasoning-for-world-action-models)  
+   evidence：高效的实时VLA模型，重构V-L-A路径，适用于触觉VLA设计
+4. [RoboBRIDGE: A Modular Framework for Bridging Policies to Robust Real-World Robotic Agents](/202608/03/2607.27881v1-robobridge-a-modular-framework-for-bridging-policies-to-robust-real-world-robotic-agents)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向机器人控制的世界-动作模型，采用动态中心视觉监督，可迁移至触觉世界模型
-3. [RL$^2$-VLA: Adaptive RL Latent Compositional Steering with Test-Time Scaling for Vision-Language-Action Models](/202608/02/2607.26991v2-rl2-vla-adaptive-rl-latent-compositional-steering-with-test-time-scaling-for-vision-language-action-models)  
+   evidence：面向机器人操作的VLA模型，未涉及触觉
+5. [Safe Vision Language Action Models via Barrier Enhanced Flow Matching](/202608/03/2607.29569v1-safe-vision-language-action-models-via-barrier-enhanced-flow-matching)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：通过强化学习对VLA潜变量进行测试时自适应引导与扩展，方法可迁移到触觉VLA
+   evidence：为视觉语言行动模型提供屏障增强流匹配安全框架，可应用于触觉VLA以确保机器人控制安全。
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,223 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T19:48:06.285039+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.29231v1",
+      "source": "arxiv",
+      "title": "TacPrint: A Wearable Fingertip Tactile Sensor for Human-to-Robot Contact Reproduction",
+      "abstract": "Human-centric data collection is emerging as a significant paradigm for robot skill acquisition, but seamlessly integrating low-cost, scalable tactile sensing systems that capture fine-grained fingertip interactions without compromising natural operation remains a key challenge. This reduces the reliability of human-to-robot transfer in contact-rich tasks. In this work, we present TacPrint, a wearable fingertip tactile sensor, where protrusions on the inner surface of the silicone skin are aligned one-to-one with 24 capacitive taxels to enable localized capacitive responses. A real-to-sim-to-real pipeline estimates a 35 $\\times$ 26 contact-depth map from 24-channel capacitive signals. Against simulation-generated labels, the model achieved a contact-region RMSE of 0.223 $\\pm$ 0.161 mm, a weighted-centroid error of 1.213 $\\pm$ 2.379 pixels, and an IoU of 0.829 $\\pm$ 0.169. With measured capacitive inputs, the network-predicted depth evaluated at the guide-calibrated contact center showed a mean absolute error of 0.085 $\\pm$ 0.057 mm across all 40 controlled trials, while the mean contact-position error was 0.250 $\\pm$ 0.208 mm across the 37 trials whose reference contact regions were not truncated by the sensing boundary. In human-to-robot replay, tactile-guided compensation increased grasping and wiping success rates from 0% to 91.67% and 90%, respectively. In closed-loop grasping, dense-depth feedback achieved success rates of 87.5% over all tested positions and 85% under edge-contact conditions, compared with 67.5% and 45% for raw-taxel feedback.",
+      "authors": [
+        "Yongxi Liu",
+        "Chaofan Zhang",
+        "Xingyu Zhang",
+        "Xiangyin Bao",
+        "Boyue Zhang",
+        "Shaowei Cui",
+        "Shuo Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-31T10:04:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.29231v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Wearable fingertip tactile sensor with real-to-sim-to-real contact depth estimation for robot touch sensing",
+      "llm_evidence_cn": "可穿戴指尖触觉传感器，通过真-仿-真管线估计接触深度，用于机器人触觉感知",
+      "llm_evidence": "可穿戴指尖触觉传感器，通过真-仿-真管线估计接触深度，用于机器人触觉感知",
+      "canonical_evidence": "可穿戴指尖触觉传感器，通过真-仿-真管线估计接触深度，用于机器人触觉感知",
+      "llm_tldr_en": "Presents TacPrint, a wearable fingertip tactile sensor with 24 capacitive taxels and a real-to-sim-to-real pipeline that estimates a 35x26 contact-depth map from 24-channel signals, enabling human-to-robot contact reproduction.",
+      "llm_tldr_cn": "针对人机触觉数据采集中低成本、可扩展且不干扰自然操作的指尖触觉传感难题，提出可穿戴指尖触觉传感器TacPrint，内表面突起与24个电容式taxels一一对应，并通过真-仿-真管线从24通道电容信号估计35×26接触深度图。该研究为机器人的触觉感知与接触复制提供了低成本传感方案，可作为触觉基础模型和触觉感知应用的重要支撑。",
+      "llm_tldr": "针对人机触觉数据采集中低成本、可扩展且不干扰自然操作的指尖触觉传感难题，提出可穿戴指尖触觉传感器TacPrint，内表面突起与24个电容式taxels一一对应，并通过真-仿-真管线从24通道电容信号估计35×26接触深度图。该研究为机器人的触觉感知与接触复制提供了低成本传感方案，可作为触觉基础模型和触觉感知应用的重要支撑。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model and its applications in robot touch sensing",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.27205v1",
+      "source": "arxiv",
+      "title": "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM",
+      "abstract": "Vision-language-action (VLA) models commonly adopt an LLM-centric $V \\to L \\to A$ pathway, where visual observations are projected into the representation space of a large language model before being decoded into robot actions. Although effective, this design incurs substantial computation and memory overhead at every policy invocation. In this work, we introduce TurboVLA, a new VLA paradigm that reformulates the conventional $V \\to L \\to A$ pathway as a direct $V + L \\to A$ mapping. Instead of using a large language model as the central interface between perception and action, TurboVLA independently encodes visual observations and language instructions, directly exchanges information between them through lightweight bidirectional vision-language interaction, and predicts continuous action chunks with a compact decoder. This simple design constructs task-conditioned representations directly from visual and linguistic features, significantly reducing the computational and memory costs of VLA inference. On LIBERO, TurboVLA achieves 97.7% average success with only 0.2B parameters, 31.2 ms inference latency, and 0.9 GB inference VRAM on a consumer-grade RTX 4090, matching or outperforming substantially larger VLA policies. These results establish TurboVLA as a simple and effective alternative to the prevailing LLM-centric VLA paradigm, offering a new perspective on how vision, language, and action can be connected for efficient robotic manipulation. Code is available at https://github.com/H-EmbodVis/TurboVLA.",
+      "authors": [
+        "Hengyi Xie",
+        "Chenfei Yao",
+        "Xianjin Wu",
+        "Xuanyang Xi",
+        "Yiping Tang",
+        "Di Xu",
+        "Yingying Zhu",
+        "Dingkang Liang",
+        "Xiang Bai",
+        "Han Ding"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-29T17:59:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.27205v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "efficient real-time VLA model reformulating V-L-A pathway, applicable to tactile VLA design",
+      "llm_evidence_cn": "高效的实时VLA模型，重构V-L-A路径，适用于触觉VLA设计",
+      "llm_evidence": "高效的实时VLA模型，重构V-L-A路径，适用于触觉VLA设计",
+      "canonical_evidence": "高效的实时VLA模型，重构V-L-A路径，适用于触觉VLA设计",
+      "llm_tldr_en": "TurboVLA reformulates VLA as a direct V+L to A mapping without an LLM intermediary, achieving real-time 32Hz inference with <1GB VRAM on an RTX 4090.",
+      "llm_tldr_cn": "传统VLA模型采用LLM中心的V到L到A路径，计算和内存开销大。TurboVLA将其重构为直接的V+L到A映射，独立编码视觉和语言指令，通过轻量双向视觉-语言信息交换融合特征，无需大语言模型作为中央接口。实验表明该模型可在RTX 4090上以32Hz实时运行，显存占用低于1GB。该工作为构建高效实时的触觉VLA系统提供了重要的架构参考。",
+      "llm_tldr": "传统VLA模型采用LLM中心的V到L到A路径，计算和内存开销大。TurboVLA将其重构为直接的V+L到A映射，独立编码视觉和语言指令，通过轻量双向视觉-语言信息交换融合特征，无需大语言模型作为中央接口。实验表明该模型可在RTX 4090上以32Hz实时运行，显存占用低于1GB。该工作为构建高效实时的触觉VLA系统提供了重要的架构参考。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.29613v1",
+      "source": "arxiv",
+      "title": "WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning",
+      "abstract": "Reinforcement learning (RL) post-training of Vision-Language-Action (VLA) models has shown strong promise for robotic manipulation. Among RL methods, critic-based approaches rely on a value estimator that predominantly operates on single-frame observations or single-frame VLM backbone latents, which is a fundamental mismatch with the partially observable nature of robot control. A naive approach to incorporate observation history into the critic incurs exponential complexity with high-dimensional visual space, and still fails because pure scalar-return regression provides insufficient supervision for learning cross-temporal dynamics. We identify the root cause as a state approximation problem: without an explicit world modeling objective, the critic's representation cannot capture the temporal structure needed for accurate value estimation. To address this, we propose the World Critic Model (WCM), built on a lightweight LeJEPA architecture; WCM jointly predicts future latent state and estimates values, such that the critic's representation is explicitly trained to capture temporal dynamics rather than merely regress scalar returns. WCM integrates seamlessly into both on-policy and off-policy training pipelines and is compatible with state-of-the-art VLA backbones including Pi0, Pi0.5, and OpenVLA-OFT. Extensive experiments on 149 tasks across four benchmarks demonstrate that WCM consistently achieves state-of-the-art performance in both in-distribution and out-of-distribution settings, with particularly strong generalization gains. We further validate WCM on seven real-world manipulation tasks using OpenVLA-OFT and Pi0.5 with off-policy RL, confirming stable deployment across diverse settings.",
+      "authors": [
+        "Senyu Fei",
+        "Xiaopeng Yu",
+        "Siyin Wang",
+        "Xianzhong Zhao",
+        "Jingjing Gong",
+        "Xipeng Qiu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-07-31T16:48:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.29613v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "world critic model for VLA reinforcement learning, no tactile",
+      "llm_evidence_cn": "面向VLA强化学习的世界评论家模型，未涉及触觉",
+      "llm_evidence": "面向VLA强化学习的世界评论家模型，未涉及触觉",
+      "canonical_evidence": "面向VLA强化学习的世界评论家模型，未涉及触觉",
+      "llm_tldr_en": "WCM identifies the root cause of critic failures in VLA RL as state approximation without world modeling, and proposes an explicit world modeling objective to learn cross-temporal dynamics. Improves critic-based RL post-training.",
+      "llm_tldr_cn": "针对基于评论家的VLA强化学习仅用单帧观测导致与部分可观察控制不匹配的问题，提出WCM世界评论家模型。它将根因归结为缺乏显式世界建模目标下的状态近似问题，并通过引入世界建模目标来学习跨时间动态，避免了对高维视觉历史的朴素展开。该方法改善了VLA后训练中评论家的价值估计与策略学习。该工作不涉及触觉感知。",
+      "llm_tldr": "针对基于评论家的VLA强化学习仅用单帧观测导致与部分可观察控制不匹配的问题，提出WCM世界评论家模型。它将根因归结为缺乏显式世界建模目标下的状态近似问题，并通过引入世界建模目标来学习跨时间动态，避免了对高维视觉历史的朴素展开。该方法改善了VLA后训练中评论家的价值估计与策略学习。该工作不涉及触觉感知。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.27881v1",
+      "source": "arxiv",
+      "title": "RoboBRIDGE: A Modular Framework for Bridging Policies to Robust Real-World Robotic Agents",
+      "abstract": "Vision-Language-Action (VLA) models have attracted growing interest as a scalable approach to robotic manipulation. While these models are effective action predictors, deploying them as robotic agents exposes critical gaps: no mechanism for failure recovery, inconsistent execution over long horizons, and limited robustness to shifts in observations, tasks, or embodiments. Existing solutions address these limitations individually through model retraining or environment-specific modules, yet what is needed is a general framework that systematically transforms a pretrained VLA into a robotic agent. We present RoboBRIDGE, a modular framework that provides an orchestration layer over five coordinated modules, namely Monitor, Perceptor, Planner, Controller, and Robot Interface, to compose robust robotic agents from off-the-shelf components, including pretrained VLAs. The Monitor pairs rapid failure detection with hierarchical recovery to correct errors before they cascade. When the environment diverges from the current plan, the Planner triggers replanning while the Perceptor updates scene understanding asynchronously, avoiding execution stalls. Within the Controller, primitive skill fine-tuning factors manipulation into domain-invariant primitives with dedicated LoRA adapters, reducing sensitivity to domain shifts when a VLA is used. Across LIBERO, RoboCasa, and real-world case studies spanning multiple robot platforms and VLA backbones, RoboBRIDGE consistently outperforms both standalone policies and prior augmented VLA deployments. These results suggest that reliable robotic agency does not arise from scaling action predictors alone, but from structured orchestration around them.",
+      "authors": [
+        "Sihyung Yoon",
+        "Minjong Yoo",
+        "Sanghyun Ahn",
+        "Seojeong Choi",
+        "Honguk Woo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-07-30T08:55:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.27881v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLA models for robotic manipulation, modular framework, no tactile",
+      "llm_evidence_cn": "面向机器人操作的VLA模型，未涉及触觉",
+      "llm_evidence": "面向机器人操作的VLA模型，未涉及触觉",
+      "canonical_evidence": "面向机器人操作的VLA模型，未涉及触觉",
+      "llm_tldr_en": "RoboBRIDGE provides a modular orchestration layer over five coordinated modules to transform pretrained VLA policies into robust real-world robotic agents. Addresses failure recovery, long-horizon consistency, robustness. No tactile.",
+      "llm_tldr_cn": "针对预训练VLA模型部署到真实机器人时面临失败恢复缺失、长程执行不稳定和对观测/任务/本体变化鲁棒性差的问题，提出RoboBRIDGE模块化框架。该框架通过监控、感知、规划等五个协调模块为VLA策略提供编排层，将其系统性地转化为鲁棒的真实世界机器人智能体。实验表明该方法有效弥补这些部署缺口。该工作不涉及触觉感知。",
+      "llm_tldr": "针对预训练VLA模型部署到真实机器人时面临失败恢复缺失、长程执行不稳定和对观测/任务/本体变化鲁棒性差的问题，提出RoboBRIDGE模块化框架。该框架通过监控、感知、规划等五个协调模块为VLA策略提供编排层，将其系统性地转化为鲁棒的真实世界机器人智能体。实验表明该方法有效弥补这些部署缺口。该工作不涉及触觉感知。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.29569v1",
+      "source": "arxiv",
+      "title": "Safe Vision Language Action Models via Barrier Enhanced Flow Matching",
+      "abstract": "This article presents a modular inference framework that integrates Flow Matching generative models with formal Control Barrier Function (CBF) safety guarantees. Unlike existing methods that apply external safety filters to a model's final output, our approach modifies the Flow Matching denoising process within the model to inherently generate safe trajectories. By employing a smooth Log-Sum-Exponential aggregate barrier, we enforce safety over entire action chunks. This aggregate barrier ensures a minimal increase in computational overhead and does not alter the semantic intent of the model. We show that, within the proposed framework, the 2-Wasserstein distance between the generated distribution and the target distribution remains bounded. Our method eliminates the need for safety-specific datasets or costly model retraining, providing a versatile solution for safe inference. We validate the approach on two robotic manipulation platforms and a 2D navigation benchmark, verifying that our framework achieves reliable safety without degrading the success rate of the model.",
+      "authors": [
+        "Kasra Sinaei",
+        "Hung-Chieh Wu",
+        "Donald Ebeigbe"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "published": "2026-07-31T15:56:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.29569v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Provides a safety framework for Vision-Language-Action models via barrier-enhanced flow matching, applicable to tactile VLA for safe robot control.",
+      "llm_evidence_cn": "为视觉语言行动模型提供屏障增强流匹配安全框架，可应用于触觉VLA以确保机器人控制安全。",
+      "llm_evidence": "为视觉语言行动模型提供屏障增强流匹配安全框架，可应用于触觉VLA以确保机器人控制安全。",
+      "canonical_evidence": "为视觉语言行动模型提供屏障增强流匹配安全框架，可应用于触觉VLA以确保机器人控制安全。",
+      "llm_tldr_en": "Introduces a modular inference framework integrating flow matching with control barrier functions to make Vision-Language-Action models inherently generate safe trajectories, enforcing safety over action chunks with minimal overhead and bounded distributional shift.",
+      "llm_tldr_cn": "视觉语言行动模型可能生成不安全轨迹，常规外部安全过滤器易破坏模型语义且增加开销。本文提出将流匹配去噪过程与控制屏障函数融合的模块化框架，使模型内生生成为安全轨迹，并用光滑聚合障壁约束整段动作块。理论证明生成分布与目标分布的二阶Wasserstein距离有界。该方法在计算开销极小的同时保证安全，可适用于触觉VLA等机器人动作生成模型。",
+      "llm_tldr": "视觉语言行动模型可能生成不安全轨迹，常规外部安全过滤器易破坏模型语义且增加开销。本文提出将流匹配去噪过程与控制屏障函数融合的模块化框架，使模型内生生成为安全轨迹，并用光滑聚合障壁约束整段动作块。理论证明生成分布与目标分布的二阶Wasserstein距离有界。该方法在计算开销极小的同时保证安全，可适用于触觉VLA等机器人动作生成模型。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
