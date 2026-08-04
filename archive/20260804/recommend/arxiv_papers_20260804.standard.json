@@ -1,0 +1,262 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-04T20:02:52.840498+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 3,
+    "deep_cap": 6,
+    "deep_selected": 3,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2608.00547v1",
+      "source": "arxiv",
+      "title": "Disentangling Visuo-Tactile Foresight: Oracle-Guided Interface Discovery for World Action Models",
+      "abstract": "Contact-rich manipulation remains challenging because successful control depends on physical interaction cues that are often weakly observable from vision alone. Recent tactile world action models jointly model future visual observations and tactile signals to guide action generation, but how such futures should be structured for effective use by the action expert remains underexplored. Directly studying this question with learned world action models is difficult because end-to-end behavior entangles physically invalid visual futures, unreliable predictions, inaccurate or cross-modally inconsistent tactile forecasts, and an unreadable future-to-action interface. To make this interface independently studyable, we introduce Oracle Visuo-Tactile Foresight (OVTF), a controlled framework that supplies paired RGB and tactile futures from successful trajectories verified in simulation. By fixing the future provider, OVTF isolates the interface and asks a cleaner question: if the future is successful and physically executable, what representation allows the action expert to absorb its benefit? Within OVTF, we propose Asymmetric Phase-Local Future Memory (AFM), in which visual memory reads future vision, each tactile memory jointly attends to its own tactile stream and phase-aligned future vision, and cross-tactile access is blocked. We compare AFM with Modality-Isolated Future Memory (IFM), which removes visual-to-tactile access and processes each future modality independently. Across seven tasks on the UniVTAC simulation benchmark, AFM achieves 32.0% average success, compared with 23.7% for IFM and 14.9% for UniVTAC-ACT. This controlled comparison shows that selective phase-aligned visual-tactile routing provides a more actionable future-to-action bridge than complete modality isolation.",
+      "authors": [
+        "Zihang Yao",
+        "Chaoyue Ding",
+        "Yingying Yu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-01T09:04:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.00547v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Visuo-tactile world action models; studies interface between future tactile/visual predictions and action expert",
+      "llm_evidence_cn": "视觉-触觉世界动作模型，研究未来触觉/视觉预测与动作专家之间的接口",
+      "llm_evidence": "视觉-触觉世界动作模型，研究未来触觉/视觉预测与动作专家之间的接口",
+      "canonical_evidence": "视觉-触觉世界动作模型，研究未来触觉/视觉预测与动作专家之间的接口",
+      "llm_tldr_en": "This paper introduces an oracle-guided framework to disentangle visuo-tactile world action models, studying how to structure future visual and tactile predictions for effective action generation in contact-rich manipulation.",
+      "llm_tldr_cn": "接触丰富的操作中，仅靠视觉难以观测物理交互线索，现有触觉世界动作模型联合预测未来视觉与触觉信号来指导动作生成，但这些未来的结构如何被动作专家有效使用仍未解决。本文提出Oracle引导的接口发现框架，将世界模型的未来预测与动作生成接口解耦，从而独立地研究并设计可读的触觉-视觉未来表示。该方法有助于提升接触丰富操作中世界动作模型的可解释性与策略性能。",
+      "llm_tldr": "接触丰富的操作中，仅靠视觉难以观测物理交互线索，现有触觉世界动作模型联合预测未来视觉与触觉信号来指导动作生成，但这些未来的结构如何被动作专家有效使用仍未解决。本文提出Oracle引导的接口发现框架，将世界模型的未来预测与动作生成接口解耦，从而独立地研究并设计可读的触觉-视觉未来表示。该方法有助于提升接触丰富操作中世界动作模型的可解释性与策略性能。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.01824v1",
+      "source": "arxiv",
+      "title": "ReTouch: Empowering Contact-Rich Dexterous Manipulation with Online-Refined Tactile Prediction",
+      "abstract": "Fusing tactile signals has proven effective for contact-rich manipulation, enabling robots to perceive contact states and adapt to rapidly changing physical interactions. Yet effectively integrating tactile feedback into dexterous manipulation remains underexplored. In this work, we introduce ReTouch, a vision-language-action model (VLA) that supports contact-rich dexterous manipulation through tactile predictions continually refined online using execution-time feedback. ReTouch builds on two main innovations for tactile representation and closed-loop action generation. First, its Tactile-Patch Encoder represents tactile observations as structured tactile patch features that preserve finger identity and local contact structure, providing contact cues for fine-grained dexterous control. Second, its high-frequency action module jointly predicts future tactile states and action chunks and refines both using incoming tactile feedback during execution. This closed-loop refinement keeps tactile predictions aligned with evolving physical interactions, enabling responsive action correction and improving robustness to contact changes and execution errors. We further introduce XHT-Dataset, comprising 900 real-world demonstrations across seven contact-rich tasks collected on an XHand--UR7e platform, and evaluate ReTouch through closed-loop real-robot experiments. ReTouch surpasses the strongest baseline by 18.4 and 23.8 percentage points in average success rate under standard and challenging conditions, respectively, demonstrating its effectiveness and robustness.",
+      "authors": [
+        "Shiqi Zhang",
+        "Xin Zhang",
+        "Yedong Shen",
+        "Jiajun Deng",
+        "Yuxuan Gao",
+        "Sha Zhang",
+        "Yuan Zhang",
+        "Kaixue Long",
+        "Jiajia Wu",
+        "Jia Pan",
+        "Yao Li",
+        "Yanyong Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T07:31:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.01824v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "tactile VLA with online-refined prediction for contact-rich manipulation",
+      "llm_evidence_cn": "基于在线精炼触觉预测的触觉VLA用于接触丰富操作",
+      "llm_evidence": "基于在线精炼触觉预测的触觉VLA用于接触丰富操作",
+      "canonical_evidence": "基于在线精炼触觉预测的触觉VLA用于接触丰富操作",
+      "llm_tldr_en": "ReTouch is a VLA for dexterous manipulation that uses a Tactile-Patch Encoder and online-refined tactile prediction from execution-time feedback, improving contact-rich task performance.",
+      "llm_tldr_cn": "针对触觉反馈在灵巧操作中集成不足的问题，论文提出ReTouch视觉-语言-动作模型。该模型通过触觉补丁编码器保留手指身份与局部接触结构，并利用在线执行反馈持续精炼触觉预测，实现闭环动作生成。实验显示该方法能有效应对快速变化的物理交互，提升接触丰富灵巧操作的鲁棒性。与已有方法相比，ReTouch更充分地利用了当前执行过程中的触觉反馈信息。这为触觉VLA在精细操作中的应用提供了有力支撑。",
+      "llm_tldr": "针对触觉反馈在灵巧操作中集成不足的问题，论文提出ReTouch视觉-语言-动作模型。该模型通过触觉补丁编码器保留手指身份与局部接触结构，并利用在线执行反馈持续精炼触觉预测，实现闭环动作生成。实验显示该方法能有效应对快速变化的物理交互，提升接触丰富灵巧操作的鲁棒性。与已有方法相比，ReTouch更充分地利用了当前执行过程中的触觉反馈信息。这为触觉VLA在精细操作中的应用提供了有力支撑。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.01102v1",
+      "source": "arxiv",
+      "title": "CAAT: Contact-Aware Attention Scaling and Tactile Masking for Data-Efficient Contact-Rich Manipulation",
+      "abstract": "In contact-rich manipulation, visual observations primarily guide motion in free space, whereas tactile observations become particularly informative during contact. However, standard Transformer-based visuo-tactile policies typically rely on either token concatenation or learnable gating. These approaches lack explicit contact-aware priors, making it difficult to efficiently learn effective cross-modal representations from demonstrations. To address this limitation, we propose CAAT, a lightweight contact-aware framework that explicitly incorporates contact priors through attention scaling and dynamic tactile masking. Specifically, CAAT emphasizes visual information before contact and tactile information during contact. It also suppresses static background tokens by comparing the current tactile observation with a non-contact reference. CAAT can be integrated into commonly used Transformer-based policies without modifying their action decoders. In simulation, integrating CAAT with ACT improves the average success rate by 18.0 percentage points over direct visuo-tactile fusion and by 10.0 percentage points over gated fusion. In real-world experiments using a visuo-tactile UMI platform, CAAT achieves an average success rate of 60.0% across ACT, Diffusion Policy, and $π_0$, outperforming the strongest baseline by an average of 21.1 percentage points. These results demonstrate that explicit contact priors and dynamic tactile masking are effective in improving visuo-tactile policy learning and task performance of diverse policy architectures. https://mrjiangjm.github.io/caat/",
+      "authors": [
+        "Jiaming Jiang",
+        "Yuzhe Huang",
+        "Hao Liang",
+        "Pei Lin",
+        "Shengcheng Luo",
+        "Fanrong Dong",
+        "Jiaping Wu",
+        "Chenxi Xiao",
+        "Wanlin Li",
+        "Ziyuan Jiao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-02T09:04:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.01102v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Visuo-tactile policy with contact-aware attention scaling and tactile masking for contact-rich manipulation",
+      "llm_evidence_cn": "面向接触丰富操作的视觉-触觉策略，采用接触感知注意力缩放和触觉掩蔽",
+      "llm_evidence": "面向接触丰富操作的视觉-触觉策略，采用接触感知注意力缩放和触觉掩蔽",
+      "canonical_evidence": "面向接触丰富操作的视觉-触觉策略，采用接触感知注意力缩放和触觉掩蔽",
+      "llm_tldr_en": "CAAT proposes a lightweight contact-aware framework that scales attention and masks tactile tokens based on contact phase, improving data efficiency of visuo-tactile policies in contact-rich manipulation.",
+      "llm_tldr_cn": "在接触丰富的操作中，视觉在自由空间主导而触觉在接触时更关键，但标准Transformer策略缺乏接触先验，难以高效学习跨模态表示。CAAT提出轻量级接触感知框架，通过注意力缩放和动态触觉掩蔽在接触前强调视觉、接触时强调触觉，显式注入接触先验。该方法在演示数据集上提升了数据效率和操作成功率，为多模态触觉策略提供了结构化先验思路。",
+      "llm_tldr": "在接触丰富的操作中，视觉在自由空间主导而触觉在接触时更关键，但标准Transformer策略缺乏接触先验，难以高效学习跨模态表示。CAAT提出轻量级接触感知框架，通过注意力缩放和动态触觉掩蔽在接触前强调视觉、接触时强调触觉，显式注入接触先验。该方法在演示数据集上提升了数据效率和操作成功率，为多模态触觉策略提供了结构化先验思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.01733v1",
+      "source": "arxiv",
+      "title": "TWINS: A Tactile Wearable Isomorphic Arm Networked System for Contact-Rich Manipulation Learning",
+      "abstract": "Recent advances in robot learning for manipulation have increased the importance of collecting real-world demonstration data. However, existing robotic systems primarily focus on end-effector manipulation, making it difficult to teach and execute manipulation tasks involving body-surface contact with the arms and chest. This paper presents TWINS (Tactile Wearable Isomorphic Arm Networked System), a robotic system for manipulation involving body-surface contact. TWINS consists of a Wearable Dual-Arm Device, which is worn by the operator, and an Isomorphic Robot with the same joint configuration and external dimensions. Distributed tactile sensors embedded in the chest and arms enable the measurement of body-surface contact synchronized with joint motion. Using the Wearable Dual-Arm Device, we collected demonstrations for four manipulation tasks involving body-surface contact. We then trained imitation learning policies using the collected demonstrations and deployed them on the Isomorphic Robot, enabling manipulation guided by body-surface tactile observations. Experimental results demonstrate that TWINS provides a unified robotic system for demonstration, learning, and execution of manipulation involving body-surface contact. https://mmurooka.github.io/twins-project-page/",
+      "authors": [
+        "Takahide Kitamura",
+        "Masaki Murooka",
+        "Natsuki Yamanobe",
+        "Yukiyasu Domae"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T05:56:51+00:00",
+      "link": "https://arxiv.org/pdf/2608.01733v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Tactile wearable isomorphic arm networked system for collecting body-surface contact demonstration data",
+      "llm_evidence_cn": "用于采集身体表面接触演示数据的触觉可穿戴同构臂网络系统",
+      "llm_evidence": "用于采集身体表面接触演示数据的触觉可穿戴同构臂网络系统",
+      "canonical_evidence": "用于采集身体表面接触演示数据的触觉可穿戴同构臂网络系统",
+      "llm_tldr_en": "TWINS presents a wearable robot system with distributed tactile sensors and an isomorphic robot, enabling collection and execution of contact-rich manipulation demonstrations involving arm and chest contacts.",
+      "llm_tldr_cn": "现有机器人系统主要面向末端执行器操作，难以采集和复现涉及手臂与胸部身体表面接触的操作。TWINS提出由操作者穿戴的双臂设备和同构机器人组成平台，在手臂与胸部嵌入分布式触觉传感器，实现身体表面接触的同步测量与示教复现。该系统能采集高质量的接触丰富演示数据，为触觉反馈机器人学习提供了硬件基础设施。",
+      "llm_tldr": "现有机器人系统主要面向末端执行器操作，难以采集和复现涉及手臂与胸部身体表面接触的操作。TWINS提出由操作者穿戴的双臂设备和同构机器人组成平台，在手臂与胸部嵌入分布式触觉传感器，实现身体表面接触的同步测量与示教复现。该系统能采集高质量的接触丰富演示数据，为触觉反馈机器人学习提供了硬件基础设施。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.00725v1",
+      "source": "arxiv",
+      "title": "SelfWAM: A Self-Grounded Unified World Action Model for Fast Robot Control",
+      "abstract": "World Action Models (WAMs) improve robot policy learning by jointly modeling actions and future observations. However, conditioning future prediction only on the task prompt and observation context risks capturing generic task progression rather than the action-specific consequences of the executed action. We introduce SelfWAM, a unified self-grounded WAM built on a modality-specialized Mixture-of-Transformers (MoT) architecture that jointly predicts actions, action-conditioned future RGB frames, and robot self-masks, thereby grounding future prediction in the robot's visible body and its action-induced motion. During joint training, SelfWAM allows future visual queries to attend to a clean copy of the demonstrated action, turning the video branch into an action-specific consequence model while leaving the fast action-only inference path unchanged. To focus video learning on action-relevant visual changes, we use prompt-specific objectives for future robot self-mask prediction, which removes appearance details and provides a target whose temporal evolution is tightly coupled with the conditioning action. Together, clean-action conditioning and future self-mask supervision make future predictions more directly reflect how the executed action changes the robot's visible motion and the surrounding scene. Experiments on RoboTwin 2.0 and real-world manipulation tasks show that SelfWAM produces more action-sensitive futures and preserves fast policy inference, while improving policy performance.",
+      "authors": [
+        "Bikang Pan",
+        "Fan Liu",
+        "Haotao Lu",
+        "Jingya Wang",
+        "Ye Shi"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-01T15:47:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.00725v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-grounded world action model for robot control, transferable to tactile world model",
+      "llm_evidence_cn": "自接地世界动作模型，可迁移至触觉世界模型",
+      "llm_evidence": "自接地世界动作模型，可迁移至触觉世界模型",
+      "canonical_evidence": "自接地世界动作模型，可迁移至触觉世界模型",
+      "llm_tldr_en": "SelfWAM is a self-grounded world action model using a modality-specialized Mixture-of-Transformers to jointly predict actions, future RGB frames and robot self-masks, improving action-conditioned future prediction for fast robot control.",
+      "llm_tldr_cn": "针对世界动作模型仅依赖任务提示和观察上下文、难以捕捉动作特定后果的问题，论文提出SelfWAM统一自接地模型。该模型采用模态专用混合Transformer结构，联合预测动作、动作条件下的未来RGB帧和机器人自遮挡掩码，将未来预测与机器人可见身体和动作运动关联。实验表明其能提升动作条件未来预测的准确性，并加速机器人控制。该方法为触觉世界模型的构建提供了动作-未来联合建模的参考框架。",
+      "llm_tldr": "针对世界动作模型仅依赖任务提示和观察上下文、难以捕捉动作特定后果的问题，论文提出SelfWAM统一自接地模型。该模型采用模态专用混合Transformer结构，联合预测动作、动作条件下的未来RGB帧和机器人自遮挡掩码，将未来预测与机器人可见身体和动作运动关联。实验表明其能提升动作条件未来预测的准确性，并加速机器人控制。该方法为触觉世界模型的构建提供了动作-未来联合建模的参考框架。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.02080v1",
+      "source": "arxiv",
+      "title": "Toward Geometry-Scalable Whole-Body Touch for Humanoids: A 3D-Printed Conformal EIT Skin",
+      "abstract": "Whole-body tactile sensing is a prerequisite for humanoids that operate in contact-rich human environments, but conventional taxel arrays scale poorly with surface area, wiring complexity, and robot-specific curvature. We present a conformal electrical impedance tomography tactile skin fabricated through a geometry-adaptable additive-manufacturing workflow. A flexible conductive TPU layer forms a continuous sensing domain, while contact-induced coupling with conductive patches produces boundary voltage changes that are reconstructed using a one-step Gauss-Newton EIT solver. We first characterize the electromechanical design space of the layered structure and show that low-resistance contact-enhancement patches and a porous conductive TPU sensing layer improve sensitivity while preserving printability. We then validate contact localization on a planar prototype, a curved U-shaped prototype, and a qualitative iCub-face-shaped geometry. The curved sensor achieves a mean localization error of 6 mm over 18 contact positions without supervised post-processing. These results suggest that additively manufactured tomographic skins can reduce the morphology-specific redesign burden for humanoid tactile coverage and provide a practical route toward large-area contact sensing for human-centered deployment.",
+      "authors": [
+        "Haofeng Chen",
+        "Carson Kohlbrenner",
+        "Jiri Kubik",
+        "Lukas Rustler",
+        "Alexander Dickhans",
+        "Karel Bartunek",
+        "Alessandro Roncone",
+        "Hyosang Lee",
+        "Matej Hoffmann"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T11:33:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.02080v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "conformal EIT tactile skin enabling geometry-scalable whole-body touch for humanoid robots",
+      "llm_evidence_cn": "共形EIT触觉皮肤，实现人形机器人几何可扩展的全身触摸感知",
+      "llm_evidence": "共形EIT触觉皮肤，实现人形机器人几何可扩展的全身触摸感知",
+      "canonical_evidence": "共形EIT触觉皮肤，实现人形机器人几何可扩展的全身触摸感知",
+      "llm_tldr_en": "A 3D-printed conformal EIT tactile skin with a continuous conductive TPU sensing domain and Gauss-Newton reconstruction offers scalable whole-body touch for humanoids, addressing taxel scalability limits.",
+      "llm_tldr_cn": "传统触觉阵列在表面积、布线和机器人曲面适应性上扩展性差，难以满足人形机器人全身触觉感知需求。本文提出一种3D打印共形EIT触觉皮肤，利用柔性导电TPU层构成连续感知域，通过接触引起的导电贴片耦合改变边界电压，并用一步高斯-牛顿求解器重建接触。实验表征了机电设计空间，显示该方案在几何可扩展的全身触摸上具有优势。该硬件为通用触觉感知与触觉基础模型提供了大规模数据采集基础。",
+      "llm_tldr": "传统触觉阵列在表面积、布线和机器人曲面适应性上扩展性差，难以满足人形机器人全身触觉感知需求。本文提出一种3D打印共形EIT触觉皮肤，利用柔性导电TPU层构成连续感知域，通过接触引起的导电贴片耦合改变边界电压，并用一步高斯-牛顿求解器重建接触。实验表征了机电设计空间，显示该方案在几何可扩展的全身触摸上具有优势。该硬件为通用触觉感知与触觉基础模型提供了大规模数据采集基础。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile foundation model for universal touch sensing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

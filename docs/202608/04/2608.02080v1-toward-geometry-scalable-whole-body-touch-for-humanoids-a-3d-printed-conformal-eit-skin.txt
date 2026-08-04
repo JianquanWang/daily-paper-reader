@@ -1,0 +1,335 @@
+Title: Toward Geometry-Scalable Whole-Body Touch for Humanoids: A 3D-Printed Conformal EIT Skin
+
+URL Source: https://arxiv.org/pdf/2608.02080v1
+
+Published Time: Tue, 04 Aug 2026 02:16:28 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible. 
+
+# Toward Geometry-Scalable Whole-Body Touch for Humanoids: A 3D-Printed Conformal EIT Skin 
+
+Haofeng Chen 1, Carson Kohlbrenner 2, Jiri Kubik 1, Lukas Rustler 1, Alexander Dickhans 2,Karel Bartunek 1 Alessandro Roncone 2, Hyosang Lee 3, and Matej Hoffmann 1
+
+Abstract — Whole-body tactile sensing is a prerequisite for humanoids that operate in contact-rich human environments, but conventional taxel arrays scale poorly with surface area, wiring complexity, and robot-specific curvature. We present a conformal electrical impedance tomography tactile skin fab-ricated through a geometry-adaptable additive-manufacturing workflow. A flexible conductive TPU layer forms a contin-uous sensing domain, while contact-induced coupling with conductive patches produces boundary voltage changes that are reconstructed using a one-step Gauss–Newton EIT solver. We first characterize the electromechanical design space of the layered structure and show that low-resistance contact-enhancement patches and a porous conductive TPU sensing layer improve sensitivity while preserving printability. We then validate contact localization on a planar prototype, a curved U-shaped prototype, and a qualitative iCub-face-shaped geometry. The curved sensor achieves a mean localization error of 6 mm over 18 contact positions without supervised post-processing. These results suggest that additively manufactured tomographic skins can reduce the morphology-specific redesign burden for humanoid tactile coverage and provide a practical route toward large-area contact sensing for human-centered deployment. 
+
+I. I NTRODUCTION 
+
+Humanoids are intended to operate in spaces designed for people, from industrial workspaces to care settings and homes. In these settings, physical contact is a source of information for whole-body control, manipulation, and so-cial physical interaction [1]. Large-area tactile skins have therefore become a central enabling technology for contact-rich humanoids. However, scaling them across curved robot morphologies remains challenging, as existing systems com-monly rely on dense or modular arrays of discrete sensing cells, requiring extensive interconnection, packaging, and geometry-specific integration [2]–[4]. Electrical impedance tomography (EIT) offers a scal-able approach to contact sensing by reconstructing contact-induced conductivity changes in a continuous sensing do-main from a limited number of electrodes [5], [6]. EIT skins have been demonstrated over large areas [7]–[9]. However, applying them to non-planar, curved, and robot-specific sur-faces remains challenging due to the sensing layer, electrode               
+
+> The authors are with 1Department of Cybernetics, Faculty of Electrical Engineering, Czech Technical University in Prague
+> {
+
+matej.hoffmann@fel.cvut.cz }, 2 Human Interaction and Robotics group at CU Boulder {first.last@colorado.edu },and 3Eindhoven University of Technology. H.C., L.R., and M.H. were supported by the European Union under the project Robotics and Advanced Industrial Production (reg. no. CZ.02.01.01/00/22 008/0004590). C.K., A.D., and A.R. were supported by the NSF FW-HTF-R grant #2222952. We thank Benn Proper for assistance with 3D printing the robot face. 
+
+arrangement, mechanical support, and forward model often requiring extensive hand tailoring for each new surface. Additive manufacturing could reduce this morphology-specific fabrication burden by using the CAD geometry of a target robot surface to design conformal sensing and structural layers for direct fabrication. Existing 3D-printed tactile sensors, however, are predominantly based on discrete capacitive or piezoresistive sensing units [10]–[14]. Recent studies have incorporated 3D-printed components into EIT sensors. Huang et al. [15] investigated patterned 3D-printed EIT skins on planar fingertip-scale samples. Park et al. [5] demonstrated EIT sensing on a humanoid-face geometry using a printed support followed by spray coating, mold-ing, manually positioned conductive patches, and electrode assembly. Chen et al. [16] developed a printed conductive-PLA EIT sensor for a customized curved interface, focus-ing on anisotropic conductivity correction and interaction-pressure monitoring. These studies establish the feasibility of printed and non-planar EIT sensing, but the design of a flexible, printing-compatible continuous-domain skin that can be transferred across geometries remains under explored. A preliminary version of the curved sensor design and localization experiment was presented at the ICRA 2026 Workshop on Towards Large-Area Tactile Sensing Skins [17]. The present paper substantially extends that work through electromechanical design characterization, planar localization experiments, force-response and multi-contact evaluations, and a proof-of-concept demonstration on an iCub-face geometry. In this work, we present a conformal EIT tactile skin for contact localization on planar and curved surfaces. The flexible conductive TPU sensing layer forms an electrically continuous sensing surface, allowing contacts at arbitrary locations within the covered area to be localized without embedding and wiring a dense array of predefined taxels. EIT reconstructs the spatial conductivity perturbation from pairwise voltage changes acquired using a limited number of distributed electrodes. The sensor further combines 3D-printed structural layers and conductive contact-enhancement patches to enable conformal implementation on both flat and curved geometries. The main contributions of this work are:  
+
+> •
+
+A conformal 3D-printed EIT tactile-skin architecture that combines a flexible conductive TPU sensing layer, printed structural layers, electrodes, and low-resistance contact-enhancement patches to form a continuous sens-ing domain on planar and curved surfaces. arXiv:2608.02080v1 [cs.RO] 3 Aug 2026 Printed support base layer          
+
+> Electrode
+> Printed compliant cover layer
+> Electrode
+> r
+> R
+> (a) (b)
+> Touch
+> Printed f lexible
+> conductive TPU sensing
+> layer (R)
+> Low -resistance contact -
+> enhancement patch ( r)R >> r Fig. 1. Schematic of the proposed conformal EIT tactile skin. (a) Layered sensor structure. (b) Touch increases local coupling between the low-resistance contact-enhancement patches (r) and the higher-resistance flexible conductive TPU sensing layer (R, with R ≫r).
+> •
+
+Experimental characterization of contact-patch material, conductive-layer thickness, and porosity, for geometry-aware contact reconstruction.  
+
+> •
+
+Quantitative contact-localization evaluation on planar and U-shaped sensors, supplemented by multi-contact, force-response, and humanoid-face demonstrations. Together, these results provide a basis for extending addi-tively manufactured EIT tactile skins to larger and more com-plex robot surfaces, with future work focusing on automated geometry-to-sensor design, fully printed electrical interfaces, and whole-body integration. II. M ETHODS 
+
+A. Sensor Design and Fabrication 
+
+The sensor is designed as a conformal EIT tactile skin for curved robotic surfaces. As illustrated in Fig. 1 (a), the sensor follows a layered structure consisting of a flexible conductive TPU sensing layer, contact-enhancement patches, a printed support base layer, and a printed compliant cover layer. The sensing mechanism is illustrated in Fig. 1(b). When a normal load is applied, the effective contact area between the contact-enhancement patch and the conductive sensing layer increases, reducing the local interfacial resistance and producing a conductivity perturbation in the sensing domain. This perturbation is measured as boundary voltage changes and reconstructed using EIT. Fig. 2 shows the fabricated planar and curved EIT tactile sensor prototypes. The planar sensing area is 150 mm ×
+
+150 mm, while the U-shaped sensor has a radius of 40 mm and a length of 100 mm. Both prototypes use Recreus Conductive Filaflex TPU (Recreus, Spain) for the conductive sensing layer, with a sensing-layer thickness of 0.4 mm. Filaflex 60A TPU (Recreus, Spain) was used for the compli-ant cover because of its flexibility and compatibility with Fused Deposition Modelling (FDM) printing. Conductive fabric patches cut from WE-TS Shielding Textiles 33025 (W¨ urth Elektronik eiSos, Germany) were used as contact-enhancement patches. The porosity values of the conductive TPU sensing layers were 26.96% and 38.40% for the planar and U-shaped sensors, respectively. The complete stack was mounted on a 3D-printed PETG base to define the sensor geometry and support both planar and curved prototypes. Both prototypes used sixteen electrodes arranged in a 4 × 4               
+
+> Fig. 2. Fabricated sensor samples. The planar sensor is on the left, the U-shaped sensor is on the right. Both sensors follow the same layer concept, with the conductive fabric patches adhered to the cover layer, while the patch geometry was adapted to each sensor shape. TABLE I PRINTING PARAMETERS FOR EACH FILAMENT .
+> Filament Nozzle Bed Speed (◦C) (◦C) (mm/s)
+> Conductive Filaflex 250 50 15 Filaflex 60A TPU 235 30 15 PETG 230 70 30
+
+distributed layout over the sensing surface. The distributed layout was selected to provide measurement coverage across the full tactile surface, including the interior region, follow-ing prior EIT/ERT tactile-sensing studies that used internal electrodes to improve central-region sensitivity and spatial resolution[5], [18]. Design parameters such as contact-enhancement patch ma-terial, conductive TPU sensing layer thickness, and conduc-tive TPU sensing layer porosity were selected according to the electromechanical characterization described in Section III-A and layer-specific print settings are reported in Table I. The planar sensor is used for controlled quantitative evalu-ation, including single-contact localization, force-dependent response, and multi-contact reconstruction. The U-shaped sensor is used to validate the transferability of the sensor fabrication and contact reconstruction pipelines to a curved surface. 
+
+B. Inverse Reconstruction 
+
+The relationship between boundary voltages V ∈ Rm and conductivity distribution σ ∈ Rn is governed by the forward operator F (·), i.e., V = F (σ). Since F (·) is inherently nonlinear, a linearized differential formulation is commonly adopted, relating the conductivity change ∆σ ∈ Rn to the boundary voltage change ∆V ∈ Rm as 
+
+∆V = J ∆σ + nnoise (1) where J ∈ Rm×n is the sensitivity matrix, nnoise denotes the noise matrix [19]. Following the one-step Gauss–Newton formulation [20], the conductivity change is recovered in closed form as 
+
+∆σ = ( JT WJ + λ2R)−1JT W
+
+| {z }
+
+> RM
+
+∆V (2) where J ∈ Rm×n is the sensitivity matrix relating boundary voltage changes ∆V ∈ Rm to conductivity changes ∆σ ∈Patch material  Sensing layer 
+
+thickness 
+
+Sensing layer 
+
+porosity 
+
+Linear movement stage 
+
+Patch  Sensing  layer 
+
+Electrode 
+
+Test sample 
+
+Load cell 
+
+Indenter    
+
+> Conductive
+> TPU
+> Conductive
+> spray
+> Conductive
+> fabric  0.2
+> mm
+> 0.4
+> mm
+> 0.6
+> mm 0% 21%
+
+38% 
+
+(a) 
+
+(b)
+
+Wire  
+
+> Resistance
+> measurement Fig. 3. Experimental setup and samples for electromechanical characteriza-tion. (a) Normal-loading setup and resistance measurement path. (b) Sample groups used to compare contact-enhancement patch material, conductive TPU sensing layer thickness, and conductive TPU sensing layer porosity.
+
+Rn, W is a weighting matrix, λ is a regularization hyperpa-rameter, and R is computed using the Laplace prior [21]. The reconstruction matrix RM is precomputed offline, enabling real-time tactile reconstruction at deployment. 
+
+C. Contact Localization 
+
+To extract the estimated contact location, the reconstructed image was thresholded to suppress background noise, retain-ing only elements satisfying 
+
+Ωc = i | ∆σi > 0, ∆σi > α max(∆ σ), (3) where ∆σ is the reconstructed conductivity change of ele-ment i and α is the threshold ratio. The estimated contact position was then calculated as the weighted centroid of the retained region: 
+
+ˆx =
+
+P 
+
+> i∈Ωc
+
+xi∆σi
+
+P 
+
+> i∈Ωc
+
+∆σi
+
+, ˆy =
+
+P 
+
+> i∈Ωc
+
+yi∆σi
+
+P 
+
+> i∈Ωc
+
+∆σi
+
+, (4) where (xi, y i) denotes the center coordinate of element i.The localization error was defined as the Euclidean distance between the true contact position (x, y ) and the estimated position (ˆ x, ˆy):
+
+e = p(ˆ x − x)2 + (ˆ y − y)2. (5) For the curved surface sensor, the raw contact estimate was then computed as the conductivity- and volume-weighted centroid of the active elements: 
+
+ˆp =
+
+P 
+
+> i∈S
+
+δσ iVici
+
+P i ∈ S δσ iVi
+
+, (6)                     
+
+> TABLE II SAMPLE CONFIGURATIONS FOR COMPARING DESIGN FACTORS IN ELECTROMECHANICAL CHARACTERIZATION .
+> Varied factor Contact-enhancement patch Conductive TPU sens-ing layer
+> Patch material cTPU (1.5 mm) /con-ductive spray / conductive fabric cTPU, 0.4 mm, 0% porosity Sensing layer thickness Conductive fabric patch cTPU: 0.2, 0.4, 0.6 mm, 0% porosity Sensing layer porosity Conductive fabric patch cTPU, 0.4 mm: 0, 21, 38% porosity
+> Note: cTPU denotes 3D-printed Recreus Conductive Filaflex TPU (Recreus, Spain).
+
+where δσ i, Vi, and ci denote the reconstructed conduc-tivity change, volume, and centroid of the i-th tetrahedral element, respectively. Because the weighted centroid may lie inside the volumet-ric finite-element mesh rather than exactly on the physical tactile surface, the estimated position was projected onto the nearest surface mesh node. Surface nodes were obtained by extracting boundary faces that belong to only one tetrahe-dral element. The projected estimate is denoted as ˆpsurf .The ground-truth indentation point pgt was defined from the manually measured contact location on the sensor surface. 
+
+PE = ˆpsurf − pgt  
+
+> 2
+
+. (7) This projection-based Euclidean error was used instead of a graph-based surface geodesic distance because the finite-element model represents the sensor as a finite-thickness volumetric shell. The extracted boundary mesh therefore con-tains multiple boundary layers and triangulation-dependent edge connections. A shortest-path geodesic computed on this mesh can be affected by mesh resolution, triangle orienta-tion, and projection ambiguity between neighboring surface layers. In contrast, the projected Euclidean distance directly measures the spatial discrepancy between the estimated and true contact locations on the physical sensor surface, while remaining simple, reproducible, and independent of mesh-edge connectivity. III. R ESULTS 
+
+A. Electromechanical Characterization 
+
+Before fabricating the EIT tactile-skin prototypes, planar samples were used to identify the dominant design fac-tors affecting the electromechanical response of the layered sensing structure. The goal of this characterization was not to exhaustively optimize all geometric parameters, but to derive practical design principles that balance sensitivity, printability, and mechanical robustness. The experimental setup is shown in Fig. 3 (a). Each sample was compressed using a linear movement stage equipped with a load cell and a rectangular indenter (30 mm ×
+
+10 mm × 6 mm). The sample resistance was measured between two electrodes connected to the conductive TPU 0 5 10 15 20  
+
+> Force (N)
+> 0.0
+> 0.2
+> 0.4
+> | R/R0|
+> (a)
+
+Patch material      
+
+> 1.5 mm cTPU (0.16)
+> Conductive spray (0.13)
+> Conductive fabric (0.44)
+> 0510 15 20
+> Force (N)
+> (b)
+
+Sensing layer thickness      
+
+> 0.2 mm (0.48)
+> 0.4 mm (0.44)
+> 0.6 mm (0.35)
+> 0510 15 20
+> Force (N)
+> (c)
+
+Sensing layer porosity     
+
+> 0% porosity (0.44)
+> 21% porosity (0.54)
+> 38% porosity (0.54) Fig. 4. Comparison of electromechanical responses for fabrication-relevant design factors under normal loading from 0 to 20 N. (a) patch material, (b) conductive TPU sensing layer thickness, and (c) conductive TPU sensing layer porosity. The curves show the force-dependent normalized resistance change. The values in parentheses indicate the maximum |∆R/R 0|observed over the 0–20 N loading range.
+
+sensing layer, as illustrated in the inset of Fig. 3(a). Each sample measured 50 × 20 mm, with an electrode spacing of 40 mm. For each test, the no-load resistance was defined as 
+
+R0 = R(0) , and the normalized resistance change at each force level was computed as |∆R/R 0| = |R(F )−R0| 
+
+> R0
+
+, where 
+
+R(F ) is the resistance under the applied normal force F .Representative sample groups are shown in Fig. 3 (b), and the corresponding test configurations are summarized in Table II. For the patch-material comparison, all contact patches had the same footprint, consisting of two 15 mm × 15 mm square patches. The cTPU patch was directly 3D printed with a thickness of 1.5 mm. For the conductive spray and conductive fabric, 1.5 mm non-conductive TPU patches with the same footprint were first printed as mechanical substrates, and the conductive spray or conductive fabric was then applied on top. Three coats of conductive spray paint were applied to the sample before testing. The non-conductive TPU patch used Filaflex 60A TPU (Recreus, Spain). The conductive spray used 838AR conductive spray paint (MG Chemicals, Canada), while the conductive fabric was cut from WE-TS Shielding Textiles 33025 (W¨ urth Elektronik eiSos, Germany). The characterization followed the design logic illustrated in Table. II. The comparison of electromechanical responses for fabrication-relevant design factors is shown in Fig. 4. 
+
+1) Patch materials: The selected patch materials have different manufacturer-reported electrical properties: the con-ductive spray paint has a nominal sheet resistance of 50 Ω/sq, the conductive fabric has a reported surface resistance of 0.04 Ω/cm 2, and the printed cTPU has an electrical resistivity of 0.9–16.5 Ω· cm. Since these values are reported using different measurement methods and units, they are treated only as indicative material properties rather than directly comparable quantities. Fig. 4(a) compares the effect of contact-enhancement patch material. The conductive fabric patch produced the largest normalized resistance change, while the printed cTPU patch showed the weakest response. The conductive spray patch exhibits an earlier low-force response than the printed cTPU patch, but its maximum resistance change remains limited. This may be caused by non-uniform coating on the rough surface of the 3D-printed TPU substrate, which can increase the effective interfacial resistance. These results indicate that a low-resistance contact-enhancement patch is important for producing a strong local coupling with the conductive TPU sensing layer. Therefore, conductive fabric patches were used in the following sensor prototypes. 
+
+2) Sensing layer thickness: After selecting the contact-enhancement patch material, we evaluated the thickness of the conductive TPU sensing layer. As shown in Fig. 4 (b), thinner sensing layers produced larger normalized resistance changes. This is because reducing the sensing layer thickness increases the effective resistance of the conductive TPU layer, making the local contact-induced perturbation more visible in the measured resistance response. However, the 0.2 mm layer was more difficult to print and handle reliably. Therefore, a 0.4 mm conductive TPU sensing layer was selected as a compromise between sensitivity, printability, and mechanical robustness. 
+
+3) Sensing layer porosity: Finally, we evaluated the porosity of the conductive TPU sensing layer. Three 0.4 mm sensing layers were fabricated: 0% porosity, 21% porosity, and 38% porosity. Porosity was introduced into the samples via grid-aligned spreading of specifically sized holes during design. As shown in Fig. 4(c), introducing porosity increased the normalized resistance change compared with the solid layer (0% porosity). This suggests that porosity can increase the effective resistance of the sensing layer while preserving a printable layer thickness. Further increasing the porosity from 21% to 38% did not noticeably increase the maximum response, indicating that moderate porosity is sufficient for improving sensitivity in this design. Overall, these results indicate two practical design prin-ciples for the proposed tactile skin. First, the contact-enhancement patch should provide a low-resistance local in-terface relative to the conductive TPU sensing layer. Second, the conductive TPU sensing layer should have sufficiently high effective resistance to yield measurable resistance changes, but this must be balanced against printability and mechanical robustness. The final sensor design follows these principles while selecting parameters that remain feasible for conformal fabrication on planar and curved surfaces. XYZ stage            
+
+> Force load
+> Indenter Tactile sensor
+> oX
+> Z
+> oX
+> ZY
+> oX
+> ZY
+> Acquisition board
+> XYZ stage
+> Force load
+> Indenter Tactile sensor
+> oX
+> ZY
+> Acquisition board Fig. 5. Experimental setup for planar single-contact localization.
+> Fig. 6. Schematic diagram of single the touch test with predefined contact positions 1, 3, 13, and 15 highlighted.
+
+B. Single-Contact Localization on the Planar Sensor 
+
+The planar sensor was first evaluated under controlled single-contact indentation. As shown in Fig. 5, the sensor was fixed under a XYZ positioning stage, and a force gauge with a flat-tip cylindrical indenter was used to apply normal contact at predefined locations. The indenter diameter was 15 mm, providing a consistent contact area across tests. This setup allowed the contact position and loading level to be controlled while electrode voltage measurements were recorded by the EIT acquisition board. A two-terminal measurement scheme was used, where current injection and voltage measurement were performed simultaneously for each electrode pair. With 16 electrodes, 120 independent electrode-pair measurements were acquired per frame. De-tails of the acquisition circuitry can be found in [9]. Fig. 6 shows the predefined contact positions used for the single-touch test. The positions were distributed across the sensing area to evaluate localization performance at both central and near-boundary regions. For each indentation, the voltage change relative to the no-contact reference was reconstructed into a conductivity-change image using the one-step Gauss–Newton EIT solver. The sensor geometry was designed in CAD software and imported into EIDORS to generate the finite element      
+
+> Fig. 7. Illustration of the reconstruction and localization process. (a) FEM model and electrode configuration of the EIT tactile sensor. (b) Representative reconstructed conductivity-change image for a single contact. The true contact location and the extracted estimated position are marked, from which the XY localization error is calculated. 14710 13
+
+Loading level (a)   
+
+> 050 100 150
+> Position error (mm)
+> -50 050
+
+x (mm) (b) 
+
+> -50 050
+> y (mm)
+
+510 15  
+
+> Error (mm)
+> True
+> Estimated
+> Fig. 8. Localization performance of the 3D-printed EIT tactile sensor.(a) Position error under different loading levels. Markers and error bars indicate the mean and standard deviation. The loading level denotes the predefined indentation setting, not closed-loop force control; the corresponding load-cell measurements increased monotonically from approximately 1.5 ˜ N to 16 ˜ N across levels 1–13. (b) Representative localization map at loading level 6. Black crosses, colored circles, and gray lines denote true positions, estimated positions, and localization error vectors, respectively.
+
+model (FEM), which served as the basis for both electrical simulation and EIT image reconstruction. As shown in Fig. 7, sixteen electrodes (green dots) were arranged in a 4 × 4 grid over the sensing area. Fig. 7 (b) shows a representative reconstructed conductivity-change image under a single contact, with the true and estimated contact positions indicated by green and magenta markers, respectively. Fig. 8 summarizes the localization performance under different loading levels. The loading level represents the predefined experimental force setting, and the corresponding measured force increased monotonically from approximately 1.5 N to 16 N across levels 1–13. As shown in Fig. 8(a), the localization error decreases as the contact force increases. At low loading levels, the reconstructed response is weak and more strongly affected by measurement noise and the spatially non-uniform sensitivity of EIT, resulting in larger errors and higher variability. For loading level indices 1–3, the average localization error was 25 ± 30 mm. In contrast, for loading level indices 11–13, the error decreased to 6 ± 3
+
+mm, indicating that the localization performance becomes 0 2 4 6 8 10 12 14 16 
+
+Actual force (N)  
+
+> 00.2 0.4 0.6 0.8 1
+> Normalized peak response
+> Pos. 1
+> Pos. 3
+> Pos. 13
+> Pos. 15 Fig. 9. Reconstructed normalized peak response versus measured contact force at four representative positions. For each frame, the peak value was defined as the maximum positive value of the reconstructed conductivity change. At each position, the peak responses were normalized by the mean peak response measured at the highest force level, yielding a dimensionless normalized peak response. Error bars indicate the standard deviation across valid frames within the selected pressing window. The normalized peak response increases with applied force and gradually approaches saturation at high force levels.
+
+stable once the contact-induced conductivity perturbation is sufficiently strong. A representative localization result at force index 6 is shown in Fig. 8 (b). At this force level, the mean localization error was 7 ± 3.5 mm over 36 valid contact samples, with a median error of 6.66 mm and a 90th percentile error of 10.83 mm. The estimated positions generally follow the spatial distribution of the true contact points, demonstrating that the proposed 3D-printed EIT sensor can recover contact locations over the planar sensing area. 
+
+C. Force-Response Characterization 
+
+To examine how the reconstructed response varies with contact force, Fig. 9 shows the relationship between the measured contact force and the normalized peak response at four representative positions. For each frame, the peak response was defined as the maximum positive value in the reconstructed conductivity change ∆σ. This scalar value represents the strongest local contact-induced conductivity perturbation in the conductive TPU sensing layer. Four representative positions were selected from different regions of the sensing area, as shown in Fig. 6, to exam-ine whether the force-response trend was consistent across locations. The experiment was conducted using predefined loading levels, while the response curves in Fig. 9 are plotted against the actual measured force. For each representative position, the peak response was first averaged over valid frames at each loading condition and then normalized by the mean peak response at the highest loading level of that position, yielding a dimensionless normalized peak response. The normalized responses from the four positions were subsequently averaged to quantify the overall force-response trend. The forces corresponding to 50%, 80%, and 90% of the maximum response were estimated by linear interpolation between adjacent measured force points. Quantitatively, the average normalized peak value increased from 0.15 ±0.06 at (a)  (b)  (c)    
+
+> Ground truth Reconstruction
+> (a) (b) (c)
+> Ground truth Reconstruction
+> Fig. 10. Multi-contact reconstruction on the planar sensor. The top row shows the applied contact conditions, and the bottom row shows the corresponding EIT reconstruction. The reconstructed hotspots are consistent with the applied contact regions for one-, two-, and three-contact cases.
+
+the lowest force level to 0.80 ± 0.10 at an intermediate force level, and approached unity at the highest measured forces. The response reached 50%, 80%, and 90% of its maximum at 3.8 ± 0.4 N, 8 ± 1 N, and 12 ± 2 N, respectively. Above 12 N, the normalized response remained close to saturation, with an average value of 0.97 ± 0.04 .This trend indicates that the EIT reconstruction contains information related to contact intensity. However, the re-sponse is not perfectly linear, which can be attributed to the nonlinear contact mechanics between the conductive patch and the conductive TPU sensing layer, as well as the saturation of the effective contact area under larger loads. Therefore, the current result demonstrates force-sensitive reconstruction behavior, while accurate force estimation would require position-dependent calibration or learning-based compensation. 
+
+D. Multi-Contact Reconstruction 
+
+The planar sensor was further evaluated under multi-contact conditions to demonstrate the ability of EIT to cap-ture spatially distributed touch. Fig. 10 shows representative one-, two-, and three-contact cases. For each case, the top row shows the applied contact condition, while the bottom row shows the corresponding reconstructed conductivity-change image. The reconstructed hotspots are spatially con-sistent with the applied contact regions, indicating that the sensor can distinguish multiple separated contacts on the same sensing surface. Compared with the single-contact case, the reconstructed regions become broader and partially blurred as the number of contacts increases. This is expected because EIT is a diffusive imaging modality with limited spatial resolution, and nearby conductivity perturbations may overlap in the reconstructed image. Nevertheless, the result demonstrates the potential of the proposed 3D-printed EIT tactile skin for distributed contact detection without requiring a dense taxel array. 
+
+E. Localization on the Curved U-Shaped Sensor 
+
+To evaluate whether the sensor design can be extended from a planar surface to a curved robotic surface, the U-shaped prototype was tested under controlled single-point (a)  (b)      
+
+> Conductivity
+> (a) (b)
+> Conductivity
+> (a) (b)
+> Conductivity Fig. 11. Experimental validation. (a) Photograph of the indentation test setup. (b) Representative EIT reconstruction showing the localized conductivity change under single-point contact.
+> Fig. 12. Spatial distribution of ground truth and estimated contact positions on the sensor surface.
+
+indentation. The sensor adopts a multi-layer architecture as illustrated in Fig. 2. The U-shaped substrate has a radius of 40 mm and a length of 100 mm. Fig. 11 shows the experimental setup and a representative 3D EIT reconstruction. A 15 mm diameter indenter was mounted on the gripper of a Kinova Gen3 robotic arm and brought into contact with the curved tactile sensor under position control. The indentation was adjusted to obtain a stable reconstruction response, rather than to enforce the same contact force at all positions. Thus, this experiment evaluates curved-surface contact localization rather than force-controlled sensing performance. A total of 18 predefined indentation positions were tested on the curved surface. For each position, multiple frames around the peak response were averaged to reduce frame-to-frame noise before reconstruction. The estimated contact location was extracted from the reconstructed conductivity-change image using a thresholded weighted center-of-mass method. Fig. 12 compares the ground-truth and estimated con-tact positions on the U-shaped sensor surface. The system achieved a mean localization error of 6 ± 4 mm across all 18 positions, with errors ranging from 1.5 mm to 14.4 mm. The result demonstrates that the proposed 3D-printed EIT sensor can localize contact on a curved surface with millimeter-level accuracy. Higher errors were mainly observed in regions with weaker boundary sensitivity and larger manual indentation uncertainty, suggesting that future work should improve electrode placement, mechanical fixturing, and geometry-aware calibration. 
+
+F. Proof-of-concept on a complex shape (a)  (b)  (c)  (d)     
+
+> Ground truth Reconstruction
+> (a) (b) (c) (d)
+> Ground truth Reconstruction
+> Fig. 13. Example interactions with the iCub face sensor prototype. In each column, the ground truth (photography) is presented above the resulting EIT reconstruction. See the supplementary video for more information.
+
+Finally, we explored the feasibility of applying the pro-posed conformal EIT sensing concept to a more complex freeform geometry. For this purpose, the front surface of the iCub robot’s face was chosen. Unlike the planar and cylindri-cal prototypes used for quantitative evaluation, the iCub-face-shaped prototype required several fabrication modifications due to the high curvature and local geometric features of the surface. In preliminary trials, printing a 0.4 mm conductive TPU sensing layer on the face geometry has proven unreli-able using a standard FDM printer. The thin conductive layer was difficult to print continuously over the curved surface, and removing support material often led to damage of the sensing layer. Therefore, for this proof-of-concept prototype, the conductive TPU sensing layer was substituted with a 0.8 mm solid conductive TPU layer to improve printability and handling robustness. The compliant cover layer was also substituted. For this complex face geometry, fabricating a thin and conformal flexible cover layer using FDM printing was impractical. Therefore, an soft cover layer was printed using Stereolithography (SLA) to obtain a better surface fit and finer geometric resolution [22]. After manual assembly of boundary electrodes and conductive contact patches, man-ual touch tests were performed at representative locations on the face surface. As shown in Fig. 13, the reconstructed conductivity-change regions generally appear near the touch locations. This result suggests that the proposed EIT sensing concept can be transferred from simple planar and cylindrical surfaces to more complex freeform geometry. This experiment serves as a qualitative demonstration of applying the proposed EIT sensing architecture to ahumanoid-like freeform surface. A systematic quantitative evaluation on complex geometries would require further im-provements in fabrication repeatability, electrode integration, contact-position control, and automated geometry-to-FEM generation. IV. D ISCUSSION 
+
+The presented results demonstrate that tomographic tactile sensing and additive manufacturing are complementary ap-proaches for humanoid skin design. EIT avoids dense internal taxel arrays by reconstructing contact-induced conductivity changes from boundary measurements, while 3D printing allows the sensing layer, support structure, and surface geom-etry to be designed for curved robot bodies. Strong material selection, electromechanical response, and geometry-aware reconstruction are important factors for large-area scaling to torso surfaces, hands, heads, and other non-developable geometries found on humanoid morphologies. This work is a step toward deployable humanoid skin, but integration challenges regarding the conductive tape patches and externally assembled electrodes remain before the sensor can be truly fully 3D-printed. Future work should focus on fully printed conductive interfaces, integrated wiring, auto-mated CAD-to-FEM generation, calibrated force-controlled testing on freeform surfaces, durability and hysteresis char-acterization, and integration with whole-body controllers for contact anticipation, impact mitigation, and safe physical interaction. V. C ONCLUSION 
+
+This work presented a 3D-printed conformal EIT tactile skin for contact localization on planar and curved surfaces. By combining a flexible conductive TPU sensing domain, conductive contact-enhancement patches, printed structural layers, and model-based EIT reconstruction, the sensor local-izes contact without dense embedded taxels. Electromechan-ical characterization showed that contact-patch conductivity and the resistance/porosity of the conductive TPU sensing layer are key design parameters for improving sensitiv-ity while preserving printability. Quantitative experiments demonstrated stable planar localization at moderate-to-high forces and 6 mm mean localization error on a curved U-shaped sensor, while a qualitative iCub-face prototype illus-trated transfer to a more humanoid freeform geometry. These results indicate a practical path toward geometry-scalable tactile skins for humanoids operating in contact-rich human environments, including homes, care settings, and industrial workspaces. REFERENCES [1] C. Chen, Z. Yu, H. Choi, M. Cutkosky, and J. Bohg, “Dexforce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation,” IEEE Robotics and Automation Letters ,vol. 10, no. 6, pp. 6416–6423, 2025. [2] Z. Zhao, J. Tang, J. Yuan, Y. Li, Y. Dai, J. Yao, Q. Zhang, S. Ding, T. Li, R. Zhang, et al. , “Large-scale integrated flexible tactile sensor array for sensitive smart robotic touch,” ACS nano , vol. 16, no. 10, pp. 16 784–16 795, 2022. [3] G. Cheng, E. Dean-Leon, F. Bergner, J. R. G. Olvera, Q. Leboutet, and P. Mittendorfer, “A comprehensive realization of robot skin: Sensors, sensing, control, and applications,” Proceedings of the IEEE , vol. 107, no. 10, pp. 2034–2051, 2019. [4] Y. Zhou, J. Zhao, P. Lu, Z. Wang, and B. He, “Tacsuit: A wear-able large-area, bioinspired multimodal tactile skin for collaborative robots,” IEEE Transactions on Industrial Electronics , vol. 71, no. 2, pp. 1708–1717, 2023. [5] H. Park, W. Kim, S. Jeon, Y. Na, and J. Kim, “Graph-structured super-resolution for geometry-generalized tomographic tactile sensing: Application to humanoid faces,” IEEE Transactions on Robotics ,vol. 41, pp. 558–572, 2024. [6] M. Yang, “A biomimetic elastomeric robot skin using electrical impedance and acoustic tomography for tactile sensing,” Science Robotics , vol. 7, no. 67, p. eabm7187, 2022. [7] M. J. Yang, H. Chung, Y. Kim, K. Park, and J. Kim, “A body-scale robotic skin using distributed multimodal sensing modules: Design, evaluation, and application,” IEEE Transactions on Robotics , vol. 41, pp. 96–109, 2025. [8] W. Zheng, D. Guo, W. Yang, and H. Liu, “A large-area robotic skin for intelligent tactile interaction of collaborative robots,” IEEE/ASME Transactions on Mechatronics , 2025. [9] H. Chen, X. Yang, P. Wang, J. Geng, G. Ma, and X. Wang, “A large-area flexible tactile sensor for multi-touch and force detection using electrical impedance tomography,” IEEE Sensors Journal , vol. 22, no. 7, pp. 7119–7129, 2022. [10] H. Moeinnia, D. J. Agron, C. Ganzert, L. Schubert, and W. S. Kim, “Wireless pressure monitoring system utilizing a 3D-printed origami pressure sensor array,” npj Flexible Electronics , vol. 8, no. 1, p. 21, 2024. [11] J. Gong, O. Seow, C. Honnet, J. Forman, and S. Mueller, “MetaSense: Integrating sensing capabilities into mechanical metamaterial,” in 
+
+The 34th Annual ACM Symposium on User Interface Software and Technology , 2021, pp. 1063–1073. [12] S. Imranuddin, A. Singh, G. Stano, S. A. I. Ovy, G. Percoco, and Y. Tadesse, “Enhancing 3D-printed piezoresistive sensors: An investigation into process parameters, sensor geometries and materials selection,” IEEE Sensors Journal , vol. 25, no. 8, pp. 13 063–13 072, 2025. [13] C. Massaroni, L. Vitali, D. Lo Presti, S. Silvestri, and E. Schena, “Fully additively 3D manufactured conductive deformable sensors for pressure sensing,” Advanced Intelligent Systems , vol. 6, no. 8, p. 2300901, 2024. [14] C. Kohlbrenner, A. Soukhovei, C. Escobedo, N. Nechyporenko, and A. Roncone, “Design, mapping, and contact anticipation with 3d-printed whole-body tactile and proximity sensors,” in 2026 IEEE International Conference on Robotics and Automation (ICRA) , 2026. [15] Y. Huang, D. Hardman, C. Bascucci, F. Clemens, and T. G. Thuruthel, “Design and modelling of electrical impedance tomography-based 3d-printed patterned soft tactile skins,” in 2025 IEEE 8th International Conference on Soft Robotics (RoboSoft) . IEEE, 2025, pp. 1–6. [16] H. Chen, Z. Wang, K. Langlois, P. Mohamadi, H. Tian, T. Verstraten, and B. Vanderborght, “Investigating a novel 3D-printed electrical impedance tomography sensor for monitoring the interaction pressure on a customized physical interface in wearable robots,” Measurement ,vol. 257, p. 118714, 2026. [17] H. Chen, C. Kohlbrenner, J. Kubik, L. Rustler, A. Dickhans, A. Ron-cone, H. Lee, and M. Hoffmann, “A 3d-printed electrical impedance tomography tactile sensor for scalable coverage,” Workshop on To-wards Large-Area Tactile Sensing Skins: From Scalable Materials to Embodied Robotic Perception, IEEE International Conference on Robotics and Automation (ICRA), Vienna, Austria, 2026. [18] H. Lee, K. Park, J. Kim, and K. J. Kuchenbecker, “Internal array electrodes improve the spatial resolution of soft tactile sensors based on electrical resistance tomography,” in 2019 International Conference on Robotics and Automation (ICRA) . IEEE, 2019, Conference Proceedings, pp. 5411–5417. [19] A. Adler, T. Dai, and W. R. Lionheart, “Temporal image reconstruc-tion in electrical impedance tomography,” Physiological measurement ,vol. 28, no. 7, p. S1, 2007. [20] A. Adler and R. Guardo, “Electrical impedance tomography: regular-ized imaging and contrast detection,” IEEE transactions on medical imaging , vol. 15, no. 2, pp. 170–179, 1996. [21] A. Adler and W. R. Lionheart, “Uses and abuses of eidors: an extensible software base for eit,” Physiological measurement , vol. 27, no. 5, pp. S25–S42, 2006. [22] B. W. Proper, B. J. Caasenbrood, and I. A. Kuling, “Easy cleaning of 3D sla/dlp printed soft fluidic actuators with complex internal geometry,” in 2023 IEEE International Conference on Soft Robotics (RoboSoft) . IEEE, 2023, pp. 01–06.

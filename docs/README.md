@@ -6,38 +6,38 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-03
-- 运行时间：2026-08-03 19:51:35 UTC
+- 最新运行日期：2026-08-04
+- 运行时间：2026-08-04 20:08:35 UTC
 - 运行状态：成功
-- 本次总论文数：5
-- 精读区：0
-- 速读区：5
+- 本次总论文数：6
+- 精读区：3
+- 速读区：3
 
 ### 今日简报（AI）
-今日速读5篇论文，聚焦机器人触觉与VLA模型。  
-最值得关注触觉再现方案TacPrint和世界模型增强的WCM强化学习。  
-下一步可精读这两篇，并留意TurboVLA的实时性优化。
-- 详情：[/202608/03/README](/202608/03/README)
+2026-08-04日报：6篇论文聚焦触觉感知与机器人操作，精读两篇获9.0高分。最值得关注的是视觉-触觉前瞻解耦（Oracle-Guided接口发现）与在线触觉预测增强的灵巧操作（ReTouch）。若想快速入门，建议从触觉+世界模型结合方向入手，先读高分解耦方法。
+- 详情：[/202608/04/README](/202608/04/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Disentangling Visuo-Tactile Foresight: Oracle-Guided Interface Discovery for World Action Models](/202608/04/2608.00547v1-disentangling-visuo-tactile-foresight-oracle-guided-interface-discovery-for-world-action-models)  
+   标签：评分：9.0/10、query:tactile-vla
+   evidence：视觉-触觉世界动作模型，研究未来触觉/视觉预测与动作专家之间的接口
+2. [ReTouch: Empowering Contact-Rich Dexterous Manipulation with Online-Refined Tactile Prediction](/202608/04/2608.01824v1-retouch-empowering-contact-rich-dexterous-manipulation-with-online-refined-tactile-prediction)  
+   标签：评分：9.0/10、query:tactile-vla
+   evidence：基于在线精炼触觉预测的触觉VLA用于接触丰富操作
+3. [CAAT: Contact-Aware Attention Scaling and Tactile Masking for Data-Efficient Contact-Rich Manipulation](/202608/04/2608.01102v1-caat-contact-aware-attention-scaling-and-tactile-masking-for-data-efficient-contact-rich-manipulation)  
+   标签：评分：8.0/10、query:tactile-vla
+   evidence：面向接触丰富操作的视觉-触觉策略，采用接触感知注意力缩放和触觉掩蔽
 
 ### 速读区论文标签
-1. [TacPrint: A Wearable Fingertip Tactile Sensor for Human-to-Robot Contact Reproduction](/202608/03/2607.29231v1-tacprint-a-wearable-fingertip-tactile-sensor-for-human-to-robot-contact-reproduction)  
+1. [TWINS: A Tactile Wearable Isomorphic Arm Networked System for Contact-Rich Manipulation Learning](/202608/04/2608.01733v1-twins-a-tactile-wearable-isomorphic-arm-networked-system-for-contact-rich-manipulation-learning)  
    标签：评分：7.0/10、query:tactile-vla
-   evidence：可穿戴指尖触觉传感器，通过真-仿-真管线估计接触深度，用于机器人触觉感知
-2. [WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning](/202608/03/2607.29613v1-wcm-a-world-critic-model-for-vision-language-action-reinforcement-learning)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：面向VLA强化学习的世界评论家模型，未涉及触觉
-3. [TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM](/202608/03/2607.27205v1-turbovla-real-time-vision-language-action-model-at-32-hz-on-an-rtx-4090-with-1-gb-vram)  
+   evidence：用于采集身体表面接触演示数据的触觉可穿戴同构臂网络系统
+2. [SelfWAM: A Self-Grounded Unified World Action Model for Fast Robot Control](/202608/04/2608.00725v1-selfwam-a-self-grounded-unified-world-action-model-for-fast-robot-control)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：高效的实时VLA模型，重构V-L-A路径，适用于触觉VLA设计
-4. [RoboBRIDGE: A Modular Framework for Bridging Policies to Robust Real-World Robotic Agents](/202608/03/2607.27881v1-robobridge-a-modular-framework-for-bridging-policies-to-robust-real-world-robotic-agents)  
+   evidence：自接地世界动作模型，可迁移至触觉世界模型
+3. [Toward Geometry-Scalable Whole-Body Touch for Humanoids: A 3D-Printed Conformal EIT Skin](/202608/04/2608.02080v1-toward-geometry-scalable-whole-body-touch-for-humanoids-a-3d-printed-conformal-eit-skin)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向机器人操作的VLA模型，未涉及触觉
-5. [Safe Vision Language Action Models via Barrier Enhanced Flow Matching](/202608/03/2607.29569v1-safe-vision-language-action-models-via-barrier-enhanced-flow-matching)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：为视觉语言行动模型提供屏障增强流匹配安全框架，可应用于触觉VLA以确保机器人控制安全。
+   evidence：共形EIT触觉皮肤，实现人形机器人几何可扩展的全身触摸感知
 
 
 <div class="dpr-home-promo-card">
