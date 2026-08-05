@@ -1,0 +1,487 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-05T21:49:14.125772+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 13,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.26657v2",
+      "source": "arxiv",
+      "title": "Enfold: Folding World Model Imagination into Predictive Representations for Ultra-Efficient Embodied Control",
+      "abstract": "World generative models are typically used through what they produce: a rendered future, a video-conditioned action, or latent context computed by a costly generative branch. We argue that their more reusable asset is the computation that constructs a future. As a generator transforms a corrupted future into a coherent trajectory, its intermediate states organize appearance, spatial layout, and interaction across levels of abstraction. Can this future-generative computation be internalized in a representation inferred from the present alone? We present Enfold, which transfers this computation into a representation predicted from the current visual context and language instruction. During training, multi-level states exposed as the generator processes the observed future supervise a current-only encoder. The learned representation is fed back to condition future generation and is read by task heads without allowing task gradients to reshape the encoder. At deployment, action prediction no longer executes the generator. Across LIBERO, RoboTwin2.0, and real-robot tasks, Enfold supports strong control while reducing action latency by $3.7\\times$ relative to Fast--WAM, Enfold-Flash reaches $10.1\\times$. Representation analyses show that it suppresses nuisance variation and preferentially captures changes that emerge over longer horizons. When the current scene is altered by human intervention, both the generated continuation and the executed actions adapt, which is inconsistent with fixed trajectory replay. These results recast a world generator as a source of predictive control representations: its future need not be materialized at every step if its internal structure can be enfolded into the present.",
+      "authors": [
+        "Weili Zeng",
+        "Yitong Xing",
+        "Fulong Liu",
+        "Chengqun Yang",
+        "Antao Xiang",
+        "Feng Tian",
+        "Jingnan Gao",
+        "Jisong Cai",
+        "Xin Wang",
+        "Xiaomin Wu",
+        "Yao Mu",
+        "Xiaokang Yang",
+        "Yichao Yan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-29T09:17:33+00:00",
+      "link": "https://arxiv.org/pdf/2607.26657v2",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "World model computation folded into predictive representations for embodied control, transferable to tactile",
+      "llm_evidence_cn": "将世界模型计算融入预测表示以支持具身控制，可迁移到触觉世界模型",
+      "llm_evidence": "将世界模型计算融入预测表示以支持具身控制，可迁移到触觉世界模型",
+      "canonical_evidence": "将世界模型计算融入预测表示以支持具身控制，可迁移到触觉世界模型",
+      "llm_tldr_en": "Enfold distills the computation of a generative world model into a representation inferred from the current visual context and language instruction, enabling ultra-efficient embodied control without explicit future generation, offering a new paradigm for world models.",
+      "llm_tldr_cn": "生成式世界模型通常通过渲染未来、视频条件动作等产物来使用，但其构建未来的中间计算更有复用价值。Enfold提出将这种未来生成计算迁移到仅由当前视觉上下文和语言指令推断的表示中，并在训练中利用多层级状态监督进行蒸馏。该表示可在不显式生成未来的情况下高效支持具身控制，为触觉世界模型如何压缩预测计算、提升运行效率提供了新思路。",
+      "llm_tldr": "生成式世界模型通常通过渲染未来、视频条件动作等产物来使用，但其构建未来的中间计算更有复用价值。Enfold提出将这种未来生成计算迁移到仅由当前视觉上下文和语言指令推断的表示中，并在训练中利用多层级状态监督进行蒸馏。该表示可在不显式生成未来的情况下高效支持具身控制，为触觉世界模型如何压缩预测计算、提升运行效率提供了新思路。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.28993v1",
+      "source": "arxiv",
+      "title": "ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts",
+      "abstract": "World Action Models (WAMs) have emerged as a promising paradigm by jointly modeling robot actions and future visual dynamics. However, their reliance on pixel-generative future supervision can entangle action-relevant state transitions with task-irrelevant visual content, limiting robustness under visual distribution shifts. We identify Training-Distribution Hallucination, a recurring phenomenon in which futures conditioned on visually shifted observations hallucinate training-domain content rather than remain faithful to the current scene. A controlled frame-triplet diagnosis further shows that DINOv3 features remain more stable across visual shifts while better preserving task-state distinctions than Wan-VAE latents. Rather than correcting the predicted futures, we propose Semantic-Temporal WAM (ST-WAM) to improve action robustness by using DINOv3 as a shared semantic representation for future prediction and history retrieval while retaining fine-grained VAE dynamics. Its Dual-Space Future Experts (DSFE) jointly predict future VAE latents and DINO features, while Current-Anchored Intent Retrieval (CAIR) retrieves task-relevant evidence from recent DINO history under the current visual-language context. ST-WAM is trained end-to-end without additional embodied pretraining or task-specific annotations, and requires no explicit future generation at inference. It achieves 98.7% on LIBERO and 92.8% on RoboTwin 2.0; more importantly, compared with Fast-WAM, it improves zero-shot LIBERO-Plus performance by 21.3 percentage points and more than doubles real-world success under visual shifts from 25.8% to 61.5%. These results demonstrate that semantic-temporal modeling effectively complements pixel-generative dynamics for robust manipulation.",
+      "authors": [
+        "Mingxin Wang",
+        "Bin Hu",
+        "Bin Qian",
+        "Kaitao Jiang",
+        "Haoning Wu",
+        "Feng Yan",
+        "Bowen Jing",
+        "Ruiyang Hao",
+        "Enyi Wang",
+        "Kangning Niu",
+        "Yandan Yang",
+        "Mu Xu",
+        "Yan Wang",
+        "Houde Liu",
+        "Tianlun Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-07-31T03:44:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.28993v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "World action model robust to visual shifts, no tactile but relevant to VLA robustness",
+      "llm_evidence_cn": "面向视觉分布偏移的WAM，与触觉VLA鲁棒性相关",
+      "llm_evidence": "面向视觉分布偏移的WAM，与触觉VLA鲁棒性相关",
+      "canonical_evidence": "面向视觉分布偏移的WAM，与触觉VLA鲁棒性相关",
+      "llm_tldr_en": "ST-WAM identifies Training-Distribution Hallucination in WAMs under visual shifts and proposes semantic-temporal modeling to improve robustness in manipulation.",
+      "llm_tldr_cn": "世界行动模型在视觉分布变化时会把未来预测幻觉到训练域内容，影响操作鲁棒性。ST-WAM分析了训练分布幻觉现象，利用DINOv3特征的稳定性和语义-时间建模来减少幻觉，保持任务状态判别能力。实验表明该方法在分布偏移下比基线更稳健，有助于提升视觉变化场景中操作模型的泛化能力。",
+      "llm_tldr": "世界行动模型在视觉分布变化时会把未来预测幻觉到训练域内容，影响操作鲁棒性。ST-WAM分析了训练分布幻觉现象，利用DINOv3特征的稳定性和语义-时间建模来减少幻觉，保持任务状态判别能力。实验表明该方法在分布偏移下比基线更稳健，有助于提升视觉变化场景中操作模型的泛化能力。",
+      "llm_tags": [
+        "query:tactile-vla:composite"
+      ],
+      "matched_query_tag": "query:tactile-vla:composite",
+      "matched_query_text": "Papers central to 请查找触觉大模型，触觉世界模型，和机器人多模态触觉VLA相关的论文, especially work that connects or combines: tactile large model for robot perception; tactile world model for robot manipulation; multi-modal tactile perception in robotics; tactile vision language action model for robot control; tactile foundation model for universal touch sensing; robot learning with tactile feedback; tactile large model and world model for robot manipulation; multi modal tactile vision language action model for robotics; tactile foundation model and its applications in robot touch sensing.",
+      "matched_requirement_id": "req-composite-tactile-vla",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.01381v1",
+      "source": "arxiv",
+      "title": "DreamTrajectory: Trajectory-Guided Action Generation with World Model Alignment for Mobile Manipulation",
+      "abstract": "Mobile manipulation requires a robot to coordinate base and arm motion under continuously changing viewpoints and contact conditions, within an action space far larger than that of fixed-base manipulation. Existing Vision-Language-Action (VLA) policies are limited in two respects. (i)They map observations directly to whole-body action chunks, searching this large action space without an explicit task-space motion plan, which makes coordinated base--arm prediction imprecise. (ii)They execute the predicted chunk open-loop, without checking whether the actions can realize the motion the policy intended, so control errors and unmodeled contacts accumulate into a gap between planned and realized motion. We present DreamTrajectory, a trajectory-guided framework for language-conditioned mobile manipulation that introduces one component for each limitation. Addressing(i), DreamTrajectory jointly predicts an intention-level end-effector trajectory and a whole-body action chunk in a single action expert, so that the trajectory explicitly guides base--arm action generation instead of remaining implicit. Addressing(ii), a lightweight trajectory world model predicts the trajectory that a candidate action chunk would induce, and a test-time search--predict--score procedure selects the candidate best aligned with the planned trajectory. On MS-HAB, trajectory guidance raises average success from 32.3% to 47.5% and test-time refinement further to 54.8%, with the largest gains on contact-rich articulated-object tasks. On three real-world mobile manipulation tasks, the corresponding average success rates are 63.3%, 81.7%, and 90.0%.",
+      "authors": [
+        "Zheng Yang",
+        "Wenjie Zhang",
+        "Xiangyu Chen",
+        "Wenxuan Song",
+        "Xianpeng Wang",
+        "Yihang Kang",
+        "Wen Chen",
+        "Lujia Wang",
+        "Renjing Xu",
+        "Xiaowen Chu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-02T17:02:48+00:00",
+      "link": "https://arxiv.org/pdf/2608.01381v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "VLA policy with trajectory-guided world model alignment for mobile manipulation, transferable to tactile VLA",
+      "llm_evidence_cn": "VLA策略结合轨迹引导与世界模型对齐，方法可迁移至触觉VLA",
+      "llm_evidence": "VLA策略结合轨迹引导与世界模型对齐，方法可迁移至触觉VLA",
+      "canonical_evidence": "VLA策略结合轨迹引导与世界模型对齐，方法可迁移至触觉VLA",
+      "llm_tldr_en": "DreamTrajectory improves VLA policies for mobile manipulation by generating with explicit task-space trajectory and aligning with a world model to reduce the gap between planned and realized motion, enabling precise whole-body action generation.",
+      "llm_tldr_cn": "现有VLA策略在移动操作中直接映射观测到全身动作块，缺乏显式任务空间轨迹且开环执行易积累控制误差。DreamTrajectory提出轨迹引导的动作生成，并利用世界模型对齐确保动作能实现预期运动。该方法在移动操作中提升规划与执行的一致性，减少了未建模接触导致的漂移，为VLA策略与动作条件世界模型结合提供了范例。",
+      "llm_tldr": "现有VLA策略在移动操作中直接映射观测到全身动作块，缺乏显式任务空间轨迹且开环执行易积累控制误差。DreamTrajectory提出轨迹引导的动作生成，并利用世界模型对齐确保动作能实现预期运动。该方法在移动操作中提升规划与执行的一致性，减少了未建模接触导致的漂移，为VLA策略与动作条件世界模型结合提供了范例。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.00464v1",
+      "source": "arxiv",
+      "title": "Learning to Predict Contact Force Distributions from Vision Leveraging Object Geometry Priors",
+      "abstract": "Based on vision and prior experience, humans can make rough physical predictions and adjust their manipulation strategies. This paper aims to endow robots with a similar ability. To collect paired data of vision and forces, we use a rigid-body simulator commonly adopted in robotics. However, unlike simulators that output noisy point forces, humans are able to make consistent predictions even in unfamiliar situations. Based on this observation, we hypothesize that predicting smooth force distributions rather than raw point forces can improve both force prediction itself and downstream task performance. To validate this hypothesis, we construct a model that predicts three-dimensional force distributions from a single RGB image of piled daily objects. The target distribution is generated by applying statistical smoothing to point forces obtained from the simulator. Moreover, by incorporating object geometry into the smoothing process, we aim to account for variations in contact states and achieve more consistent vision-based predictions. We conduct extensive evaluations in both simulation and real environments. Results show that our approach improves prediction accuracy, enhances downstream task performance through smoothing, and further benefits from geometry-guided smoothing. Remarkably, the trained model generalizes effectively to real-world scenes despite being trained solely in simulation.",
+      "authors": [
+        "Ryo Hanai",
+        "Yukiyasu Domaea",
+        "Ixchel G. Ramirez-Alpizar",
+        "Abdullah Mustafa",
+        "Floris Erich",
+        "Tetsuya Ogata"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-01T06:11:50+00:00",
+      "link": "https://arxiv.org/pdf/2608.00464v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Predicts contact force distributions from vision with object geometry priors, directly supporting robot learning with tactile/force feedback",
+      "llm_evidence_cn": "从视觉结合几何先验预测接触力分布，直接支持带触觉/力反馈的机器人学习",
+      "llm_evidence": "从视觉结合几何先验预测接触力分布，直接支持带触觉/力反馈的机器人学习",
+      "canonical_evidence": "从视觉结合几何先验预测接触力分布，直接支持带触觉/力反馈的机器人学习",
+      "llm_tldr_en": "Predicts smooth 3D contact force distributions from a single RGB image using object geometry priors, avoiding noisy point forces from simulators. Improves force prediction and downstream manipulation. Offers a vision-only route to tactile-like force feedback for robot learning.",
+      "llm_tldr_cn": "为让机器人像人一样根据视觉经验预判物理接触，论文利用物体几何先验从单张RGB图像预测平滑的三维接触力分布，取代仿真器中带噪的点力输出。实验验证，平滑力分布假设能同时提高力预测质量与下游操作表现。该方法为机器人提供了一种无需触觉传感器即可获得接触力反馈的学习途径，对触觉反馈相关的操作学习具有直接参考价值。",
+      "llm_tldr": "为让机器人像人一样根据视觉经验预判物理接触，论文利用物体几何先验从单张RGB图像预测平滑的三维接触力分布，取代仿真器中带噪的点力输出。实验验证，平滑力分布假设能同时提高力预测质量与下游操作表现。该方法为机器人提供了一种无需触觉传感器即可获得接触力反馈的学习途径，对触觉反馈相关的操作学习具有直接参考价值。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.03103v1",
+      "source": "arxiv",
+      "title": "A Hierarchical Approach to Imitation Learning for Manipulation Tasks Requiring Time Varying Forces",
+      "abstract": "Diffusion policies have shown strong performance in learning complex, multi-modal behaviors for robotic manipulation. However, their application to contact-rich disassembly tasks remains limited by a key trade-off: the iterative denoising process introduces inference latencies that makes high frequency control difficult, which is essential for realizing dynamic interactions such as chiseling and prying. Recent action-chunking techniques mitigate latency but use an open-loop execution window, rendering the system blind to rapid force transients caused by fracture events. To bridge this gap, we introduce the Diffusion Policy Augmented by Fast Trajectory Generation (DPA-FTG). Compared to recent visual-tactile approaches that focus on positional correction, DPA-FTG decouples low-frequency planning from high-frequency force regulation. At the high level ($5$ Hz), a conditional diffusion model predicts a sequence of latent parameters for selecting a strategy from a learned vocabulary of task primitives. At the low level ($60$ Hz), a lightweight, force-conditioned policy acts as a neural impedance controller, modulating execution in real-time to maintain contact stability. We validate our approach on a bimanual battery disassembly task involving the separation of a compliant sheet. Experimental evaluation demonstrates that DPA-FTG outperforms state-of-the-art baselines, including Reactive Diffusion Policy (RDP).",
+      "authors": [
+        "Rishabh Shukla",
+        "Adithya Santhosh",
+        "Shaili Gandhi",
+        "Samrudh Moode",
+        "Satyandra K. Gupta"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-04T04:21:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.03103v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "imitation learning with force feedback for contact-rich tasks",
+      "llm_evidence_cn": "含力反馈的模仿学习，用于接触丰富任务",
+      "llm_evidence": "含力反馈的模仿学习，用于接触丰富任务",
+      "canonical_evidence": "含力反馈的模仿学习，用于接触丰富任务",
+      "llm_tldr_en": "DPA-FTG augments diffusion policy with fast trajectory generation to enable high-frequency closed-loop control in contact-rich disassembly, preserving sensitivity to rapid force transients for time-varying force tasks.",
+      "llm_tldr_cn": "针对扩散策略在接触丰富拆解任务中因迭代去噪引入推理延迟而难以实现高频控制的问题，本文提出DPA-FTG，将扩散策略与快速轨迹生成相结合，在闭环执行中保持对断裂等快速力瞬变的感知。相比近期视觉-触觉方法，该方法在时变力操控任务中兼顾了高频反应和策略表达力，提升了接触丰富操作的性能。相关技术可被用于触觉反馈的机器人操作学习。",
+      "llm_tldr": "针对扩散策略在接触丰富拆解任务中因迭代去噪引入推理延迟而难以实现高频控制的问题，本文提出DPA-FTG，将扩散策略与快速轨迹生成相结合，在闭环执行中保持对断裂等快速力瞬变的感知。相比近期视觉-触觉方法，该方法在时变力操控任务中兼顾了高频反应和策略表达力，提升了接触丰富操作的性能。相关技术可被用于触觉反馈的机器人操作学习。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.00793v1",
+      "source": "arxiv",
+      "title": "DynamicWAM: Dual-Path Motion Conditioning for World-Action Models in Dynamic Manipulation",
+      "abstract": "Dynamic manipulation requires robots to infer target motion and respond promptly, yet existing World-Action Models (WAMs) typically condition only on the current frame and execute large backbones synchronously, limiting motion awareness and responsive control in dynamic scenes. We propose DynamicWAM, a compact WAM for dynamic object manipulation with dual-path motion conditioning. DynamicWAM introduces history-flow conditioning, encoding temporally aligned optical-flow frames alongside the current observation through a frozen pretrained video VAE to preserve spatial motion structure, while injecting kinematic descriptors of displacement, duration, velocity, and acceleration into the action expert to provide motion magnitude and timing. The two complementary paths are fused through joint world-action attention. A distilled compact backbone and real-time chunking (RTC)-based asynchronous execution further enable responsive control. On DOMINO, DynamicWAM achieves a 38.2% success rate and a 53.2 manipulation score, outperforming all evaluated baselines. Across 12 real-world tasks spanning linear, circular, and compound target motion, it achieves a 46.7% average success rate, exceeding the strongest baseline by 22.9 percentage points.",
+      "authors": [
+        "Yunfan Lou",
+        "Hewen Gao",
+        "Xiyu Zhu",
+        "Zhuoran Qiao",
+        "Xuan Han",
+        "Yifan Yang",
+        "Yifan Ye",
+        "Boxian Yao",
+        "Zhibo Pang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-01T17:49:39+00:00",
+      "link": "https://arxiv.org/pdf/2608.00793v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "World action model for dynamic manipulation, no tactile but transferable to tactile WAMs",
+      "llm_evidence_cn": "面向动态操作的世界行动模型，方法可迁移至触觉WAM",
+      "llm_evidence": "面向动态操作的世界行动模型，方法可迁移至触觉WAM",
+      "canonical_evidence": "面向动态操作的世界行动模型，方法可迁移至触觉WAM",
+      "llm_tldr_en": "DynamicWAM enhances world-action models for dynamic manipulation by adding history-flow optical flow conditioning and kinematic descriptors, improving motion awareness and responsiveness.",
+      "llm_tldr_cn": "现有世界行动模型多基于当前帧条件，对动态操作中的目标运动感知不足。DynamicWAM提出双路径运动条件化，将时间对齐的光流历史帧与位移、速度等运动学描述符注入模型，兼顾空间运动结构和运动幅度。在动态操作任务上验证了更强的运动感知与响应能力，为可迁移到触觉世界模型提供了通用运动条件化方法。",
+      "llm_tldr": "现有世界行动模型多基于当前帧条件，对动态操作中的目标运动感知不足。DynamicWAM提出双路径运动条件化，将时间对齐的光流历史帧与位移、速度等运动学描述符注入模型，兼顾空间运动结构和运动幅度。在动态操作任务上验证了更强的运动感知与响应能力，为可迁移到触觉世界模型提供了通用运动条件化方法。",
+      "llm_tags": [
+        "query:tactile-vla:composite"
+      ],
+      "matched_query_tag": "query:tactile-vla:composite",
+      "matched_query_text": "Papers central to 请查找触觉大模型，触觉世界模型，和机器人多模态触觉VLA相关的论文, especially work that connects or combines: tactile large model for robot perception; tactile world model for robot manipulation; multi-modal tactile perception in robotics; tactile vision language action model for robot control; tactile foundation model for universal touch sensing; robot learning with tactile feedback; tactile large model and world model for robot manipulation; multi modal tactile vision language action model for robotics; tactile foundation model and its applications in robot touch sensing.",
+      "matched_requirement_id": "req-composite-tactile-vla",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.03701v1",
+      "source": "arxiv",
+      "title": "LiLa-WAM: Lightweight Latent Reasoning World-Action Model for Robotic Manipulation",
+      "abstract": "World-action modeling has emerged as a promising paradigm for robotic control, as it empowers models to go beyond reacting to observations and anticipate how a scene will evolve. However, existing WAMs often incur substantial computational overhead. Pixel-space methods often allocate substantial capacity to visual details that may not be directly relevant to control, while some latent-space methods require multi-stage training to construct the reasoning space. The resulting training cost can make such methods difficult to train under modest computational budgets. In this work, we propose LiLa-WAM, a lightweight world-action model that reasons about the future in a compact latent space and can be trained end-to-end on a single 24GB GPU. Its core design is a compact latent reasoning space jointly shaped by future-state prediction and action generation, which keeps the model lightweight while remaining well aligned with control. For task specification, we further propose the Visual Transition Token(VTT), a language-free task representation that encodes each task as a direction in visual feature space. Experiments on RoboTwin~2.0, LIBERO, and real-robot tasks demonstrate LiLa-WAM's effectiveness, achieving 90.48\\% success across 50 RoboTwin tasks with single-GPU training.",
+      "authors": [
+        "Fan Yang",
+        "Yuting Su",
+        "Xiaobo Wang",
+        "Yuncheng You",
+        "Fugui Fan",
+        "Yuting Wu",
+        "Minghui Wu",
+        "Chenxu Zhao",
+        "JiaHong Ning",
+        "Peiguang Jing"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-04T14:06:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.03701v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "latent world-action model for robotic manipulation",
+      "llm_evidence_cn": "潜在世界-动作模型，用于机器人操作",
+      "llm_evidence": "潜在世界-动作模型，用于机器人操作",
+      "canonical_evidence": "潜在世界-动作模型，用于机器人操作",
+      "llm_tldr_en": "LiLa-WAM is a lightweight world-action model that reasons about future scenes in a compact latent space, trainable end-to-end on one 24GB GPU for efficient robotic manipulation.",
+      "llm_tldr_cn": "针对现有世界-动作模型计算开销大、训练成本高的问题，本文提出LiLa-WAM轻量级潜在推理世界-动作模型，在紧凑潜空间中预测场景演进，并能在单块24GB GPU上端到端训练。该方法避免像素空间的无关细节和多阶段训练，为资源受限环境下的机器人操作提供了高效世界模型。该范式可进一步扩展至触觉等模态。",
+      "llm_tldr": "针对现有世界-动作模型计算开销大、训练成本高的问题，本文提出LiLa-WAM轻量级潜在推理世界-动作模型，在紧凑潜空间中预测场景演进，并能在单块24GB GPU上端到端训练。该方法避免像素空间的无关细节和多阶段训练，为资源受限环境下的机器人操作提供了高效世界模型。该范式可进一步扩展至触觉等模态。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01265v1",
+      "source": "arxiv",
+      "title": "Hermite Curves as Trajectory Priors for Vision-Language-Action Models",
+      "abstract": "Despite recent progress in Vision-Language-Action (VLA) models for robotic manipulation, the action chunk remains a weakly structured interface. Existing work typically flatten each chunk into per-timestep controls, relying on implicit data learning that manifests as jagged motion and boundary discontinuities during physical execution. To address these limitations, we introduce Hermite trajectory priors, parameterizing the chunk trajectory as a piecewise cubic Hermite curve defined by endpoint positions and velocities to explicitly enforce smoothness and continuity. We instantiate this fixed operator across discrete autoregressive and continuous generative paradigms via three variants: (1) Hermite Tokens, which predict quantized boundary variables autoregressively; (2) Hermite Scaffold, which decomposes clean actions into a base scaffold and residuals; and (3) Hermite Regularization, which applies the prior strictly as an auxiliary training objective. Across simulation benchmarks and real-robot platforms, Hermite Regularization achieves superior performance among these three variants, improving π0.5 baseline success rates from 95.9% to 98.7% on LIBERO, 85.7% to 90.9% on LIBERO-plus, and 63.4% to 90.0% across four real-robot tasks without additional inference overhead. Trajectory analyses reveal that explicitly structuring trajectory priors serves most effectively as a learning inductive bias rather than a runtime constraint.",
+      "authors": [
+        "Qi Lv",
+        "Jianming Xing",
+        "Zhao Yang",
+        "Mingyuan Yao",
+        "Yinan Shi",
+        "Yawei Jueluo",
+        "Mike Zheng Shou",
+        "Xiang Deng"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-08-02T14:18:17+00:00",
+      "link": "https://arxiv.org/pdf/2608.01265v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Hermite trajectory priors for VLA models, improving action chunk structure, applicable to tactile VLA",
+      "llm_evidence_cn": "为VLA模型提供Hermite轨迹先验，改进动作块结构，可应用于触觉VLA",
+      "llm_evidence": "为VLA模型提供Hermite轨迹先验，改进动作块结构，可应用于触觉VLA",
+      "canonical_evidence": "为VLA模型提供Hermite轨迹先验，改进动作块结构，可应用于触觉VLA",
+      "llm_tldr_en": "This paper introduces piecewise cubic Hermite curves as trajectory priors for VLA models, parameterizing action chunks by endpoint positions and velocities to enforce smoothness and continuity, instantiated in autoregressive and generative paradigms.",
+      "llm_tldr_cn": "VLA模型的原始动作块缺乏结构，逐时刻控制可能导致动作抖动和边界不连续。本文提出用分段三次Hermite曲线参数化动作块，以端点位置和速度显式施加平滑与连续约束，并在离散自回归和连续生成两类范式下实现三种变体。该方法以固定算子注入VLA，显著提升物理执行的动作平滑性，为动作块结构化提供了通用先验。",
+      "llm_tldr": "VLA模型的原始动作块缺乏结构，逐时刻控制可能导致动作抖动和边界不连续。本文提出用分段三次Hermite曲线参数化动作块，以端点位置和速度显式施加平滑与连续约束，并在离散自回归和连续生成两类范式下实现三种变体。该方法以固定算子注入VLA，显著提升物理执行的动作平滑性，为动作块结构化提供了通用先验。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.01573v1",
+      "source": "arxiv",
+      "title": "Uncovering and Mitigating Positional Blind Spots in Vision-Language-Action Models",
+      "abstract": "Recent Vision-Language-Action (VLA) models achieve promising performance in robotic manipulation, typically measured by success rates aggregated over predefined object configurations, an evaluation that implicitly assumes spatially uniform competence across the workspace. However, this assumption does not hold: even with the instruction and every other scene factor held fixed, merely relocating a task-irrelevant distractor can sharply raise the failure probability within localized, spatially coherent regions, which we term Positional Blind Spots (PBS). In this paper, we propose a two-stage black-box framework to uncover and mitigate PBS. During the uncovering stage, we grid the workspace and apply a one-sided log-likelihood-ratio test to localize PBS cells with significantly elevated risk. During the mitigation stage, we fine-tune the policy via LoRA on demonstrations collected from these PBS regions, improving competence there while largely preserving performance across the rest of the workspace. We evaluate our framework on five state-of-the-art VLA policies across two benchmarks, and find that PBS are pervasive and spatially concentrated in all of them, with failure rates up to 0.58. Our search strategy achieves an average F1-score of 0.678, outperforming random search and adaptive sampling baselines by 0.268 and 0.178, respectively. Guided by the discovered regions, targeted fine-tuning reduces the overall failure rate by 40.00%--85.19%.",
+      "authors": [
+        "Dongdong An",
+        "Pengjie Zhao",
+        "Yihao Huang",
+        "Wenbing Tang",
+        "Ziming He",
+        "Jiayi Zhu",
+        "Jifeng Ning",
+        "Qin Zhao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T01:11:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.01573v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLA model robustness study, transferable to tactile VLA evaluation",
+      "llm_evidence_cn": "VLA模型鲁棒性研究，可迁移到触觉VLA评估",
+      "llm_evidence": "VLA模型鲁棒性研究，可迁移到触觉VLA评估",
+      "canonical_evidence": "VLA模型鲁棒性研究，可迁移到触觉VLA评估",
+      "llm_tldr_en": "Discovers Positional Blind Spots in VLA models where relocating a task-irrelevant distractor sharply raises failures, and proposes a black-box framework to uncover and mitigate them.",
+      "llm_tldr_cn": "当前VLA模型评估默认空间均匀能力，但移动无关干扰物即可在局部区域造成失败率突增。该文提出两阶段黑盒框架，通过网格工作区与似然比检验定位位置盲区，并加以缓解。在机器人操作任务上验证了PBS的存在和缓解效果，为VLA模型（含触觉VLA）的鲁棒评估和训练提供了新工具。",
+      "llm_tldr": "当前VLA模型评估默认空间均匀能力，但移动无关干扰物即可在局部区域造成失败率突增。该文提出两阶段黑盒框架，通过网格工作区与似然比检验定位位置盲区，并加以缓解。在机器人操作任务上验证了PBS的存在和缓解效果，为VLA模型（含触觉VLA）的鲁棒评估和训练提供了新工具。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.01880v1",
+      "source": "arxiv",
+      "title": "World Action Models in Real Time: An Empirical Study of Smooth Execution via Asynchronous Deployment",
+      "abstract": "World Action Models generate fixed-horizon action chunks through iterative denoising, creating substantial inference latency that can cause pauses, stale actions, and discontinuities during robotic execution. We present an empirical study of asynchronous deployment strategies that overlap model inference with action execution to enable responsive and smooth control. We compare six strategies, including synchronous execution, pure asynchronous switching, post-hoc action blending, denoising-time blending, inference-time velocity guidance, and prefix-conditioned generation, on a 10 Hz bimanual robot. Evaluation combines offline trajectory analysis with online experiments across dynamic manipulation, precision-critical placement, and long-horizon tasks. Our results identify accurate temporal alignment between observations, predictions, and executed commands as a fundamental requirement. Alignment errors produce persistent chunk-boundary discontinuities that cannot be corrected through blending alone. With proper alignment, direct action weighting provides a simple and smooth baseline but sacrifices accuracy in precision-critical tasks. Inference-time velocity guidance fails to reliably constrain committed actions on our platform. In contrast, prefix-conditioned generation achieves the best overall balance between task performance, execution speed, and trajectory smoothness by learning consistent action continuations during training. These findings clarify the practical trade-offs among asynchronous deployment strategies and provide guidance for deploying high-latency World Action Models in real-time robotic systems.",
+      "authors": [
+        "Motubrain Team"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T08:24:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.01880v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "empirical study of asynchronous deployment for world action models, relevant to real-time tactile world models",
+      "llm_evidence_cn": "世界动作模型异步部署的实证研究，与实时触觉世界模型相关",
+      "llm_evidence": "世界动作模型异步部署的实证研究，与实时触觉世界模型相关",
+      "canonical_evidence": "世界动作模型异步部署的实证研究，与实时触觉世界模型相关",
+      "llm_tldr_en": "This paper empirically studies asynchronous deployment strategies that overlap inference with execution for World Action Models, comparing six strategies on a 10 Hz bimanual robot to achieve smooth and responsive control despite iterative denoising latency.",
+      "llm_tldr_cn": "世界动作模型通过迭代去噪生成固定时域动作块，推理延迟会造成执行停顿和动作不连续。本文在10Hz双臂机器人上比较了六种异步部署策略，包括纯异步切换、动作混合、去噪时混合、推理时速度引导和前缀条件生成等。离线轨迹分析和在线实验表明，合理的异步调度能显著提升动态操作和精度关键任务的平滑性，为实时部署触觉世界模型提供了实用参考。",
+      "llm_tldr": "世界动作模型通过迭代去噪生成固定时域动作块，推理延迟会造成执行停顿和动作不连续。本文在10Hz双臂机器人上比较了六种异步部署策略，包括纯异步切换、动作混合、去噪时混合、推理时速度引导和前缀条件生成等。离线轨迹分析和在线实验表明，合理的异步调度能显著提升动态操作和精度关键任务的平滑性，为实时部署触觉世界模型提供了实用参考。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.02197v1",
+      "source": "arxiv",
+      "title": "Look Where It Matters: Adaptive Visual Refinement for Vision-Language-Action Models",
+      "abstract": "Visual representations of VLA models remain unreliable for spatially precise robotic manipulation. We uncover that vision encoders in VLAs also exhibit attention artifacts previously documented in generic Vision Transformers, and further show that, in embodied policies, these artifacts are closely associated with spatial perception capabilities acquired during post-training. As the encoder learns task-relevant information such as object location, depth ordering, and local geometry, limited global-token capacity causes part of this information to spill into low-information patch tokens. We introduce AtVLA, a framework that inserts learnable register tokens into the visual encoder. Trained end-to-end using only embodied data and the original action objective, these registers emerge as dedicated carriers of embodied spatial information, while the remaining patch tokens recover clean and spatially faithful attention distributions crucial for precise target localization and fine-grained contact. Clean attention restores reliable localization, but cannot recover geometric details lost in low-resolution observations. AtVLA therefore couples attention rectification with uncertainty-gated local refinement. The action expert samples multiple action chunks and estimates uncertainty from their disagreement; only for uncertain predictions, action-conditioned attention rollout identifies the task-relevant region, which is cropped, re-encoded at high resolution, and appended to the cached prefix for refined action generation. Across LIBERO, SimplerEnv, and a challenging single-view real-world benchmark, AtVLA improves the average LIBERO success rate from 94.2% to 98.4% and real-world success from 46.5% to 69.0%. The cropping is triggered on approximately 30% of replanning steps, resulting in only 1.4-1.6x the total computation of the base model under the representative deployment setting.",
+      "authors": [
+        "Jin Cui",
+        "Yanbin Hu",
+        "Xinyue Long",
+        "Linkai Li",
+        "Boran Zhao",
+        "Pengju Ren"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-03T13:18:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.02197v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Improves VLA visual encoder with register tokens, relevant to tactile VLA if extended",
+      "llm_evidence_cn": "通过可学习寄存器token改进VLA视觉编码器，可推广到触觉VLA",
+      "llm_evidence": "通过可学习寄存器token改进VLA视觉编码器，可推广到触觉VLA",
+      "canonical_evidence": "通过可学习寄存器token改进VLA视觉编码器，可推广到触觉VLA",
+      "llm_tldr_en": "AtVLA inserts learnable register tokens into VLA vision encoders to fix attention artifacts and improve spatial perception, enhancing embodied policies without requiring additional data, and can be seen as a general visual refinement method for VLA models.",
+      "llm_tldr_cn": "视觉语言动作模型在空间精确操作中视觉表示不可靠，其视觉编码器存在注意力伪影，且全局token容量有限导致空间信息泄漏。AtVLA在编码器中插入可学习的寄存器token，仅使用具身数据即可端到端训练，修复这些伪影并增强位置、深度和局部几何感知。实验表明该方法显著提升VLA操作精度，为多模态触觉VLA的视觉分支改进提供了一般性方法。",
+      "llm_tldr": "视觉语言动作模型在空间精确操作中视觉表示不可靠，其视觉编码器存在注意力伪影，且全局token容量有限导致空间信息泄漏。AtVLA在编码器中插入可学习的寄存器token，仅使用具身数据即可端到端训练，修复这些伪影并增强位置、深度和局部几何感知。实验表明该方法显著提升VLA操作精度，为多模态触觉VLA的视觉分支改进提供了一般性方法。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
