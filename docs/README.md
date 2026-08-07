@@ -6,54 +6,45 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-05
-- 运行时间：2026-08-05 21:53:08 UTC
+- 最新运行日期：2026-08-07
+- 运行时间：2026-08-07 02:16:53 UTC
 - 运行状态：成功
-- 本次总论文数：11
-- 精读区：0
-- 速读区：11
+- 本次总论文数：7
+- 精读区：1
+- 速读区：6
 
 ### 今日简报（AI）
-今日共速读11篇论文，聚焦具身智能与机器人操纵前沿，暂无精读。最值得关注的是世界模型与预测表征结合的高效具身控制（《Enfold》7.0分），以及轨迹引导动作生成的移动操纵方案（《DreamTrajectory》7.0分）。建议优先精读这两篇，并顺带浏览层级模仿学习处理时变力任务的思路。
-- 详情：[/202608/05/README](/202608/05/README)
+今日共读7篇论文，其中精读1篇、速读6篇，重点关注具身智能与机器人操作方向。
+
+最值得精读的是《Tactus》（9.0分），它用低成本压力阵列实现开放词汇物体识别，为触觉感知带来新思路。
+
+建议优先阅读这篇高分论文，并结合其余三篇VLA模型的工作，快速把握当前触觉与视觉-语言-动作模型的前沿进展。
+- 详情：[/202608/07/README](/202608/07/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Tactus: Open-Vocabulary Object Recognition from Low-Cost Pressure Arrays](/202608/07/2608.04043v1-tactus-open-vocabulary-object-recognition-from-low-cost-pressure-arrays)  
+   标签：评分：9.0/10、query:tactile-vla
+   evidence：基于低成本压力阵列的开放词汇物体识别，采用掩码自编码器预训练，体现触觉基础模型方法
 
 ### 速读区论文标签
-1. [Enfold: Folding World Model Imagination into Predictive Representations for Ultra-Efficient Embodied Control](/202608/05/2607.26657v2-enfold-folding-world-model-imagination-into-predictive-representations-for-ultra-efficient-embodied-control)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：将世界模型计算融入预测表示以支持具身控制，可迁移到触觉世界模型
-2. [DreamTrajectory: Trajectory-Guided Action Generation with World Model Alignment for Mobile Manipulation](/202608/05/2608.01381v1-dreamtrajectory-trajectory-guided-action-generation-with-world-model-alignment-for-mobile-manipulation)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：VLA策略结合轨迹引导与世界模型对齐，方法可迁移至触觉VLA
-3. [A Hierarchical Approach to Imitation Learning for Manipulation Tasks Requiring Time Varying Forces](/202608/05/2608.03103v1-a-hierarchical-approach-to-imitation-learning-for-manipulation-tasks-requiring-time-varying-forces)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：含力反馈的模仿学习，用于接触丰富任务
-4. [LiLa-WAM: Lightweight Latent Reasoning World-Action Model for Robotic Manipulation](/202608/05/2608.03701v1-lila-wam-lightweight-latent-reasoning-world-action-model-for-robotic-manipulation)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：潜在世界-动作模型，用于机器人操作
-5. [ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts](/202608/05/2607.28993v1-st-wam-semantic-temporal-world-action-model-for-robust-manipulation-under-visual-distribution-shifts)  
+1. [ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts](/202608/07/2607.28993v1-st-wam-semantic-temporal-world-action-model-for-robust-manipulation-under-visual-distribution-shifts)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向视觉分布偏移的WAM，与触觉VLA鲁棒性相关
-6. [Learning to Predict Contact Force Distributions from Vision Leveraging Object Geometry Priors](/202608/05/2608.00464v1-learning-to-predict-contact-force-distributions-from-vision-leveraging-object-geometry-priors)  
+   evidence：面向机器人操作的世界行动模型，未涉及触觉
+2. [ActFovea: Runtime Safeguarding for VLA Policies via Spatiotemporal Visual-Action Consistency](/202608/07/2607.29169v1-actfovea-runtime-safeguarding-for-vla-policies-via-spatiotemporal-visual-action-consistency)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：从视觉结合几何先验预测接触力分布，直接支持带触觉/力反馈的机器人学习
-7. [DynamicWAM: Dual-Path Motion Conditioning for World-Action Models in Dynamic Manipulation](/202608/05/2608.00793v1-dynamicwam-dual-path-motion-conditioning-for-world-action-models-in-dynamic-manipulation)  
+   evidence：面向VLA策略的运行时保护
+3. [Latency-Tolerant Cloud-Edge Collaborative Vision-Language-Action Models via Emergent Representational Specialization](/202608/07/2608.00569v1-latency-tolerant-cloud-edge-collaborative-vision-language-action-models-via-emergent-representational-specialization)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：面向动态操作的世界行动模型，方法可迁移至触觉WAM
-8. [Hermite Curves as Trajectory Priors for Vision-Language-Action Models](/202608/05/2608.01265v1-hermite-curves-as-trajectory-priors-for-vision-language-action-models)  
+   evidence：面向机器人控制的VLA策略，处理云边延迟，未引入触觉模态
+4. [DynamicWAM: Dual-Path Motion Conditioning for World-Action Models in Dynamic Manipulation](/202608/07/2608.00793v1-dynamicwam-dual-path-motion-conditioning-for-world-action-models-in-dynamic-manipulation)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：为VLA模型提供Hermite轨迹先验，改进动作块结构，可应用于触觉VLA
-9. [Uncovering and Mitigating Positional Blind Spots in Vision-Language-Action Models](/202608/05/2608.01573v1-uncovering-and-mitigating-positional-blind-spots-in-vision-language-action-models)  
+   evidence：面向机器人操作的世界-动作模型
+5. [ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State for Long-Horizon Manipulation](/202608/07/2608.02326v2-chainvla-chaining-vision-language-action-queries-through-a-unified-execution-state-for-long-horizon-manipulation)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：VLA模型鲁棒性研究，可迁移到触觉VLA评估
-10. [World Action Models in Real Time: An Empirical Study of Smooth Execution via Asynchronous Deployment](/202608/05/2608.01880v1-world-action-models-in-real-time-an-empirical-study-of-smooth-execution-via-asynchronous-deployment)  
+   evidence：面向机器人控制的VLA策略，未涉及触觉模态
+6. [Grounded Semantic Re-Binding for Robust Instruction Generalization in Vision-Language-Action Models](/202608/07/2608.02497v1-grounded-semantic-re-binding-for-robust-instruction-generalization-in-vision-language-action-models)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：世界动作模型异步部署的实证研究，与实时触觉世界模型相关
-11. [Look Where It Matters: Adaptive Visual Refinement for Vision-Language-Action Models](/202608/05/2608.02197v1-look-where-it-matters-adaptive-visual-refinement-for-vision-language-action-models)  
-   标签：评分：6.0/10、query:tactile-vla
-   evidence：通过可学习寄存器token改进VLA视觉编码器，可推广到触觉VLA
+   evidence：面向机器人操作的VLA模型，改进指令泛化，不涉及触觉
 
 
 <div class="dpr-home-promo-card">
