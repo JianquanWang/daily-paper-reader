@@ -1,0 +1,236 @@
+Title: Compliant Sphere Lattice Contact: Distributed Contact Modeling for Sphere-Based Robot Representations
+
+URL Source: https://arxiv.org/pdf/2608.00263v1
+
+Published Time: Tue, 04 Aug 2026 00:13:38 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# Compliant Sphere Lattice Contact: Distributed Contact Modeling for Sphere-Based Robot Representations 
+
+Nataliya Nechyporenko, Ava Abderezaei, Alessandro Roncone 
+
+Abstract — Contact planning in robotics requires models that are both computationally efficient and physically accurate. Sphere-based robot representations satisfy the first requirement by enabling fast collision checking and differentiable geometry, but sacrifice physical accuracy by relying on point contact which cannot capture contact patch area, pressure distributions, rota-tional stiffness, or frictional moments. We introduce Compliant Sphere Lattice Contact (CSLC), a distributed contact model that operates natively on sphere representations by modeling the robot interface as a compliant lattice of surface spheres connected through anchor and lateral springs. When pressed against an object, the lattice deforms to produce a spatially distributed contact patch that improves the physical accuracy of sphere-based contact. We validate CSLC across two inde-pendent solvers and show preliminary results demonstrating contact patch formation and improved grasp stability. 
+
+I. I NTRODUCTION 
+
+Physical contact is the fundamental mechanism through which robots interact with their environment. To accomplish tasks like washing dishes or clearing a table, robots must accurately predict how objects will respond to contact. Model-based contact formulations enable these predictions for simulation, trajectory optimization, planning, and control [1]. However, applying these models in real time intro-duces a challenging computational tradeoff. Contact models must capture complex physical interactions while remaining lightweight enough to evaluate inside tight control loops. Modern robotics increasingly utilizes sphere primitives as a primary geometric representation to satisfy the com-putational demands of planning in real time. Motion plan-ning frameworks such as cuRobo [2], [3], VAMP [4], and AkinoPDF [5] represent robot links as collections of spheres because they enable exceptionally fast collision checking and admit analytical signed distance queries. Furthermore, contact planners adopt spheres because their geometry is fully differentiable [6], [7]. However, the contact models applied to these sphere representations sacrifice physical accuracy. The standard approach relies on point contact. Point contact inherently lacks a contact patch area, meaning it cannot model rotational stiffness, frictional moments, or pressure distributions [8], [9]. When a robot grasps a flat book or a curved cylinder, a point contact model localizes the entire reaction force at a single infinitely small location. This creates fragile grasps that are highly sensitive to microscopic pose errors. To compensate for this instability, planners are forced to artificially inflate friction coefficients or command excessive grip forces. These workarounds inevitably suppress the nuanced mechanics required for dexterous manipulation and risk damaging fragile objects. We introduce Compliant Sphere Lattice Contact (CSLC) to fill this gap. CSLC is a distributed contact model that unifies the speed of sphere primitives with the physical fidelity pre-viously available only to methods based on meshes. Rather than relying on rigid points or volumetric intersections, CSLC models the robot interface as a compliant lattice. The surface consists of sphere primitives connected by anchor springs and lateral springs. When pressed against an object, these spheres displace to form a spatially distributed contact patch. With this formulation, we take a step toward capturing physical properties of contact like rotational stiffness and pressure distributions that were previously only available to mesh-based methods. We implement CSLC in the Newton simulator and report preliminary results on gripper-object interactions during grasping. II. R ELATED WORK 
+
+Most robotics simulators rely on rigid or locally compliant point-contact models (Linear Complementar-ity Problem (LCP), Nonlinear Complementarity Problem (NCP), or Cone Complementarity Problem (CCP) variants with Hunt–Crossley-style normal laws), which regularize force–penetration but still concentrate load at isolated points and therefore cannot represent contact patch area, pressure distributions, or rotational stiffness [1], [10], [11], [12], [13]. Distributed patch-based models such as Pressure Field Contact (PFC) and its hydroelastic and discrete variants address these limitations by precomputing pressure fields over volumetric or surface meshes and integrating across a contact surface [8], [9], [14]. Surface-contact rigid-body methods model extended rigid patches and their equivalent wrenches [15], [16], whereas soft-finger models encode compliance in a local lumped contact law [17], [18], [19], [20]. CSLC differs from both by representing the interface as a compliant distributed sphere lattice, so patch formation and load sharing emerge directly on sphere-based geometric surfaces. Complementarity-free and contact-implicit formulations instead focus on how to integrate contact into optimization and control, reformulating time-stepping to remove explicit complementarity constraints and enabling real-time dexter-ous manipulation, but they still assume either point-based or mesh-based contact laws and do not tackle distributed contact in sphere-based representations [21], [22], [23], [24]. In contrast to these existing approaches, our method achieves the physical fidelity of distributed pressure fields directly on sphere-based representations, with a straightfor-ward path to a differentiable formulation. arXiv:2608.00263v1 [cs.RO] 31 Jul 2026 Fig. 1. Compliant Sphere Lattice Contact (CSLC) overview. (Left) The robot finger and object are represented using sphere primitives for fast, differentiable planning, with the finger modeled as a deformable lattice. (Center) CSLC distributes contact forces by connecting surface spheres through a network of anchor and lateral springs. (Right) Preliminary results of a grasped object subjected to a rotational disturbance. The standard point contact model exhibits instability, whereas CSLC generates a distributed contact patch that recovers rotational stiffness and restoring torque, successfully stabilizing the object. 
+
+III. M ETHODS 
+
+A. Sphere Lattice Kinematics 
+
+We start with an arbitrary rigid body that has a defined position and orientation. A collection of surface spheres covers this body. Each sphere i has a rest position pi fixed to the underlying rigid body, a contact radius ri representing the thickness of the compliant skin, and a precomputed outward unit normal ˆ ni determined by its position on the body surface. When the body interacts with another object, the skin at sphere i deforms by a vector displacement δ i ∈ R3, shifting the sphere centre from pi to a deformed centre 
+
+qi = pi + δ i. (1) The contact radius ri stays fixed and only the sphere centre moves. The underlying rigid body obeys ordinary rigid-body dynamics independent of δ . The displacements δ i are the state variables of the contact problem and encode how the compliant skin deforms under load. We decompose δ i in sphere i’s local rest frame as 
+
+δn,i = δ i · ˆni, δ t,i = δ i − δn,i ˆni, (2) where δn,i < 0 is the signed normal compression of the skin and δ t,i is tangential shear of the compliant layer relative to the rigid body. The tangential component carries the stick-slip restraint of Section III-B.4; without it the model would have no representation of static friction prior to macroscopic slip. We stack the per-sphere displacements into a state vector 
+
+δ = [ δ ⊤ 
+
+> 1
+
+, . . . , δ ⊤ 
+
+> n
+
+]⊤ ∈ R3n.
+
+B. Forces on Each Sphere 
+
+Four distinct forces act on every surface sphere i. These forces determine how the body deforms during contact. 
+
+1) Anchor Spring: A spring connects each sphere centre to its rest position and resists displacement of the compliant skin. Resolving the anchor force in sphere i’s rest frame gives separate stiffnesses on the normal and tangential axes, 
+
+fanchor  
+
+> i
+
+= −ka δn,i ˆni − ρ ka δ t,i, (3) where ka > 0 is the normal anchor stiffness and ρ ∈ (0, 1]
+
+is the tangent ratio. The isotropic case ρ = 1 recovers 
+
+fanchor  
+
+> i
+
+= −ka δ i, while ρ = 1/3 matches the shear modulus of a nearly-incompressible elastomer. 
+
+2) Lateral Coupling: Lateral springs connect adjacent spheres and spread the contact load across a larger area instead of keeping it concentrated at a single point. The lateral force on sphere i is 
+
+flateral  
+
+> i
+
+= −kℓ ∑ 
+
+> j∈N(i)
+
+ δ i − δ j
+
+, (4) where N (i) is the set of neighbouring spheres and kℓ ≥ 0controls the load spreading. The coupling acts component-wise on the vector displacement, so it transmits both normal compression and tangential shear between neighbours. The lateral spring coupling plays the role of a continuous pressure field as in the hydroelastic model [8]. Both mech-anisms ensure that the contact load is distributed across the patch rather than concentrated at a single point. 
+
+3) Contact Force: In our formulation, we assume that both the gripper lattice and the target object are represented as a collection of spheres. However, by sampling points on a mesh and using those points in place of spheres, we can also apply CSLC to mesh based objects. This allows us to benchmark CSLC against mature mesh based solvers such as MuJoCo. We write t j for the j-th element of the target surface, which is an object sphere when the target is sphere based and a sampled point when the target is mesh based. Each t j carries an outward normal ˆ nface , j and an area element 
+
+A j, and these areas sum to the total target surface area. When the target is sphere based, the normal is the sphere’s outward radial direction, the area element is its packing area, and the face penetration described below then reduces to an overlap between two spheres. When the target is mesh based, the normal is the surface normal at the sampled point and the area element is the Voronoi area of that point. For each lattice sphere i that reaches t j, the contact direction is the face normal ˆ ni j = ˆnface , j, and the signed face penetration overlap is φi j = − ˆnface , j · (qi − t j), which is zero at first geometric contact between the lattice sphere centre and the target’s tangent plane and grows monotonically with penetration depth. The per-pair contact force on lattice sphere 
+
+i from target element j follows a Hertz-like compliance law, 
+
+fcontact  
+
+> i j
+
+= kc A j si j φ eff  
+
+> i j
+
+ˆni j , (5) 
+
+φ eff  
+
+> i j
+
+= max (φi j , 0)3/2, (6) 
+
+si j = wt,i j 
+
+∑k wt,k j 
+
+, (7) with contact stiffness kc (units N /m2/7) and locality kernel 
+
+wt,i j that marks each lattice sphere reaching target element 
+
+t j within its tangent-plane radius ri. The share weight si j 
+
+gives each reaching lattice sphere a fraction of the target’s area element A j, so each target element contributes A j
+
+of area to the total force regardless of how many lattice spheres reach it. The total body force Fbody = ∑i, j fcontact 
+
+> i j
+
+is therefore a Riemann approximation of the surface in-tegral R 
+
+> Ω
+
+kc φ eff ˆnface dA analogous to the pressure integral in pressure-field methods [9] but with a Hertz-like growth. Force is zero at φi j ≤ 0 and grows smoothly with penetration, with a C1 onset at φi j = 0. In the future, we plan to smooth the max (·, 0) clamp for gradient-based use. 
+
+4) Pre-sliding Friction: The compliant skin develops tan-gential shear before macroscopic slip occurs. Following the pre-sliding (elastoplastic) friction literature [25], [26], we tie friction to the tangential displacement δ t,i from Eq. (2) rather than to a sliding velocity. Unlike LuGre-style models, which carry a separate state variable for the bristle deflection, δ t,i is already part of the lattice’s displacement field and emerges from the quasistatic equilibrium solve. Let fn,i = |Fcontact  
+
+> i
+
+· ˆni|
+
+denote the aggregate normal-axis magnitude of the contact force on sphere i. The friction force is 
+
+ffriction  
+
+> i
+
+= − kstick μ fn,i
+
+kstick ∥δ t,i∥ + μ fn,i
+
+δ t,i, (8) where kstick is the tangential stick stiffness and μ the Coulomb coefficient. The expression interpolates smoothly between an elastic spring −kstick δ t,i at small shear and Coulomb saturation at magnitude μ fn,i. Being quasistatic and tangentially stateless, it captures pre-slip elasticity and the Coulomb limit but not kinetic sliding dynamics, which suffices for the grasping regime we target.            
+
+> Fig. 2. Deflection of a flat 15 ×15 CSLC lattice under a single contact. The left panel shows the deformed lattice, where only the center sphere receives a contact force of 58 mN and the surrounding deformation is produced entirely by graph-Laplacian lateral coupling. The right panel shows that the radial compression |δn|decays on the scale ℓ=hpkℓ/ka=4.24 mm, consistent with the lattice’s screened-Poisson Green’s function. The grey curve is the exponential envelope exp (−r/ℓ )that bounds its large rasymptote.
+
+C. Contact Stiffness 
+
+In a uniform flat contact each engaged sphere transmits load through three series elements. These are the anchor ka,the contact element, and the target modulus ktarget  
+
+> e
+
+. Linearis-ing the contact law at a reference penetration φ0, one sphere contributes a tangent stiffness κc = 32 kc Ac
+
+√φ0, where Ac
+
+is its contact area from Eq. (5). With Ncontact such chains in parallel, matching the aggregate to a target bulk stiffness 
+
+kbulk  
+
+> e
+
+gives 1
+
+κc
+
+= Ncontact 
+
+kbulk 
+
+> e
+
+− 1
+
+ka
+
+− 1
+
+ktarget 
+
+> e
+
+, kc = 2 κc
+
+3 Ac
+
+√φ0
+
+. (9) This relation grounds kc in a measurable bulk modulus and can be inverted offline for tuning, however, to simplify the analysis in this work we set kc directly. 
+
+D. Quasistatic Equilibrium Solver 
+
+At each timestep the lattice displacement field δ is found by balancing the four forces on every surface sphere i,
+
+fanchor  
+
+> i
+
++ flateral  
+
+> i
+
++ Fcontact  
+
+> i
+
++ ffriction  
+
+> i
+
+= 0, (10) with the four terms supplied by Eqs. (3) to (5) and (8). We solve it with a damped Jacobi sweep, warm-started from the 
+
+δ of the previous timestep. Updates are independent across spheres and map naturally to GPU parallelism. After the lattice solve converges, CSLC hands the de-formed sphere centres qi and the per-sphere contact and fric-tion forces to the host rigid-body simulator, which advances the body state according to its own integration scheme. CSLC is agnostic to the choice of simulator, and we have integrated it with both a MuJoCo rigid-body pipeline (mesh-sampled) and a position-based dynamics pipeline (sphere/particle). IV. E XPERIMENTS , R ESULTS & D ISCUSSION 
+
+A. Lattice Deflection Under Point Load 
+
+We first verify that the spring network distributes a lo-calised load as intended before coupling it to rigid-body dynamics. We build a 15 × 15 flat lattice with 3 mm spacing, 
+
+ka = 100 N/m, kℓ = 200 N/m, and kc = 10 9 N/m 7/2, and press Fig. 3. The three grasp configurations from Fig. 4 in MuJoCo, shown left to right as a flat pad on a sphere, a dome pad on a sphere, and a dome pad on a box. The markers on each object are the CSLC contact samples. Their density over the contact region carries the distributed contact patch that enforces the grip.   
+
+> Fig. 4. CSLC integrated into a MuJoCo squeeze, lift, and hold grasp for three pad and object pairs. The left panel shows the per-pad normal force with the dotted Coulomb slip floors mg /2μ, and the right panel shows the object rising about 20 mm and maintaining the hold.
+
+a single contact sample into the centre sphere from above. Solving the quasistatic equilibrium of Eq. (10) gives the deformation in Fig. 2. Only the centre sphere receives a direct contact force, because every other sphere lies outside the sample’s tangential locality kernel, so the surrounding deformation is produced entirely by the graph-Laplacian lateral coupling. Away from the load, the compression decays with acharacteristic length ℓ = hpkℓ/ka set by the lattice spacing 
+
+h and the lateral-to-anchor stiffness ratio. For our parameters this gives ℓ = 4.24 mm. The right panel of Fig. 2 confirms the decay, with the data tracking the predicted exp (−r/ℓ )
+
+envelope. The patch width is therefore controlled entirely by the kℓ/ka ratio. 
+
+B. Stable Lifting Near the Coulomb Limit 
+
+To test CSLC for grasping applications, we integrate it into a MuJoCo pipeline and run a two-finger squeeze, lift, and hold on the three pad and object pairs in Fig. 3, namely a flat pad on a sphere, a dome pad on a sphere, and a dome pad on a box. The flat pad presents a broad planar lattice and the dome pad a small convex one, so for the same squeeze (1mm φ ) the flat pad engages a larger contact patch while the dome pad engages a small one. A grasp holds the object against gravity only if the friction at the two pads can carry its weight. With friction coefficient 
+
+μ and per-pad normal force Fn, this requires 2μFn ≥ mg ⇒ Fn ≥ mg 
+
+2μ , (11) which sets a slip floor mg /2μ on the grip force. With μ = 0.5this floor is 0 .57 N for the ball and 1 .09 N for the box. Figure 4 shows the results. After the squeeze transient the normal force settles to a steady plateau for every pair, and the object rises smoothly to about 20 mm and holds without slipping. Because it engages the smaller patch, each dome grasp settles near its slip floor, at 0 .7 N against the 0 .57 N ball floor and 1 .5 N against the 1 .09 N box floor, roughly 1 .4times the limit, while the broader flat patch holds the ball more firmly at 2 .9 N. CSLC therefore produces stable grasps in the low-force regime just above the Coulomb slip limit, which is the gentle grip that a distributed compliant patch is meant to enable. 
+
+C. Rotational Grasp Stability 
+
+We integrate CSLC into the PBD-R solver from our prior work [27], then grasp a rectangular box that simulates a rigid book (2 ×10 ×20 cm, 0 .3 kg) with two curved fingertips approximated with sphre via [28]. The fingers then lift the book into free space, and then we apply a force pulse (3 N, 50 ms) that tries to rotate the book out of the grasp. We compare CSLC against a rigid point-contact baseline, the same fingertip treated as a rigid convex shape, with the scene, friction ( μ = 1.0), and grip kinematics held fixed so that only the contact model varies. The squeeze normal force is identical for both models, giving a friction capacity roughly two orders of magnitude above the book’s weight, so the grasp is never translationally friction-limited and the test isolates rotational stiffness. As Fig. 1 shows, the rigid point contact cannot generate a restoring couple, so the book pitches out of the grasp with over 6 degrees of tilt and slides 18 mm down, whereas CSLC bounds the response to 
+
+±0.7 degrees with negligible height loss and damps back to equilibrium. The distributed patch supplies this restoring torque through its off-axis compliant springs, recovering the rotational stiffness that point contact lacks while operating entirely on sphere primitives. V. C ONCLUSION 
+
+CSLC assumes quasistatic lattice relaxation, so the solver breaks down during high-speed impacts where the skin cannot equilibrate within a timestep. It is also more expensive than point contact at runtime, costing roughly three times as much per step on the same grasp scene. Part of this gap is intrinsic, since CSLC resolves a distributed contact patch where point contact resolves only a few points, and each step solves a quasistatic equilibrium over the lattice rather than a single force evaluation per contact pair. Two changes would address these limits directly. A better-conditioned solve with fewer Jacobi iterations would narrow the runtime gap, and a dynamic extension beyond the quasistatic assumption would let the model handle impacts. Separately, the contact law currently relies on a hard max (·, 0) clamp and hard active-set culls in the forward path, and replacing them with smooth surrogates would make CSLC fully differentiable, opening it to gradient-based planning and control. This work is our initial step toward the broader goal of creating a contact model that is differentiable, physically informative, and practical for real-time robotics. These properties are essential for model-based manipulation and learning-based methods, whose performance is directly tied to the strengths and limitations of the underlying contact models [29], [30]. REFERENCES [1] Q. Le Lidec et al., “Contact models in robotics: A comparative analysis,” IEEE Transactions on Robotics , vol. 40, pp. 3716–3733, 2024. [2] B. Sundaralingam et al., “Curobo: Parallelized collision-free robot motion generation,” in 2023 IEEE International Conference on Robotics and Automation (ICRA) , IEEE, 2023, pp. 8112–8119. [3] B. Sundaralingam, A. Murali, and S. Birchfield, “Curobov2: Dynamics-aware motion generation with depth-fused distance fields for high-dof robots,” arXiv preprint arXiv:2603.05493 , 2026. [4] W. Thomason, Z. Kingston, and L. E. Kavraki, “Motions in mi-croseconds via vectorized sampling-based planning,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) ,IEEE, 2024, pp. 8749–8756. [5] T. Duong et al., “Ultrafast sampling-based kinodynamic planning via differential flatness,” arXiv preprint arXiv:2603.16059 , 2026. [6] V. Kurtz, A. Castro, A. ¨O. ¨Onol, and H. Lin, “Inverse dynamics trajectory optimization for contact-implicit model predictive con-trol,” The International Journal of Robotics Research , vol. 45, no. 1, pp. 23–40, 2026. [7] T. Pang, H. T. Suh, L. Yang, and R. Tedrake, “Global planning for contact-rich manipulation via local smoothing of quasi-dynamic contact models,” IEEE Transactions on robotics , vol. 39, no. 6, pp. 4691–4711, 2023. [8] J. Masterjohn, D. Guoy, J. Shepherd, and A. Castro, “Velocity level approximation of pressure field contact patches,” IEEE Robotics and Automation Letters , vol. 7, no. 4, pp. 11 593–11 600, 2022. [9] R. Elandt, E. Drumwright, M. Sherman, and A. Ruina, “A pressure field model for fast, robust approximation of net contact force and moment between nominally rigid objects,” in 2019 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) ,IEEE, 2019, pp. 8238–8245. [10] R. Tedrake and the Drake Development Team, Drake: Model-based design and verification for robotics , 2019. [11] E. Todorov, T. Erez, and Y. Tassa, “Mujoco: A physics engine for model-based control,” in 2012 IEEE/RSJ international conference on intelligent robots and systems , IEEE, 2012, pp. 5026–5033. [12] E. Coumans and Y. Bai, Pybullet, a python module for physics simulation for games, robotics and machine learning , http:// pybullet.org , 2019. [13] J. Liang et al., “Gpu-accelerated robotic simulation for distributed reinforcement learning,” in Conference on Robot Learning , PMLR, 2018, pp. 270–282. [14] A. M. Castro, F. Permenter, and X. Han, “An Unconstrained Convex Formulation of Compliant Contact,” IEEE Transactions on Robotics , vol. 39, pp. 1301–1320, Oct. 2021. [15] J. Xie and N. Chakraborty, “Rigid body dynamic simulation with line and surface contact,” 2016 IEEE International Conference on Simulation, Modeling, and Programming for Autonomous Robots (SIMPAR) , pp. 9–15, Dec. 2016. [16] J. Xie and N. Chakraborty, “Rigid Body Dynamic Simulation with Multiple Convex Contact Patches,” ArXiv , vol. abs/1809.05555, Aug. 2018. [17] N. Xydas and I. Kao, “Modeling of Contact Mechanics and Friction Limit Surfaces for Soft Fingers in Robotics, with Experimental Results,” The International Journal of Robotics Research , vol. 18, pp. 941–950, Sep. 1999. [18] M. Ciocarlie, C. Lackner, and P. Allen, Soft Finger Model with Adaptive Contact Geometry for Grasping and Manipulation Tasks ,2006. [19] J. Xu, T. Aykut, D. Ma, and E. Steinbach, “Non-planar Frictional Surface Contacts: Modeling and Application to Grasping,” ArXiv ,vol. abs/1909.06885, Sep. 2019. [20] S. Bakhy, “Modeling of contact pressure distribution and friction limit surfaces for soft fingers in robotic grasping,” Robotica , vol. 32, pp. 1005–1015, Jan. 2014. [21] W. Jin, “Complementarity-free multi-contact modeling and optimization for dexterous manipulation,” arXiv preprint arXiv:2408.07855 , 2024. [22] J.-P. Sleiman et al., “Contact-implicit trajectory optimization for dynamic object manipulation,” in 2019 IEEE/RSJ international conference on intelligent robots and systems (IROS) , IEEE, 2019, pp. 6814–6821. [23] N. Doshi et al., “Contact-implicit optimization of locomo-tion trajectories for a quadrupedal microrobot,” arXiv preprint arXiv:1901.09065 , 2019. [24] V. Kurtz and H. Lin, “Contact-implicit trajectory optimization with hydroelastic contact and ilqr,” in 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , IEEE, 2022, pp. 8829–8834. [25] C. C. De Wit, H. Olsson, K. J. Astrom, and P. Lischinsky, “A new model for control of systems with friction,” IEEE Transactions on automatic control , vol. 40, no. 3, pp. 419–425, 1995. [26] A. M. Castro, X. Han, and J. Masterjohn, “Irrotational Contact Fields,” IEEE Transactions on Robotics , vol. 41, pp. 6176–6192, Dec. 2023. [27] A. Abderezaei et al., “Physically accurate rigid-body dynamics in particle-based simulation,” arXiv preprint arXiv:2603.14634 , 2026. [28] N. Nechyporenko, Y. Zhang, S. Campbell, and A. Roncone, “Mor-phit: Flexible spherical approximation of robot morphology for representation-driven adaptation,” arXiv preprint arXiv:2507.14061 ,2025. [29] L. Yang et al., “Physics-driven data generation for contact-rich manipulation via trajectory optimization,” arXiv preprint arXiv:2502.20382 , 2025. [30] A. Kanehira et al., “Rl-driven data generation for robust vision-based dexterous grasping,” arXiv preprint arXiv:2504.18084 , 2025.

@@ -1,15 +1,15 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-07T02:13:13.566860+00:00",
+  "generated_at": "2026-08-07T20:28:06.639449+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
-    "deep_divecandidates": 1,
+    "deep_divecandidates": 2,
     "deep_cap": 6,
-    "deep_selected": 1,
-    "quick_candidates": 6,
+    "deep_selected": 2,
+    "quick_candidates": 9,
     "quick_skim_target": 11,
-    "quick_selected": 6
+    "quick_selected": 9
   },
   "deep_dive": [
     {
@@ -32,13 +32,13 @@
         "query:tactile-vla"
       ],
       "llm_score": 9.0,
-      "llm_evidence_en": "Open-vocabulary object recognition from pressure arrays using masked-autoencoder pretraining, a tactile foundation model approach",
-      "llm_evidence_cn": "基于低成本压力阵列的开放词汇物体识别，采用掩码自编码器预训练，体现触觉基础模型方法",
-      "llm_evidence": "基于低成本压力阵列的开放词汇物体识别，采用掩码自编码器预训练，体现触觉基础模型方法",
-      "canonical_evidence": "基于低成本压力阵列的开放词汇物体识别，采用掩码自编码器预训练，体现触觉基础模型方法",
-      "llm_tldr_en": "Tactus trains an open-vocabulary object recognition model on low-cost resistive pressure arrays using masked-autoencoder pretraining and the sensor's calibration affine, achieving competitive accuracy without a classifier head, serving as a tactile foundation model.",
-      "llm_tldr_cn": "本文针对电阻式压力阵列这一最广泛使用的低成本触觉传感器，提出了开放词汇物体识别模型Tactus。它利用大规模无标签同一传感器帧进行掩码自编码器预训练，并结合传感器自身的标定仿射变换，无需训练分类头即可在STAG基准上达到与监督封闭集CNN相当或更优的结果。该方法展现了从低成本的触觉数据中构建触觉基础模型的可行路径，推动了通用触摸感知的发展。",
-      "llm_tldr": "本文针对电阻式压力阵列这一最广泛使用的低成本触觉传感器，提出了开放词汇物体识别模型Tactus。它利用大规模无标签同一传感器帧进行掩码自编码器预训练，并结合传感器自身的标定仿射变换，无需训练分类头即可在STAG基准上达到与监督封闭集CNN相当或更优的结果。该方法展现了从低成本的触觉数据中构建触觉基础模型的可行路径，推动了通用触摸感知的发展。",
+      "llm_evidence_en": "open-vocabulary tactile recognition from low-cost pressure arrays with foundation-model-style pretraining",
+      "llm_evidence_cn": "基于低成本压感阵列的开放词汇触觉识别及类基础模型预训练",
+      "llm_evidence": "基于低成本压感阵列的开放词汇触觉识别及类基础模型预训练",
+      "canonical_evidence": "基于低成本压感阵列的开放词汇触觉识别及类基础模型预训练",
+      "llm_tldr_en": "Tactus is an open model that performs open-vocabulary object recognition from low-cost pressure arrays alone, using masked-autoencoder pretraining and calibration affine to match or exceed a supervised closed-set CNN without a trained classifier head.",
+      "llm_tldr_cn": "针对电阻式压感阵列等廉价触觉传感器缺乏通用表征的问题，本文提出Tactus开放模型，仅凭压感数据即可回答文本查询并完成开放词汇物体识别。模型采用掩码自编码器在大量同传感器无标注帧上预训练，并结合传感器标定仿射变换，在小数据条件下达到或超过有监督闭集CNN精度。该工作为低成本触觉传感器建立了可迁移的基础模型，推动通用触觉感知与机器人触觉应用。",
+      "llm_tldr": "针对电阻式压感阵列等廉价触觉传感器缺乏通用表征的问题，本文提出Tactus开放模型，仅凭压感数据即可回答文本查询并完成开放词汇物体识别。模型采用掩码自编码器在大量同传感器无标注帧上预训练，并结合传感器标定仿射变换，在小数据条件下达到或超过有监督闭集CNN精度。该工作为低成本触觉传感器建立了可迁移的基础模型，推动通用触觉感知与机器人触觉应用。",
       "llm_tags": [
         "query:tactile-vla"
       ],
@@ -46,140 +46,159 @@
       "matched_query_text": "tactile foundation model for universal touch sensing",
       "matched_requirement_id": "req-5",
       "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.06192v1",
+      "source": "arxiv",
+      "title": "HOPE: Hand-Object Pressure Estimation from Monocular Videos",
+      "abstract": "Estimating physical pressure from vision is essential for understanding contact-rich hand-object interaction. However, prior vision-based pressure estimation methods are largely limited to planar surfaces and single image input, making them difficult to apply to dynamic hand-object interaction with diverse objects. We instead formulate pressure estimation as a hand-centric video prediction problem with monocular video as input. This formulation predicts temporally evolving per-vertex normal pressure and contact directly on the hand mesh, yielding a unified output space independent of object shape and sensor layout. Building on this formulation, we propose \\textbf{HOPE}, a framework with two key components. First, we lift tactile-glove pressure, planar-sensor pressure, and distance-based hand-object contact annotations into a shared hand vertex space, allowing bare-hand contact data to regularize pressure learning where metric labels are unavailable. Second, we introduce a vertex-anchored video transformer that treats each vertex as a persistent token, aggregates visual features and hand pose over time, and uses a contact-gated pressure head to enforce that pressure vanishes without contact. Experiments on OpenTouch, PressureVisionDB, and hand-object contact benchmarks validate HOPE across object-pressure, surface-pressure, and contact-supervised HOI settings. Despite using metric pressure supervision primarily from gloved-hand videos, HOPE generalizes to bare-hand egocentric and in-the-wild videos, producing joint contact and pressure predictions beyond the scope of contact-only or planar-pressure baselines.",
+      "authors": [
+        "Subin Jeon",
+        "Byungjun Kim",
+        "Hanbyul Joo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-06T15:51:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.06192v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Multi-modal tactile perception by estimating hand-object pressure from monocular video",
+      "llm_evidence_cn": "通过单目视频估计手物压力，融合视觉与触觉信息",
+      "llm_evidence": "通过单目视频估计手物压力，融合视觉与触觉信息",
+      "canonical_evidence": "通过单目视频估计手物压力，融合视觉与触觉信息",
+      "llm_tldr_en": "HOPE frames hand-object pressure estimation as hand-centric video prediction from monocular video, lifting tactile-glove and planar-sensor data to predict per-vertex normal pressure directly on the hand mesh, achieving object- and layout-invariant contact estimation.",
+      "llm_tldr_cn": "从视觉估计接触压力对理解手物交互很重要，但已有方法多限于平面和单图。本文将压力估计重构为以手为中心的单目视频预测问题，结合触觉手套与平面传感器数据，在手的网格上直接预测逐顶点法向压力和接触状态。统一输出空间摆脱了对物体形状和传感器布局的依赖，能够处理动态多类物体的交互。该框架展示了视觉与触觉信息融合的可行性，为抓取和操作研究提供了新的感知途径。",
+      "llm_tldr": "从视觉估计接触压力对理解手物交互很重要，但已有方法多限于平面和单图。本文将压力估计重构为以手为中心的单目视频预测问题，结合触觉手套与平面传感器数据，在手的网格上直接预测逐顶点法向压力和接触状态。统一输出空间摆脱了对物体形状和传感器布局的依赖，能够处理动态多类物体的交互。该框架展示了视觉与触觉信息融合的可行性，为抓取和操作研究提供了新的感知途径。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
     }
   ],
   "quick_skim": [
     {
-      "id": "2607.28993v1",
+      "id": "2608.05684v1",
       "source": "arxiv",
-      "title": "ST-WAM: Semantic-Temporal World Action Model for Robust Manipulation under Visual Distribution Shifts",
-      "abstract": "World Action Models (WAMs) have emerged as a promising paradigm by jointly modeling robot actions and future visual dynamics. However, their reliance on pixel-generative future supervision can entangle action-relevant state transitions with task-irrelevant visual content, limiting robustness under visual distribution shifts. We identify Training-Distribution Hallucination, a recurring phenomenon in which futures conditioned on visually shifted observations hallucinate training-domain content rather than remain faithful to the current scene. A controlled frame-triplet diagnosis further shows that DINOv3 features remain more stable across visual shifts while better preserving task-state distinctions than Wan-VAE latents. Rather than correcting the predicted futures, we propose Semantic-Temporal WAM (ST-WAM) to improve action robustness by using DINOv3 as a shared semantic representation for future prediction and history retrieval while retaining fine-grained VAE dynamics. Its Dual-Space Future Experts (DSFE) jointly predict future VAE latents and DINO features, while Current-Anchored Intent Retrieval (CAIR) retrieves task-relevant evidence from recent DINO history under the current visual-language context. ST-WAM is trained end-to-end without additional embodied pretraining or task-specific annotations, and requires no explicit future generation at inference. It achieves 98.7% on LIBERO and 92.8% on RoboTwin 2.0; more importantly, compared with Fast-WAM, it improves zero-shot LIBERO-Plus performance by 21.3 percentage points and more than doubles real-world success under visual shifts from 25.8% to 61.5%. These results demonstrate that semantic-temporal modeling effectively complements pixel-generative dynamics for robust manipulation.",
+      "title": "Nonvisual Classification of Ground-Condition by Artificial Proprioception in an Amoeba-Inspired Autonomous Walking Robot",
+      "abstract": "Nonvisual classification of ground condition based on a multimodal sensing approach was investigated for an amoeba-inspired autonomous walking robot. To classify ground condition without image sensing and processing, we implemented artificial proprioception by integrating a three-axis accelerometer, eight foot pressure sensors, and reservoir computing (RC). Even when large fluctuations in the sensor outputs are caused by dynamic motions of a four-legged robot in walking, our system can classify the ground condition, flat or rough, with high accuracy. We demonstrate on-site switching of walking gait depending on ground condition in the robot. We also discuss the contribution of each sensor to ground condition classification.",
       "authors": [
-        "Mingxin Wang",
-        "Bin Hu",
-        "Bin Qian",
-        "Kaitao Jiang",
-        "Haoning Wu",
-        "Feng Yan",
-        "Bowen Jing",
-        "Ruiyang Hao",
-        "Enyi Wang",
-        "Kangning Niu",
-        "Yandan Yang",
-        "Mu Xu",
-        "Yan Wang",
-        "Houde Liu",
-        "Tianlun Li"
-      ],
-      "primary_category": "cs.RO",
-      "categories": [
-        "cs.RO",
-        "cs.CV"
-      ],
-      "published": "2026-07-31T03:44:56+00:00",
-      "link": "https://arxiv.org/pdf/2607.28993v1",
-      "tags": [
-        "keyword:tactile-vla",
-        "query:tactile-vla"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "world action model for robot manipulation, no tactile sensing",
-      "llm_evidence_cn": "面向机器人操作的世界行动模型，未涉及触觉",
-      "llm_evidence": "面向机器人操作的世界行动模型，未涉及触觉",
-      "canonical_evidence": "面向机器人操作的世界行动模型，未涉及触觉",
-      "llm_tldr_en": "Proposes ST-WAM, a world action model that jointly models actions and future visual dynamics for robust manipulation, addressing visual distribution shifts via semantic-temporal supervision. No tactile input.",
-      "llm_tldr_cn": "该文提出ST-WAM世界行动模型，用以联合建模机器人动作与未来视觉动态，解决操作任务在视觉分布偏移下的鲁棒性问题。作者识别了训练分布幻觉现象，并利用更稳定的语义特征与时间建模来解耦动作相关状态与无关视觉内容。实验表明该模型在视觉变化下保持任务状态区分并提升操作鲁棒性。虽然不涉及触觉，但其世界行动建模思想可为触觉世界模型研究提供参考。",
-      "llm_tldr": "该文提出ST-WAM世界行动模型，用以联合建模机器人动作与未来视觉动态，解决操作任务在视觉分布偏移下的鲁棒性问题。作者识别了训练分布幻觉现象，并利用更稳定的语义特征与时间建模来解耦动作相关状态与无关视觉内容。实验表明该模型在视觉变化下保持任务状态区分并提升操作鲁棒性。虽然不涉及触觉，但其世界行动建模思想可为触觉世界模型研究提供参考。",
-      "llm_tags": [
-        "query:tactile-vla"
-      ],
-      "matched_query_tag": "query:tactile-vla",
-      "matched_query_text": "tactile world model for robot manipulation",
-      "matched_requirement_id": "req-2",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2607.29169v1",
-      "source": "arxiv",
-      "title": "ActFovea: Runtime Safeguarding for VLA Policies via Spatiotemporal Visual-Action Consistency",
-      "abstract": "Vision-language-action (VLA) policies achieve strong performance in robotic manipulation but remain vulnerable to runtime disturbances that break the temporal alignment among visual observations, robot states, and executed actions. We introduce ActFovea, a plug-and-play safeguarding framework that detects and mitigates such failures without retraining or modifying the underlying VLA policy. ActFovea uses robot kinematics, proprioceptive states, and recent actions to construct action-conditioned foveated regions that retain contact-relevant areas and predicted motion corridors while suppressing task-irrelevant visual content. It detects runtime risks by evaluating whether visual motion and observation freshness remain consistent with geometric, proprioceptive, and action transitions. For recoverable disturbances, ActFovea constructs disturbance-specific candidate observations and accepts a recovery only after verifying the resulting action chunk. When stale or replayed observations make reliable recovery impossible, it invokes a bounded safe-failure procedure. In closed-loop evaluations of $π_0$ across multiple LIBERO suites, ActFovea increases success under localized visual overlays from 49.3\\% to 90.3\\%, closing 93.7\\% of the gap to clean performance. It further improves success under action drift and visual delay by 7.0 and 9.8 percentage points, respectively, while preserving clean-task performance. Under frozen-observation replay, ActFovea triggers timely safe failure in all trials, with no unprotected failures. These results demonstrate that spatiotemporal visual-action consistency provides an effective basis for runtime safeguarding of VLA policies.",
-      "authors": [
-        "Wenda Yu",
-        "Tianshi Wang",
-        "Fengling Li",
-        "Xin Li",
-        "Jingjing Li",
-        "Lei Zhu"
-      ],
-      "primary_category": "cs.RO",
-      "categories": [
-        "cs.RO",
-        "cs.AI"
-      ],
-      "published": "2026-07-31T08:47:57+00:00",
-      "link": "https://arxiv.org/pdf/2607.29169v1",
-      "tags": [
-        "keyword:tactile-vla",
-        "query:tactile-vla"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "runtime safeguarding for VLA policies",
-      "llm_evidence_cn": "面向VLA策略的运行时保护",
-      "llm_evidence": "面向VLA策略的运行时保护",
-      "canonical_evidence": "面向VLA策略的运行时保护",
-      "llm_tldr_en": "ActFovea safeguards VLA policies at runtime by constructing action-conditioned foveated regions from kinematics and proprioception, detecting failures via visual-action consistency without retraining.",
-      "llm_tldr_cn": "视觉-语言-动作（VLA）策略在机器人操作中表现优异，但容易受到破坏视觉、状态与动作时间对齐的运行时扰动影响。ActFovea作为一种即插即用的保护框架，利用机器人运动学、本体感受和最近动作构建动作条件中央凹区域，保留与接触相关的区域并预测运动走廊。该方法无需重新训练或修改底层VLA策略，通过评估视觉运动与观测新鲜度的一致性来检测并缓解失败，为VLA策略的安全部署提供了有效保障。",
-      "llm_tldr": "视觉-语言-动作（VLA）策略在机器人操作中表现优异，但容易受到破坏视觉、状态与动作时间对齐的运行时扰动影响。ActFovea作为一种即插即用的保护框架，利用机器人运动学、本体感受和最近动作构建动作条件中央凹区域，保留与接触相关的区域并预测运动走廊。该方法无需重新训练或修改底层VLA策略，通过评估视觉运动与观测新鲜度的一致性来检测并缓解失败，为VLA策略的安全部署提供了有效保障。",
-      "llm_tags": [
-        "query:tactile-vla"
-      ],
-      "matched_query_tag": "query:tactile-vla",
-      "matched_query_text": "tactile vision language action model for robot control",
-      "matched_requirement_id": "req-4",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2608.00569v1",
-      "source": "arxiv",
-      "title": "Latency-Tolerant Cloud-Edge Collaborative Vision-Language-Action Models via Emergent Representational Specialization",
-      "abstract": "Deploying billion-parameter Vision-Language-Action (VLA) policies on mobile robots creates a systems conflict: semantic reasoning benefits from cloud GPUs, whereas closed-loop control must respond locally despite network delay and jitter. Existing hierarchical and asynchronous policies improve throughput, but their slow-path representations can still arrive stale or require explicit scheduling and delay cues. We introduce CloudEdgeVLA, a cloud-edge policy that treats temporal misalignment as a representation-learning problem. A cloud VLA encodes delayed observations into slowly varying task features, while a lightweight edge head combines the latest available cloud feature with current local vision. During training, current and randomly delayed frames are paired with the same current action target in fresh and stale paths. This objective encourages the cloud representation to preserve task-level information while the edge path supplies state-sensitive corrections. Across four LIBERO suites, CloudEdgeVLA retains 63.8--78.0% success with a 40-step uniform-delay window, whereas VLASH reaches at most 6.4% and the evaluated single-path baselines at most 3.0%. By removing blocking synchronization from the control loop, the design offers a practical route to scalable VLA deployment in which cloud models can grow while edge computation remains lightweight and responsive.",
-      "authors": [
-        "Daojie Peng",
-        "Fulong Ma",
-        "Bingtao Wang",
-        "Sheng Wang",
-        "Jun Ma"
+        "Hyoto Yamaguchi",
+        "Zenji Yatabe",
+        "Seiya Kasai"
       ],
       "primary_category": "cs.RO",
       "categories": [
         "cs.RO",
         "cs.AI",
+        "cs.LG",
         "eess.SY"
       ],
-      "published": "2026-08-01T10:11:59+00:00",
-      "link": "https://arxiv.org/pdf/2608.00569v1",
+      "published": "2026-08-06T07:19:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.05684v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Uses pressure sensors and proprioception for multimodal ground classification",
+      "llm_evidence_cn": "利用压力传感器和本体感觉进行多模态地面分类",
+      "llm_evidence": "利用压力传感器和本体感觉进行多模态地面分类",
+      "canonical_evidence": "利用压力传感器和本体感觉进行多模态地面分类",
+      "llm_tldr_en": "Investigates nonvisual ground-condition classification for an amoeba-inspired robot by fusing accelerometer and eight foot pressure sensors with reservoir computing. Achieves high accuracy despite dynamic motion and enables on-site gait switching, highlighting multimodal tactile perception for legged robots.",
+      "llm_tldr_cn": "该论文面向仿变形虫自主行走机器人，提出了一种基于人工本体感觉的非视觉地面条件分类方法，融合三轴加速度计和八路足底压力传感器，利用储备池计算对地面平坦或粗糙状态进行分类，并实现了行走步态的在线切换。实验表明即使在动态运动干扰下仍能保持高精度，并分析了各传感器对分类的贡献。该工作展示了多模态触觉感知在移动机器人中的有效应用。",
+      "llm_tldr": "该论文面向仿变形虫自主行走机器人，提出了一种基于人工本体感觉的非视觉地面条件分类方法，融合三轴加速度计和八路足底压力传感器，利用储备池计算对地面平坦或粗糙状态进行分类，并实现了行走步态的在线切换。实验表明即使在动态运动干扰下仍能保持高精度，并分析了各传感器对分类的贡献。该工作展示了多模态触觉感知在移动机器人中的有效应用。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.00263v1",
+      "source": "arxiv",
+      "title": "Compliant Sphere Lattice Contact: Distributed Contact Modeling for Sphere-Based Robot Representations",
+      "abstract": "Contact planning in robotics requires models that are both computationally efficient and physically accurate. Sphere-based robot representations satisfy the first requirement by enabling fast collision checking and differentiable geometry, but sacrifice physical accuracy by relying on point contact which cannot capture contact patch area, pressure distributions, rotational stiffness, or frictional moments. We introduce Compliant Sphere Lattice Contact (CSLC), a distributed contact model that operates natively on sphere representations by modeling the robot interface as a compliant lattice of surface spheres connected through anchor and lateral springs. When pressed against an object, the lattice deforms to produce a spatially distributed contact patch that improves the physical accuracy of sphere-based contact. We validate CSLC across two independent solvers and show preliminary results demonstrating contact patch formation and improved grasp stability.",
+      "authors": [
+        "Nataliya Nechyporenko",
+        "Ava Abderezaei",
+        "Alessandro Roncone"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-07-31T20:11:14+00:00",
+      "link": "https://arxiv.org/pdf/2608.00263v1",
       "tags": [
         "keyword:tactile-vla",
         "query:tactile-vla"
       ],
       "llm_score": 6.0,
-      "llm_evidence_en": "VLA policy for robot control with cloud-edge latency handling, no tactile modality",
-      "llm_evidence_cn": "面向机器人控制的VLA策略，处理云边延迟，未引入触觉模态",
-      "llm_evidence": "面向机器人控制的VLA策略，处理云边延迟，未引入触觉模态",
-      "canonical_evidence": "面向机器人控制的VLA策略，处理云边延迟，未引入触觉模态",
-      "llm_tldr_en": "Proposes CloudEdgeVLA, a cloud-edge VLA policy that treats temporal misalignment as representation learning, enabling lightweight local control with stale cloud features. Relevant to tactile VLA system design but lacks tactile input.",
-      "llm_tldr_cn": "将数十亿参数的视觉-语言-动作(VLA)策略部署到移动机器人时，云端的语义推理与本地闭环控制之间存在网络延迟冲突。该文提出CloudEdgeVLA，把时间错位问题转化为表征学习问题：云端VLA将延迟观测编码为慢变任务特征，轻量级边缘头结合最新云特征与当前局部视觉做出控制。这样无需显式延迟调度即可容忍网络抖动。该方法为未来加入触觉模态的VLA系统提供了实用的分布式架构参考。",
-      "llm_tldr": "将数十亿参数的视觉-语言-动作(VLA)策略部署到移动机器人时，云端的语义推理与本地闭环控制之间存在网络延迟冲突。该文提出CloudEdgeVLA，把时间错位问题转化为表征学习问题：云端VLA将延迟观测编码为慢变任务特征，轻量级边缘头结合最新云特征与当前局部视觉做出控制。这样无需显式延迟调度即可容忍网络抖动。该方法为未来加入触觉模态的VLA系统提供了实用的分布式架构参考。",
+      "llm_evidence_en": "Distributed contact model useful for tactile feedback simulation",
+      "llm_evidence_cn": "分布式接触建模，可用于触觉反馈仿真",
+      "llm_evidence": "分布式接触建模，可用于触觉反馈仿真",
+      "canonical_evidence": "分布式接触建模，可用于触觉反馈仿真",
+      "llm_tldr_en": "Distributed contact model capturing contact patch and pressure for sphere-based robot representations, relevant to tactile simulation.",
+      "llm_tldr_cn": "球体机器人表示在接触规划中计算高效但点接触假设丢失接触面积、压力分布等物理量。该论文提出柔性球体晶格接触模型，通过弹性晶格弹簧网络模拟分布式接触变形，产生空间接触补丁和压力分布。该模型可作为触觉感知与机器人学习仿真的基础，为触觉反馈提供物理细节，但不涉及触觉大模型。",
+      "llm_tldr": "球体机器人表示在接触规划中计算高效但点接触假设丢失接触面积、压力分布等物理量。该论文提出柔性球体晶格接触模型，通过弹性晶格弹簧网络模拟分布式接触变形，产生空间接触补丁和压力分布。该模型可作为触觉感知与机器人学习仿真的基础，为触觉反馈提供物理细节，但不涉及触觉大模型。",
       "llm_tags": [
         "query:tactile-vla"
       ],
       "matched_query_tag": "query:tactile-vla",
-      "matched_query_text": "tactile vision language action model for robot control",
-      "matched_requirement_id": "req-4",
+      "matched_query_text": "robot learning with tactile feedback",
+      "matched_requirement_id": "req-6",
       "selection_source": "fresh_fetch",
       "quick_tier": "6"
+    },
+    {
+      "id": "2608.05725v1",
+      "source": "arxiv",
+      "title": "Near-sensor Computing for Rapid Visuotactile Perception",
+      "abstract": "Visuotactile sensors reconstruct dense contact geometry from measured surface gradients, but host-based processing increases power consumption and introduces data-transfer delays and variable scheduling latency, limiting the sensing and response speed of robotic systems. To address these limitations, we implement a near-sensor computing framework that includes a spectral Poisson solver as a fully streaming hardware pipeline. The computational core logic has an estimated power consumption of 347 mW and achieves high throughput without data-dependent branching or iterative convergence, thereby providing deterministic latency. Operating at 166 MHz, the pipeline produces the first depth value of each 128x128 frame 35,107 cycles after receiving the first input pixel, corresponding to a fixed latency of 0.211 ms. Across 15 contact geometries, the reconstructed depths differ from a double-precision reference by 0.17 % of the peak contact depth. On-chip decisions based on these reconstructions close a robot protective reflex loop in 28.3 +/- 4.9 ms, compared with 169.9 +/- 27.8 ms for an equivalent host-based loop using the same actuator. These results demonstrate that near-sensor reconstruction can provide accurate, energy-efficient, and deterministic tactile geometry on timescales suitable for rapid robotic contact responses.",
+      "authors": [
+        "Zhengying Zhu",
+        "Ruilin Zhang",
+        "Runze Hu",
+        "Chenxi Xiao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-06T08:08:45+00:00",
+      "link": "https://arxiv.org/pdf/2608.05725v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Visuotactile perception and near-sensor computing pipeline",
+      "llm_evidence_cn": "视触觉感知与近传感器计算流水线",
+      "llm_evidence": "视触觉感知与近传感器计算流水线",
+      "canonical_evidence": "视触觉感知与近传感器计算流水线",
+      "llm_tldr_en": "Near-sensor computing implements a streaming spectral Poisson solver for visuotactile reconstruction, cutting host-based latency; operating at 166 MHz with 347 mW, it outputs depth deterministically within 35,107 cycles per frame.",
+      "llm_tldr_cn": "视触觉传感器在主机端处理时存在功耗高、传输延迟和调度抖动，严重限制机器人快速跟踪接触几何。本文在传感器旁实现全流式硬件流水线，用谱泊松求解器直接重建128x128深度图，避免数据依赖分支和迭代收敛。在166MHz下，第一个深度值仅需35107个周期，功耗约347mW，延迟确定。该工作为快速、低功耗的机器人触觉感知提供了可复用的硬件方案。",
+      "llm_tldr": "视触觉传感器在主机端处理时存在功耗高、传输延迟和调度抖动，严重限制机器人快速跟踪接触几何。本文在传感器旁实现全流式硬件流水线，用谱泊松求解器直接重建128x128深度图，避免数据依赖分支和迭代收敛。在166MHz下，第一个深度值仅需35107个周期，功耗约347mW，延迟确定。该工作为快速、低功耗的机器人触觉感知提供了可复用的硬件方案。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "multi-modal tactile perception in robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
     },
     {
       "id": "2608.00793v1",
@@ -208,13 +227,13 @@
         "query:tactile-vla"
       ],
       "llm_score": 6.0,
-      "llm_evidence_en": "world-action model for robot manipulation",
-      "llm_evidence_cn": "面向机器人操作的世界-动作模型",
-      "llm_evidence": "面向机器人操作的世界-动作模型",
-      "canonical_evidence": "面向机器人操作的世界-动作模型",
-      "llm_tldr_en": "DynamicWAM introduces dual-path motion conditioning into a compact world-action model, encoding optical-flow history and kinematic descriptors to improve motion awareness and responsiveness in dynamic manipulation.",
-      "llm_tldr_cn": "针对动态操作中机器人需要推断目标运动并快速响应的需求，现有世界-动作模型仅以当前帧为条件且骨干网络较重，导致运动感知和响应不足。DynamicWAM提出双路径运动条件化，利用冻结的预训练视频VAE编码历史光流以保持空间运动结构，并向动作专家注入位移、时长、速度与加速度等运动学描述。实验表明该方法在动态物体操作中实现了更紧凑的模型和更快的控制响应，为机器人世界模型在动态场景中的应用提供了新思路。",
-      "llm_tldr": "针对动态操作中机器人需要推断目标运动并快速响应的需求，现有世界-动作模型仅以当前帧为条件且骨干网络较重，导致运动感知和响应不足。DynamicWAM提出双路径运动条件化，利用冻结的预训练视频VAE编码历史光流以保持空间运动结构，并向动作专家注入位移、时长、速度与加速度等运动学描述。实验表明该方法在动态物体操作中实现了更紧凑的模型和更快的控制响应，为机器人世界模型在动态场景中的应用提供了新思路。",
+      "llm_evidence_en": "World-action model for dynamic manipulation, no tactile",
+      "llm_evidence_cn": "面向动态操作的世界-行动模型，不含触觉",
+      "llm_evidence": "面向动态操作的世界-行动模型，不含触觉",
+      "canonical_evidence": "面向动态操作的世界-行动模型，不含触觉",
+      "llm_tldr_en": "Compact world-action model with dual-path motion conditioning for dynamic manipulation, no tactile.",
+      "llm_tldr_cn": "动态操作要求机器人快速推断目标运动并响应，现有世界-行动模型仅依赖当前帧，运动感知不足。DynamicWAM提出紧凑的双路径运动条件化方法，利用冻结预训练视频VAE编码光流历史，并注入位移、速度等运动学描述符，以提升动态场景中的响应。该方法面向世界模型与动作生成，但未使用触觉，可为触觉世界模型提供参考。",
+      "llm_tldr": "动态操作要求机器人快速推断目标运动并响应，现有世界-行动模型仅依赖当前帧，运动感知不足。DynamicWAM提出紧凑的双路径运动条件化方法，利用冻结预训练视频VAE编码光流历史，并注入位移、速度等运动学描述符，以提升动态场景中的响应。该方法面向世界模型与动作生成，但未使用触觉，可为触觉世界模型提供参考。",
       "llm_tags": [
         "query:tactile-vla"
       ],
@@ -225,37 +244,80 @@
       "quick_tier": "6"
     },
     {
-      "id": "2608.02326v2",
+      "id": "2608.02990v1",
       "source": "arxiv",
-      "title": "ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State for Long-Horizon Manipulation",
-      "abstract": "Humans perform long-horizon manipulation by retaining knowledge of what earlier actions have established while continuously adapting the motion underway. By contrast, action-chunked vision-language-action (VLA) policies repeatedly replan from the current input at each query. Existing methods preserve either long-term task evidence through memory or short-term motion through action reuse and ensembling, leaving the cross-query handoff incomplete. We introduce ChainVLA, a 1.2B-parameter VLA policy that chains successive queries through a joint and revisable execution state. Progress Context combines a recurrent Working State with sparse event memory to carry observation-derived task progress, while Motion Tail feeds the preceding prediction's unexecuted continuation into state construction and action generation. Together, the two components condition a decoder that regenerates each action horizon under the latest observation, allowing the carried state to guide the next prediction without fixing it. ChainVLA reaches 62.8% average success on RMBench and 98.8% across four LIBERO suites, while removing Motion Tail or Progress Context reduces RMBench success to 11.2% and 3.0%, respectively. These asymmetric ablations are consistent with motion continuity helping preserve the observation stream from which task progress is inferred.",
+      "title": "EmbodiedVAE: Disentangled Video VAE for Efficient and Controllable Embodied Manipulation",
+      "abstract": "Latent diffusion models (LDMs) have recently significantly advanced embodied learning in constructing powerful embodied manipulation world models. However, despite the remarkable performance, existing LDMs predominantly rely on Variational Autoencoders (VAEs) optimized for natural scenes while failing to account for the unique characteristics of embodied manipulation scenarios, yielding latent representations that are neither compact nor controllable, thereby hindering efficient training of LDMs and precise robotic control. To solve this problem, we present EmbodiedVAE, a novel video VAE that provides compact yet controllable latent representations tailored for the robotic manipulation world models. Specifically, EmbodiedVAE adopts a dual-encoder, single-decoder architecture with an asymmetric spatio-temporal compression module, which automatically disentangles the robot arm's motion from background environment, resulting in overall compactness while providing explicit embodied latent to support fine-grained action control. To further preserve the temporal consistency of learned robotic motion latent, we introduce an optimal-transport-based consistency module that explicitly enforces motion fidelity and inter-frame coherence. Extensive experiments demonstrate that our proposed EmbodiedVAE achieves superior reconstruction quality with high compression rate, while enabling more precise action control in robotic manipulation scenarios with an average of 2dB PSNR improvement over state-of-the-art video VAEs.",
       "authors": [
-        "Yuzhi Huang",
-        "Weijue Bu",
-        "Ziyi Xiong",
-        "Jie Wu",
-        "Fanding Huang",
-        "Jingyan Jiang",
-        "Zhi Wang"
+        "Jiayi Luo",
+        "Hanxin Zhu",
+        "Chen Gao",
+        "Jiankun Wang",
+        "Cong Wang",
+        "Tianyu He",
+        "Jianxin Li",
+        "Zhibo Chen"
       ],
       "primary_category": "cs.RO",
       "categories": [
         "cs.RO"
       ],
-      "published": "2026-08-03T14:48:20+00:00",
-      "link": "https://arxiv.org/pdf/2608.02326v2",
+      "published": "2026-08-04T01:01:18+00:00",
+      "link": "https://arxiv.org/pdf/2608.02990v1",
       "tags": [
         "keyword:tactile-vla",
         "query:tactile-vla"
       ],
       "llm_score": 6.0,
-      "llm_evidence_en": "VLA policy for robot control, no tactile modality",
-      "llm_evidence_cn": "面向机器人控制的VLA策略，未涉及触觉模态",
-      "llm_evidence": "面向机器人控制的VLA策略，未涉及触觉模态",
-      "canonical_evidence": "面向机器人控制的VLA策略，未涉及触觉模态",
-      "llm_tldr_en": "ChainVLA introduces a 1.2B VLA policy that chains action queries through a joint execution state and sparse event memory, improving long-horizon manipulation without tactile input.",
-      "llm_tldr_cn": "现有动作分块的VLA策略在长时程操作中缺少跨查询的状态交接，导致任务进度信息丢失。ChainVLA提出1.2B参数的VLA策略，通过联合且可修正的执行状态将连续查询链接起来，结合循环工作状态与稀疏事件记忆携带任务进度，并利用运动尾部实现平滑交接。实验结果验证了该方法在长时程操作任务中优于基线策略，为触觉VLA扩展提供了可借鉴的状态链接机制。",
-      "llm_tldr": "现有动作分块的VLA策略在长时程操作中缺少跨查询的状态交接，导致任务进度信息丢失。ChainVLA提出1.2B参数的VLA策略，通过联合且可修正的执行状态将连续查询链接起来，结合循环工作状态与稀疏事件记忆携带任务进度，并利用运动尾部实现平滑交接。实验结果验证了该方法在长时程操作任务中优于基线策略，为触觉VLA扩展提供了可借鉴的状态链接机制。",
+      "llm_evidence_en": "Video VAE for embodied manipulation world models, no tactile",
+      "llm_evidence_cn": "面向具身操作世界模型的视频VAE，不含触觉",
+      "llm_evidence": "面向具身操作世界模型的视频VAE，不含触觉",
+      "canonical_evidence": "面向具身操作世界模型的视频VAE，不含触觉",
+      "llm_tldr_en": "Disentangled video VAE providing compact controllable latents for robot manipulation world models.",
+      "llm_tldr_cn": "现有潜在扩散模型在构建具身操作世界模型时使用自然场景VAE，导致表示不紧凑且不可控。EmbodiedVAE提出面向操作世界模型的解耦视频VAE，生成紧凑可控的潜在表示，提高LDM训练效率和操作控制精度。该方法聚焦视觉视频压缩，未涉及触觉，但与触觉世界模型的潜在表示设计互补。",
+      "llm_tldr": "现有潜在扩散模型在构建具身操作世界模型时使用自然场景VAE，导致表示不紧凑且不可控。EmbodiedVAE提出面向操作世界模型的解耦视频VAE，生成紧凑可控的潜在表示，提高LDM训练效率和操作控制精度。该方法聚焦视觉视频压缩，未涉及触觉，但与触觉世界模型的潜在表示设计互补。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.03052v1",
+      "source": "arxiv",
+      "title": "How Should Vision-Language-Action Models Use Proprioceptive State?",
+      "abstract": "Recent Vision-Language-Action (VLA) models almost universally take robot proprioceptive state as input, yet wire it in incompatible ways -- serialized into text prompts, projected into the vision-language prefix, or fed directly to the action expert -- and almost always as a single current frame. Three questions remain open: (1) whether, and on which tasks, current state actually improves closed-loop control; (2) how much state history helps, and whether its benefit reflects genuine temporal variation rather than added conditioning capacity; and (3) where state should enter the model -- the vision-language backbone or the action-generation module. We answer these questions through controlled experiments on a flow-matching VLA, fixing the backbone, training data, action representation, and evaluation protocol throughout. We implement five representative interfaces -- discrete state prompt, VLM prefix, action prefix, state expert, and feature modulation -- under matched implementation details, and evaluate them on 45 atomic tasks spanning three task families plus 20 composite tasks; we then sweep the state-history length from 1 to 96 frames to examine how historical state information affects model performance. The experiments yield systematic answers to all three questions, distilled into testable design principles for state-aware VLAs.",
+      "authors": [
+        "Yiren Zhao",
+        "Ziyang Chen",
+        "Ziyang Rao",
+        "Pengteng Li",
+        "He Zhang",
+        "Weiyu Guo",
+        "Yandong Guo",
+        "Rushi Dai"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-04T03:05:47+00:00",
+      "link": "https://arxiv.org/pdf/2608.03052v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "systematic study of how VLA models should integrate proprioceptive state, directly transferable to tactile state integration",
+      "llm_evidence_cn": "系统研究VLA模型如何整合本体状态，对触觉状态整合具有直接借鉴意义",
+      "llm_evidence": "系统研究VLA模型如何整合本体状态，对触觉状态整合具有直接借鉴意义",
+      "canonical_evidence": "系统研究VLA模型如何整合本体状态，对触觉状态整合具有直接借鉴意义",
+      "llm_tldr_en": "Controlled experiments on a flow-matching VLA reveal whether, and where, proprioceptive state should be fed into the vision-language backbone or action expert, and whether history helps, informing tactile VLA design.",
+      "llm_tldr_cn": "VLA模型普遍把本体状态以文本、视觉前缀或动作专家输入等方式接入，但缺乏系统认识。本文在flow-matching VLA上通过控制实验回答三个问题：当前状态是否改善闭环控制、状态历史是否有帮助、状态应进入视觉语言主干还是动作生成模块。结果表明不同接入位置和状态历史对性能影响显著，这些结论可直接迁移到触觉状态的接入设计。研究未使用触觉传感器，但为触觉VLA提供了重要的架构经验。",
+      "llm_tldr": "VLA模型普遍把本体状态以文本、视觉前缀或动作专家输入等方式接入，但缺乏系统认识。本文在flow-matching VLA上通过控制实验回答三个问题：当前状态是否改善闭环控制、状态历史是否有帮助、状态应进入视觉语言主干还是动作生成模块。结果表明不同接入位置和状态历史对性能影响显著，这些结论可直接迁移到触觉状态的接入设计。研究未使用触觉传感器，但为触觉VLA提供了重要的架构经验。",
       "llm_tags": [
         "query:tactile-vla"
       ],
@@ -266,38 +328,142 @@
       "quick_tier": "6"
     },
     {
-      "id": "2608.02497v1",
+      "id": "2608.04657v1",
       "source": "arxiv",
-      "title": "Grounded Semantic Re-Binding for Robust Instruction Generalization in Vision-Language-Action Models",
-      "abstract": "Vision-Language-Action (VLA) models excel in robotic manipulation but suffer catastrophic performance drops when canonical instructions are simply paraphrased. Although this brittleness is typically addressed through costly data scaling, our probing reveals that the root cause is architectural rather than a lack of semantic understanding. Specifically, we demonstrate that current VLAs successfully retain the correct task identity internally. The failure actually stems from the joint encoding of dynamic visual observations and text, which introduces systematic feature shifts. Because the downstream action policy is highly vulnerable to these variations, it fails to translate the preserved semantics into correct control commands. To resolve this structural bottleneck, we propose Grounded Semantic Re-binding (GSR), an elegant intervention that bypasses unstable joint routing by explicitly fusing independently extracted task semantics with native visual features to train a completely re-initialized action expert from scratch. This targeted intervention dramatically restores paraphrastic invariance using only canonical demonstrations. On the LIBERO-Para benchmark, GSR improves success rates by up to 44.6 percent. It enables lightweight models to rival massively scaled baselines and pushes state-of-the-art models to a new record PRIDE score of 70.4, outperforming the recently introduced large-scale pretrained model Xiaomi-Robotics-0 in instruction generation capabilities. Building on these insights, we also introduce ParaVLA, a natively decoupled 0.33B-parameter model exhibiting near-perfect robustness to instruction rewording. Ultimately, our work proves that robust semantic grounding can be achieved through elegant structural design, bypassing the inefficient brute-force data scaling paradigm.",
+      "title": "MobileWAM: Bridging World Action Models to Mobile Manipulation with Chain-of-Foresight",
+      "abstract": "World action models (WAMs) built on video generation backbones are a rising recipe for robot learning, yet remain confined to tabletop manipulation. Mobile manipulation demands simultaneous locomotion and whole-body manipulation amid scene-scale dynamics, yet is still dominated by dynamics-blind visual encoders with hand-crafted coordination. We bridge this gap with MobileWAM, a mixture-of-transformers architecture that fuses a pretrained video diffusion transformer with a lightweight action expert through layerwise joint attention, translating internet-scale motion priors into whole-body control. To reconcile the heterogeneous dynamics of moving and manipulating, each feed-forward layer of the action expert becomes a three-expert mixture of shared, locomotion, and manipulation experts, softly routed by the motion intent in the action tokens. To densify supervision, we further propose Chain-of-Foresight (CoF): intermediate representations sequentially predict a chain of future latent chunks, each step conditioned on its predecessor. CoF pairs naturally with our decoupled video--action denoising scheme. At deployment, the WAM serves as a pure current-frame encoder; foresight acts only through gradients, so at inference the foresight chain and video generation are discarded, leaving only policy-level cost. MobileWAM surpasses state-of-the-art mobile manipulation policies on ManiSkill-HAB and fine-tunes to a real ARX Lift2 mobile manipulator across diverse tasks with strong generalization. Code will be released soon.",
       "authors": [
-        "Zhaokai Yin",
-        "Zhipeng Zhang"
+        "Zehua Fan",
+        "Junjie He",
+        "Wenxuan Song",
+        "Xi Wang",
+        "Wenqi Lyu",
+        "Linge Zhao",
+        "Fuhao Li",
+        "Zihan You",
+        "Yifei Yang",
+        "Kaiming Xu",
+        "Qi Jiang",
+        "Yue Jiang",
+        "Haoang Li",
+        "Cheng Chi",
+        "Bailin Li",
+        "Yan Wang"
       ],
-      "primary_category": "cs.RO",
+      "primary_category": "cs.CV",
       "categories": [
-        "cs.RO"
+        "cs.CV"
       ],
-      "published": "2026-08-03T17:02:04+00:00",
-      "link": "https://arxiv.org/pdf/2608.02497v1",
+      "published": "2026-08-05T10:12:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.04657v1",
       "tags": [
         "keyword:tactile-vla",
         "query:tactile-vla"
       ],
       "llm_score": 6.0,
-      "llm_evidence_en": "VLA models for robotic manipulation, improves instruction generalization; no tactile modality",
-      "llm_evidence_cn": "面向机器人操作的VLA模型，改进指令泛化，不涉及触觉",
-      "llm_evidence": "面向机器人操作的VLA模型，改进指令泛化，不涉及触觉",
-      "canonical_evidence": "面向机器人操作的VLA模型，改进指令泛化，不涉及触觉",
-      "llm_tldr_en": "Shows VLA instruction brittleness stems from joint visual-text encoding feature shifts, and proposes grounded semantic re-binding to preserve task identity under paraphrased instructions. Relevant to tactile VLA generalization but not tactile-specific.",
-      "llm_tldr_cn": "视觉-语言-动作(VLA)模型在机器人操作中表现优异，但指令被改写后性能急剧下降。该文通过探测发现模型内部保留了正确的任务身份，真正的问题来自动态视觉观测与文本的联合编码所产生的系统性特征偏移。为此提出接地语义重绑定方法，将保留的语义重新绑定到当前观测特征上，使下游策略免受特征变化干扰。实验证明该方法显著提升了对改写指令的泛化能力，对构建鲁棒的多模态触觉VLA同样具有参考价值。",
-      "llm_tldr": "视觉-语言-动作(VLA)模型在机器人操作中表现优异，但指令被改写后性能急剧下降。该文通过探测发现模型内部保留了正确的任务身份，真正的问题来自动态视觉观测与文本的联合编码所产生的系统性特征偏移。为此提出接地语义重绑定方法，将保留的语义重新绑定到当前观测特征上，使下游策略免受特征变化干扰。实验证明该方法显著提升了对改写指令的泛化能力，对构建鲁棒的多模态触觉VLA同样具有参考价值。",
+      "llm_evidence_en": "World action model for mobile whole-body manipulation; directly relevant to tactile world model research",
+      "llm_evidence_cn": "面向移动操作的世界动作模型，直接关联触觉世界模型研究",
+      "llm_evidence": "面向移动操作的世界动作模型，直接关联触觉世界模型研究",
+      "canonical_evidence": "面向移动操作的世界动作模型，直接关联触觉世界模型研究",
+      "llm_tldr_en": "MobileWAM adapts world action models from tabletop to mobile manipulation using a mixture-of-transformers that fuses a pretrained video diffusion transformer with a lightweight action expert through layerwise joint attention and chain-of-foresight. It achieves whole-body control by leveraging internet-scale motion priors, offering a strong foundation for incorporating tactile modalities into world models.",
+      "llm_tldr_cn": "针对世界动作模型局限于桌面操作的问题，MobileWAM提出一种混合Transformer架构，融合预训练视频扩散Transformer与轻量动作专家，通过逐层联合注意力将互联网运动先验转化为全身控制。该方法实现了移动操作中的同时移动和操作，并采用链式预见机制进行动作规划。为触觉世界模型在复杂操作中的扩展提供了技术框架。",
+      "llm_tldr": "针对世界动作模型局限于桌面操作的问题，MobileWAM提出一种混合Transformer架构，融合预训练视频扩散Transformer与轻量动作专家，通过逐层联合注意力将互联网运动先验转化为全身控制。该方法实现了移动操作中的同时移动和操作，并采用链式预见机制进行动作规划。为触觉世界模型在复杂操作中的扩展提供了技术框架。",
+      "llm_tags": [
+        "query:tactile-vla:composite"
+      ],
+      "matched_query_tag": "query:tactile-vla:composite",
+      "matched_query_text": "Papers central to 请查找触觉大模型，触觉世界模型，和机器人多模态触觉VLA相关的论文, especially work that connects or combines: tactile large model for robot perception; tactile world model for robot manipulation; multi-modal tactile perception in robotics; tactile vision language action model for robot control; tactile foundation model for universal touch sensing; robot learning with tactile feedback; tactile large model and world model for robot manipulation; multi modal tactile vision language action model for robotics; tactile foundation model and its applications in robot touch sensing.",
+      "matched_requirement_id": "req-composite-tactile-vla",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.05369v1",
+      "source": "arxiv",
+      "title": "World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation",
+      "abstract": "Vision-language-action (VLA) models often treat main-view and wrist-view observations as parallel visual inputs, overlooking their distinct roles in robot manipulation. Fine-grained manipulation, however, benefits from anticipating how wrist-local interactions may evolve under the global task context. To address this limitation, we present World-to-Wrist VLA (W2-VLA), a VLA model for fine-grained robot manipulation with task-conditioned future wrist modeling. Given current multi-view observations and a task instruction, W2-VLA contextualizes a set of latent modeling tokens as a compact interface between the vision-language model and the wrist predictor. Conditioned on this interface and the observed wrist history, the predictor forecasts future wrist latents, which are transformed into future-aware context for action prediction. In addition, we introduce W2-CoT, a synthesis pipeline that produces structured annotations describing manipulation progress, physical transition cues, and wrist-local evidence. These annotations provide auxiliary supervision that shapes the task-conditioned latent interface. Experiments on LIBERO, RoboTwin 2.0, and real-world manipulation tasks demonstrate improved fine-grained and contact-sensitive manipulation across both single-arm and bimanual settings, while maintaining action-generation rates above 80 Hz.",
+      "authors": [
+        "Yuhao Pan",
+        "Haosong Peng",
+        "Zhengshen Zhang",
+        "Zhengyang Yan",
+        "Yalun Dai",
+        "Fushuo Huo",
+        "Chujie Wang",
+        "Tianyu Qi",
+        "Xiucheng Wang",
+        "Nan Cheng",
+        "Wenchao Xu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-08-05T19:48:47+00:00",
+      "link": "https://arxiv.org/pdf/2608.05369v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLA model with wrist-view modeling for fine-grained manipulation; architecture adaptable to tactile VLA",
+      "llm_evidence_cn": "面向精细操作的VLA模型，建模手腕视角的未来动态，可适配触觉VLA架构",
+      "llm_evidence": "面向精细操作的VLA模型，建模手腕视角的未来动态，可适配触觉VLA架构",
+      "canonical_evidence": "面向精细操作的VLA模型，建模手腕视角的未来动态，可适配触觉VLA架构",
+      "llm_tldr_en": "W2-VLA is a VLA model that explicitly models future wrist-view dynamics conditioned on the task, using latent tokens to connect a vision-language model and a wrist predictor. This wrist-centric design improves fine-grained robot manipulation and offers a clear bridge to tactile-observation-based VLA models.",
+      "llm_tldr_cn": "针对精细机器人操作中主视角与手腕视角被平等对待而忽略其作用差异的问题，提出World-to-Wrist VLA（W2-VLA）模型。该方法通过一组隐式建模token连接视觉语言模型与手腕预测器，并基于任务条件预测手腕局部的未来交互。实验表明该设计提升了精细操作性能，其手腕建模思想对引入触觉观测的触觉VLA模型具有直接借鉴意义。",
+      "llm_tldr": "针对精细机器人操作中主视角与手腕视角被平等对待而忽略其作用差异的问题，提出World-to-Wrist VLA（W2-VLA）模型。该方法通过一组隐式建模token连接视觉语言模型与手腕预测器，并基于任务条件预测手腕局部的未来交互。实验表明该设计提升了精细操作性能，其手腕建模思想对引入触觉观测的触觉VLA模型具有直接借鉴意义。",
+      "llm_tags": [
+        "query:tactile-vla:composite"
+      ],
+      "matched_query_tag": "query:tactile-vla:composite",
+      "matched_query_text": "Papers central to 请查找触觉大模型，触觉世界模型，和机器人多模态触觉VLA相关的论文, especially work that connects or combines: tactile large model for robot perception; tactile world model for robot manipulation; multi-modal tactile perception in robotics; tactile vision language action model for robot control; tactile foundation model for universal touch sensing; robot learning with tactile feedback; tactile large model and world model for robot manipulation; multi modal tactile vision language action model for robotics; tactile foundation model and its applications in robot touch sensing.",
+      "matched_requirement_id": "req-composite-tactile-vla",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.06332v1",
+      "source": "arxiv",
+      "title": "GeniWorld: A Generalizable Interactive World Model for Robotic Manipulation via Visual Actions",
+      "abstract": "Generalist robot policies exhibit strong capabilities, but their robustness in complex and unseen environments remains limited. Scaling robot learning and evaluation in diverse real-world environments remains costly and challenging. Action-conditioned world models offer a promising alternative, but they often suffer from limited action controllability and poor generalization to out-of-distribution (OOD) scenarios. To this end, we present GeniWorld, an interactive world model for robots that generalizes robustly across unseen scenarios. Building on pretrained video generative models, we use URDF-based rendering to transform numerical actions into visual action representations, enabling spatially grounded action control. By explicitly decoupling embodiment kinematics from environmental dynamics, our model mitigates scene overfitting and facilitates modeling of robot-environment interactions. To achieve closed-loop control, we construct an autoregressive video prediction model integrated with high-frequency robot kinematic control, enabling interaction with both robot policies and human teleoperators. In our experiments, even when trained solely on limited fixed-scene data, our model achieves superior in-domain performance and robust zero-shot generalization to highly randomized, unseen environments. For downstream applications, GeniWorld serves as a scalable policy evaluator that remains reliable under environmental perturbations. Furthermore, even with limited real-world demonstrations, GeniWorld generates diverse manipulation trajectories within the world model, improving downstream policy performance and robustness in complex environments.",
+      "authors": [
+        "Chenghao Gu",
+        "Hanyang Yu",
+        "Jingbo Zhang",
+        "Haitao Lin",
+        "Wenyao Zhang",
+        "Jinghe Wang",
+        "Hanglei Jin",
+        "Shuzhao Xie",
+        "Jingyan Jiang",
+        "Zhi Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-06T17:40:32+00:00",
+      "link": "https://arxiv.org/pdf/2608.06332v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interactive world model for robotic manipulation, but visual future only, no tactile",
+      "llm_evidence_cn": "面向机器人操作的交互式世界模型，但仅使用视觉未来，无触觉信号",
+      "llm_evidence": "面向机器人操作的交互式世界模型，但仅使用视觉未来，无触觉信号",
+      "canonical_evidence": "面向机器人操作的交互式世界模型，但仅使用视觉未来，无触觉信号",
+      "llm_tldr_en": "GeniWorld builds an action-conditioned world model on pre-trained video generative models with URDF-based visual action rendering to generalize across unseen manipulation scenarios, but it does not incorporate tactile sensing.",
+      "llm_tldr_cn": "GeniWorld基于视频生成模型构建交互式世界模型，通过URDF渲染将数值动作转化为视觉动作表示，实现空间根基的动作控制，提升对未见场景的泛化能力。它主要解决视觉世界模型的动作可控性和小样本泛化问题，但未使用触觉信息，因而只能作为触觉世界模型的视觉基础或启发性方法。",
+      "llm_tldr": "GeniWorld基于视频生成模型构建交互式世界模型，通过URDF渲染将数值动作转化为视觉动作表示，实现空间根基的动作控制，提升对未见场景的泛化能力。它主要解决视觉世界模型的动作可控性和小样本泛化问题，但未使用触觉信息，因而只能作为触觉世界模型的视觉基础或启发性方法。",
       "llm_tags": [
         "query:tactile-vla"
       ],
       "matched_query_tag": "query:tactile-vla",
-      "matched_query_text": "tactile vision language action model for robot control",
-      "matched_requirement_id": "req-4",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
       "selection_source": "fresh_fetch",
       "quick_tier": "6"
     }

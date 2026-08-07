@@ -1,0 +1,671 @@
+Title: 2608.05684v1.pdf
+
+URL Source: https://arxiv.org/pdf/2608.05684v1
+
+Published Time: Fri, 07 Aug 2026 00:35:54 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+Nonvisual  Classification of  Ground -Condition  by 
+
+# Artificial P ropriocept ion  in an  Amoeba -Inspired 
+
+# Autonomous  Walking  Robot 
+
+Hyoto  Yamaguchi 
+
+RCIQE  and Graduate School of IST 
+
+Hokkaido University 
+
+Sapporo , Japan 
+
+0009 -0003 -9057 -1869 
+
+Zenji Yatabe 
+
+RCIQE  and Graduate School of IST 
+
+Hokkaido University 
+
+Sapporo , Japan 
+
+0000 -0003 -2069 -6677 
+
+Seiya Kasai 
+
+RCIQE  and Graduate School of IST 
+
+Hokkaido University 
+
+Sapporo , Japan 
+
+0000 -0003 -1291 -2587 
+
+Abstract —Nonvisual classification of ground condition 
+
+based on  a multimodal sensing approach was investigated for an 
+
+amoeba -inspired autonomous walking robot.  To  classify ground 
+
+condition  without image  sensing and  processing , we
+
+implemented artificial proprioception by integrating  a three -
+
+axis accelerometer, eight foot pressure sensors,  and reservoir 
+
+computing (RC).  Even when  large fluctuation s in the  sensor 
+
+outputs  are  caused by  dynamic motions of  a four -legged  robot 
+
+in walking , our  system  can  classify  the  ground condition, flat or 
+
+rough,  with high accuracy. We demonstrate on -site switching of 
+
+walking gait depending on ground condition in  the  robot. We 
+
+also discuss  the  contribution of each sensor to ground condition 
+
+classification. 
+
+Keywords —autonomous walking robot, artificial 
+
+proprioception,  classification,  multimodal sensing,  reservoir 
+
+computing , amoeba -inspired computing 
+
+I.  INTRODUCTION 
+
+Blind  locomotion is a n interesting  issue  for autonomous 
+
+legged robots , in particular when  it  should work  under  low -
+
+visib ility  condition.  Recent ly , legged robots can traverse 
+
+challenging terrain using proprioceptive histories, contact 
+
+information, or tactile sensing [1] –[3].  However,  these 
+
+approaches  need  large -scale simulation, extensive prior 
+
+training, or substantial onboard computation  [1] –[4].
+
+Therefore, f or small autonomous robots with limited  energy ,
+
+payload, and  space , we have investigated apply ing  amoeba -
+
+inspired solution search [5],  [6]  to  a four -legged  walking 
+
+robot  [7] . The robot walks by searching for  a feasible motion 
+
+and executing it  step by step , called amoeba -inspired walking. 
+
+This walking makes  it  possible to go over rough terrain  with 
+
+a commercially available  small  micro -controller , although 
+
+the  behavior  is  not organized  and  locomotion efficiency is 
+
+low. 
+
+A considerable problem  in our robot is to  correctly 
+
+per ceive  the ground condition  by the proprioceptive sensing 
+
+approach  in press[8] . Acceleration, vibration, impact, foot 
+
+pressure, and contact timing are affected by both robot 
+
+motion and ground condition, allowing the robot to infer 
+
+terrain without a camera [ 9], [1 0].  Previously  we have 
+
+investigated this approach based on the accelerations, 
+
+however, it has been difficult to perceive the information 
+
+necessary for blind locomotion, because  the sensor signals 
+
+are fluctuated severely  due to large  and irregular  movement 
+
+of the  body attitude  induced  by  nonperiodic  walking  gait . The 
+
+irregular walking step cancels out the information of ground 
+
+condition.  This  prevent s our  robot  from  making  the 
+
+appropriate  behavioral decision  in  terms of  blind locomotion .
+
+On the  above  background, i n this study, we  investigate  the 
+
+multi -modal sensing -based  artificial proprioception  to 
+
+perceive  ground condition  for  the amoeba -inspired 
+
+autonomous walking robot . Our previous work  demonstrated 
+
+the  classification  of  ground  condition s between flat and rough 
+
+during normal walking  based on  three -axis  accelerations 
+
+using reservoir computing (RC)  in press [8]. The remaining 
+
+issue  is perception during  the  amoeba -inspired walking.  To 
+
+improve the  classification accuracy, we  attempt to increase 
+
+input  information for RC by adding time -series data of 
+
+pressure  sensors on feet  and also  optimize  the  time series data 
+
+length for classification . Then w e demonstrate the  on -site 
+
+walking gait switching between  normal and amoeba -inspired 
+
+walks  based on the c lassification  of ground condition .
+
+II.  SYSTEM  DESIGN 
+
+Fig . 1(a)  and 1(b)  show  photographs of  an  amoeba -inspired 
+
+four -legged robot and the  prepared  experimental ground ,
+
+respectively . For the controller of t he robot , an Arduino Uno 
+
+R4 Minima  was used, which implemented  an  amoeba -
+
+inspired  walking algorithm,  a normal walking  algorithm , RC 
+
+model s for  ground condition classification , and  a walking 
+
+pattern switching mechanism , as shown in  Fig. 2 . The robot 
+
+had  a three -axis accelerometer (MMA8451), and eight foot -
+
+This work is supported in part by JSPS Core -to -Core Program 
+
+“Material Intelligence” , JSPS KAKENHI Grant No. 26K01001 , and by 
+
+Grants for Revitalization  of  Regional Universities and Industries 
+
+“Realization of a semiconductor complex base triggered by next -
+
+generation semiconductors and revitalization of local economies”. 
+
+Fig. 1.  (a) Amoeba -inspired four -legged walking robot , (b) top view of test 
+
+ground , (c) layout of sensors on the robot, and (d)  positions of foot pressure 
+
+sensor s.pressure sensors (MF01A -N-221 -A04 ) for multimodal 
+
+sensing  as sho wn in  Fig. 1(c) . Each foot had  two pressure 
+
+sensors , because  a single sensor  missed  detect ing  the  ground 
+
+contact  depending on the angle of the leg contact  (Fig. 1(d) ). 
+
+The robot had eight servo motors, corresponding to eight leg 
+
+degrees of freedom. The amoeba -inspired solution -search 
+
+mechanism  in the microcontroller  searched for  a feasible leg 
+
+state  step by step  in real time  under constraints that  avoided 
+
+falling, retreating, and unstable postures [7]. 
+
+The  RC for  amoeba  walking developed in this study  was 
+
+trained to classify  between  flat  and  rough terrain s during  the 
+
+amoeba -inspired walk.  The  system switched  between two 
+
+walking algorithms  in accordance with  a simple rule , where 
+
+the normal walk  was selected when the ground was flat and 
+
+the  amoeba -inspired walk  was selected when  the ground was 
+
+rough. Both RC classifiers used an Echo State Network (ESN) 
+
+which  had  a fixed recurrent  neural network  of nonlinear 
+
+nodes , called reservoir layer,  and a single trainable  readout 
+
+layer [ 11 ], [ 12 ]. 
+
+For  pretreatment of  input  data,  sensor values were 
+
+standardized using the mean and standard deviation of the 
+
+training dataset. The  smoothing  was  made  on  the  RC output 
+
+by a moving average , then  the output was classified  into flat 
+
+or  rough by thresholding.  For on -site  classification, t he 
+
+trained readout weights  of the RC models  and preprocessing 
+
+coefficients were transferred to the  RCs in the 
+
+microcontroller  on the robot .
+
+III.  EXPERIMENTAL  METHOD 
+
+A.  Data  Collection  and  Offline RC -model  Training 
+
+The rough terrain was  prepared  by arranging  mesa blocks 
+
+with heights of 10, 24, and 36 mm in arbitrary order.  We
+
+obtained  time -series data  of  3-axis  accelerations and  eight 
+
+pressure  sensors  during  the robot walked on  both  flat and 
+
+rough  ground  by  the amoeba -inspired  walk  (Fig.  3).  The  RC 
+
+for the  amoeba -inspired  walk  was trained  using  the obtained 
+
+data set . Then , we narrowed the data streams from eleven to 
+
+three  to maintain the ground condition classification accuracy 
+
+as possible.  This was because it was necessary to reduce the 
+
+computational load for the microcontroller with the limited 
+
+computing power.  On the other hand,  for  normal  walk , we 
+
+reuse the  RC  trained  in the  previous  stud y in press [8]. The 
+
+input data for this RC included only 3 -axis accelerations. 
+
+The number s of  walking  steps  obtained for train ing  and 
+
+test ing  of the RC  were  646  step s on flat ground  and  675 step s
+
+on rough ground , respectively . The  obtained sensor data  were 
+
+divided  at a ratio of  15 :70:15 , for  us ing  in  optimization of 
+
+hyperparameters,  training, and  validation  test , respectively .
+
+To increase  the  classification accuracy , we accumulated the 
+
+sensor data for several walking steps in classification:  1, 5, 
+
+10, 15, and 20 steps.  Increasing the number of  walking  steps ,
+
+the length of sensor history  increased.  The readout weights  of 
+
+the  RC  were trained  on  an  external PC. Hyperparameters 
+
+were optimized using Optuna [1 3].  The exploration range s
+
+and optimized parameter values  are  summarized  in Table I. 
+
+To improve generalization, zero -mean Gaussian noise was 
+
+added to the standardized inputs during training, and 
+
+variation  level  of the noise  was  also  optimized together with 
+
+the ESN  hyper parameters [1 4].          
+
+> Fig. 2. Control system architecture of autonomous robot for switching
+> walking gait depending on ground conditio n.
+> Fig. 3.Process of ground -condition classification in a four -legged amoeba -in spired autonomous walking robot.
+
+B.  On-Site  Classification  and Gait Switching 
+
+The trained  RCs were used to classify ground condition 
+
+and  to  switch the walking  gait  on  site.  The robot was expected 
+
+to move  with  normal w al k on the flat ground and to move 
+
+with  the  amoeba -inspired walk on the rough ground.  To avoid 
+
+misclassification  of ground condition , switching  of  the 
+
+walking  algorithms  was  carried out  based on  different 
+
+policies for  the  normal and amoeba -inspired walking.  In the 
+
+case of  the  normal walk,  the system switched  the algorithm 
+
+to  the  amoeba -inspired walk  when the RC  for  the  normal 
+
+walk  continuously  indicated  rough  terrain  for a certain 
+
+duration time . In the same way , in the case of  the  amoeba -
+
+inspired walk,  the system switched the algorithm to  the 
+
+normal walk when the RC  for  the  amoeba -inspired  walk 
+
+indicated flat continuously for  a certain period.  The period 
+
+was determined based on the experimental result. 
+
+IV.  RESULTS 
+
+A.  Classification  of Ground Condition 
+
+As shown in  Fig.  4, the evaluated classification accurac y
+
+of the trained RCs for  the  amoeba -inspired walk  using only 
+
+acceleration  data  was 54 %, whereas that  using all 
+
+acceleration and  pressure  sensor  data  was  82 %.  In b oth  cases, 
+
+classification was made  at  a single  walking step . Multimodal 
+
+sensing improved  the  classification accuracy . Fig . 5 shows 
+
+the measured classification accurac ies  as a function of  the 
+
+number of walking steps  for  the  amoeba -inspired walk  with 
+
+3-axis  acceleration  data  (referred to as  ACC ), and with  all 
+
+eleven sensor  data  (referred to as  MM). In the case of  ACC ,
+
+the accuracy was around 55 % for both flat and rough terrain s.
+
+The accuracy was not improved even though  the  walking step 
+
+was  increased.  On the other hand, in the case of  MM , the 
+
+accuracy was  obviously  improved to 80 %  on  average  at  one 
+
+walking step . The accuracy  was  further improved by 
+
+increasing  the number of steps  and it achieved 97 %  at  10 
+
+steps . It  reached almost 100 %  at  20  steps . Increasing the 
+
+number of walking steps,  response  time  was also increased. 
+
+Thus , we  considered that  10 -step  was feasible for 
+
+classification  in our robot .
+
+Next , we narrowed  down  the input data for  the  RC to  front -
+
+left -leg  pressure  sensor  1 (FL1), front -right -leg  pressure 
+
+sensor  2 (F R2 ), and  y-axis acceleration  (AccY). We 
+
+experimentally found that  th ese  selected data could  almost 
+
+maintain the classification accuracy as shown in Table II. 
+
+B.  Gait Switching 
+
+For gait switching, i t was necessary to adjust  the  timing  of 
+
+on -site  algorithm switching  from  the  amoeba -inspired walk 
+
+to  the  normal walk . It was found that  walking on rough 
+
+ground  often made  a mis classification . From the observation 
+
+of robot walking,  the  misclassification  was  found to  continu e
+
+for  approximately  10 walking steps , 12 s  in time . Therefore, 
+
+we set  the threshold  of  gait  switching timing to  12 walking 
+
+steps , 14.4 s  in time . This threshold was applied  when the 
+
+robot  transit ion ed  from rough to flat ground. 
+
+Fig . 6 shows the snapshots of the robot walking from rough 
+
+to flat ground.  We examined two scenarios.  As shown i n Fig. 
+
+6(a) , t he  robot started  with  the  amoeba -inspired walk  on 
+
+rough ground , whereas  as shown  in  Fig.  6(b)  the robot started 
+
+with  the  normal walk . In the first scenario,  the robot 
+
+performed  the  amoeba -inspired walk.  After a while, the robot 
+
+escaped from rough ground and reached flat ground.  In this 
+
+case, t he robot needed to detect ground condition by the RC 
+
+for  the  amoeba -inspired walk . After walking  on flat ground 
+
+for 1 20 s  by  the  amoeba -inspired walk , the robot  found the 
+
+ground flat and  switched the gait to  the  normal  one . In the 
+
+second scenario  as shown  in  Fig.  6(b) , the  robot  immediately 
+
+found that ground was rough and  it  switched the gait  from  the 
+
+normal  to amoeba -ins pired walk.  After that , the robot  walked 
+
+and escaped from rough ground to flat.  It took  760 s  to find                                                                             
+
+> Fig. 4.Evaluated ground -condition classification accuracy .
+> Fig. 5.Classification accuracy as afunction of walking steps for
+> classification in offline (a) using 3-axis accelerations and (b) 3-axis
+> accelerations and 8 -pressur esensors.
+> TABLE II. ACCURACY OF GROUND CONDITION CLASSIFICATION USING
+> MULTIMODAL SENSING .ALL SENSORS INCLUDE 3-AXIS ACCELERATIONS
+> AND 8PRESSURE SENSORS
+> All sensors
+> offline
+> FR2+FL1+AccY
+> offline
+> FR2+FL1+AccY
+> on -site
+> Flat 94 %91 %70 %
+> Rough 99 %81 %88 %
+> Average 97 %86 %79 %
+> TABLE I. HYPERPARAMETERS OF THE RC FOR AMOEBA -INSPIRED
+> WALKING :EXPLORATION RANGE FOR OPTIMIZATION AND OPTIMIZED
+> VALUES
+> Parameter Exploration range Optimized
+> Nodes 20 -100 60
+> Density 0.01 -0.25 0.13
+> Input scale 0.05 -2.5 1.68
+> ρ(Spectral radius )0.5 -1.5 0.93
+> Variation level 0-0.3 0.25
+> Average window 5-300 274
+> λ(Ridge coefficient )10-5-1020.012
+
+ground flat , suggesting that the  system  misclassif ied  the 
+
+ground condition  many  times.  The observed behaviors of the 
+
+robot demonstrated on -site non -visual perception of ground 
+
+condition  using a multimodal sensing approach , although the 
+
+robot needed  a rather long time for classification. 
+
+V.  DISCUSSION 
+
+The multimodal sensing approach  was found  to improve 
+
+classification accuracy  for  the amoeba -inspired autonomous 
+
+walking robot  in terms of ground condition.  We analyzed 
+
+which  sensor  information  played an important role  in  the 
+
+classification.  Fig . 7(a)  shows t he  evaluated  contribution to 
+
+classification  of  each sensor output  to  the RC  output . It was 
+
+found that the contributions of FR2 and FL1 were large ,
+
+whereas the  contributions of the  accelerations  were small .
+
+This result explain s why high classification accuracy was 
+
+achieved  when the input of the RC  was  MM including  FL1, 
+
+FR2, and Acc Y data . The result also  suggested  that the 
+
+pressure  sensor data  from  the front leg was dominant on 
+
+classification of ground condition , that is, the position of the 
+
+foot  pressure  sensor was involved in  classification . On the 
+
+other hand , the  contribution  of the  pressure  sensors  was 
+
+bilaterally  asymmetric  even though the physical structure of 
+
+the robot was symmetric .
+
+To understand  th e large contribution of the  specific  sensor, 
+
+the sensor  sensitivity  was analyzed . The result is shown  in 
+
+Fig.  7(b) . Here, the sensor sensitivity was evaluated  by 
+
+discriminability  using  Cohen's method  [1 5]. A clear 
+
+correlation  was  observed  between the  contribution to the 
+
+classification accuracy and the  discriminability . The 
+
+evaluated  correlation  coefficient  r was  0.87.  The  observed 
+
+difference  in the contribution  shown in Fig. 7(a)  was 
+
+attributed  not only  to  the mechanical role of each body part 
+
+but also  to  variation in the  discriminability , in particular 
+
+pressure  sensor s. Bilateral contribution  of the  pressure 
+
+sensors in the front legs  shown  in  Fig.  7(a)  might  arise  from 
+
+variation  in  discriminability , although  the standardization 
+
+was made on the sensor data.  Further analysis is necessary  to 
+
+understand the variation in contribution of the sensors. 
+
+VI.  CONCLUSION 
+
+We investigated  a non visual  perception  of  ground 
+
+condition  in an amoeba -inspired autonomous walking robot 
+
+based on the multimodal sensing approach  utilizing  reservoir 
+
+computing (RC).  By c ombining accelerations of the robot 
+
+body and foot  pressure s, accurate  classification  between flat 
+
+and rough ground was  successfully  achieved . We 
+
+demonstrated  on -site  walking gait switching depending on 
+
+ground condition in our amoeba -inspired walking robot 
+
+installed our  nonvisual  classification  system . The obtained 
+
+result indicated the feasibility of our approach  for the 
+
+autonomous  robot  to  obtain the  surrounding  information  in a 
+
+computationally  compact manner  without power -consum ing 
+
+image  processing. 
+
+REFERENCES                          
+
+> [1] J. Hwangbo, J. Lee, A. Dosovitskiy, D. Bellicoso, V. Tsounis, V. Koltun,
+> and M. Hutter, “Learning agile and dynamic motor skills for legged
+> robots,” Science Robotics , vol. 4, no. 26, eaau5872, 2019.
+> [2] J. Lee, J. Hwangbo, L. Wellhausen, V. Koltun, and M. Hutter, “Learning
+> quadrupedal locomotion over challenging terrain,” Science Robotics ,
+> vol. 5, no. 47, eabc5986, 2020.
+> [3] A. Kumar, Z. Fu, D. Pathak, and J. Malik, “RMA: Rapid motor adaptation
+> for legged robots,” in Proc. Robotics: Science and Systems , 2021.
+> [4] R. Grandia, F. Jenelten, S. Yang, F. Farshidian, and M. Hutter,
+> “Perceptive locomotion through nonlinear model -predictive control,”
+> IEEE Transactions on Robotics , vol. 39, no. 5, pp. 3402 –3421, 2023.
+> Fig. 7.(a) Evaluated contribution of each sensor to ground condition
+> classification and (b) correlation between flat -rough discriminability among
+> the sensors and contribution to ground -condition classification .
+> Fig. 6. Snapshot sof robot walking with on -site walking gait switching depending on ground condition: (a) starting with amoeba -inspired walk (scenario 1) and
+> (b) starting with normal walk (scenario 2).
+
+[5] M. Aono, M. Naruse, S. -J. Kim, M. Wakabayashi, H. Hori, M. Ohtsu, 
+
+and M. Hara, “Amoeba -inspired nanoarchitectonic computing: Solving 
+
+intractable computational problems using nanoscale photoexcitation 
+
+transfer dynamics,”  Langmuir , vol. 29, no. 24, pp. 7557 –7564, 2013. 
+
+[6] T. Nakagaki, H. Yamada, and Á. Tóth, “Intelligence: Maze -solving by 
+
+an amoeboid organism,”  Nature , vol. 407, p. 470, 2000. 
+
+[7] K. Saito, N. Suefuji, S. Kasai, and M. Aono, “Amoeba -inspired electronic 
+
+computing system and its application to autonomous walking of a multi -
+
+legged robot,”  Journal of Applied Logics , vol. 5, no. 9, pp. 1799 –1814, 
+
+2018. 
+
+[8] H. Yamaguchi and S. Kasai, “Artificial proprioception for ground 
+
+condition perception in an amoeba -inspired four -legged walking robot,” 
+
+IEICE Transactions on Electronics , vol. E109 -C, no. 9, 2026, in press. 
+
+[9] U. Proske and S. C. Gandevia, “The proprioceptive senses: Their roles in 
+
+signaling body shape, body position and movement, and muscle force,” 
+
+Physiological Reviews , vol. 92, no. 4, pp. 1651 –1697, 2012. 
+
+[1 0] X. A. Wu, T. M. Huh, A. Sabin, S. A. Suresh, and M. R. Cutkosky, 
+
+“Tactile sensing and terrain -based gait control for small legged robots,” 
+
+IEEE Transactions on Robotics , vol. 36, no. 1, pp. 15 –27, 2020. 
+
+[1 1] G. Tanaka, T. Yamane, J. B. Héroux, R. Nakane, N. Kanazawa, S. 
+
+Takeda, H. Numata, D. Nakano, and A. Hirose, “Recent advances in 
+
+physical reservoir computing: A review,”  Neural Networks , vol. 115, 
+
+pp. 100 –123, 2019. 
+
+[1 2] H. Jaeger, “The ‘echo state’ approach to analy zing and training recurrent 
+
+neural networks,” GMD Report 148, German National Research Center 
+
+for Information Technology, 2001. 
+
+[1 3] T. Akiba , S. Sano, T. Yanase, T. Ohta, and M. Koyama , “Optuna: A 
+
+next -generation hyperparameter optimization framework,” arXiv 
+
+preprint, arXiv:1907.10902, 2019. 
+
+[1 4] C. M. Bishop, “Training with noise is equivalent to Tikhonov 
+
+regularization,”  Neural Computation , vol. 7, no. 1, pp. 108 –116, 1995. 
+
+[1 5] J. Cohen, Statistical Power Analysis for the Behavioral Sciences, 2nd 
+
+ed. Hillsdale, NJ, USA: Lawrence Erlbaum Associates, 1988.
