@@ -1,0 +1,147 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-08T20:46:53.627194+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.02365v1",
+      "source": "arxiv",
+      "title": "Faster-WAM: Do World Action Models Need Deep Action Modules?",
+      "abstract": "World Action Models (WAMs) couple robot action prediction with video world models. Existing WAMs with shared-backbone and Mixture-of-Transformers designs generally tie the depth of the action module to that of the video backbone, resulting in substantial computational overhead and high inference latency. To address this limitation, we introduce Dock of Transformer (DoT), a video-centric design principle that treats a pretrained video Transformer as a representation hub and connects lightweight output-heads through docking interfaces. This enables flexible output-head design while providing direct access to representations from all layers of the backbone. We then introduce \\textbf{Faster-WAM}, an instantiation of DoT for WAMs, which docks a single-layer action head onto a 30-layer video backbone. The docking interface fuses keys and values from all video layers and applies RoPE realignment. Without additional embodied pretraining, Faster-WAM achieves competitive performance on LIBERO and RoboTwin 2.0 while demonstrating strong out-of-distribution generalization on LIBERO-Plus. Faster-WAM also achieves the lowest end-to-end latency in our controlled comparison, requiring only 66.5 ms per inference --- a \\(3.2\\times\\) speedup over Fast-WAM. Overall, these results demonstrate that the video-centric DoT architecture supports flexible task-specific head design while delivering low inference latency, strong action-prediction performance, and robust generalization.",
+      "authors": [
+        "Liheng Ma",
+        "Rui Heng Yang",
+        "Zhanguang Zhang",
+        "Mateo Clemente",
+        "Ziwen Hu",
+        "Tongtong Cao",
+        "Yingxue Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-08-03T15:11:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.02365v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "World Action Models, video-centric design, light-weight action heads",
+      "llm_evidence_cn": "世界行动模型，以视频为中心的设计，轻量级动作头",
+      "llm_evidence": "世界行动模型，以视频为中心的设计，轻量级动作头",
+      "canonical_evidence": "世界行动模型，以视频为中心的设计，轻量级动作头",
+      "llm_tldr_en": "Faster-WAM introduces Dock of Transformer (DoT), a video-centric design for World Action Models that docks lightweight action heads to a pretrained video Transformer, reducing inference overhead while maintaining performance.",
+      "llm_tldr_cn": "世界行动模型（WAM）将动作预测和视频世界模型耦合，但现有设计将动作模块深度与视频骨干绑定，导致计算开销高。Faster-WAM提出Dock of Transformer（DoT）设计原则，将预训练视频Transformer视为表征枢纽，通过对接接口连接单层动作头。结果显示，Faster-WAM在降低推理延迟的同时保持性能，证明了浅层动作模块的可行性，为机器人操控的实时世界建模提供了高效架构。",
+      "llm_tldr": "世界行动模型（WAM）将动作预测和视频世界模型耦合，但现有设计将动作模块深度与视频骨干绑定，导致计算开销高。Faster-WAM提出Dock of Transformer（DoT）设计原则，将预训练视频Transformer视为表征枢纽，通过对接接口连接单层动作头。结果显示，Faster-WAM在降低推理延迟的同时保持性能，证明了浅层动作模块的可行性，为机器人操控的实时世界建模提供了高效架构。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01013v1",
+      "source": "arxiv",
+      "title": "RL Bootstrapping of OpenVLA-OFT for a Novel Robot Embodiment",
+      "abstract": "Adapting a pretrained vision-language-action (VLA) policy to a new robot usually assumes embodiment-specific demonstrations. This assumption is especially restrictive for custom robots whose morphology differs strongly from the manipulators seen in large robot datasets. We study a harder setting: zero-demo embodiment alignment of OpenVLA-OFT on a cable-driven parallel robot (CDPR) with a simple gripper and a previously unseen control interface. Instead of supervised fine-tuning, we use reinforcement learning in simulation with dense geometric rewards computed from simulator state. The training is performed in two stages: a PPO stage for directional motion primitives, followed by GRPO continuation from the PPO checkpoint with an expanded instruction space that includes object-conditioned commands. On the four shared directional instructions, the average held-out success rate improves from 34.25\\% after PPO to 53.50\\% after PPO$\\rightarrow$GRPO, with especially large gains on \\texttt{move left} and \\texttt{move backward}. In the GRPO stage we additionally introduce \\texttt{move to <object>} over eight target objects and obtain 39/400 = 9.75\\% strict success, while qualitative rollouts frequently show correct target-directed approach behavior before late-stage instability. Compared with prior OpenVLA and OpenVLA-OFT results, which rely on demonstration datasets and mostly standard rigid-arm embodiments, our method uses no embodiment-specific dataset at all. The results do not yet establish robust manipulation, but they provide stronger evidence that RL-only bootstrapping can create the first usable language-conditioned controller for a genuinely novel embodiment.",
+      "authors": [
+        "Damir Nurtdinov",
+        "Alexei Kornaev",
+        "Alexander Maloletov"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-02T05:33:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.01013v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "adapting pretrained vision-language-action policy to a novel embodiment via RL in simulation",
+      "llm_evidence_cn": "通过仿真中的强化学习将预训练视觉-语言-动作策略适配到新型机器人形态",
+      "llm_evidence": "通过仿真中的强化学习将预训练视觉-语言-动作策略适配到新型机器人形态",
+      "canonical_evidence": "通过仿真中的强化学习将预训练视觉-语言-动作策略适配到新型机器人形态",
+      "llm_tldr_en": "This paper addresses zero-demo embodiment alignment of OpenVLA-OFT on a cable-driven parallel robot using reinforcement learning in simulation with dense geometric rewards, showing that RL bootstrapping can adapt VLA policies to novel morphologies without demonstrations.",
+      "llm_tldr_cn": "本文研究将预训练视觉-语言-动作（VLA）策略适配到新机器人形态的困难设定：在用户自定义的绳驱并联机器人上，不依赖示范数据。作者在仿真中使用稠密几何奖励进行两阶段强化学习（PPO后接GRPO）来引导OpenVLA-OFT，实现了零示范的形态对齐。结果表明该方法能有效将VLA策略迁移到形态差异大的机器人上，为VLA部署到新硬件提供了实用范式。",
+      "llm_tldr": "本文研究将预训练视觉-语言-动作（VLA）策略适配到新机器人形态的困难设定：在用户自定义的绳驱并联机器人上，不依赖示范数据。作者在仿真中使用稠密几何奖励进行两阶段强化学习（PPO后接GRPO）来引导OpenVLA-OFT，实现了零示范的形态对齐。结果表明该方法能有效将VLA策略迁移到形态差异大的机器人上，为VLA部署到新硬件提供了实用范式。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile vision language action model for robot control",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.04657v1",
+      "source": "arxiv",
+      "title": "MobileWAM: Bridging World Action Models to Mobile Manipulation with Chain-of-Foresight",
+      "abstract": "World action models (WAMs) built on video generation backbones are a rising recipe for robot learning, yet remain confined to tabletop manipulation. Mobile manipulation demands simultaneous locomotion and whole-body manipulation amid scene-scale dynamics, yet is still dominated by dynamics-blind visual encoders with hand-crafted coordination. We bridge this gap with MobileWAM, a mixture-of-transformers architecture that fuses a pretrained video diffusion transformer with a lightweight action expert through layerwise joint attention, translating internet-scale motion priors into whole-body control. To reconcile the heterogeneous dynamics of moving and manipulating, each feed-forward layer of the action expert becomes a three-expert mixture of shared, locomotion, and manipulation experts, softly routed by the motion intent in the action tokens. To densify supervision, we further propose Chain-of-Foresight (CoF): intermediate representations sequentially predict a chain of future latent chunks, each step conditioned on its predecessor. CoF pairs naturally with our decoupled video--action denoising scheme. At deployment, the WAM serves as a pure current-frame encoder; foresight acts only through gradients, so at inference the foresight chain and video generation are discarded, leaving only policy-level cost. MobileWAM surpasses state-of-the-art mobile manipulation policies on ManiSkill-HAB and fine-tunes to a real ARX Lift2 mobile manipulator across diverse tasks with strong generalization. Code will be released soon.",
+      "authors": [
+        "Zehua Fan",
+        "Junjie He",
+        "Wenxuan Song",
+        "Xi Wang",
+        "Wenqi Lyu",
+        "Linge Zhao",
+        "Fuhao Li",
+        "Zihan You",
+        "Yifei Yang",
+        "Kaiming Xu",
+        "Qi Jiang",
+        "Yue Jiang",
+        "Haoang Li",
+        "Cheng Chi",
+        "Bailin Li",
+        "Yan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-05T10:12:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.04657v1",
+      "tags": [
+        "keyword:tactile-vla",
+        "query:tactile-vla"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "world action models for mobile manipulation, mixture-of-transformers, chain-of-foresight",
+      "llm_evidence_cn": "面向移动操控的世界行动模型，混合Transformer，预瞻链",
+      "llm_evidence": "面向移动操控的世界行动模型，混合Transformer，预瞻链",
+      "canonical_evidence": "面向移动操控的世界行动模型，混合Transformer，预瞻链",
+      "llm_tldr_en": "MobileWAM extends World Action Models to mobile manipulation by fusing a video diffusion transformer with a lightweight action expert via layerwise joint attention and a three-expert FFN, enabling whole-body control with scene-scale dynamics.",
+      "llm_tldr_cn": "世界行动模型（WAM）在桌面操控中有效，但移动操控需要同时考虑移动和全身操控，且场景动态复杂。MobileWAM提出混合Transformer架构，通过分层联合注意力将预训练视频扩散Transformer与轻量动作专家融合，并在动作专家中采用三专家前馈层适配移动与操控的异质动态。实验表明其在移动操控任务中能有效利用互联网级动作先验，扩展了WAM的应用范围。",
+      "llm_tldr": "世界行动模型（WAM）在桌面操控中有效，但移动操控需要同时考虑移动和全身操控，且场景动态复杂。MobileWAM提出混合Transformer架构，通过分层联合注意力将预训练视频扩散Transformer与轻量动作专家融合，并在动作专家中采用三专家前馈层适配移动与操控的异质动态。实验表明其在移动操控任务中能有效利用互联网级动作先验，扩展了WAM的应用范围。",
+      "llm_tags": [
+        "query:tactile-vla"
+      ],
+      "matched_query_tag": "query:tactile-vla",
+      "matched_query_text": "tactile world model for robot manipulation",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

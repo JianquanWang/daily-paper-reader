@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-08",
+  "date": "2026-08-08",
+  "generated_at": "2026-08-08T20:48:51",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/08/2608.02365v1-faster-wam-do-world-action-models-need-deep-action-modules",
+      "section": "quick",
+      "title_en": "Faster-WAM: Do World Action Models Need Deep Action Modules?",
+      "authors": "Liheng Ma, Rui Heng Yang, Zhanguang Zhang, Mateo Clemente, Ziwen Hu, Tongtong Cao, Yingxue Zhang",
+      "date": "2026-08-03",
+      "pdf": "https://arxiv.org/pdf/2608.02365v1",
+      "score": "7.0",
+      "evidence": "世界行动模型，以视频为中心的设计，轻量级动作头",
+      "tldr": "现有WAMs通常将动作模块深度与视频骨干深度绑定，导致计算开销大、推理延迟高。为此，提出视频中心的DoT设计：以预训练视频Transformer为表示中心，通过对接接口连接轻量输出头，灵活访问骨干各层表示。基于此的Faster-WAM采用单层动作头对接30层视频骨干，融合各层键值并重对齐RoPE，无需额外具身预训练，在LIBERO和RoboTwin 2.0上取得有竞争力性能，并在LIBERO-Plus上展现强分布外泛化。其端到端推理仅66.5ms，比Fast-WAM快3.2倍，证明视频中心架构支持灵活任务头设计，兼顾速度与性能。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "World Action Models (WAMs) couple robot action prediction with video world models. Existing WAMs with shared-backbone and Mixture-of-Transformers designs generally tie the depth of the action module to that of the video backbone, resulting in substantial computational overhead and high inference latency. To address this limitation, we introduce Dock of Transformer (DoT), a video-centric design principle that treats a pretrained video Transformer as a representation hub and connects lightweight output-heads through docking interfaces. This enables flexible output-head design while providing direct access to representations from all layers of the backbone. We then introduce \\textbf{Faster-WAM}, an instantiation of DoT for WAMs, which docks a single-layer action head onto a 30-layer video backbone. The docking interface fuses keys and values from all video layers and applies RoPE realignment. Without additional embodied pretraining, Faster-WAM achieves competitive performance on LIBERO and RoboTwin 2.0 while demonstrating strong out-of-distribution generalization on LIBERO-Plus. Faster-WAM also achieves the lowest end-to-end latency in our controlled comparison, requiring only 66.5 ms per inference --- a \\(3.2\\times\\) speedup over Fast-WAM. Overall, these results demonstrate that the video-centric DoT architecture supports flexible task-specific head design while delivering low inference latency, strong action-prediction performance, and robust generalization.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/08/2608.04657v1-mobilewam-bridging-world-action-models-to-mobile-manipulation-with-chain-of-foresight",
+      "section": "quick",
+      "title_en": "MobileWAM: Bridging World Action Models to Mobile Manipulation with Chain-of-Foresight",
+      "authors": "Zehua Fan, Junjie He, Wenxuan Song, Xi Wang, Wenqi Lyu, Linge Zhao, Fuhao Li, Zihan You, Yifei Yang, Kaiming Xu, Qi Jiang, Yue Jiang, Haoang Li, Cheng Chi, Bailin Li, Yan Wang",
+      "date": "2026-08-05",
+      "pdf": "https://arxiv.org/pdf/2608.04657v1",
+      "score": "7.0",
+      "evidence": "面向移动操控的世界行动模型，混合Transformer，预瞻链",
+      "tldr": "移动操作要求同时控制底盘与机械臂，现有世界行动模型仅支持桌面场景，视觉编码器又缺乏动态感知。MobileWAM提出混合变换器架构，将视频扩散先验与动作专家做层级联合注意力，并采用三专家混合及链式预视CoF做密集监督，把互联网级运动先验转化为全身控制。在ManiSkill-HAB上达到SOTA，微调到真实ARX Lift2机器人，跨任务泛化强。该工作首次将世界模型引入移动操作，为动态场景下机器人学习提供新思路。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "World action models (WAMs) built on video generation backbones are a rising recipe for robot learning, yet remain confined to tabletop manipulation. Mobile manipulation demands simultaneous locomotion and whole-body manipulation amid scene-scale dynamics, yet is still dominated by dynamics-blind visual encoders with hand-crafted coordination. We bridge this gap with MobileWAM, a mixture-of-transformers architecture that fuses a pretrained video diffusion transformer with a lightweight action expert through layerwise joint attention, translating internet-scale motion priors into whole-body control. To reconcile the heterogeneous dynamics of moving and manipulating, each feed-forward layer of the action expert becomes a three-expert mixture of shared, locomotion, and manipulation experts, softly routed by the motion intent in the action tokens. To densify supervision, we further propose Chain-of-Foresight (CoF): intermediate representations sequentially predict a chain of future latent chunks, each step conditioned on its predecessor. CoF pairs naturally with our decoupled video--action denoising scheme. At deployment, the WAM serves as a pure current-frame encoder; foresight acts only through gradients, so at inference the foresight chain and video generation are discarded, leaving only policy-level cost. MobileWAM surpasses state-of-the-art mobile manipulation policies on ManiSkill-HAB and fine-tunes to a real ARX Lift2 mobile manipulator across diverse tasks with strong generalization. Code will be released soon.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/08/2608.01013v1-rl-bootstrapping-of-openvla-oft-for-a-novel-robot-embodiment",
+      "section": "quick",
+      "title_en": "RL Bootstrapping of OpenVLA-OFT for a Novel Robot Embodiment",
+      "authors": "Damir Nurtdinov, Alexei Kornaev, Alexander Maloletov",
+      "date": "2026-08-02",
+      "pdf": "https://arxiv.org/pdf/2608.01013v1",
+      "score": "6.0",
+      "evidence": "通过仿真中的强化学习将预训练视觉-语言-动作策略适配到新型机器人形态",
+      "tldr": "将预训练视觉-语言-动作（VLA）策略适配到新机器人通常需要该机器人形态的演示数据，这对形态差异大的定制机器人（如绳驱动并联机器人）尤其困难。本文研究零演示设置下的体现对齐：在仿真中以密集几何奖励的强化学习（PPO预训练+GRPO扩展）微调OpenVLA-OFT，使其适应带简单夹爪和新型控制接口的CDPR。结果表明，四个共享方向指令的平均成功率从34.25%显著提升至53.50%，并在八个物体条件命令上获得9.75%严格成功率。这项无需任何体现特定数据集的方法，为全新机器人形态提供了首个可用的语言条件控制器。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Adapting a pretrained vision-language-action (VLA) policy to a new robot usually assumes embodiment-specific demonstrations. This assumption is especially restrictive for custom robots whose morphology differs strongly from the manipulators seen in large robot datasets. We study a harder setting: zero-demo embodiment alignment of OpenVLA-OFT on a cable-driven parallel robot (CDPR) with a simple gripper and a previously unseen control interface. Instead of supervised fine-tuning, we use reinforcement learning in simulation with dense geometric rewards computed from simulator state. The training is performed in two stages: a PPO stage for directional motion primitives, followed by GRPO continuation from the PPO checkpoint with an expanded instruction space that includes object-conditioned commands. On the four shared directional instructions, the average held-out success rate improves from 34.25\\% after PPO to 53.50\\% after PPO$\\rightarrow$GRPO, with especially large gains on \\texttt{move left} and \\texttt{move backward}. In the GRPO stage we additionally introduce \\texttt{move to <object>} over eight target objects and obtain 39/400 = 9.75\\% strict success, while qualitative rollouts frequently show correct target-directed approach behavior before late-stage instability. Compared with prior OpenVLA and OpenVLA-OFT results, which rely on demonstration datasets and mostly standard rigid-arm embodiments, our method uses no embodiment-specific dataset at all. The results do not yet establish robust manipulation, but they provide stronger evidence that RL-only bootstrapping can create the first usable language-conditioned controller for a genuinely novel embodiment.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
