@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-09",
+  "date": "2026-08-09",
+  "generated_at": "2026-08-09T20:38:07",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/09/2608.02326v1-chainvla-chaining-vision-language-action-queries-through-a-unified-execution-state-for-long-horizon-manipulation",
+      "section": "quick",
+      "title_en": "ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State for Long-Horizon Manipulation",
+      "authors": "Yuzhi Huang, Weijue Bu, Ziyi Xiong, Jie Wu, Fanding Huang, Jingyan Jiang, Zhi Wang",
+      "date": "2026-08-03",
+      "pdf": "https://arxiv.org/pdf/2608.02326v1",
+      "score": "6.0",
+      "evidence": "VLA策略通过统一执行状态链式查询实现长时程操作",
+      "tldr": "长时程操作中，VLA策略反复从当前输入重规划，缺乏跨查询交接。本文提出ChainVLA，用1.2B参数的VLA策略，通过进度上下文与动作尾部将连续查询链式化。进度上下文结合循环工作状态和稀疏事件记忆携带任务进度，动作尾部保留瞬时运动。该方法补全了长时程跨查询交接，为触觉VLA提供可借鉴的状态链式机制。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Humans perform long-horizon manipulation by retaining knowledge of what earlier actions have established while continuously adapting the motion underway. By contrast, action-chunked vision-language-action (VLA) policies repeatedly replan from the current input at each query. Existing methods preserve either long-term task evidence through memory or short-term motion through action reuse and ensembling, leaving the cross-query handoff incomplete. We introduce ChainVLA, a 1.2B-parameter VLA policy that chains successive queries through a joint and revisable execution state. Progress Context combines a recurrent Working State with sparse event memory to carry observation-derived task progress, while Motion Tail feeds the preceding prediction's unexecuted continuation into state construction and action generation. Together, the two components condition a decoder that regenerates each action horizon under the latest observation, allowing the carried state to guide the next prediction without fixing it. ChainVLA reaches 62.8% average success on RMBench and 98.8% across four LIBERO suites, while removing Motion Tail or Progress Context reduces RMBench success to 11.2% and 3.0%, respectively. These asymmetric ablations are consistent with motion continuity helping preserve the observation stream from which task progress is inferred.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/09/2608.02958v1-valueformer-a-causal-transformer-value-function-with-stage-aware-labels-for-semi-autonomous-vision-language-action-policies",
+      "section": "quick",
+      "title_en": "ValueFormer: A Causal Transformer Value Function with Stage-Aware Labels for Semi-Autonomous Vision-Language-Action Policies",
+      "authors": "Inkyu Sa, Konstantin Stulov, Rajat Bhageria",
+      "date": "2026-08-03",
+      "pdf": "https://arxiv.org/pdf/2608.02958v1",
+      "score": "6.0",
+      "evidence": "VLA策略的值函数，可用于触觉VLA训练",
+      "tldr": "行为克隆训练的VLA策略无法感知执行进展，终端成功信号又过于稀疏。本文提出ValueFormer，一种紧凑的与策略无关的因果Transformer值函数，利用稠密连续的分阶段标签为半自主VLA策略提供进展信号。该方法降低了稀疏奖励导致的样本低效问题。该值函数可用于触觉VLA的评估与安全控制。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Vision-Language-Action (VLA) policies trained by behavior cloning fail silently: from the action stream alone, a collapsing rollout looks much like one making clean progress, because imitation supplies no notion of progress. Reinforcement learning would supply one, but it is impractical here, where real-robot experience is costly and deformable food resists simulation. The cheap alternative, a terminal success / failure bit, is learnable in principle yet far too sparse to say when a rollout went wrong. We argue that the per-frame label, not the architecture, is the hard part: to be useful it must be dense, continuous, and correctly shaped. We present ValueFormer, a compact policy-agnostic causal transformer over a frozen DINOv3 backbone that emits two per-frame signals in one forward pass: a smooth Monte Carlo value, V_mc, for advantage estimation and a sharp binary value for online mistake detection, targets that pull in opposite directions by design. Failed episodes are labeled with a stage-aware, success-then-decay return that preserves the success curve before the failure stage, and detection is supervised from mistake intervals rather than a single failure time, so mistakes the policy recovers from also carry signal. On a real-robot bimanual sandwich-assembly task 1,427 episodes), a critic-derived per-frame training weight lifts task completion from 70% to 85% (within noise at n=20), and a batched bf16 encoder cuts the live serving cost 3~5 times so the critic runs at 2 Hz alongside the policy on a single GPU.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/09/2608.05369v1-world-to-wrist-task-conditioned-future-wrist-modeling-for-fine-grained-robot-manipulation",
+      "section": "quick",
+      "title_en": "World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation",
+      "authors": "Yuhao Pan, Haosong Peng, Zhengshen Zhang, Zhengyang Yan, Yalun Dai, Fushuo Huo, Chujie Wang, Tianyu Qi, Xiucheng Wang, Nan Cheng, Wenchao Xu",
+      "date": "2026-08-05",
+      "pdf": "https://arxiv.org/pdf/2608.05369v1",
+      "score": "6.0",
+      "evidence": "VLA结合任务条件未来手腕建模，可应用于触觉VLA",
+      "tldr": "现有VLA模型常把主视角和腕部视角等同处理，忽略了它们在精细操作中的分工。为此提出W2-VLA，通过任务条件化的未来腕部建模，将观测与指令编码为潜在接口，并由预测器生成未来腕部潜在特征以增强动作预测。引入W2-CoT合成管道提供结构化监督，在LIBERO、RoboTwin 2.0及真实场景中提升单臂和双臂精细操作性能，同时保持80Hz以上的动作生成频率。",
+      "tags": "query:tactile-vla",
+      "abstract_en": "Vision-language-action (VLA) models often treat main-view and wrist-view observations as parallel visual inputs, overlooking their distinct roles in robot manipulation. Fine-grained manipulation, however, benefits from anticipating how wrist-local interactions may evolve under the global task context. To address this limitation, we present World-to-Wrist VLA (W2-VLA), a VLA model for fine-grained robot manipulation with task-conditioned future wrist modeling. Given current multi-view observations and a task instruction, W2-VLA contextualizes a set of latent modeling tokens as a compact interface between the vision-language model and the wrist predictor. Conditioned on this interface and the observed wrist history, the predictor forecasts future wrist latents, which are transformed into future-aware context for action prediction. In addition, we introduce W2-CoT, a synthesis pipeline that produces structured annotations describing manipulation progress, physical transition cues, and wrist-local evidence. These annotations provide auxiliary supervision that shapes the task-conditioned latent interface. Experiments on LIBERO, RoboTwin 2.0, and real-world manipulation tasks demonstrate improved fine-grained and contact-sensitive manipulation across both single-arm and bimanual settings, while maintaining action-generation rates above 80 Hz.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

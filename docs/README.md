@@ -6,34 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-08
-- 运行时间：2026-08-08 20:48:46 UTC
+- 最新运行日期：2026-08-09
+- 运行时间：2026-08-09 20:38:00 UTC
 - 运行状态：成功
 - 本次总论文数：3
 - 精读区：0
 - 速读区：3
 
 ### 今日简报（AI）
-今日速读 3 篇世界行动模型（WAM）相关论文，聚焦模型架构与机器人操作应用。
-
-最值得关注的是两篇 7.0 分工作：《Faster-WAM》探讨深度行动模块的必要性，《MobileWAM》提出用“前瞻链”连接移动操作任务。
-
-下一步可优先精读这两篇高分论文，重点比较其行动模块设计对效率与泛化能力的影响。
-- 详情：[/202608/08/README](/202608/08/README)
+- 今日共生成 3 篇推荐（精读 0 篇，速读 3 篇）
+- 速读：《ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State for Long-Horizon Manipulation》（6.0/10）, 《ValueFormer: A Causal Transformer Value Function with Stage-Aware Labels for Semi-Autonomous Vision-Language-Action Policies》（6.0/10）, 《World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation》（6.0/10）
+- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
+- 详情：[/202608/09/README](/202608/09/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Faster-WAM: Do World Action Models Need Deep Action Modules?](/202608/08/2608.02365v1-faster-wam-do-world-action-models-need-deep-action-modules)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：世界行动模型，以视频为中心的设计，轻量级动作头
-2. [MobileWAM: Bridging World Action Models to Mobile Manipulation with Chain-of-Foresight](/202608/08/2608.04657v1-mobilewam-bridging-world-action-models-to-mobile-manipulation-with-chain-of-foresight)  
-   标签：评分：7.0/10、query:tactile-vla
-   evidence：面向移动操控的世界行动模型，混合Transformer，预瞻链
-3. [RL Bootstrapping of OpenVLA-OFT for a Novel Robot Embodiment](/202608/08/2608.01013v1-rl-bootstrapping-of-openvla-oft-for-a-novel-robot-embodiment)  
+1. [ChainVLA: Chaining Vision-Language-Action Queries through a Unified Execution State for Long-Horizon Manipulation](/202608/09/2608.02326v1-chainvla-chaining-vision-language-action-queries-through-a-unified-execution-state-for-long-horizon-manipulation)  
    标签：评分：6.0/10、query:tactile-vla
-   evidence：通过仿真中的强化学习将预训练视觉-语言-动作策略适配到新型机器人形态
+   evidence：VLA策略通过统一执行状态链式查询实现长时程操作
+2. [ValueFormer: A Causal Transformer Value Function with Stage-Aware Labels for Semi-Autonomous Vision-Language-Action Policies](/202608/09/2608.02958v1-valueformer-a-causal-transformer-value-function-with-stage-aware-labels-for-semi-autonomous-vision-language-action-policies)  
+   标签：评分：6.0/10、query:tactile-vla
+   evidence：VLA策略的值函数，可用于触觉VLA训练
+3. [World-to-Wrist: Task-Conditioned Future Wrist Modeling for Fine-Grained Robot Manipulation](/202608/09/2608.05369v1-world-to-wrist-task-conditioned-future-wrist-modeling-for-fine-grained-robot-manipulation)  
+   标签：评分：6.0/10、query:tactile-vla
+   evidence：VLA结合任务条件未来手腕建模，可应用于触觉VLA
 
 
 <div class="dpr-home-promo-card">
